@@ -36,10 +36,16 @@
 			<span class="menu-icon"></span>
 		</div>
 		<ul class="navbar-menu animate">
+                           <li>
+				<a href="<?php echo base_url('home');?>" class="animate">
+					<span class="desc animate"> Home </span>
+					<span class="glyphicon glyphicon-home"></span>
+				</a>
+			</li>
                         <li>
-				<a href="<?php echo base_url('user/logout');?>" class="animate">
-					<span class="desc animate"> Logout </span>
-					<span class="glyphicon glyphicon-log-out"></span>
+				<a href="<?php echo base_url('teacher');?>" class="animate">
+					<span class="desc animate"> Teacher </span>
+					<span class="glyphicon glyphicon-pencil"></span>
 				</a>
 			</li>
                         <?php if ($session_data['role']==$this->config->item('role_admin')){ ?>

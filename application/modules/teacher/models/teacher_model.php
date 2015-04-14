@@ -8,7 +8,10 @@ Class Teacher_model extends CI_Model
      */
     function insertTeacher($data)
     {
-        return $this->db->insert('tbl_teacher', $data); 
+        $data['user_id']= $this->session->userdata('logged_in')['id'];
+        $data['active']= TRUE;
+        return $this->db->insert('tbl_teacher', $data);
+        
     }
     
     /** function that retrieves specific teacher if the teacher_id is provided
@@ -21,6 +24,7 @@ Class Teacher_model extends CI_Model
     {
         if(!is_null($teacher_id))
             $this->db->where('id', $teacher_id);
+        $this->db->where('active', 1);
         $query = $this->db->get('tbl_teacher');
         $result=$query->result_array();
         return $result;
