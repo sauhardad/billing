@@ -44,8 +44,20 @@
 			</li>
                         <li>
 				<a href="<?php echo base_url('teacher');?>" class="animate">
-					<span class="desc animate"> Teacher </span>
+					<span class="desc animate"> Teachers </span>
 					<span class="glyphicon glyphicon-pencil"></span>
+				</a>
+			</li>
+                        <li>
+				<a href="<?php echo base_url('group');?>" class="animate">
+					<span class="desc animate"> Groups </span>
+					<span class="glyphicon glyphicon-th-large"></span>
+				</a>
+			</li>
+                        <li>
+				<a href="<?php echo base_url('Section');?>" class="animate">
+					<span class="desc animate">Sections </span>
+					<span class="glyphicon glyphicon-th"></span>
 				</a>
 			</li>
                         <?php if ($session_data['role']==$this->config->item('role_admin')){ ?>

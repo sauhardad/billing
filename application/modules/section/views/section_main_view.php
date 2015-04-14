@@ -18,7 +18,6 @@
                     <tbody>
                         <?php if(isset($sections)){ ?>
                         <?php $sn=1; ?>
-                        <?php debug_array($sections); ?>
                         <?php foreach($sections as $section){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
