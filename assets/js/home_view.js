@@ -41,6 +41,39 @@ $(function () {
         }
     });
     
+    //validate and submit section form
+     $("#add_section_form").validate({
+        rules: {
+                name: "required",
+                
+                code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                name: "Please enter name of the Section",
+                code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    //if(data.status==true)
+                        //window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    
     //validate and verify password    
     // validate signup form on keyup and submit
     $("#frm_change_password").validate({
