@@ -29,7 +29,7 @@ class Group extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['teacher_name']=$this->input->post('teacher_name')) && ($data['contact_no']=$this->input->post('contact_no')) && ($data['address']=$this->input->post('address')))
+     if(($data['name']=$this->input->post('name')) && ($data['code']=$this->input->post('code')) && ($data['time_slot']=$this->input->post('time_slot')))
      {
          if($this->group_model->insertGroup($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Group Saved'));

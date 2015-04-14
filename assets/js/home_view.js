@@ -42,6 +42,39 @@ $(function () {
     });
     
     //validate and submit section form
+     $("#add_group_form").validate({
+        rules: {
+                code: {
+                        required: true,
+                        rangelength: [2,2]
+                },
+                name: "required",
+                time_slot:"required"
+        },
+        messages: {
+                name: "Please enter name of the Group",
+                time_slot: "Please enter a time slot",
+                code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit section form
      $("#add_section_form").validate({
         rules: {
                 name: "required",
@@ -65,8 +98,8 @@ $(function () {
                 dataType:'json',
                 success: function(data) {
                     alert(data.message);
-                    //if(data.status==true)
-                        //window.location=window.location.href;
+                    if(data.status==true)
+                        window.location=window.location.href;
                 }
             });
             return false;

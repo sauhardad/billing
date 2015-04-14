@@ -26,7 +26,7 @@
                                 <td><?php echo $group['code']; ?></td>
                                 <td><?php echo $group['name']; ?></td>
                                 <td><?php echo $group['time_slot']; ?></td>
-                                <td><?php echo $group['is_running']; ?></td>
+                                <td><?php echo $group['is_running']? "Yes":"No"  ?></td>
                                 <td>
                                     <button class="btn btn-danger" onclick="return deleteData('<?php echo $group['id']; ?>','group/delete',this)"><span class="glyphicon glyphicon-edit">Delete</span></button>
                                 </td>
@@ -52,18 +52,18 @@
                         <table class="table-padding-10">
                             <tr>
                                 <td>
-                                    <label for="group_code">Group Code</label>
+                                    <label for="code">Group Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="group_code" class="form-control input-sm">
+                                    <input type="text" name="code" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="group_name">Group Name</label>
+                                    <label for="name">Group Name</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="group_name" class="form-control input-sm">
+                                    <input type="text" name="name" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
