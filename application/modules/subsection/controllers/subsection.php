@@ -30,14 +30,26 @@ class Subsection extends CI_Controller {
  
  function add()
  {
-     $data=array();
-     if(($data['name']=$this->input->post('name')) && ($data['code']=$this->input->post('code')) && ($data['time_slot']=$this->input->post('time_slot')))
-     {
-         if($this->subsection_model->insertSubsection($data))
-             echo json_encode(array('status'=>TRUE,'message'=>'Subsection Saved'));
-         else
-             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
-     }
+    $data=array();
+    if(($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['code']=$this->input->post('add_subsection_code')) && ($data['name']=$this->input->post('add_subsection_name')))
+    {
+     if($this->subsection_model->insertSubsection($data))
+         echo json_encode(array('status'=>TRUE,'message'=>'Subsection Saved'));
+     else
+         echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+    }
+ }
+ 
+ function edit()
+ {
+    $data=array();
+    if(($id=$this->input->post('edit_subsection_id')) && ($data['code']=$this->input->post('edit_subsection_code')) && ($data['name']=$this->input->post('edit_subsection_name')) && ($data['section_id']=$this->input->post('edit_section_dropdown')))
+    {
+     if($this->subsection_model->updateSubsection($id,$data))
+         echo json_encode(array('status'=>TRUE,'message'=>'Subsection Updated'));
+     else
+         echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+    }
  }
  
  function delete()

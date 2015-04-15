@@ -40,5 +40,16 @@ Class Subsection_model extends CI_Model
         $this->db->where('id', $subsection_id);
         return $this->db->update('tbl_subsection', array('active'=>FALSE)); 
     }
+    
+    /** function that updates subsection row depending on id passed
+     * 
+     * @param type $id
+     * @param type $data
+     */
+    function updateSubsection($id,$data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tbl_subsection', $data); 
+    }
 }
 ?>

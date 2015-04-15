@@ -20,6 +20,20 @@ $(function () {
         
     });
     
+    //fill in form values in the edit subsection form
+    $(document).on( "click", '.edit_subsection_btn',function(e) {
+        var id=$(this).data('id');
+        var section = $(this).data('section');
+        var name = $(this).data('name');
+        var code = $(this).data('code');
+
+        $("input:hidden[name=edit_subsection_id]").val(id);
+        $("#edit_subsection_code").val(code);
+        $("#edit_subsection_name").val(name);
+        $("#edit_section_dropdown").val(section);
+        
+    });
+    
     //fill in form values in the edit group form
     $(document).on( "click", '.edit_group_btn',function(e) {
 

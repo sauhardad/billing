@@ -174,6 +174,70 @@ $(function () {
         }
     });
     
+    //validate and submit the add section form
+     $("#add_subsection_form").validate({
+        rules: {
+                add_subsection_name: "required",
+                
+                add_subsection_code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                add_subsection_name: "Please enter name of the Section",
+                add_subsection_code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit the add section form
+     $("#edit_subsection_form").validate({
+        rules: {
+                edit_subsection_name: "required",
+                
+                edit_subsection_code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                edit_subsection_name: "Please enter name of the Section",
+                edit_subsection_code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
     //validate and submit the edit section form
      $("#edit_section_form").validate({
         rules: {
