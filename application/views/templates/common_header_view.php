@@ -18,6 +18,7 @@
    <script src="<?=base_url()?>assets/js/bootstrap.min.js"></script> 
    <script src="<?=base_url()?>assets/js/fileinput.min.js"></script> 
    <script src="<?=base_url()?>assets/js/bootstrap-select.min.js"></script> 
+   <script src="<?=base_url()?>assets/js/custom_validation.js"></script>
    <script src="<?=base_url()?>assets/js/home_view.js"></script>    
    
    <script>var base_url='<?php echo base_url(); ?>';</script>

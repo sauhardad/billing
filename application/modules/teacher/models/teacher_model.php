@@ -40,6 +40,17 @@ Class Teacher_model extends CI_Model
         $this->db->where('id', $teacher_id);
         return $this->db->update('tbl_teacher', array('active'=>FALSE));  
     }
+    
+    /** function that updates teacher row depending on id passed
+     * 
+     * @param type $id
+     * @param type $data
+     */
+    function updateTeacher($id,$data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tbl_teacher', $data); 
+    }
  
 }
 ?>

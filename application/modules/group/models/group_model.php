@@ -37,8 +37,19 @@ Class Group_model extends CI_Model
      */
     function deleteGroup($group_id)
     {
-        $this->db->where('id', $teacher_id);
+        $this->db->where('id', $group_id);
         return $this->db->update('tbl_group', array('active'=>FALSE)); 
+    }
+    
+    /** function that updates group row depending on id passed
+     * 
+     * @param type $id
+     * @param type $data
+     */
+    function updateGroup($id,$data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tbl_group', $data); 
     }
  
 }

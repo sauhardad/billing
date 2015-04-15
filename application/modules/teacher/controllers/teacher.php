@@ -29,12 +29,25 @@ class Teacher extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['teacher_name']=$this->input->post('teacher_name')) && ($data['contact_no']=$this->input->post('contact_no')) && ($data['address']=$this->input->post('address')))
+     if(($data['teacher_name']=$this->input->post('add_teacher_name')) && ($data['contact_no']=$this->input->post('add_contact_no')) && ($data['address']=$this->input->post('add_address')))
      {
          if($this->teacher_model->insertTeacher($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Teacher Saved'));
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+     }
+ }
+ 
+ function edit()
+ {
+     $data=array();
+     if(($id=$this->input->post('edit_teacher_id')) && ($data['teacher_name']=$this->input->post('edit_teacher_name')) && ($data['contact_no']=$this->input->post('edit_contact_no')) && ($data['address']=$this->input->post('edit_address')))
+     {
+        if($this->teacher_model->updateTeacher($id,$data))
+            echo json_encode(array('status'=>TRUE,'message'=>'Teacher Updated'));
+        else
+            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+         
      }
  }
  

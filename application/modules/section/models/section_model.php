@@ -41,5 +41,16 @@ Class Section_model extends CI_Model
         return $this->db->update('tbl_section', array('active'=>FALSE)); 
     }
  
+    /** function that updates section row depending on id passed
+     * 
+     * @param type $id
+     * @param type $data
+     */
+    function updateSection($id,$data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tbl_section', $data); 
+    }
+ 
 }
 ?>
