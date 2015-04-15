@@ -36,6 +36,19 @@ $(function () {
         $("#edit_group_is_running").val(running);
         
     });
+    
+    //fill in form values in the edit section form
+    $(document).on( "click", '.edit_section_btn',function(e) {
+
+        var id = $(this).data('id');
+        var code = $(this).data('code');
+        var name = $(this).data('name');
+
+        $("input:hidden[name=edit_section_id]").val(id);
+        $("#edit_section_code").val(code);
+        $("#edit_section_name").val(name);
+        
+    });
 });
 
 /** function that deletes user 

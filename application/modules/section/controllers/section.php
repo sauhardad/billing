@@ -29,10 +29,23 @@ class Section extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['code']=$this->input->post('code')) && ($data['name']=$this->input->post('name')))
+     if(($data['code']=$this->input->post('add_section_code')) && ($data['name']=$this->input->post('add_section_name')))
      {
         
          if($this->section_model->insertSection($data))
+             echo json_encode(array('status'=>TRUE,'message'=>'Section Saved'));
+         else
+             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+     }
+ }
+ 
+ function edit()
+ {
+     $data=array();
+     if(($id=$this->input->post('edit_section_id')) && ($data['code']=$this->input->post('edit_section_code')) && ($data['name']=$this->input->post('edit_section_name')))
+     {
+        
+         if($this->section_model->updateSection($id,$data))
              echo json_encode(array('status'=>TRUE,'message'=>'Section Saved'));
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));

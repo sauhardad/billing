@@ -3,22 +3,22 @@ $(function () {
     // validate signup form on keyup and submit
     $("#add_teacher_form").validate({
         rules: {
-                teacher_name: "required",
-                contact_no: {
+                add_teacher_name: "required",
+                add_contact_no: {
                         required: true,
                         minlength: 6
                 },
-                address: {
+                add_address: {
                         required: true,
                 }
         },
         messages: {
-                teacher_name: "Please enter name of the Teacher",
-                contact_no: {
+                add_teacher_name: "Please enter name of the Teacher",
+                add_contact_no: {
                         required: "Please enter contact number",
                         minlength: "Invalid contact Number"
                 },
-                address: {
+                add_address: {
                         required: "Please provide an address"
                 }
         },
@@ -142,19 +142,51 @@ $(function () {
     });
     
     
-    //validate and submit section form
+    //validate and submit the add section form
      $("#add_section_form").validate({
         rules: {
-                name: "required",
+                add_section_name: "required",
                 
-                code: {
+                add_section_code: {
                         required: true,
                         rangelength: [2,2]
                 }
         },
         messages: {
-                name: "Please enter name of the Section",
-                code: {
+                add_section_name: "Please enter name of the Section",
+                add_section_code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit the edit section form
+     $("#edit_section_form").validate({
+        rules: {
+                edit_section_name: "required",
+                
+                edit_section_code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                edit_section_name: "Please enter name of the Section",
+                edit_section_code: {
                         required: "Please provide the code",
                         rangelength: "Enter a two digit number"
                 }
