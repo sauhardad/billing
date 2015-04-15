@@ -78,8 +78,8 @@
                                 <td>
                                     <label for="is_running">Is Running</label>
                                 </td>
-                                <td colspan="3">
-                                    <?php echo form_dropdown('is_running', array(TRUE=>'Yes',FALSE=>'No'), TRUE); ?>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('is_running', array(TRUE=>'Yes',FALSE=>'No'), TRUE,'class="form-control"'); ?>
                                 </td>
                             </tr>
                         </table>    
