@@ -83,7 +83,7 @@
             </div>    
         </div>
         
-        <!-- modal for adding teachers -->
+        <!-- modal for editing teachers -->
         <div class="modal fade" tabindex="-1" role="dialog" id="edit_teacher_modal">
             <div class="modal-dialog">
                 <div class="modal-content">

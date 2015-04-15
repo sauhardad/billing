@@ -29,12 +29,27 @@ class Group extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['name']=$this->input->post('name')) && ($data['code']=$this->input->post('code')) && ($data['time_slot']=$this->input->post('time_slot')))
+     if(($data['name']=$this->input->post('add_group_name')) && ($data['code']=$this->input->post('add_group_code')) && ($data['time_slot']=$this->input->post('add_group_time_slot')))
      {
+         $data['is_running']=$this->input->post('add_group_is_running');
          if($this->group_model->insertGroup($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Group Saved'));
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+     }
+ }
+ 
+ function edit()
+ {
+     $data=array();
+     if(($id=$this->input->post('edit_group_id')) && ($data['name']=$this->input->post('edit_group_name')) && ($data['code']=$this->input->post('edit_group_code')) && ($data['time_slot']=$this->input->post('edit_group_time_slot')))
+     {
+        $data['is_running']=$this->input->post('edit_group_is_running'); 
+        if($this->group_model->updateGroup($id,$data))
+            echo json_encode(array('status'=>TRUE,'message'=>'Group Updated'));
+        else
+            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+         
      }
  }
  
