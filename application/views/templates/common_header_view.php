@@ -52,12 +52,18 @@
                         <li>
 				<a href="<?php echo base_url('group');?>" class="animate">
 					<span class="desc animate"> Groups </span>
-					<span class="glyphicon glyphicon-th-large"></span>
+					<span class="glyphicon glyphicon-folder-open"></span>
 				</a>
 			</li>
                         <li>
 				<a href="<?php echo base_url('section');?>" class="animate">
 					<span class="desc animate">Sections </span>
+					<span class="glyphicon glyphicon-th-large"></span>
+				</a>
+			</li>
+                        <li>
+				<a href="<?php echo base_url('subsection');?>" class="animate">
+					<span class="desc animate">Subsections </span>
 					<span class="glyphicon glyphicon-th"></span>
 				</a>
 			</li>
