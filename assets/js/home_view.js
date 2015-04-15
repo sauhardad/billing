@@ -41,6 +41,59 @@ $(function () {
         }
     });
     
+    //validate and submit edit teacher form
+    // validate signup form on keyup and submit
+    $("#edit_teacher_form").validate({
+        rules: {
+                edit_teacher_name: "required",
+                edit_contact_no: {
+                        required: true,
+                        minlength: 6
+                },
+                edit_address: {
+                        required: true,
+                }
+        },
+        messages: {
+                edit_teacher_name: "Please enter name of the Teacher",
+                edit_contact_no: {
+                        required: "Please enter contact number",
+                        minlength: "Invalid contact Number"
+                },
+                edit_address: {
+                        required: "Please provide an address"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //fill in form values in the edit teacher form
+    $(document).on( "click", '.edit_teacher_btn',function(e) {
+
+        var name = $(this).data('name');
+        var id = $(this).data('id');
+        var address = $(this).data('address');
+        var contact = $(this).data('contact');
+
+        $("input:hidden[name=edit_teacher_id]").val(id);
+        $("#edit_teacher_name").val(name);
+        $("#edit_address").val(address);
+        $("#edit_contact_no").val(contact);
+        
+    });
+    
     //validate and submit section form
      $("#add_group_form").validate({
         rules: {
