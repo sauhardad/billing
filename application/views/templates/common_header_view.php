@@ -55,7 +55,7 @@
 				</a>
 			</li>
                         <li>
-				<a href="<?php echo base_url('Section');?>" class="animate">
+				<a href="<?php echo base_url('section');?>" class="animate">
 					<span class="desc animate">Sections </span>
 					<span class="glyphicon glyphicon-th"></span>
 				</a>
