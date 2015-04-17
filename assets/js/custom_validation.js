@@ -184,7 +184,7 @@ $(function () {
         }
     });
     
-    //validate and submit the add section form
+    //validate and submit the add subsection form
      $("#add_subsection_form").validate({
         rules: {
                 add_subsection_name: "required",
@@ -216,7 +216,7 @@ $(function () {
         }
     });
     
-    //validate and submit the add section form
+    //validate and submit the edit subsection form
      $("#edit_subsection_form").validate({
         rules: {
                 edit_subsection_name: "required",
@@ -279,6 +279,70 @@ $(function () {
             return false;
         }
     });
+     //validate and submit the add level form
+     $("#add_level_form").validate({
+        rules: {
+                add_level_name: "required",
+                
+                add_level_code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                add_level_name: "Please enter name of the Section",
+                add_level_code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit the edit subsection form
+     $("#edit_level_form").validate({
+        rules: {
+                edit_level_name: "required",
+                
+                edit_level_code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                edit_level_name: "Please enter name of the Section",
+                edit_level_code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
     
     
     //validate and verify password    

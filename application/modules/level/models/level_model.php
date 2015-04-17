@@ -2,7 +2,7 @@
 
 Class Level_model extends CI_Model
 {
-    /** function that inserts new Level into the database
+    /** function that inserts new level into the database
      * 
      * @param type $data
      */
@@ -14,10 +14,10 @@ Class Level_model extends CI_Model
         
     }
     
-    /** function that retrieves specific function if the level_id is provided
-     * from the sectiontable else all the levels
+    /** function that retrieves specific level if the teacher_id is provided
+     * from the teachers table else all the teachers
      * 
-     * @param type $section_id
+     * @param type $level_id
      * @return type
      */
     function retrieveLevel($level_id=NULL)
@@ -32,7 +32,7 @@ Class Level_model extends CI_Model
     
     /** function that deletes level when level_id is passed
      * 
-     * @param type $section_id
+     * @param type $level_id
      * @return type
      */
     function deleteLevel($level_id)
@@ -40,6 +40,16 @@ Class Level_model extends CI_Model
         $this->db->where('id', $level_id);
         return $this->db->update('tbl_level', array('active'=>FALSE)); 
     }
- 
+    
+    /** function that updates level row depending on id passed
+     * 
+     * @param type $id
+     * @param type $data
+     */
+    function updateLevel($id,$data)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('tbl_level', $data); 
+    }
 }
 ?>
