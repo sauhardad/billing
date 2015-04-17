@@ -38,7 +38,7 @@ Class Teacher_model extends CI_Model
     function deleteTeacher($teacher_id)
     {
         $this->db->where('id', $teacher_id);
-        return $this->db->update('tbl_teacher', array('active'=>FALSE));  
+        return $this->db->delete('tbl_teacher');  
     }
     
     /** function that updates teacher row depending on id passed

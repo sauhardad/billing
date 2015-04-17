@@ -38,7 +38,7 @@ Class Section_model extends CI_Model
     function deleteSection($section_id)
     {
         $this->db->where('id', $section_id);
-        return $this->db->update('tbl_section', array('active'=>FALSE)); 
+        return $this->db->delete('tbl_section'); 
     }
  
     /** function that updates section row depending on id passed

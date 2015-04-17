@@ -38,7 +38,7 @@ Class Subsection_model extends CI_Model
     function deleteSubsection($subsection_id)
     {
         $this->db->where('id', $subsection_id);
-        return $this->db->update('tbl_subsection', array('active'=>FALSE)); 
+        return $this->db->delete('tbl_subsection'); 
     }
     
     /** function that updates subsection row depending on id passed
