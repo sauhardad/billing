@@ -341,3 +341,8 @@ thead {
 .table-padding-10 tr td{
     padding:10px;
 }
+
+/* margin for glyphicon in edit amd delete buttons */
+.glyphicon-margin-right-5{
+    margin-right:5px;
+}

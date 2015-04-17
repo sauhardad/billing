@@ -24,9 +24,8 @@
                                 <td><?php echo $section['code']; ?></td>
                                 <td><?php echo $section['name']; ?></td>
                                 <td>
-                                    <a class="btn btn-success"><span class="glyphicon glyphicon-list glyphicon-margin-right-5"></span>View</a>
-                                    <button class="btn btn-primary edit_section_btn" data-id="<?php echo $section['id']; ?>" data-code="<?php echo $section['code']; ?>" data-name="<?php echo $section['name']; ?>" data-toggle="modal" data-target="#edit_section_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $section['id']; ?>','section/delete',this)"><span class="glyphicon glyphicon-remove glyphicon-margin-right-5"></span>Delete</button>
+                                    <button class="btn btn-primary edit_section_btn" data-id="<?php echo $section['id']; ?>" data-code="<?php echo $section['code']; ?>" data-name="<?php echo $section['name']; ?>" data-toggle="modal" data-target="#edit_section_modal"><span class="glyphicon glyphicon-edit">Edit</span></button>
+                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $section['id']; ?>','section/delete',this)"><span class="glyphicon glyphicon-edit">Delete</span></button>
                                 </td>
                             </tr> 
                             <?php $sn++; ?>

@@ -29,7 +29,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title">Users</h4>
-                 <a data-toggle="modal" data-target="#add_user_modal" class="btn btn-danger"> Add User</a>
+                <a data-toggle="modal" data-target="#add_user_modal" class="btn btn-success"><span class="glyphicon glyphicon-user glyphicon-margin-right-5"></span> Add User</a>
             </div>
             <div class="modal-body">
                 <table class="table toggle-circle-filled footable table-striped table-hover table-responsive" data-filter="#search" data-page-size="10" style="width: 100%;">

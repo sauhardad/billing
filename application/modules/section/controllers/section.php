@@ -63,6 +63,14 @@ class Section extends CI_Controller {
      }
  }
  
+ function view()
+ {
+     if(($id=$this->input->get('id')))
+     {
+         
+     }
+ }
+ 
  function check_code()
  {
     if(($code=$this->input->post('code')))
