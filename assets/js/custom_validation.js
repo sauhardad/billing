@@ -80,7 +80,16 @@ $(function () {
         rules: {
                 add_group_code: {
                         required: true,
-                        rangelength: [2,2]
+                        rangelength: [2,2],
+                        remote: {
+                          url: base_url+"group/check_code",
+                          type: "post",
+                          data: {
+                            code: function() {
+                                return $('input[name="add_group_code"]').val();
+                            }
+                          }
+                      }  
                 },
                 add_group_name: "required",
                 add_group_time_slot:"required"
@@ -90,7 +99,8 @@ $(function () {
                 add_group_time_slot: "Please enter a time slot",
                 add_group_code: {
                         required: "Please provide the code",
-                        rangelength: "Enter a two digit number"
+                        rangelength: "Enter a two digit number",
+                        remote: "That code has already been assigned,please choose a new code"
                 }
         },
         errorClass: "invalid",

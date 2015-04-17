@@ -109,7 +109,7 @@
                                     <label for="edit_group_code">Group Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_group_code" id="edit_group_code" class="form-control input-sm">
+                                    <input type="text" name="edit_group_code" id="edit_group_code" class="form-control input-sm" disabled>
                                 </td>
                             </tr>
                             <tr>

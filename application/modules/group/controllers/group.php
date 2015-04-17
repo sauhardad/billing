@@ -42,7 +42,7 @@ class Group extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_group_id')) && ($data['name']=$this->input->post('edit_group_name')) && ($data['code']=$this->input->post('edit_group_code')) && ($data['time_slot']=$this->input->post('edit_group_time_slot')))
+     if(($id=$this->input->post('edit_group_id')) && ($data['name']=$this->input->post('edit_group_name')) && ($data['time_slot']=$this->input->post('edit_group_time_slot')))
      {
         $data['is_running']=$this->input->post('edit_group_is_running'); 
         if($this->group_model->updateGroup($id,$data))
@@ -62,6 +62,17 @@ class Group extends CI_Controller {
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
+ }
+ 
+ function check_code()
+ {
+    if(($code=$this->input->post('code')))
+    {
+     if($this->common_model->check_if_code_exists('tbl_group',$code))
+        echo "false";
+     else
+        echo "true";
+    }
  }
 
 }
