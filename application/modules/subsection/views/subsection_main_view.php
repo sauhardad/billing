@@ -99,7 +99,7 @@
                                     <label for="edit_subsection_code">Subsection Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_subsection_code" id="edit_subsection_code" class="form-control input-sm">
+                                    <input type="text" name="edit_subsection_code" id="edit_subsection_code" class="form-control input-sm" disabled>
                                 </td>
                             </tr>
                             <tr>

@@ -93,7 +93,7 @@
                                     <label for="edit_section_code">Section Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_section_code" id="edit_section_code" class="form-control input-sm">
+                                    <input type="text" name="edit_section_code" id="edit_section_code" class="form-control input-sm" disabled>
                                 </td>
                             </tr>
                             <tr>

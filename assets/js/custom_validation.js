@@ -159,14 +159,24 @@ $(function () {
                 
                 add_section_code: {
                         required: true,
-                        rangelength: [2,2]
+                        rangelength: [2,2],
+                        remote: {
+                          url: base_url+"section/check_code",
+                          type: "post",
+                          data: {
+                            code: function() {
+                                return $('input[name="add_section_code"]').val();
+                            }
+                          }
+                      } 
                 }
         },
         messages: {
                 add_section_name: "Please enter name of the Section",
                 add_section_code: {
                         required: "Please provide the code",
-                        rangelength: "Enter a two digit number"
+                        rangelength: "Enter a two digit number",
+                        remote: "That code has already been assigned,please choose a new code"
                 }
         },
         errorClass: "invalid",
@@ -191,14 +201,24 @@ $(function () {
                 
                 add_subsection_code: {
                         required: true,
-                        rangelength: [2,2]
+                        rangelength: [2,2],
+                        remote: {
+                          url: base_url+"subsection/check_code",
+                          type: "post",
+                          data: {
+                            code: function() {
+                                return $('input[name="add_subsection_code"]').val();
+                            }
+                          }
+                      }
                 }
         },
         messages: {
                 add_subsection_name: "Please enter name of the Section",
                 add_subsection_code: {
                         required: "Please provide the code",
-                        rangelength: "Enter a two digit number"
+                        rangelength: "Enter a two digit number",
+                        remote: "That code has already been assigned,please choose a new code"
                 }
         },
         errorClass: "invalid",

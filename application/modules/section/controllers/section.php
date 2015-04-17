@@ -42,7 +42,7 @@ class Section extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_section_id')) && ($data['code']=$this->input->post('edit_section_code')) && ($data['name']=$this->input->post('edit_section_name')))
+     if(($id=$this->input->post('edit_section_id')) && ($data['name']=$this->input->post('edit_section_name')))
      {
         
          if($this->section_model->updateSection($id,$data))
@@ -61,6 +61,17 @@ class Section extends CI_Controller {
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
+ }
+ 
+ function check_code()
+ {
+    if(($code=$this->input->post('code')))
+    {
+     if($this->common_model->check_if_code_exists('tbl_section',$code))
+        echo "false";
+     else
+        echo "true";
+    }
  }
 
 }
