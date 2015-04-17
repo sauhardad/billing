@@ -65,9 +65,18 @@ class Section extends CI_Controller {
  
  function view()
  {
-     if(($id=$this->input->get('id')))
+     if(($id=$this->uri->segment(3)))
      {
+        $data=array();
+        $session_data = $this->session->userdata('logged_in');
+        $data['session_data']=$session_data;
+        //check if the user has permission to add/edit users
+        if ($session_data['role']=$this->config->item('role_admin'))
+            $data['users']=$this->user_model->get_users_except($session_data['id']);
+        $data['roles']=$this->config->item('role_value');
+        $data['section']=$this->section_model->retrieveSection($id)[0];
          
+        $this->template->load('default', 'section/specific_section_view',$data);
      }
  }
  

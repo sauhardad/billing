@@ -28,7 +28,7 @@
                                 <td><?php echo $level['name']; ?></td>
                                 <td>
                                     <button class="btn btn-primary edit_level_btn" data-id="<?php echo $level['id']; ?>" data-subsection="<?php echo $level['subsection_id']; ?>" data-code="<?php echo $level['code']; ?>" data-name="<?php echo $level['name']; ?>" data-toggle="modal" data-target="#edit_level_modal"><span class="glyphicon glyphicon-edit">Edit</span></button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $level['id']; ?>','level/delete',this)"><span class="glyphicon glyphicon-remove">Delete</span></button>
+                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $level['id']; ?>','level/delete',this)"><span class="glyphicon glyphicon-trash">Delete</span></button>
                                 </td>
                             </tr> 
                             <?php $sn++; ?>

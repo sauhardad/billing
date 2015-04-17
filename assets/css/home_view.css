@@ -346,3 +346,9 @@ thead {
 .glyphicon-margin-right-5{
     margin-right:5px;
 }
+
+/* width for form control 10% and set display to inline */
+.width-10pc-inline{
+    width:15%;
+    display:inline;
+}
