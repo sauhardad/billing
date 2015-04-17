@@ -20,10 +20,12 @@ Class Subsection_model extends CI_Model
      * @param type $subsection_id
      * @return type
      */
-    function retrieveSubsection($subsection_id=NULL)
+    function retrieveSubsection($subsection_id=NULL,$section_id=NULL)
     {
-        if(!is_null($subsection_id))
+        if(!is_null($subsection_id) || !empty($subsection_id))
             $this->db->where('id', $subsection_id);
+        if(!is_null($subsection_id) || !empty($section_id))
+            $this->db->where('section_id', $section_id);
         $this->db->where('active', 1);
         $query = $this->db->get('tbl_subsection');
         $result=$query->result_array();

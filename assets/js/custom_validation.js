@@ -239,13 +239,16 @@ $(function () {
                           data: {
                             code: function() {
                                 return $('input[name="add_subsection_code"]').val();
+                            },
+                            section_id: function() {
+                                return $('#section_id').val();
                             }
                           }
                       }
                 }
         },
         messages: {
-                add_subsection_name: "Please enter name of the Section",
+                add_subsection_name: "Please enter name of the Subsection",
                 add_subsection_code: {
                         required: "Please provide the code",
                         rangelength: "Enter a two digit number",
@@ -257,6 +260,7 @@ $(function () {
             $(form).ajaxSubmit({
                 clearForm:true,
                 dataType:'json',
+                data:{section_id: $('#section_id').val()},
                 success: function(data) {
                     alert(data.message);
                     if(data.status==true)

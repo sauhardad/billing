@@ -31,7 +31,7 @@ class Subsection extends CI_Controller {
  function add()
  {
     $data=array();
-    if(($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['code']=$this->input->post('add_subsection_code')) && ($data['name']=$this->input->post('add_subsection_name')))
+    if(($data['section_id']=$this->input->post('section_id')) && ($data['code']=$this->input->post('add_subsection_code')) && ($data['name']=$this->input->post('add_subsection_name')))
     {
      if($this->subsection_model->insertSubsection($data))
          echo json_encode(array('status'=>TRUE,'message'=>'Subsection Saved'));
@@ -43,7 +43,7 @@ class Subsection extends CI_Controller {
  function edit()
  {
     $data=array();
-    if(($id=$this->input->post('edit_subsection_id')) && ($data['name']=$this->input->post('edit_subsection_name')) && ($data['section_id']=$this->input->post('edit_section_dropdown')))
+    if(($id=$this->input->post('edit_subsection_id')) && ($data['name']=$this->input->post('edit_subsection_name')))
     {
      if($this->subsection_model->updateSubsection($id,$data))
          echo json_encode(array('status'=>TRUE,'message'=>'Subsection Updated'));
@@ -65,13 +65,14 @@ class Subsection extends CI_Controller {
 
  function check_code()
  {
-    if(($code=$this->input->post('code')))
+    if(($code=$this->input->post('code')) && ($section_id=$this->input->post('section_id')))
     {
-     if($this->common_model->check_if_code_exists('tbl_subsection',$code))
+     if($this->common_model->check_if_code_exists('tbl_subsection',array('section_id'=>$section_id),$code))
         echo "false";
      else
         echo "true";
     }
+    
  }
 }
 

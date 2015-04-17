@@ -10,6 +10,7 @@ class Section extends CI_Controller {
    if(!$this->session->userdata('logged_in'))
        redirect('user/login', 'refresh');
    $this->load->model('section_model');
+   $this->load->model('subsection/subsection_model');
    $this->load->helper(array('form'));
  }
 
@@ -74,7 +75,9 @@ class Section extends CI_Controller {
         if ($session_data['role']=$this->config->item('role_admin'))
             $data['users']=$this->user_model->get_users_except($session_data['id']);
         $data['roles']=$this->config->item('role_value');
-        $data['section']=$this->section_model->retrieveSection($id)[0];
+        
+        $data['this_section']=$this->section_model->retrieveSection($id)[0];
+        $data['subsections']=$this->subsection_model->retrieveSubsection(NULL,$id);
          
         $this->template->load('default', 'section/specific_section_view',$data);
      }

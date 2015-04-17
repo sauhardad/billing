@@ -22,16 +22,14 @@ $(function () {
     
     
     //fill in form values in the edit level form
-    $(document).on( "click", '.edit_level_btn',function(e) {
+    $(document).on( "click", '.edit_subsection_btn',function(e) {
         var id=$(this).data('id');
-        var subsection = $(this).data('subsection');
         var name = $(this).data('name');
         var code = $(this).data('code');
-
-        $("input:hidden[name=edit_level_id]").val(id);
-        $("#edit_level_code").val(code);
-        $("#edit_level_name").val(name);
-        $("#edit_subsection_dropdown").val(subsection);
+        
+        $("input:hidden[name=edit_subsection_id]").val(id);
+        $("#edit_subsection_code").val(code);
+        $("#edit_subsection_name").val(name);
         
     });
     
