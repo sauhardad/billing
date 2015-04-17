@@ -99,7 +99,7 @@
                                     <label for="edit_level_code">Level Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_level_code" id="edit_level_code" class="form-control input-sm">
+                                    <input type="text" name="edit_level_code" id="edit_level_code" class="form-control input-sm" disabled>
                                 </td>
                             </tr>
                             <tr>
@@ -112,10 +112,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="edit_dubsection_dropdown">Subsection</label>
+                                    <label for="edit_subsection_dropdown">Subsection</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('edit_subsection_dropdown', convert_to_keyvalue($sections),TRUE,'class="form-control" id="edit_subsection_dropdown"'); ?>
+                                    <?php echo form_dropdown('edit_subsection_dropdown', convert_to_keyvalue($subsections),TRUE,'class="form-control" id="edit_subsection_dropdown"'); ?>
                                 </td>
                             </tr>
                         </table>    

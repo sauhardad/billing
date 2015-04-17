@@ -44,7 +44,7 @@ class Level extends CI_Controller {
  function edit()
  {
     $data=array();
-    if(($id=$this->input->post('edit_level_id')) && ($data['code']=$this->input->post('edit_level_code')) && ($data['name']=$this->input->post('edit_level_name')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')))
+    if(($id=$this->input->post('edit_level_id')) && ($data['name']=$this->input->post('edit_level_name')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')))
     {
      if($this->level_model->updateLevel($id,$data))
          echo json_encode(array('status'=>TRUE,'message'=>'Level Updated'));
@@ -63,7 +63,16 @@ class Level extends CI_Controller {
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
  }
-
+function check_code()
+ {
+    if(($code=$this->input->post('code')))
+    {
+     if($this->common_model->check_if_code_exists('tbl_level',$code))
+        echo "false";
+     else
+        echo "true";
+    }
+ }
 }
 
 ?>
