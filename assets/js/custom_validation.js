@@ -75,7 +75,7 @@ $(function () {
         }
     });
     
-    //validate and submit section form
+    //validate and submit group form
      $("#add_group_form").validate({
         rules: {
                 add_group_code: {
@@ -118,7 +118,7 @@ $(function () {
         }
     });
     
-    //validate and submit section form
+    //validate and edit group form
      $("#edit_group_form").validate({
         rules: {
                 edit_group_code: {
@@ -177,6 +177,37 @@ $(function () {
                         required: "Please provide the code",
                         rangelength: "Enter a two digit number",
                         remote: "That code has already been assigned,please choose a new code"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+     //validate and submit the edit section form
+     $("#edit_section_form").validate({
+        rules: {
+                edit_section_name: "required",
+                
+                edit_section_code: {
+                        required: true,
+                        rangelength: [2,2]
+                }
+        },
+        messages: {
+                edit_section_name: "Please enter name of the Section",
+                edit_section_code: {
+                        required: "Please provide the code",
+                        rangelength: "Enter a two digit number"
                 }
         },
         errorClass: "invalid",
@@ -267,53 +298,31 @@ $(function () {
             return false;
         }
     });
-    
-    //validate and submit the edit section form
-     $("#edit_section_form").validate({
-        rules: {
-                edit_section_name: "required",
-                
-                edit_section_code: {
-                        required: true,
-                        rangelength: [2,2]
-                }
-        },
-        messages: {
-                edit_section_name: "Please enter name of the Section",
-                edit_section_code: {
-                        required: "Please provide the code",
-                        rangelength: "Enter a two digit number"
-                }
-        },
-        errorClass: "invalid",
-        submitHandler: function(form) {
-            $(form).ajaxSubmit({
-                clearForm:true,
-                dataType:'json',
-                success: function(data) {
-                    alert(data.message);
-                    if(data.status==true)
-                        window.location=window.location.href;
-                }
-            });
-            return false;
-        }
-    });
-     //validate and submit the add level form
+    //validate and submit the add level form
      $("#add_level_form").validate({
         rules: {
                 add_level_name: "required",
                 
                 add_level_code: {
                         required: true,
-                        rangelength: [2,2]
+                        rangelength: [2,2],
+                        remote: {
+                          url: base_url+"level/check_code",
+                          type: "post",
+                          data: {
+                            code: function() {
+                                return $('input[name="add_level_code"]').val();
+                            }
+                          }
+                      }
                 }
         },
         messages: {
                 add_level_name: "Please enter name of the Section",
                 add_level_code: {
                         required: "Please provide the code",
-                        rangelength: "Enter a two digit number"
+                        rangelength: "Enter a two digit number",
+                        remote: "That code has already been assigned,please choose a new code"
                 }
         },
         errorClass: "invalid",
@@ -330,15 +339,14 @@ $(function () {
             return false;
         }
     });
-    
-    //validate and submit the edit subsection form
+    //validate and submit the edit level form
      $("#edit_level_form").validate({
         rules: {
                 edit_level_name: "required",
                 
                 edit_level_code: {
                         required: true,
-                        rangelength: [2,2]
+                        rangelength: [2,2],
                 }
         },
         messages: {
@@ -362,9 +370,6 @@ $(function () {
             return false;
         }
     });
-    
-    
-    
     //validate and verify password    
     // validate signup form on keyup and submit
     $("#frm_change_password").validate({
