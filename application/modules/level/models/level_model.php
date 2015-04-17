@@ -38,7 +38,7 @@ Class Level_model extends CI_Model
     function deleteLevel($level_id)
     {
         $this->db->where('id', $level_id);
-        return $this->db->update('tbl_level', array('active'=>FALSE)); 
+        return $this->db->delete('tbl_level'); 
     }
     
     /** function that updates level row depending on id passed

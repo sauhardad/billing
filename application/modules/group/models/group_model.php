@@ -38,7 +38,7 @@ Class Group_model extends CI_Model
     function deleteGroup($group_id)
     {
         $this->db->where('id', $group_id);
-        return $this->db->update('tbl_group', array('active'=>FALSE)); 
+        return $this->db->delete('tbl_group'); 
     }
     
     /** function that updates group row depending on id passed
