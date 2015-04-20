@@ -14,17 +14,19 @@ Class Group_model extends CI_Model
         
     }
     
-    /** function that retrieves specific group if the teacher_id is provided
-     * from the teachers table else all the teachers
+    /** function that retrieves specific group if the group_id is provided
+     * else if subsection_id is passed then it retrieves all the groups within a subsection
+     * else retrieves all the groups in the database
      * 
      * @param type $group_id
-     * @return type
+     * @param type $subsection_id
+     * @return array
      */
     function retrieveGroup($group_id=NULL,$subsection_id=NULL)
     {
-        if(!is_null($group_id) || !empty($group_id))
+        if(!is_null($group_id) AND !empty($group_id))
             $this->db->where('id', $group_id);
-        if(!is_null($subsection_id) || !empty($subsection_id))
+        if(!is_null($subsection_id) AND !empty($subsection_id))
             $this->db->where('subsection_id', $subsection_id);
         $this->db->where('active', 1);
         $query = $this->db->get('tbl_group');

@@ -29,7 +29,7 @@ class Group extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['name']=$this->input->post('add_group_name')) && ($data['code']=$this->input->post('add_group_code')) && ($data['time_slot']=$this->input->post('add_group_time_slot')))
+     if(($data['subsection_id']=$this->input->post('subsection_id')) && ($data['name']=$this->input->post('add_group_name')) && ($data['code']=$this->input->post('add_group_code')) && ($data['time_slot']=$this->input->post('add_group_time_slot')))
      {
          $data['is_running']=$this->input->post('add_group_is_running');
          if($this->group_model->insertGroup($data))
@@ -66,9 +66,9 @@ class Group extends CI_Controller {
  
  function check_code()
  {
-    if(($code=$this->input->post('code')))
+    if(($code=$this->input->post('code')) && ($subsection_id=$this->input->post('subsection_id')))
     {
-     if($this->common_model->check_if_code_exists('tbl_group',$code))
+     if($this->common_model->check_if_code_exists('tbl_group',array('subsection_id'=>$subsection_id),$code))
         echo "false";
      else
         echo "true";

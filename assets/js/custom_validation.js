@@ -87,6 +87,9 @@ $(function () {
                           data: {
                             code: function() {
                                 return $('input[name="add_group_code"]').val();
+                            },
+                            subsection_id: function() {
+                                return $('#subsection_id').val();
                             }
                           }
                       }  
@@ -108,6 +111,7 @@ $(function () {
             $(form).ajaxSubmit({
                 clearForm:true,
                 dataType:'json',
+                data:{subsection_id: $('#subsection_id').val()},
                 success: function(data) {
                     alert(data.message);
                     if(data.status==true)
