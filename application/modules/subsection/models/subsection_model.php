@@ -14,17 +14,19 @@ Class Subsection_model extends CI_Model
         
     }
     
-    /** function that retrieves specific subsection if the teacher_id is provided
-     * from the teachers table else all the teachers
+    /** function that retrieves specific subsection if the subsection_id is provided
+     * from the subsection table or all subsections of a given section if section_id
+     * is given
      * 
      * @param type $subsection_id
+     * @param type $section_id
      * @return type
      */
     function retrieveSubsection($subsection_id=NULL,$section_id=NULL)
     {
-        if(!is_null($subsection_id) || !empty($subsection_id))
+        if(!is_null($subsection_id) AND !empty($subsection_id))
             $this->db->where('id', $subsection_id);
-        if(!is_null($subsection_id) || !empty($section_id))
+        if(!is_null($subsection_id) AND !empty($section_id))
             $this->db->where('section_id', $section_id);
         $this->db->where('active', 1);
         $query = $this->db->get('tbl_subsection');

@@ -76,10 +76,10 @@ class Subsection extends CI_Controller {
             $data['users']=$this->user_model->get_users_except($session_data['id']);
         $data['roles']=$this->config->item('role_value');
         
-        $data['this_subsection']=$this->subsection_model->retrieveSubection($id)[0];
+        $data['this_subsection']=$this->subsection_model->retrieveSubsection($id,NULL)[0];
         $data['groups']=$this->group_model->retrieveGroup(NULL,$id);
-         
-        $this->template->load('default', 'section/specific_subsection_view',$data);
+       
+        $this->template->load('default', 'subsection/specific_subsection_view',$data);
      }
  }
 
