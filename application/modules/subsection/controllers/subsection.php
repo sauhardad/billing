@@ -11,6 +11,7 @@ class Subsection extends CI_Controller {
        redirect('user/login', 'refresh');
    $this->load->model('subsection_model');
    $this->load->model('section/section_model');
+   $this->load->model('group/group_model');
    $this->load->helper(array('form'));
  }
 
@@ -60,6 +61,25 @@ class Subsection extends CI_Controller {
              echo json_encode(array('status'=>TRUE,'message'=>'Subsection Deleted'));
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+     }
+ }
+ 
+  function view()
+ {
+     if(($id=$this->uri->segment(3)))
+     {
+        $data=array();
+        $session_data = $this->session->userdata('logged_in');
+        $data['session_data']=$session_data;
+        //check if the user has permission to add/edit users
+        if ($session_data['role']=$this->config->item('role_admin'))
+            $data['users']=$this->user_model->get_users_except($session_data['id']);
+        $data['roles']=$this->config->item('role_value');
+        
+        $data['this_subsection']=$this->subsection_model->retrieveSubection($id)[0];
+        $data['groups']=$this->group_model->retrieveGroup(NULL,$id);
+         
+        $this->template->load('default', 'section/specific_subsection_view',$data);
      }
  }
 
