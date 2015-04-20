@@ -1,55 +1,55 @@
 <?php
 
-Class Teacher_model extends CI_Model
+Class Student_model extends CI_Model
 {
-    /** function that inserts new teacher into the database
+    /** function that inserts new student into the database
      * 
      * @param type $data
      */
-    function insertTeacher($data)
+    function insertStudent($data)
     {
         $data['user_id']= $this->session->userdata('logged_in')['id'];
         $data['active']= TRUE;
-        return $this->db->insert('tbl_teacher', $data);
+        return $this->db->insert('tbl_students', $data);
         
     }
     
-    /** function that retrieves specific teacher if the teacher_id is provided
-     * from the teachers table else all the teachers
+    /** function that retrieves specific students if the student_id is provided
+     * from the student table else all the students
      * 
-     * @param type $teacher_id
+     * @param type $student_id
      * @return type
      */
-    function retrieveTeacher($teacher_id=NULL)
+    function retrieveStudent($student_id=NULL)
     {
-        if(!is_null($teacher_id))
-            $this->db->where('id', $teacher_id);
+        if(!is_null($student_id))
+            $this->db->where('id', $student_id);
         $this->db->where('active', 1);
-        $query = $this->db->get('tbl_teacher');
+        $query = $this->db->get('tbl_students');
         $result=$query->result_array();
         return $result;
     }
     
-    /** function that deletes teacher when teacher_id is passed
+    /** function that deletes students when students_id is passed
      * 
-     * @param type $teacher_id
+     * @param type $student_id
      * @return type
      */
-    function deleteTeacher($teacher_id)
+    function deleteStudent($student_id)
     {
-        $this->db->where('id', $teacher_id);
-        return $this->db->delete('tbl_teacher');  
+        $this->db->where('id', $student_id);
+        return $this->db->delete('tbl_students');  
     }
     
-    /** function that updates teacher row depending on id passed
+    /** function that updates students row depending on id passed
      * 
      * @param type $id
      * @param type $data
      */
-    function updateTeacher($id,$data)
+    function updateStudent($id,$data)
     {
         $this->db->where('id', $id);
-        return $this->db->update('tbl_teacher', $data); 
+        return $this->db->update('tbl_students', $data); 
     }
  
 }

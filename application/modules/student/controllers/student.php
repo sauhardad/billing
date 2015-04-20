@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Teacher extends CI_Controller {
+class Student extends CI_Controller {
 
  function __construct()
  {
@@ -9,7 +9,10 @@ class Teacher extends CI_Controller {
     //check login
    if(!$this->session->userdata('logged_in'))
        redirect('user/login', 'refresh');
-   $this->load->model('teacher_model');
+   $this->load->model('student_model');
+   $this->load->model('subsection/subsection_model');
+   $this->load->model('section/section_model');
+   $this->load->model('group/group_model');
    $this->load->helper(array('form'));
  }
 
@@ -22,17 +25,20 @@ class Teacher extends CI_Controller {
         $data['users']=$this->user_model->get_users_except($session_data['id']);
     $data['roles']=$this->config->item('role_value');
     
-    $data['teachers']=$this->teacher_model->retrieveTeacher();
-    $this->template->load('default', 'teacher/teacher_main_view',$data);
+    $data['students']=$this->student_model->retrieveStudent();
+    $data['sections']=$this->section_model->retrieveSection();
+    $data['subsections']=$this->subsection_model->retrieveSubsection();
+    $data['groups']=$this->group_model->retrieveGroup();
+    $this->template->load('default', 'student/student_main_view',$data);
  }
  
  function add()
  {
      $data=array();
-     if(($data['teacher_name']=$this->input->post('add_teacher_name')) && ($data['contact_no']=$this->input->post('add_contact_no')) && ($data['address']=$this->input->post('add_address')))
+     if(($data['student_name']=$this->input->post('add_student_name')) && ($data['contact_no']=$this->input->post('add_contact_no')) && ($data['address']=$this->input->post('add_address')) && ($data['section_id']=$this->input->post('add_section_id')) && ($data['subsection_id']=$this->input->post('add_subsection_id')) && ($data['group_id']=$this->input->post('add_group_id')))
      {
-         if($this->teacher_model->insertTeacher($data))
-             echo json_encode(array('status'=>TRUE,'message'=>'Teacher Saved'));
+         if($this->student_model->insertStudent($data))
+             echo json_encode(array('status'=>TRUE,'message'=>'Student Saved'));
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
@@ -41,10 +47,10 @@ class Teacher extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_teacher_id')) && ($data['teacher_name']=$this->input->post('edit_teacher_name')) && ($data['contact_no']=$this->input->post('edit_contact_no')) && ($data['address']=$this->input->post('edit_address')))
+     if(($id=$this->input->post('edit_student_id')) && ($data['student_name']=$this->input->post('edit_student_name')) && ($data['contact_no']=$this->input->post('edit_contact_no')) && ($data['address']=$this->input->post('edit_address')) &&  ($data['section_id']=$this->input->post('edit_section_id')) && ($data['subsection_id']=$this->input->post('edit_subsection_id')) && ($data['group_id']=$this->input->post('edit_group_id')))
      {
-        if($this->teacher_model->updateTeacher($id,$data))
-            echo json_encode(array('status'=>TRUE,'message'=>'Teacher Updated'));
+        if($this->student_model->updateStudent($id,$data))
+            echo json_encode(array('status'=>TRUE,'message'=>'Student Updated'));
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
          
@@ -55,8 +61,8 @@ class Teacher extends CI_Controller {
  {
      if(($id=$this->input->post('id')))
      {
-         if($this->teacher_model->deleteTeacher($id))
-             echo json_encode(array('status'=>TRUE,'message'=>'Teacher Deleted'));
+         if($this->student_model->deleteStudent($id))
+             echo json_encode(array('status'=>TRUE,'message'=>'Student Deleted'));
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }

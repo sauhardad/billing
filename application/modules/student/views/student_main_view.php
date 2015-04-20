@@ -2,8 +2,8 @@
             <div style="min-height: 70px;">
               <div class="page-header" id="fix-page-header">
                 <div> 
-                  <h2 style="display:inline-block;">Teachers</h2>
-                  <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_teacher_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+                  <h2 style="display:inline-block;">Students</h2>
+                  <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_student_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
                 </div>
               </div>
             </div>
@@ -14,20 +14,32 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Contact Number</th>
+                        <th>Section Name</th>
+                        <th>Subsection Name</th>
+                        <th>Group Name</th>
+                        
+                        <th>
                         <th></th>
                     </thead>
                     <tbody>
-                        <?php if(isset($teachers)){ ?>
+                        <?php if(isset($students)){ ?>
                         <?php $sn=1; ?>
-                        <?php foreach($teachers as $teacher){ ?>
+                        <?php $section_map=convert_to_keyvalue($sections); ?>
+                        <?php $subsection_map=convert_to_keyvalue($subsections); ?>
+                        <?php $group_map=convert_to_keyvalue($groups); ?>
+                        
+                        <?php foreach($students as $student){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $teacher['teacher_name']; ?></td>
-                                <td><?php echo $teacher['address']; ?></td>
-                                <td><?php echo $teacher['contact_no']; ?></td>
+                                <td><?php echo $section_map[$section['section_id']]; ?></td>
+                                <td><?php echo $subsection_map[$subsection['subsection_id']]; ?></td>
+                                <td><?php echo $group_map[$group['group_id']]; ?></td>
+                                <td><?php echo $student['student_name']; ?></td>
+                                <td><?php echo $student['address']; ?></td>
+                                <td><?php echo $student['contact_no']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_teacher_btn" data-id="<?php echo $teacher['id']; ?>" data-name="<?php echo $teacher['teacher_name']; ?>" data-address="<?php echo $teacher['address']; ?>" data-contact="<?php echo $teacher['contact_no']; ?>" data-toggle="modal" data-target="#edit_teacher_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $teacher['id']; ?>','teacher/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
+                                    <button class="btn btn-primary edit_student_btn" data-id="<?php echo $student['id']; ?>" data-name="<?php echo $student['student_name']; ?>" data-address="<?php echo $student['address']; ?>" data-contact="<?php echo $student['contact_no']; ?>" data-toggle="modal" data-target="#edit_student_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $student['id']; ?>','student/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
                                 </td>
                             </tr> 
                             <?php $sn++; ?>
@@ -38,23 +50,23 @@
             </div>
         </div>
         
-        <!-- modal for adding teachers -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="add_teacher_modal">
+        <!-- modal for adding Student -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="add_student_modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <a class="close" data-dismiss="modal">×</a>
-                        <h3>Add Teacher</h3>
+                        <h3>Add Student</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('teacher/add',array('id' => 'add_teacher_form')); ?>
+                        <?php echo form_open('student/add',array('id' => 'add_student_form')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>
-                                    <label for="add_teacher_name">Teacher Name</label>
+                                    <label for="add_student_name">Student Name</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_teacher_name" class="form-control input-sm">
+                                    <input type="text" name="add_student_name" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
@@ -73,6 +85,30 @@
                                     <input type="text" name="add_address" class="form-control input-sm">
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_section_dropdown">Section</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="add_section_dropdown"'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_subsection_dropdown">Subsection</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_subsection_dropdown',convert_to_keyvalue($subsections),TRUE,'class="form-control" id="add_subsection_dropdown"'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_group_dropdown">Group</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_group_dropdown',convert_to_keyvalue($groups),TRUE,'class="form-control" id="add_group_dropdown"'); ?>
+                                </td>
+                            </tr>
                         </table>    
                         
                         <input class="btn btn-primary" type="submit" value="Save" id="submit">
@@ -83,23 +119,23 @@
             </div>    
         </div>
         
-        <!-- modal for editing teachers -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="edit_teacher_modal">
+        <!-- modal for editing students -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="edit_student_modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <a class="close" data-dismiss="modal">×</a>
-                        <h3>Edit Teacher</h3>
+                        <h3>Edit Student</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('teacher/edit',array('id' => 'edit_teacher_form'),array('edit_teacher_id' => '')); ?>
+                        <?php echo form_open('student/edit',array('id' => 'edit_student_form'),array('edit_student_id' => '')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>
-                                    <label for="edit_teacher_name">Teacher Name</label>
+                                    <label for="edit_student_name">Student Name</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_teacher_name" id="edit_teacher_name" class="form-control input-sm">
+                                    <input type="text" name="edit_student_name" id="edit_student_name" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
@@ -116,6 +152,21 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="edit_address" id="edit_address" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_section_dropdown">Section</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="edit_section_dropdown"'); ?>
+                                </td>
+                            </tr><tr>
+                                <td>
+                                    <label for="edit_section_dropdown">Subsection</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="edit_section_dropdown"'); ?>
                                 </td>
                             </tr>
                         </table>    
