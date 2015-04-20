@@ -67,6 +67,13 @@
 					<span class="glyphicon glyphicon-th"></span>
 				</a>
 			</li>
+                                                <li>
+				<a href="<?php echo base_url('student');?>" class="animate">
+					<span class="desc animate">Students </span>
+					<span class="glyphicon glyphicon-plus"></span>
+				</a>
+			</li>
+
                         <?php if ($session_data['role']==$this->config->item('role_admin')){ ?>
                         <li>
                                     <a href="#add_user" class="animate" data-toggle="modal">
