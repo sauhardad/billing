@@ -26,7 +26,7 @@ Class Subsection_model extends CI_Model
     {
         if(!is_null($subsection_id) AND !empty($subsection_id))
             $this->db->where('id', $subsection_id);
-        if(!is_null($subsection_id) AND !empty($section_id))
+        if(!is_null($section_id) AND !empty($section_id))
             $this->db->where('section_id', $section_id);
         $this->db->where('active', 1);
         $query = $this->db->get('tbl_subsection');

@@ -67,6 +67,26 @@ class Student extends CI_Controller {
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
  }
+ 
+ function load_subsection()
+ {
+     if(($id=$this->input->post('id')))
+     {
+        $data=array(); 
+        $data['subsections']=$this->subsection_model->retrieveSubsection(NULL,$id);
+        echo $this->load->view('subsection_dropdown_view',$data);
+     }
+ }
+ 
+ function load_group()
+ {
+     if(($id=$this->input->post('id')))
+     {
+        $data=array(); 
+        $data['groups']=$this->group_model->retrieveGroup(NULL,$id);
+        echo $this->load->view('group_dropdown_view',$data);
+     }
+ }
 
 }
 

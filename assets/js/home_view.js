@@ -100,3 +100,23 @@ function deleteData(id,url,element)
         }       
       });
 }
+
+/** function that loads subsection or group dropdown when particular section
+ * or subsection is selected
+ * @param object element
+ */
+function loadDropdown(element)
+{
+    var url=$(element).attr("url");
+    var id=$(element).val();
+    var target=$(element).attr("target");
+    $.ajax({
+        type: "POST",
+        url: base_url+url,
+        data: {id : id},
+        dataType: 'html',
+        success:function(html) {
+            $('#'+target).html(html);
+        }       
+      });
+}

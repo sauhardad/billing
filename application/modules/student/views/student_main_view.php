@@ -90,25 +90,20 @@
                                     <label for="add_section_dropdown">Section</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="add_section_dropdown"'); ?>
+                                    <?php echo form_dropdown('add_section_dropdown',array("0"=>"Select Section") + convert_to_keyvalue($sections),"0",'class="form-control" id="add_section_dropdown" target="tr_subsection_dropdown" url="student/load_subsection" onchange="return loadDropdown(this);"') ?>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label for="add_subsection_dropdown">Subsection</label>
-                                </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_subsection_dropdown',convert_to_keyvalue($subsections),TRUE,'class="form-control" id="add_subsection_dropdown"'); ?>
-                                </td>
-                            </tr>
+                            <tr id="tr_subsection_dropdown"></tr>
+                            <tr id="tr_group_dropdown"></tr>
+                            <!--
                             <tr>
                                 <td>
                                     <label for="add_group_dropdown">Group</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_group_dropdown',convert_to_keyvalue($groups),TRUE,'class="form-control" id="add_group_dropdown"'); ?>
+                                    <?php //echo form_dropdown('add_group_dropdown',convert_to_keyvalue($groups),TRUE,'class="form-control" id="add_group_dropdown"'); ?>
                                 </td>
-                            </tr>
+                            </tr>-->
                         </table>    
                         
                         <input class="btn btn-primary" type="submit" value="Save" id="submit">
