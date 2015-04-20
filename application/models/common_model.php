@@ -14,7 +14,8 @@ Class Common_model extends CI_Model
     function check_if_code_exists($table,$condition_array,$code)
     {
         $this->db->where('code',$code);
-        $this->db->where($condition_array);
+        if(!empty($condition_array))
+            $this->db->where($condition_array);
         $this->db->from($table);
         if($this->db->count_all_results()) return TRUE;
         return FALSE;

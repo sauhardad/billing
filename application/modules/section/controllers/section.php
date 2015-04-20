@@ -87,7 +87,7 @@ class Section extends CI_Controller {
  {
     if(($code=$this->input->post('code')))
     {
-     if($this->common_model->check_if_code_exists('tbl_section',$code))
+     if($this->common_model->check_if_code_exists('tbl_section',array(),$code))
         echo "false";
      else
         echo "true";
