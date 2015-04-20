@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 20, 2015 at 08:29 AM
+-- Generation Time: Apr 20, 2015 at 09:48 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `billing_db`
 --
+CREATE DATABASE IF NOT EXISTS `billing_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `billing_db`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `ci_sessions`
 --
 
+DROP TABLE IF EXISTS `ci_sessions`;
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(45) NOT NULL DEFAULT '0',
@@ -41,7 +44,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('73522f3085de3a7c39b0c774c5d3b86b', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1429510962, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('80c9d0a5a5791d56f0583cb1456fe0d1', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1429514010, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('a0c1593401431462c69809ca6201d040', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1429516000, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -49,6 +53,7 @@ INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activ
 -- Table structure for table `tbl_amount`
 --
 
+DROP TABLE IF EXISTS `tbl_amount`;
 CREATE TABLE IF NOT EXISTS `tbl_amount` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_id` int(11) NOT NULL,
@@ -70,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `tbl_amount` (
 -- Table structure for table `tbl_bill`
 --
 
+DROP TABLE IF EXISTS `tbl_bill`;
 CREATE TABLE IF NOT EXISTS `tbl_bill` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_no` varchar(10) NOT NULL,
@@ -98,6 +104,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bill` (
 -- Table structure for table `tbl_expense`
 --
 
+DROP TABLE IF EXISTS `tbl_expense`;
 CREATE TABLE IF NOT EXISTS `tbl_expense` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
@@ -115,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
 -- Table structure for table `tbl_group`
 --
 
+DROP TABLE IF EXISTS `tbl_group`;
 CREATE TABLE IF NOT EXISTS `tbl_group` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subsection_id` int(11) NOT NULL,
@@ -127,7 +135,15 @@ CREATE TABLE IF NOT EXISTS `tbl_group` (
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `subsection_id` (`subsection_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+--
+-- Dumping data for table `tbl_group`
+--
+
+INSERT INTO `tbl_group` (`id`, `subsection_id`, `code`, `name`, `time_slot`, `is_running`, `user_id`, `active`, `entry_timestamp`) VALUES
+(10, 5, '03', 'Com C', '5-6', 1, 1, 1, '2015-04-20 13:00:28'),
+(11, 5, '01', 'Com A', '1-2', 1, 1, 1, '2015-04-20 13:04:23');
 
 -- --------------------------------------------------------
 
@@ -135,6 +151,7 @@ CREATE TABLE IF NOT EXISTS `tbl_group` (
 -- Table structure for table `tbl_income`
 --
 
+DROP TABLE IF EXISTS `tbl_income`;
 CREATE TABLE IF NOT EXISTS `tbl_income` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `teacher_id` int(11) NOT NULL,
@@ -163,6 +180,7 @@ CREATE TABLE IF NOT EXISTS `tbl_income` (
 -- Table structure for table `tbl_level`
 --
 
+DROP TABLE IF EXISTS `tbl_level`;
 CREATE TABLE IF NOT EXISTS `tbl_level` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `subsection_id` int(11) NOT NULL,
@@ -182,6 +200,7 @@ CREATE TABLE IF NOT EXISTS `tbl_level` (
 -- Table structure for table `tbl_section`
 --
 
+DROP TABLE IF EXISTS `tbl_section`;
 CREATE TABLE IF NOT EXISTS `tbl_section` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `code` varchar(2) NOT NULL,
@@ -208,6 +227,7 @@ INSERT INTO `tbl_section` (`id`, `code`, `name`, `user_id`, `active`, `entry_tim
 -- Table structure for table `tbl_students`
 --
 
+DROP TABLE IF EXISTS `tbl_students`;
 CREATE TABLE IF NOT EXISTS `tbl_students` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `section_id` int(11) NOT NULL,
@@ -216,6 +236,8 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
   `student_name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `contact_no` bigint(20) NOT NULL,
+  `dob` varchar(10) NOT NULL,
+  `photo` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -228,6 +250,7 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
 -- Table structure for table `tbl_subsection`
 --
 
+DROP TABLE IF EXISTS `tbl_subsection`;
 CREATE TABLE IF NOT EXISTS `tbl_subsection` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `section_id` int(11) NOT NULL,
@@ -255,6 +278,7 @@ INSERT INTO `tbl_subsection` (`id`, `section_id`, `code`, `name`, `user_id`, `ac
 -- Table structure for table `tbl_teacher`
 --
 
+DROP TABLE IF EXISTS `tbl_teacher`;
 CREATE TABLE IF NOT EXISTS `tbl_teacher` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `teacher_name` varchar(255) NOT NULL,
@@ -281,6 +305,7 @@ INSERT INTO `tbl_teacher` (`id`, `teacher_name`, `address`, `contact_no`, `user_
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
@@ -296,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-04-20 11:53:26', '2015-04-20 11:53:26'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-04-20 12:40:27', '2015-04-20 12:40:27'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 

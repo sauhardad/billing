@@ -37,10 +37,18 @@
 			<span class="menu-icon"></span>
 		</div>
 		<ul class="navbar-menu animate">
-                           <li>
+                        <?php if(!($this->router->fetch_class() === 'home' && $this->router->fetch_method() === 'index')){ ?>
+                        <li>
 				<a href="<?php echo base_url('home');?>" class="animate">
 					<span class="desc animate"> Home </span>
 					<span class="glyphicon glyphicon-home"></span>
+				</a>
+			</li>
+                        <?php } ?>
+                        <li>
+				<a href="<?php echo base_url('student');?>" class="animate">
+					<span class="desc animate">Students </span>
+					<span class="glyphicon glyphicon-plus"></span>
 				</a>
 			</li>
                         <li>
@@ -50,30 +58,11 @@
 				</a>
 			</li>
                         <li>
-				<a href="<?php echo base_url('group');?>" class="animate">
-					<span class="desc animate"> Groups </span>
-					<span class="glyphicon glyphicon-folder-open"></span>
-				</a>
-			</li>
-                        <li>
 				<a href="<?php echo base_url('section');?>" class="animate">
 					<span class="desc animate">Sections </span>
 					<span class="glyphicon glyphicon-th-large"></span>
 				</a>
 			</li>
-                        <li>
-				<a href="<?php echo base_url('subsection');?>" class="animate">
-					<span class="desc animate">Subsections </span>
-					<span class="glyphicon glyphicon-th"></span>
-				</a>
-			</li>
-                                                <li>
-				<a href="<?php echo base_url('student');?>" class="animate">
-					<span class="desc animate">Students </span>
-					<span class="glyphicon glyphicon-plus"></span>
-				</a>
-			</li>
-
                         <?php if ($session_data['role']==$this->config->item('role_admin')){ ?>
                         <li>
                                     <a href="#add_user" class="animate" data-toggle="modal">
