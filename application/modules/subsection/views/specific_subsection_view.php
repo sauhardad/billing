@@ -2,9 +2,8 @@
             <div style="min-height: 70px;">
               <div class="page-header" id="fix-page-header">
                 <div> 
-                  <h2 style="display:inline-block;"><?php echo $this_section['name']; ?></h2>
+                  <h2 style="display:inline-block;">Subsections</h2>
                   <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_subsection_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
-                  <input type="hidden" name="section_id" id="section_id" value="<?php echo $this_section['id']; ?>"/>
                 </div>
               </div>
             </div>
@@ -12,6 +11,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <th>S.N.</th>
+                        <th>Section</th>
                         <th>Code</th>
                         <th>Name</th>
                         <th></th>
@@ -19,14 +19,15 @@
                     <tbody>
                         <?php if(isset($subsections)){ ?>
                         <?php $sn=1; ?>
+                        <?php $section_map=convert_to_keyvalue($sections); ?>
                         <?php foreach($subsections as $subsection){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
+                                <td><?php echo $section_map[$subsection['section_id']]; ?></td>
                                 <td><?php echo $subsection['code']; ?></td>
                                 <td><?php echo $subsection['name']; ?></td>
                                 <td>
-                                    <a class="btn btn-success" href="<?php echo base_url('subsection/view/'.$subsection['id']); ?>"><span class="glyphicon glyphicon-list glyphicon-margin-right-5"></span>View</a>
-                                    <button class="btn btn-primary edit_subsection_btn" data-id="<?php echo $subsection['id']; ?>" data-code="<?php echo $subsection['code']; ?>" data-name="<?php echo $subsection['name']; ?>" data-toggle="modal" data-target="#edit_subsection_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_subsection_btn" data-id="<?php echo $subsection['id']; ?>" data-section="<?php echo $subsection['section_id']; ?>" data-code="<?php echo $subsection['code']; ?>" data-name="<?php echo $subsection['name']; ?>" data-toggle="modal" data-target="#edit_subsection_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <button class="btn btn-danger" onclick="return deleteData('<?php echo $subsection['id']; ?>','subsection/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
                                 </td>
                             </tr> 
@@ -65,6 +66,14 @@
                                     <input type="text" name="add_subsection_name" id="add_subsection_name" class="form-control input-sm">
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_section_dropdown">Section</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="add_section_dropdown"'); ?>
+                                </td>
+                            </tr>
                         </table>    
                         
                         <input class="btn btn-primary" type="submit" value="Save">
@@ -99,6 +108,14 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="edit_subsection_name" id="edit_subsection_name" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_section_dropdown">Section</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_section_dropdown', convert_to_keyvalue($sections),TRUE,'class="form-control" id="edit_section_dropdown"'); ?>
                                 </td>
                             </tr>
                         </table>    
