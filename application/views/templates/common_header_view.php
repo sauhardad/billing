@@ -10,6 +10,7 @@
    <link href="<?=base_url()?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
    <link href="<?=base_url()?>assets/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">
    <link href="<?=base_url()?>assets/css/fileinput.min.css" rel="stylesheet" type="text/css">
+   <link href="<?=base_url()?>assets/css/jquery.calendars.picker.css" rel="stylesheet" type="text/css">
    <link href="<?=base_url()?>assets/css/home_view.css" rel="stylesheet" type="text/css"> 
        
    <script src="<?=base_url()?>assets/js/jquery.min.js"></script>    
@@ -19,7 +20,14 @@
    <script src="<?=base_url()?>assets/js/fileinput.min.js"></script> 
    <script src="<?=base_url()?>assets/js/bootstrap-select.min.js"></script> 
    <script src="<?=base_url()?>assets/js/custom_validation.js"></script>
-   <script src="<?=base_url()?>assets/js/home_view.js"></script>    
+   
+   <!-- for the jquery plugin calender -->
+   <script src="<?=base_url()?>assets/js/jquery.plugin.min.js"></script>
+   <script src="<?=base_url()?>assets/js/jquery.calendars.all.min.js"></script>
+   <script src="<?=base_url()?>assets/js/jquery.calendars.nepali.js"></script>
+   
+   <!-- now custom javascript -->
+   <script src="<?=base_url()?>assets/js/home_view.js"></script>   
    
    <script>var base_url='<?php echo base_url(); ?>';</script>
    <script>var user_id='<?php echo $session_data['id']; ?>';</script>

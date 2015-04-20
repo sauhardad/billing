@@ -4,6 +4,31 @@ $(function () {
 		event.preventDefault();
 		$(this).closest('.navbar-minimal').toggleClass('open');
 	});
+        
+    //date picker on student add form
+    var calendar = $.calendars.instance('nepali');
+    $('.nepali_datepicker').calendarsPicker({calendar: calendar});
+    
+    //fill in form values in the edit student form
+    $(document).on( "click", '.edit_student_btn',function(e) {
+        var name = $(this).data('name');
+        var id = $(this).data('id');
+        var section=$(this).data('section');
+        var address = $(this).data('address');
+        var contact = $(this).data('contact');
+        var dob=$(this).data('dob');
+
+        $("input:hidden[name=edit_student_id]").val(id);
+        $("#edit_student_name").val(name);
+        $('#edit_section_dropdown').val(section);
+        $("#edit_address").val(address);
+        $("#edit_contact_no").val(contact);
+        $('#edit_student_dob').val(dob);
+        
+        //trigger the onchange event of section to retrieve subsections
+        $( "#edit_section_dropdown" ).trigger( "change" );
+        
+    });
     
     //fill in form values in the edit teacher form
     $(document).on( "click", '.edit_teacher_btn',function(e) {
@@ -107,16 +132,29 @@ function deleteData(id,url,element)
  */
 function loadDropdown(element)
 {
-    var url=$(element).attr("url");
+    var url=$(element).attr("url-target");
+    var type=$(element).attr("target-type");
     var id=$(element).val();
     var target=$(element).attr("target");
     $.ajax({
         type: "POST",
         url: base_url+url,
-        data: {id : id},
+        data: {id : id , type : type},
         dataType: 'html',
         success:function(html) {
             $('#'+target).html(html);
+            if(type=='edit') 
+            {    
+                if(target=='tr_edit_subsection_dropdown')
+                {
+                    $('#edit_subsection_dropdown').val($('.edit_student_btn').data('subsection'));
+                    $('#edit_subsection_dropdown').trigger( "change" );
+                }else if(target=='tr_edit_group_dropdown'){
+                    $('#edit_group_dropdown').val($('.edit_student_btn').data('group'));
+                }
+            
+            }
+                
         }       
       });
 }

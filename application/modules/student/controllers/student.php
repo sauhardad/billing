@@ -35,7 +35,7 @@ class Student extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['student_name']=$this->input->post('add_student_name')) && ($data['contact_no']=$this->input->post('add_contact_no')) && ($data['address']=$this->input->post('add_address')) && ($data['section_id']=$this->input->post('add_section_id')) && ($data['subsection_id']=$this->input->post('add_subsection_id')) && ($data['group_id']=$this->input->post('add_group_id')))
+     if(($data['student_name']=$this->input->post('add_student_name')) && ($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['subsection_id']=$this->input->post('add_subsection_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')))
      {
          if($this->student_model->insertStudent($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Student Saved'));
@@ -47,7 +47,7 @@ class Student extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_student_id')) && ($data['student_name']=$this->input->post('edit_student_name')) && ($data['contact_no']=$this->input->post('edit_contact_no')) && ($data['address']=$this->input->post('edit_address')) &&  ($data['section_id']=$this->input->post('edit_section_id')) && ($data['subsection_id']=$this->input->post('edit_subsection_id')) && ($data['group_id']=$this->input->post('edit_group_id')))
+     if(($id=$this->input->post('edit_student_id')) && ($data['student_name']=$this->input->post('edit_student_name')) &&  ($data['section_id']=$this->input->post('edit_section_dropdown')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')))
      {
         if($this->student_model->updateStudent($id,$data))
             echo json_encode(array('status'=>TRUE,'message'=>'Student Updated'));
@@ -70,21 +70,22 @@ class Student extends CI_Controller {
  
  function load_subsection()
  {
-     if(($id=$this->input->post('id')))
+     if(($id=$this->input->post('id')) && ($type=$this->input->post('type')))
      {
         $data=array(); 
         $data['subsections']=$this->subsection_model->retrieveSubsection(NULL,$id);
-        echo $this->load->view('subsection_dropdown_view',$data);
+        echo $this->load->view($type.'_subsection_dropdown_view',$data);
      }
  }
  
  function load_group()
  {
-     if(($id=$this->input->post('id')))
+     if(($id=$this->input->post('id')) && ($type=$this->input->post('type')))
      {
         $data=array(); 
         $data['groups']=$this->group_model->retrieveGroup(NULL,$id);
-        echo $this->load->view('group_dropdown_view',$data);
+        echo $this->load->view($type.'_group_dropdown_view',$data);
+        
      }
  }
 

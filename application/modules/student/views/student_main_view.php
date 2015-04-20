@@ -14,12 +14,10 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Contact Number</th>
-                        <th>Section Name</th>
-                        <th>Subsection Name</th>
-                        <th>Group Name</th>
-                        
-                        <th>
-                        <th></th>
+                        <th>Section</th>
+                        <th>Subsection</th>
+                        <th>Group</th>
+                        <th>Date of Birth</th>
                     </thead>
                     <tbody>
                         <?php if(isset($students)){ ?>
@@ -31,14 +29,15 @@
                         <?php foreach($students as $student){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $section_map[$section['section_id']]; ?></td>
-                                <td><?php echo $subsection_map[$subsection['subsection_id']]; ?></td>
-                                <td><?php echo $group_map[$group['group_id']]; ?></td>
                                 <td><?php echo $student['student_name']; ?></td>
                                 <td><?php echo $student['address']; ?></td>
                                 <td><?php echo $student['contact_no']; ?></td>
+                                <td><?php echo $section_map[$student['section_id']]; ?></td>
+                                <td><?php echo $subsection_map[$student['subsection_id']]; ?></td>
+                                <td><?php echo $group_map[$student['group_id']]; ?></td>
+                                <td><?php echo $student['dob']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_student_btn" data-id="<?php echo $student['id']; ?>" data-name="<?php echo $student['student_name']; ?>" data-address="<?php echo $student['address']; ?>" data-contact="<?php echo $student['contact_no']; ?>" data-toggle="modal" data-target="#edit_student_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_student_btn" data-id="<?php echo $student['id']; ?>" data-dob="<?php echo $student['dob']; ?>" data-section="<?php echo $student['section_id']; ?>" data-subsection="<?php echo $student['subsection_id']; ?>" data-group="<?php echo $student['group_id']; ?>" data-name="<?php echo $student['student_name']; ?>" data-address="<?php echo $student['address']; ?>" data-contact="<?php echo $student['contact_no']; ?>" data-toggle="modal" data-target="#edit_student_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <button class="btn btn-danger" onclick="return deleteData('<?php echo $student['id']; ?>','student/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
                                 </td>
                             </tr> 
@@ -71,12 +70,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_contact_no">Contact Number</label>
+                                    <label for="add_section_dropdown">Section</label>
                                 </td>
-                                <td>
-                                    <input type="text" name="add_contact_no" class="form-control input-sm nepali-date">
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_section_dropdown',array("0"=>"Select Section") + convert_to_keyvalue($sections),"0",'class="form-control" id="add_section_dropdown" target="tr_add_subsection_dropdown" url-target="student/load_subsection" target-type="add" onchange="return loadDropdown(this);"') ?>
                                 </td>
                             </tr>
+                            <tr id="tr_add_subsection_dropdown"></tr>
+                            <tr id="tr_add_group_dropdown"></tr>
                             <tr>
                                 <td>
                                     <label for="add_address">Address</label>
@@ -87,23 +88,19 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_section_dropdown">Section</label>
+                                    <label for="add_student_dob">Date of Birth</label>
                                 </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_section_dropdown',array("0"=>"Select Section") + convert_to_keyvalue($sections),"0",'class="form-control" id="add_section_dropdown" target="tr_subsection_dropdown" url="student/load_subsection" onchange="return loadDropdown(this);"') ?>
-                                </td>
-                            </tr>
-                            <tr id="tr_subsection_dropdown"></tr>
-                            <tr id="tr_group_dropdown"></tr>
-                            <!--
-                            <tr>
                                 <td>
-                                    <label for="add_group_dropdown">Group</label>
+                                    <input type="text" name="add_student_dob" class="form-control input-sm nepali_datepicker">
                                 </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php //echo form_dropdown('add_group_dropdown',convert_to_keyvalue($groups),TRUE,'class="form-control" id="add_group_dropdown"'); ?>
+                                <td>
+                                    <label for="add_contact_no">Contact Number</label>
                                 </td>
-                            </tr>-->
+                                <td>
+                                    <input type="text" name="add_contact_no" class="form-control input-sm nepali-date">
+                                </td>
+                                
+                            </tr>
                         </table>    
                         
                         <input class="btn btn-primary" type="submit" value="Save" id="submit">
@@ -135,10 +132,26 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="edit_contact_no">Contact Number</label>
+                                    <label for="edit_section_dropdown">Section</label>
                                 </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_section_dropdown',array("0"=>"Select Section") + convert_to_keyvalue($sections),"0",'class="form-control" id="edit_section_dropdown" target="tr_edit_subsection_dropdown" url-target="student/load_subsection" target-type="edit" onchange="return loadDropdown(this);"'); ?>
+                                </td>
+                            </tr>
+                            <tr id="tr_edit_subsection_dropdown">
                                 <td>
-                                    <input type="text" name="edit_contact_no" id="edit_contact_no" class="form-control input-sm nepali-date">
+                                    <label for="edit_subsection_dropdown">Subsection</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_subsection_dropdown',array("0"=>"Select Subsection") + convert_to_keyvalue($subsections),"0",'class="form-control" id="edit_subsection_dropdown"'); ?>
+                                </td>
+                            </tr>
+                            <tr id="tr_edit_group_dropdown">
+                                <td>
+                                    <label for="edit_group_dropdown">Group</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_group_dropdown',array("0"=>"Select Group") + convert_to_keyvalue($groups),"0",'class="form-control" id="edit_group_dropdown"'); ?>
                                 </td>
                             </tr>
                             <tr>
@@ -146,22 +159,21 @@
                                     <label for="edit_address">Address</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_address" id="edit_address" class="form-control input-sm">
+                                    <input type="text" name="edit_address" id="edit_address" class="form-control">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="edit_section_dropdown">Section</label>
+                                    <label for="edit_student_dob">Date of Birth</label>
                                 </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('edit_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="edit_section_dropdown"'); ?>
-                                </td>
-                            </tr><tr>
                                 <td>
-                                    <label for="edit_section_dropdown">Subsection</label>
+                                    <input type="text" name="edit_student_dob" id="edit_student_dob" class="form-control input-sm nepali_datepicker">
                                 </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('edit_section_dropdown',convert_to_keyvalue($sections),TRUE,'class="form-control" id="edit_section_dropdown"'); ?>
+                                <td>
+                                    <label for="edit_contact_no">Contact Number</label>
+                                </td>
+                                <td>
+                                    <input type="text" name="edit_contact_no" id="edit_contact_no" class="form-control input-sm nepali-date">
                                 </td>
                             </tr>
                         </table>    

@@ -352,3 +352,8 @@ thead {
     width:15%;
     display:inline;
 }
+
+/* for displaying calender-popup at the foremost */
+.calendars-popup{
+    z-index:9999;
+}

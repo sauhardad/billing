@@ -75,6 +75,69 @@ $(function () {
         }
     });
     
+    //add custom validation for student section dropdown
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return value != arg;
+    }, "Please select a value");
+    
+    // validate add student form on keyup and submit
+    $("#add_student_form").validate({
+        rules: {
+                add_student_name: "required",
+                add_section_dropdown: { valueNotEquals: "0" },
+                add_subsection_dropdown: { valueNotEquals: "0" },
+                add_group_dropdown: { valueNotEquals: "0" }
+        },
+        messages: {
+                add_student_name: "Please enter name of the Student",
+                add_section_dropdown:"Please select a Section",
+                add_subsection_dropdown:"Please select a Subsection",
+                add_group_dropdown: "Please select a Group"
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    // validate add student form on keyup and submit
+    $("#edit_student_form").validate({
+        rules: {
+                edit_student_name: "required",
+                edit_section_dropdown: { valueNotEquals: "0" },
+                edit_subsection_dropdown: { valueNotEquals: "0" },
+                edit_group_dropdown: { valueNotEquals: "0" }
+        },
+        messages: {
+                edit_student_name: "Please enter name of the Student",
+                edit_section_dropdown:"Please select a Section",
+                edit_subsection_dropdown:"Please select a Subsection",
+                edit_group_dropdown: "Please select a Group"
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
     //validate and submit group form
      $("#add_group_form").validate({
         rules: {
