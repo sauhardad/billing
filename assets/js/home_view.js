@@ -17,6 +17,7 @@ $(function () {
         var address = $(this).data('address');
         var contact = $(this).data('contact');
         var dob=$(this).data('dob');
+        
 
         $("input:hidden[name=edit_student_id]").val(id);
         $("#edit_student_name").val(name);
@@ -39,7 +40,7 @@ $(function () {
         var contact = $(this).data('contact');
 
         $("input:hidden[name=edit_teacher_id]").val(id);
-        $("#edit_teacher_name").val(name);
+        $("#edit_name").val(name);
         $("#edit_address").val(address);
         $("#edit_contact_no").val(contact);
         
@@ -86,6 +87,20 @@ $(function () {
         $("#edit_section_code").val(code);
         $("#edit_section_name").val(name);
         
+    });
+    
+     //fill in form values in the edit expense form
+    $(document).on( "click", '.edit_expense_btn',function(e) {
+
+        var id = $(this).data('id');
+        var particulars = $(this).data('particulars');
+        var amount = $(this).data('amount');
+        var date = $(this).data('date');
+
+        $("input:hidden[name=edit_expense_id]").val(id);
+        $("#edit_expense_particular").val(particulars);
+        $("#edit_expense_amount").val(amount);
+        $("#edit_expense_date").val(date);
     });
 });
 

@@ -71,6 +71,13 @@
 					<span class="glyphicon glyphicon-th-large"></span>
 				</a>
 			</li>
+                        <li>
+				<a href="<?php echo base_url('expense');?>" class="animate">
+					<span class="desc animate">Expenses </span>
+					<span class="glyphicon glyphicon-usd"></span>
+				</a>
+			</li>
+
                         <?php if ($session_data['role']==$this->config->item('role_admin')){ ?>
                         <li>
                                     <a href="#add_user" class="animate" data-toggle="modal">

@@ -22,11 +22,11 @@
                         <?php foreach($teachers as $teacher){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $teacher['teacher_name']; ?></td>
+                                <td><?php echo $teacher['name']; ?></td>
                                 <td><?php echo $teacher['address']; ?></td>
                                 <td><?php echo $teacher['contact_no']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_teacher_btn" data-id="<?php echo $teacher['id']; ?>" data-name="<?php echo $teacher['teacher_name']; ?>" data-address="<?php echo $teacher['address']; ?>" data-contact="<?php echo $teacher['contact_no']; ?>" data-toggle="modal" data-target="#edit_teacher_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_teacher_btn" data-id="<?php echo $teacher['id']; ?>" data-name="<?php echo $teacher['name']; ?>" data-address="<?php echo $teacher['address']; ?>" data-contact="<?php echo $teacher['contact_no']; ?>" data-toggle="modal" data-target="#edit_teacher_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <button class="btn btn-danger" onclick="return deleteData('<?php echo $teacher['id']; ?>','teacher/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
                                 </td>
                             </tr> 

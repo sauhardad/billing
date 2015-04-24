@@ -13,11 +13,13 @@
                         <th>S.N.</th>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>Teacher</th>
                         <th>Contact Number</th>
                         <th>Section</th>
                         <th>Subsection</th>
                         <th>Group</th>
                         <th>Date of Birth</th>
+                        <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($students)){ ?>
@@ -25,12 +27,15 @@
                         <?php $section_map=convert_to_keyvalue($sections); ?>
                         <?php $subsection_map=convert_to_keyvalue($subsections); ?>
                         <?php $group_map=convert_to_keyvalue($groups); ?>
+                        <?php $teacher_map=convert_to_keyvalue($teachers); ?>
+                        
                         
                         <?php foreach($students as $student){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
                                 <td><?php echo $student['student_name']; ?></td>
                                 <td><?php echo $student['address']; ?></td>
+                                <td><?php echo $teacher_map[$student['teacher_id']]; ?></td>
                                 <td><?php echo $student['contact_no']; ?></td>
                                 <td><?php echo $section_map[$student['section_id']]; ?></td>
                                 <td><?php echo $subsection_map[$student['subsection_id']]; ?></td>
@@ -78,6 +83,14 @@
                             </tr>
                             <tr id="tr_add_subsection_dropdown"></tr>
                             <tr id="tr_add_group_dropdown"></tr>
+                            <tr>
+                                <td>
+                                    <label for="add_teacher_dropdown">Teacher</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_teacher_dropdown"') ?>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>
                                     <label for="add_address">Address</label>
@@ -152,6 +165,14 @@
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
                                     <?php echo form_dropdown('edit_group_dropdown',array("0"=>"Select Group") + convert_to_keyvalue($groups),"0",'class="form-control" id="edit_group_dropdown"'); ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_teacher_dropdown">Teacher</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="edit_teacher_dropdown"') ?>
                                 </td>
                             </tr>
                             <tr>

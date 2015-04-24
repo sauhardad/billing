@@ -3,7 +3,7 @@ $(function () {
     // validate signup form on keyup and submit
     $("#add_teacher_form").validate({
         rules: {
-                add_teacher_name: "required",
+                add_name: "required",
                 add_contact_no: {
                         required: true,
                         minlength: 6
@@ -13,7 +13,7 @@ $(function () {
                 }
         },
         messages: {
-                add_teacher_name: "Please enter name of the Teacher",
+                add_name: "Please enter name of the Teacher",
                 add_contact_no: {
                         required: "Please enter contact number",
                         minlength: "Invalid contact Number"
@@ -41,7 +41,7 @@ $(function () {
     // validate signup form on keyup and submit
     $("#edit_teacher_form").validate({
         rules: {
-                edit_teacher_name: "required",
+                edit_name: "required",
                 edit_contact_no: {
                         required: true,
                         minlength: 6
@@ -51,7 +51,7 @@ $(function () {
                 }
         },
         messages: {
-                edit_teacher_name: "Please enter name of the Teacher",
+                edit_name: "Please enter name of the Teacher",
                 edit_contact_no: {
                         required: "Please enter contact number",
                         minlength: "Invalid contact Number"
@@ -74,25 +74,21 @@ $(function () {
             return false;
         }
     });
-    
-    //add custom validation for student section dropdown
-    $.validator.addMethod("valueNotEquals", function(value, element, arg){
-        return value != arg;
-    }, "Please select a value");
-    
-    // validate add student form on keyup and submit
-    $("#add_student_form").validate({
+    //validate and submit add expense form
+    $("#add_expense_form").validate({
         rules: {
-                add_student_name: "required",
-                add_section_dropdown: { valueNotEquals: "0" },
-                add_subsection_dropdown: { valueNotEquals: "0" },
-                add_group_dropdown: { valueNotEquals: "0" }
+                add_expense_particular: "required",
+                add_expense_amount: "required",
+                add_expense_date: {
+                        required: true,
+                }
         },
         messages: {
-                add_student_name: "Please enter name of the Student",
-                add_section_dropdown:"Please select a Section",
-                add_subsection_dropdown:"Please select a Subsection",
-                add_group_dropdown: "Please select a Group"
+                add_expense_particular: "Please enter the particular",
+                add_expense_amount: "Please enter the amount",
+                add_expense_date: {
+                        required: "Please enter the date"
+                }
         },
         errorClass: "invalid",
         submitHandler: function(form) {
@@ -109,19 +105,92 @@ $(function () {
         }
     });
     
+    //validate and submit edit expense form
+    $("#edit_expense_form").validate({
+        rules: {
+                edit_expense_particular: "required",
+                edit_expense_amount: "required",
+                edit_expense_date: {
+                        required: true,
+                }
+        },
+        messages: {
+                edit_expense_particular: "Please enter the particular",
+                edit_expense_amount: "Please enter the amount",
+                edit_expense_date:{
+                    required:true,
+                } 
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    
+    //add custom validation for student section dropdown
+    $.validator.addMethod("valueNotEquals", function(value, element, arg){
+        return value != arg;
+    }, "Please select a value");
+    
     // validate add student form on keyup and submit
+    $("#add_student_form").validate({
+        rules: {
+                add_student_name: "required",
+                add_section_dropdown: { valueNotEquals: "0" },
+                add_subsection_dropdown: { valueNotEquals: "0" },
+                add_group_dropdown: { valueNotEquals: "0" },
+                add_teacher_dropdown:{ valueNotEquals: "0" },
+                
+        },
+        messages: {
+                add_student_name: "Please enter name of the Student",
+                add_section_dropdown:"Please select a Section",
+                add_subsection_dropdown:"Please select a Subsection",
+                add_group_dropdown: "Please select a Group",
+                add_teacher_dropdown:"Enter teachers name",
+                
+                
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    // validate edit student form on keyup and submit
     $("#edit_student_form").validate({
         rules: {
                 edit_student_name: "required",
                 edit_section_dropdown: { valueNotEquals: "0" },
                 edit_subsection_dropdown: { valueNotEquals: "0" },
-                edit_group_dropdown: { valueNotEquals: "0" }
+                edit_group_dropdown: { valueNotEquals: "0" },
+                edit_teacher_dropdown:{ valueNotEquals: "0" }
         },
         messages: {
                 edit_student_name: "Please enter name of the Student",
                 edit_section_dropdown:"Please select a Section",
                 edit_subsection_dropdown:"Please select a Subsection",
-                edit_group_dropdown: "Please select a Group"
+                edit_group_dropdown: "Please select a Group",
+                edit_teacher_dropdown:"Enter teachers name"
         },
         errorClass: "invalid",
         submitHandler: function(form) {

@@ -13,6 +13,7 @@ class Student extends CI_Controller {
    $this->load->model('subsection/subsection_model');
    $this->load->model('section/section_model');
    $this->load->model('group/group_model');
+      $this->load->model('teacher/teacher_model');
    $this->load->helper(array('form'));
  }
 
@@ -29,14 +30,18 @@ class Student extends CI_Controller {
     $data['sections']=$this->section_model->retrieveSection();
     $data['subsections']=$this->subsection_model->retrieveSubsection();
     $data['groups']=$this->group_model->retrieveGroup();
+    $data['teachers']=$this->teacher_model->retrieveTeacher();
     $this->template->load('default', 'student/student_main_view',$data);
  }
  
  function add()
  {
      $data=array();
-     if(($data['student_name']=$this->input->post('add_student_name')) && ($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['subsection_id']=$this->input->post('add_subsection_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')))
+     if(($data['student_name']=$this->input->post('add_student_name')) && ($data['teacher_id']=$this->input->post('add_teacher_dropdown')) && ($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['subsection_id']=$this->input->post('add_subsection_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')))
      {
+         $data['contact_no']=$this->input->post('edit_contact_no'); 
+         $data['address']=$this->input->post('add_address'); 
+         $data['dob']=$this->input->post('add_student_dob');
          if($this->student_model->insertStudent($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Student Saved'));
          else
@@ -47,8 +52,11 @@ class Student extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_student_id')) && ($data['student_name']=$this->input->post('edit_student_name')) &&  ($data['section_id']=$this->input->post('edit_section_dropdown')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')))
+     if(($id=$this->input->post('edit_student_id')) && ($data['teacher_id']=$this->input->post('edit_teacher_dropdown')) && ($data['student_name']=$this->input->post('edit_student_name')) &&  ($data['section_id']=$this->input->post('edit_section_dropdown')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')))
      {
+        $data['contact_no']=$this->input->post('edit_contact_no'); 
+        $data['address']=$this->input->post('edit_address'); 
+        $data['dob']=$this->input->post('edit_student_dob'); 
         if($this->student_model->updateStudent($id,$data))
             echo json_encode(array('status'=>TRUE,'message'=>'Student Updated'));
         else
