@@ -357,3 +357,21 @@ thead {
 .calendars-popup{
     z-index:9999;
 }
+/* for the autocomplete search */
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }
+.searchfield{width:20%; display:inline-block;}
+
+/* for displaying user uploaded photos */
+img.picture{
+   width:20%; 
+}
+/* for displaying user uploaded photos */
+img.search-picture{
+   width:40px; 
+}
+ 
+
+ 

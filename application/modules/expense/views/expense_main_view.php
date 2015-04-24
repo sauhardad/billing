@@ -14,7 +14,6 @@
                         <th>Particular</th>
                         <th>Amount</th>
                         <th>Date</th>
-                        <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($expenses)){ ?>
@@ -70,7 +69,7 @@
                                     <label for="add_expense_date">Date</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_expense_date" class="form-control input-sm nepali_datepicker">
+                                    <input type="text" name="add_expense_date" class="form-control input-sm datepicker">
                                 </td>
                             </tr>
                             
@@ -119,7 +118,7 @@
                                     <label for="edit_expense_date">Date</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_expense_date" id="edit_expense_date" class="form-control input-sm nepali_datepicker"  >
+                                    <input type="text" name="edit_expense_date" id="edit_expense_date" class="form-control input-sm datepicker"  >
                                 </td>
                             </tr>
                             

@@ -39,7 +39,7 @@ class Student extends CI_Controller {
      $data=array();
      if(($data['student_name']=$this->input->post('add_student_name')) && ($data['teacher_id']=$this->input->post('add_teacher_dropdown')) && ($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['subsection_id']=$this->input->post('add_subsection_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')))
      {
-         $data['contact_no']=$this->input->post('edit_contact_no'); 
+         $data['contact_no']=$this->input->post('add_contact_no'); 
          $data['address']=$this->input->post('add_address'); 
          $data['dob']=$this->input->post('add_student_dob');
          if($this->student_model->insertStudent($data))
@@ -62,6 +62,30 @@ class Student extends CI_Controller {
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
          
+     }
+ }
+ 
+ function search()
+ {
+     if(($term=$this->input->get('term')))
+     {
+         $data = $this->student_model->searchStudents($term);
+         echo json_encode($data);
+     }
+ }
+ 
+ function view()
+ {
+     if(($id=$this->uri->segment(3)))
+     {
+        $session_data = $this->session->userdata('logged_in');
+        $data['session_data']=$session_data;
+        //check if the user has permission to add/edit users
+        if ($session_data['role']=$this->config->item('role_admin'))
+            $data['users']=$this->user_model->get_users_except($session_data['id']);
+        $data['roles']=$this->config->item('role_value');
+        $data['student']=$this->student_model->retrieveStudent($id)[0];
+        $this->template->load('default', 'student/student_specific_view',$data);
      }
  }
  
