@@ -17,6 +17,7 @@ $(function () {
         var id = $(this).data('id');
         var section=$(this).data('section');
         var address = $(this).data('address');
+        var teacher =$(this).data('teacher');
         var contact = $(this).data('contact');
         var dob=$(this).data('dob');
         
@@ -24,6 +25,7 @@ $(function () {
         $("input:hidden[name=edit_student_id]").val(id);
         $("#edit_student_name").val(name);
         $('#edit_section_dropdown').val(section);
+        $("#edit_teacher_dropdown").val(teacher);
         $("#edit_address").val(address);
         $("#edit_contact_no").val(contact);
         $('#edit_student_dob').val(dob);
