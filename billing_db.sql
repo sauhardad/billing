@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 24, 2015 at 11:09 AM
+-- Generation Time: Apr 24, 2015 at 01:16 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,8 +44,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('d412ff401bf80164e67b16917f9e340a', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1429866504, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('ef40988f341fce32e37ad6eb409ca71a', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1429866140, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('2114b651a2361628cd51367b3a774f0c', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1429872388, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('2b4406e7ecb66409da38f3a426d76ace', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1429873971, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('d412ff401bf80164e67b16917f9e340a', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1429866504, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -72,30 +73,21 @@ CREATE TABLE IF NOT EXISTS `tbl_amount` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_bill`
+-- Table structure for table `tbl_bill_payment`
 --
 
-DROP TABLE IF EXISTS `tbl_bill`;
-CREATE TABLE IF NOT EXISTS `tbl_bill` (
+DROP TABLE IF EXISTS `tbl_bill_payment`;
+CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bill_no` varchar(10) NOT NULL,
-  `student_name` varchar(255) NOT NULL,
-  `contact_no` varchar(255) NOT NULL,
-  `section_id` int(11) NOT NULL,
-  `level_id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `amount` decimal(10,0) NOT NULL,
-  `received_id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `paid` decimal(10,0) NOT NULL,
-  `dues` decimal(10,0) NOT NULL,
+  `paid_amount` decimal(10,0) NOT NULL,
+  `due_amount` decimal(10,0) NOT NULL,
+  `date` varchar(10) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  `event_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `section_id` (`section_id`),
-  KEY `level_id` (`level_id`),
-  KEY `group_id` (`group_id`)
+  KEY `bill_id` (`bill_no`),
+  KEY `bill_id_2` (`bill_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -121,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
 --
 
 INSERT INTO `tbl_expense` (`id`, `date`, `particulars`, `amount`, `user_id`, `active`, `entry_timestamp`) VALUES
-(13, '04/20/2015', 'mnbv', '5432', 1, 1, '2015-04-24 14:40:12'),
+(13, '04/20/2015', 'Stationary', '5432', 1, 1, '2015-04-24 16:31:52'),
 (14, '04/25/2015', 'Photocopy', '1200', 1, 1, '2015-04-24 14:48:31'),
 (15, '04/06/2015', 'Books', '3000', 1, 1, '2015-04-24 14:48:42');
 
@@ -246,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
   `address` varchar(255) NOT NULL,
   `contact_no` varchar(20) NOT NULL,
   `dob` varchar(10) NOT NULL,
+  `total_amount` decimal(10,0) NOT NULL,
   `photo` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
@@ -258,17 +251,17 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
 -- Dumping data for table `tbl_students`
 --
 
-INSERT INTO `tbl_students` (`id`, `section_id`, `subsection_id`, `group_id`, `teacher_id`, `student_name`, `address`, `contact_no`, `dob`, `photo`, `user_id`, `active`, `entry_timestamp`) VALUES
-(35, 1, 5, 10, 7, 'Nirdosh', 'kirtipur', '9841168519', '10/01/2072', 'ppl.jpg', 1, 1, '2015-04-24 13:34:02'),
-(36, 1, 5, 11, 7, 'Sauharda', '', '', '', '', 1, 1, '2015-04-24 12:47:48'),
-(37, 1, 5, 10, 9, 'Sameer Aryal', '', '', '', '', 1, 1, '2015-04-24 12:48:02'),
-(38, 1, 5, 10, 7, 'Manish Dawadi', '', '', '', '', 1, 1, '2015-04-24 12:48:15'),
-(39, 1, 5, 10, 7, 'Bishal Khanal', '', '', '', '', 1, 1, '2015-04-24 12:48:28'),
-(40, 1, 5, 10, 7, 'Pramod Kattel', '', '', '', '', 1, 1, '2015-04-24 12:48:41'),
-(41, 1, 5, 10, 7, 'Manaram Poudel', '', '', '', '', 1, 1, '2015-04-24 12:48:58'),
-(42, 1, 5, 10, 7, 'Nilam Parajuli', '', '', '', '', 1, 1, '2015-04-24 12:49:15'),
-(43, 1, 5, 10, 7, 'Sahaj Neupane', '', '', '', '', 1, 1, '2015-04-24 12:49:25'),
-(44, 1, 5, 11, 9, 'Narendra Bista', 'Kalanki', '984109755', '09/01/2072', '', 1, 1, '2015-04-24 14:30:19');
+INSERT INTO `tbl_students` (`id`, `section_id`, `subsection_id`, `group_id`, `teacher_id`, `student_name`, `address`, `contact_no`, `dob`, `total_amount`, `photo`, `user_id`, `active`, `entry_timestamp`) VALUES
+(35, 1, 5, 10, 7, 'Nirdosh', 'kirtipur', '9841168519', '10/01/2072', '0', 'ppl.jpg', 1, 1, '2015-04-24 13:34:02'),
+(36, 1, 5, 11, 7, 'Sauharda', '', '', '', '0', '', 1, 1, '2015-04-24 12:47:48'),
+(37, 1, 5, 10, 9, 'Sameer Aryal', '', '', '', '0', '', 1, 1, '2015-04-24 12:48:02'),
+(38, 1, 5, 10, 7, 'Manish Dawadi', '', '', '', '0', '', 1, 1, '2015-04-24 12:48:15'),
+(39, 1, 5, 10, 7, 'Bishal Khanal', '', '', '', '0', '', 1, 1, '2015-04-24 12:48:28'),
+(40, 1, 5, 10, 7, 'Pramod Kattel', '', '', '', '0', '', 1, 1, '2015-04-24 12:48:41'),
+(41, 1, 5, 10, 7, 'Manaram Poudel', '', '', '', '0', '', 1, 1, '2015-04-24 12:48:58'),
+(42, 1, 5, 10, 7, 'Nilam Parajuli', '', '', '', '0', '', 1, 1, '2015-04-24 12:49:15'),
+(43, 1, 5, 10, 7, 'Sahaj Neupane', '', '', '', '0', '', 1, 1, '2015-04-24 12:49:25'),
+(44, 1, 5, 11, 9, 'Narendra Bista', 'Kalanki', '984109755', '09/01/2072', '0', '', 1, 1, '2015-04-24 14:30:19');
 
 -- --------------------------------------------------------
 
@@ -346,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-04-24 12:47:25', '2015-04-24 12:47:25'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-04-24 16:31:31', '2015-04-24 16:31:31'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
@@ -359,14 +352,6 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_
 --
 ALTER TABLE `tbl_amount`
   ADD CONSTRAINT `tbl_amount_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `tbl_teacher` (`id`);
-
---
--- Constraints for table `tbl_bill`
---
-ALTER TABLE `tbl_bill`
-  ADD CONSTRAINT `tbl_bill_ibfk_1` FOREIGN KEY (`section_id`) REFERENCES `tbl_section` (`id`),
-  ADD CONSTRAINT `tbl_bill_ibfk_2` FOREIGN KEY (`level_id`) REFERENCES `tbl_level` (`id`),
-  ADD CONSTRAINT `tbl_bill_ibfk_3` FOREIGN KEY (`group_id`) REFERENCES `tbl_group` (`id`);
 
 --
 -- Constraints for table `tbl_group`
