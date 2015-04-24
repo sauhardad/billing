@@ -72,6 +72,12 @@
 				</a>
 			</li>
                         <li>
+				<a href="<?php echo base_url('income');?>" class="animate">
+					<span class="desc animate">Income </span>
+					<span class="glyphicon glyphicon-euro"></span>
+				</a>
+			</li>
+                        <li>
 				<a href="<?php echo base_url('expense');?>" class="animate">
 					<span class="desc animate">Expenses </span>
 					<span class="glyphicon glyphicon-usd"></span>

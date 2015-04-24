@@ -90,6 +90,34 @@ $(function () {
         $("#edit_section_name").val(name);
         
     });
+     //fill in form values in the edit income form
+    $(document).on( "click", '.edit_income_btn',function(e) {
+
+        var id = $(this).data('id');
+        var teacher_id = $(this).data('teacher_id');
+        var group_id = $(this).data('group_id');
+        var total = $(this).data('total');
+        var share_percent = $(this).data('share_percent');
+        var date = $(this).data('date');
+        var payment = $(this).data('payment');
+        var remark = $(this).data('remark');
+        var due= $(this).data('edit_due');
+        
+        
+        
+
+        $("input:hidden[name=edit_income_id]").val(id);
+        $("#edit_teacher_dropdown").val(teacher_id);
+        $("#edit_group_dropdown").val(group_id);
+        $("#edit_total").val(total);
+        $("#edit_share_percent").val(share_percent);
+        $("#edit_date").val(date);
+        $("#edit_payment").val(payment);
+        $("#edit_remark").val(remark);
+        $("#edit_due").val(due);
+        
+        
+    });
     
      //fill in form values in the edit expense form
     $(document).on( "click", '.edit_expense_btn',function(e) {

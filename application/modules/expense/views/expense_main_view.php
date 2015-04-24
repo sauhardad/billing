@@ -13,6 +13,7 @@
                         <th>S.N.</th>
                         <th>Particular</th>
                         <th>Amount</th>
+                        <th>Date</th>
                         <th></th>
                     </thead>
                     <tbody>

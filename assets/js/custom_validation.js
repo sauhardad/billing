@@ -136,6 +136,81 @@ $(function () {
         }
     });
     
+    //validate and submit add income form
+    $("#add_income_form").validate({
+        rules: {
+                add_teacher_dropdown: { valueNotEquals: "0" },
+                add_group_dropdown: { valueNotEquals: "0" },
+                add_payment: "required",
+                add_due: "required",
+                add_total: "required",
+                add_share_percent: "required",
+                add_remark: "required",
+                add_date: "required",
+                
+        },
+        messages: {
+                add_teacher_dropdown: "Please enter Teachers name",
+                add_group_dropdown: "Please enter Group",
+                add_payment: "Please enter Payment amount",
+                add_due: "Please enter due amount",
+                add_total: "Please enter total",
+                add_share_percent: "Please enter share percentage",
+                add_remark: "Please add remark",
+                add_date: "Please enter date",
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    //validate and submit edit income form
+    $("#edit_income_form").validate({
+        rules: {
+                edit_teacher_dropdown: { valueNotEquals: "0" },
+                edit_group_dropdown: { valueNotEquals: "0" },
+                edit_payment: "required",
+                edit_due: "required",
+                edit_total: "required",
+                edit_share_percent: "required",
+                edit_remark: "required",
+                edit_date: "required",
+                
+        },
+        messages: {
+                edit_teacher_dropdown: "Please enter Teachers name",
+                edit_group_dropdown: "Please enter Group",
+                edit_payment: "Please enter Payment amount",
+                edit_due: "Please enter due amount",
+                edit_total: "Please enter total",
+                edit_share_percent: "Please enter share percentage",
+                edit_remark: "Please add remark",
+                edit_date: "Please enter date",
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
     
     //add custom validation for student section dropdown
     $.validator.addMethod("valueNotEquals", function(value, element, arg){
