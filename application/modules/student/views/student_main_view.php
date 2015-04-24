@@ -3,7 +3,10 @@
               <div class="page-header" id="fix-page-header">
                 <div> 
                   <h2 style="display:inline-block;">Students</h2>
-                  <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_student_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+                  <button style="margin:1.5%;" class="btn" data-toggle="modal" data-target="#add_student_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+                   <div class="searchfield">
+                    <form><input type="text" id="search_student" name="search_student" class="form-control input-sm" style="display: inline-block;" placeholder="Search"/></form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -104,7 +107,7 @@
                                     <label for="add_student_dob">Date of Birth</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="add_student_dob" class="form-control input-sm nepali_datepicker">
+                                    <input type="text" name="add_student_dob" class="form-control input-sm datepicker">
                                 </td>
                                 <td>
                                     <label for="add_contact_no">Contact Number</label>
@@ -188,7 +191,7 @@
                                     <label for="edit_student_dob">Date of Birth</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="edit_student_dob" id="edit_student_dob" class="form-control input-sm nepali_datepicker">
+                                    <input type="text" name="edit_student_dob" id="edit_student_dob" class="form-control input-sm datepicker">
                                 </td>
                                 <td>
                                     <label for="edit_contact_no">Contact Number</label>

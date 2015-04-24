@@ -30,6 +30,19 @@ Class Student_model extends CI_Model
         return $result;
     }
     
+    /** function that returns students if the student name consists of the string 
+     * provided
+     * @param string $string
+     * @return array list of students
+     */
+    function searchStudents($string)
+    {
+        $this->db->like('student_name',$string);
+        $query = $this->db->get('tbl_students');
+        $result=$query->result_array();
+        return $result;
+    }
+    
     /** function that deletes students when students_id is passed
      * 
      * @param type $student_id

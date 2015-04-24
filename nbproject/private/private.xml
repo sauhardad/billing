@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/billing/application/modules/expense/models/expense_model.php</file>
-            <file>file:/C:/xampp/htdocs/billing/assets/js/custom_validation.js</file>
-            <file>file:/C:/xampp/htdocs/billing/application/modules/expense/controllers/expense.php</file>
-            <file>file:/C:/xampp/htdocs/billing/assets/js/home_view.js</file>
-            <file>file:/C:/xampp/htdocs/billing/application/modules/expense/views/expense_main_view.php</file>
+            <file>file:/opt/lampp/htdocs/billing/assets/js/home_view.js</file>
+            <file>file:/opt/lampp/htdocs/billing/application/modules/expense/models/expense_model.php</file>
+            <file>file:/opt/lampp/htdocs/billing/application/modules/student/models/student_model.php</file>
+            <file>file:/opt/lampp/htdocs/billing/application/modules/expense/controllers/expense.php</file>
+            <file>file:/opt/lampp/htdocs/billing/application/modules/student/controllers/student.php</file>
+            <file>file:/opt/lampp/htdocs/billing/application/modules/student/views/student_specific_view.php</file>
+            <file>file:/opt/lampp/htdocs/billing/application/views/templates/common_header_view.php</file>
         </group>
     </open-files>
 </project-private>

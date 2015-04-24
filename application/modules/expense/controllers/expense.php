@@ -44,7 +44,7 @@ class Expense extends CI_Controller {
      $data=array();
      if(($id=$this->input->post('edit_expense_id')) && ($data['particulars']=$this->input->post('edit_expense_particular')) && ($data['amount']=$this->input->post('edit_expense_amount')) && ($data['date']=$this->input->post('edit_expense_date')))
      {
-        
+         
          if($this->expense_model->updateExpense($id,$data))
              echo json_encode(array('status'=>TRUE,'message'=>'Expense Saved'));
          else

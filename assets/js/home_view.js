@@ -1,4 +1,5 @@
 $(function () { 
+    
     //display the menu dropdown on click
     $('.navbar-toggler').on('click', function(event) {
 		event.preventDefault();
@@ -6,8 +7,9 @@ $(function () {
 	});
         
     //date picker on student add form
-    var calendar = $.calendars.instance('nepali');
-    $('.nepali_datepicker').calendarsPicker({calendar: calendar});
+    //var calendar = $.calendars.instance('nepali');
+    var calendar = $.calendars.instance();
+    $('.datepicker').calendarsPicker({calendar: calendar});
     
     //fill in form values in the edit student form
     $(document).on( "click", '.edit_student_btn',function(e) {
@@ -40,7 +42,7 @@ $(function () {
         var contact = $(this).data('contact');
 
         $("input:hidden[name=edit_teacher_id]").val(id);
-        $("#edit_name").val(name);
+        $("#edit_teacher_name").val(name);
         $("#edit_address").val(address);
         $("#edit_contact_no").val(contact);
         
