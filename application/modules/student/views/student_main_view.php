@@ -68,7 +68,7 @@
                         <h3>Add Student</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('student/add',array('id' => 'add_student_form')); ?>
+                        <?php echo form_open_multipart('student/add',array('id' => 'add_student_form')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>

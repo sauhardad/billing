@@ -12,7 +12,12 @@ $(function () {
     $('.datepicker').calendarsPicker({calendar: calendar});
     
     //initialize the picture editor
-     $('.image').picEdit();
+    $('.image').picEdit({
+        formSubmitted: function(){
+        },
+        maxHeight:300,
+        maxWidth:200
+    });
     
     //fill in form values in the edit student form
     $(document).on( "click", '.edit_student_btn',function(e) {

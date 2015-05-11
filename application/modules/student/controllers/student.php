@@ -36,18 +36,39 @@ class Student extends CI_Controller {
  
  function add()
  {
-     $data=array();
-     if(($data['student_name']=$this->input->post('add_student_name')) && ($data['teacher_id']=$this->input->post('add_teacher_dropdown')) && ($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['subsection_id']=$this->input->post('add_subsection_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')))
-     {
-         $data['contact_no']=$this->input->post('add_contact_no'); 
-         $data['address']=$this->input->post('add_address'); 
-         $data['dob']=$this->input->post('add_student_dob');
-         if($this->student_model->insertStudent($data))
-             echo json_encode(array('status'=>TRUE,'message'=>'Student Saved'));
-         else
-             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
-     }
- }
+    $data=array();
+    if(($data['student_name']=$this->input->post('add_student_name')) && ($data['teacher_id']=$this->input->post('add_teacher_dropdown')) && ($data['section_id']=$this->input->post('add_section_dropdown')) && ($data['subsection_id']=$this->input->post('add_subsection_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')))
+    {
+       //upload the image if it exists
+       $error=FALSE; 
+       if (!empty($_FILES['add_student_photo']['name'])) 
+       {
+            $config['upload_path'] = 'assets/img/user_uploads/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['overwrite'] = false;
+
+            $this->load->library('upload', $config);
+            if ( ! $this->upload->do_upload('add_student_photo'))
+            {
+                echo $this->upload->display_errors();
+                $error =TRUE;
+            }
+            else
+            {
+                $data['photo']=$this->upload->data()['file_name'];
+                $error=FALSE;
+            }
+        }
+        
+        $data['contact_no']=$this->input->post('add_contact_no'); 
+        $data['address']=$this->input->post('add_address'); 
+        $data['dob']=$this->input->post('add_student_dob');
+        if(($this->student_model->insertStudent($data)) OR $error==FALSE)
+            echo json_encode(array('status'=>TRUE,'message'=>'Student Saved'));
+        else
+            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+    }
+}
  
  function edit()
  {
