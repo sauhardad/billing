@@ -80,6 +80,14 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <label for="add_student_photo">Picture</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="file" name="add_student_photo" class="image">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <label for="add_section_dropdown">Section</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">

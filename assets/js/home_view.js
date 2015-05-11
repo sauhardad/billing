@@ -11,6 +11,9 @@ $(function () {
     var calendar = $.calendars.instance();
     $('.datepicker').calendarsPicker({calendar: calendar});
     
+    //initialize the picture editor
+     $('.image').picEdit();
+    
     //fill in form values in the edit student form
     $(document).on( "click", '.edit_student_btn',function(e) {
         var name = $(this).data('name');
