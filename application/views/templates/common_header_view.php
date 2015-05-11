@@ -12,6 +12,7 @@
    <link href="<?=base_url()?>assets/css/fileinput.min.css" rel="stylesheet" type="text/css">
    <link href="<?=base_url()?>assets/css/jquery.calendars.picker.css" rel="stylesheet" type="text/css">
    <link href="<?=base_url()?>assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"> 
+   <link href="<?=base_url()?>assets/css/picedit.min.css" rel="stylesheet" type="text/css"> 
    <link href="<?=base_url()?>assets/css/home_view.css" rel="stylesheet" type="text/css"> 
        
    <script src="<?=base_url()?>assets/js/jquery.min.js"></script>    
@@ -23,6 +24,9 @@
    <script src="<?=base_url()?>assets/js/bootstrap-select.min.js"></script> 
    <script src="<?=base_url()?>assets/js/custom_validation.js"></script>
    <script src="<?=base_url()?>assets/js/custom_autocomplete.js"></script>
+   
+   <!-- fo the picture edit tool -->
+   <script src="<?=base_url()?>assets/js/picedit.min.js"></script>
    
    <!-- for the jquery plugin calender -->
    <script src="<?=base_url()?>assets/js/jquery.plugin.min.js"></script>
