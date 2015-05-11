@@ -1,34 +1,4 @@
-<!-- CUSTOM STYLE CSS -->
-    <style type="text/css">
-               .btn-social {
-            color: white;
-            opacity: 0.8;
-        }
-
-            .btn-social:hover {
-                color: white;
-                opacity: 1;
-                text-decoration: none;
-            }
-
-        .btn-facebook {
-            background-color: #3b5998;
-        }
-
-        .btn-twitter {
-            background-color: #00aced;
-        }
-
-        .btn-linkedin {
-            background-color: #0e76a8;
-        }
-
-        .btn-google {
-            background-color: #c32f10;
-        }
-    </style>
-    
-     <div class="container">
+<div class="container">
         <section style="padding-bottom: 50px; padding-top: 50px;">
             <div class="row">
                 <div class="col-md-4">
@@ -39,7 +9,7 @@
                     <label>Address :<?php echo $student['address']; ?></label><br>
                     <label>Contact No :<?php echo $student['contact_no']; ?></label><br>
                     <label>Date of Birth :<?php echo $student['dob']; ?></label><br>
-                    
+                    <label>Course Amount:<?php echo $student['total_amount']; ?></label><br>
                     <br>
                     
                     <br /><br/>
@@ -49,7 +19,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <th>S.N.</th>
-                        <th>Bill Amount</th>
+                        <th>Bill Number</th>
                         <th>Paid</th>
                         <th>Due</th>
                         <th>Date</th>

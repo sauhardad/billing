@@ -20,6 +20,7 @@ $(function () {
         var teacher =$(this).data('teacher');
         var contact = $(this).data('contact');
         var dob=$(this).data('dob');
+        var amount=$(this).data('amount');
         
 
         $("input:hidden[name=edit_student_id]").val(id);
@@ -29,6 +30,7 @@ $(function () {
         $("#edit_address").val(address);
         $("#edit_contact_no").val(contact);
         $('#edit_student_dob').val(dob);
+        $('#edit_course_amount').val(amount);
         
         //trigger the onchange event of section to retrieve subsections
         $( "#edit_section_dropdown" ).trigger( "change" );

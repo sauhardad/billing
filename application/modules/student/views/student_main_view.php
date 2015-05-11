@@ -21,6 +21,7 @@
                         <th>Section</th>
                         <th>Subsection</th>
                         <th>Group</th>
+                        <th>Amount</th>
                         <th>Date of Birth</th>
                         <th></th>
                     </thead>
@@ -43,9 +44,10 @@
                                 <td><?php echo $section_map[$student['section_id']]; ?></td>
                                 <td><?php echo $subsection_map[$student['subsection_id']]; ?></td>
                                 <td><?php echo $group_map[$student['group_id']]; ?></td>
+                                <td><?php echo $student['total_amount']; ?></td>
                                 <td><?php echo $student['dob']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_student_btn" data-id="<?php echo $student['id']; ?>" data-dob="<?php echo $student['dob']; ?>" data-section="<?php echo $student['section_id']; ?>" data-subsection="<?php echo $student['subsection_id']; ?>" data-group="<?php echo $student['group_id']; ?>" data-name="<?php echo $student['student_name']; ?>" data-address="<?php echo $student['address']; ?>" data-teacher="<?php echo $student['teacher_id']; ?>" data-contact="<?php echo $student['contact_no']; ?>" data-toggle="modal" data-target="#edit_student_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_student_btn" data-id="<?php echo $student['id']; ?>" data-dob="<?php echo $student['dob']; ?>" data-section="<?php echo $student['section_id']; ?>" data-subsection="<?php echo $student['subsection_id']; ?>" data-amount="<?php echo $student['total_amount']; ?>" data-group="<?php echo $student['group_id']; ?>" data-name="<?php echo $student['student_name']; ?>" data-address="<?php echo $student['address']; ?>" data-teacher="<?php echo $student['teacher_id']; ?>" data-contact="<?php echo $student['contact_no']; ?>" data-toggle="modal" data-target="#edit_student_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <button class="btn btn-danger" onclick="return deleteData('<?php echo $student['id']; ?>','student/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
                                 </td>
                             </tr> 
@@ -92,6 +94,14 @@
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
                                     <?php echo form_dropdown('add_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_teacher_dropdown"') ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_course_amount">Total Amount</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_course_amount" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
@@ -178,6 +188,15 @@
                                     <?php echo form_dropdown('edit_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="edit_teacher_dropdown"') ?>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_course_amount">Total Amount</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="edit_course_amount" id="edit_course_amount" class="form-control input-sm">
+                                </td>
+                            </tr>
+
                             <tr>
                                 <td>
                                     <label for="edit_address">Address</label>

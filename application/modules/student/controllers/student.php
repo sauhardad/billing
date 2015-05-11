@@ -52,7 +52,7 @@ class Student extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_student_id')) && ($data['teacher_id']=$this->input->post('edit_teacher_dropdown')) && ($data['student_name']=$this->input->post('edit_student_name')) &&  ($data['section_id']=$this->input->post('edit_section_dropdown')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')))
+     if(($id=$this->input->post('edit_student_id')) && ($data['teacher_id']=$this->input->post('edit_teacher_dropdown')) && ($data['student_name']=$this->input->post('edit_student_name')) && ($data['total_amount']=$this->input->post('edit_course_amount')) &&  ($data['section_id']=$this->input->post('edit_section_dropdown')) && ($data['subsection_id']=$this->input->post('edit_subsection_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')))
      {
         $data['contact_no']=$this->input->post('edit_contact_no'); 
         $data['address']=$this->input->post('edit_address'); 
