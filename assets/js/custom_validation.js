@@ -223,19 +223,14 @@ $(function () {
                 add_student_name: "required",
                 add_section_dropdown: { valueNotEquals: "0" },
                 add_subsection_dropdown: { valueNotEquals: "0" },
-                add_group_dropdown: { valueNotEquals: "0" },
-                add_teacher_dropdown:{ valueNotEquals: "0" },
-                add_course_amount: "required",
+                add_group_dropdown: { valueNotEquals: "0" }
                 
         },
         messages: {
                 add_student_name: "Please enter name of the Student",
                 add_section_dropdown:"Please select a Section",
                 add_subsection_dropdown:"Please select a Subsection",
-                add_group_dropdown: "Please select a Group",
-                add_teacher_dropdown:"Enter teachers name",
-                add_course_amount: "Enter course amount",
-                
+                add_group_dropdown: "Please select a Group"
         },
         errorClass: "invalid",
         submitHandler: function(form) {
