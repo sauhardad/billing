@@ -14,6 +14,7 @@
                         <th>Particular</th>
                         <th>Amount</th>
                         <th>Date</th>
+                        <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($expenses)){ ?>

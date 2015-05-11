@@ -588,6 +588,35 @@ $(function () {
             return false;
         }
     });
+    //validate and submit payment form in student profile
+    $("#add_payment_form").validate({
+        rules: {
+                add_bill_no: "required",
+                add_paid_amount: "required",
+                add_due_amount: "required",
+                add_bill_date: "required",
+                
+        },
+        messages: {
+                add_bill_no: "Please enter Bill Number",
+                add_paid_amount: "Please enter paid amount",
+                add_due_amount: "Please enter due amount",
+                add_bill_date: "Please enter date",
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
     //validate and verify password    
     // validate signup form on keyup and submit
     $("#frm_change_password").validate({
