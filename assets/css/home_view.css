@@ -399,6 +399,11 @@ img.search-picture{
 .btn-google {
     background-color: #c32f10;
 }
+
+/** for student profile picture **/
+.student-img-container img{
+    width:70%;
+}
  
 
  

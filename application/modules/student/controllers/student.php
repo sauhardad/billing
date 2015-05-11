@@ -104,7 +104,9 @@ class Student extends CI_Controller {
         if ($session_data['role']=$this->config->item('role_admin'))
             $data['users']=$this->user_model->get_users_except($session_data['id']);
         $data['roles']=$this->config->item('role_value');
+        $data['id']=$id;
         $data['student']=$this->student_model->retrieveStudent($id)[0];
+        $data['payments']=$this->student_model->retrievePayment();
         $this->template->load('default', 'student/student_specific_view',$data);
      }
  }
@@ -118,6 +120,32 @@ class Student extends CI_Controller {
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
+ }
+ 
+ function add_payment()
+ {
+    $data=array();
+    if(($data['bill_no']=$this->input->post('add_bill_no')) && ($data['paid_amount']=$this->input->post('add_paid_amount')) && ($data['due_amount']=$this->input->post('add_due_amount')))
+    { 
+        $data['date']=  date('d/m/Y');
+        if(($this->student_model->insertPayment($data)))
+            echo json_encode(array('status'=>TRUE,'message'=>'Payment Saved'));
+        else
+            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+    }
+ }
+ 
+ function edit_payment()
+ {
+    $data=array();
+    if(($id=$this->input->post('edit_payment_id')) && ($data['bill_no']=$this->input->post('edit_bill_no')) && ($data['paid_amount']=$this->input->post('edit_paid_amount')) && ($data['due_amount']=$this->input->post('edit_due_amount')))
+    { 
+        //$data['date']=  date('d/m/Y');
+        if(($this->student_model->updatePayment($id,$data)))
+            echo json_encode(array('status'=>TRUE,'message'=>'Payment Updated'));
+        else
+            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+    }
  }
  
  function load_subsection()
@@ -140,6 +168,16 @@ class Student extends CI_Controller {
         
      }
  }
+ 
+ function ajax_get_total_amount()
+ {
+     if(($id=$this->input->post('id')))
+     {
+         $total=$this->student_model->calcTotalByStudent($id);
+         echo $total['amount'];
+     }
+ }
+ 
 
 }
 
