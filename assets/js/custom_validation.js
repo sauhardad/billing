@@ -587,13 +587,19 @@ $(function () {
     $("#add_payment_form").validate({
         rules: {
                 add_bill_no: "required",
-                add_paid_amount: "required",
+                add_paid_amount: {
+                        required: true,
+                        number: true
+                },
                 add_due_amount: "required"
                 
         },
         messages: {
                 add_bill_no: "Please enter Bill Number",
-                add_paid_amount: "Please enter paid amount",
+                add_paid_amount:{
+                        required: "Please enter paid amount",
+                        number: "Please enter a valid amount"
+                }, 
                 add_due_amount: "Please enter due amount"
         },
         errorClass: "invalid",
@@ -601,34 +607,7 @@ $(function () {
             $(form).ajaxSubmit({
                 clearForm:true,
                 dataType:'json',
-                success: function(data) {
-                    alert(data.message);
-                    if(data.status==true)
-                        window.location=window.location.href;
-                }
-            });
-            return false;
-        }
-    });
-    
-    //validate and submit edit payment form in student profile
-    $("#edit_payment_form").validate({
-        rules: {
-                edit_bill_no: "required",
-                edit_paid_amount: "required",
-                edit_due_amount: "required"
-                
-        },
-        messages: {
-                edit_bill_no: "Please enter Bill Number",
-                edit_paid_amount: "Please enter paid amount",
-                edit_due_amount: "Please enter due amount"
-        },
-        errorClass: "invalid",
-        submitHandler: function(form) {
-            $(form).ajaxSubmit({
-                clearForm:true,
-                dataType:'json',
+                data:{student_id: $('#student_id').val()},
                 success: function(data) {
                     alert(data.message);
                     if(data.status==true)

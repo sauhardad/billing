@@ -128,7 +128,7 @@ class Student extends CI_Controller {
  function add_payment()
  {
     $data=array();
-    if(($data['bill_no']=$this->input->post('add_bill_no')) && ($data['paid_amount']=$this->input->post('add_paid_amount')) && ($data['due_amount']=$this->input->post('add_due_amount')))
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['bill_no']=$this->input->post('add_bill_no')) && ($data['paid_amount']=$this->input->post('add_paid_amount')) && ($data['due_amount']=$this->input->post('add_due_amount')))
     { 
         $data['date']=  date('d/m/Y');
         if(($this->student_model->insertPayment($data)))
@@ -138,18 +138,6 @@ class Student extends CI_Controller {
     }
  }
  
- function edit_payment()
- {
-    $data=array();
-    if(($id=$this->input->post('edit_payment_id')) && ($data['bill_no']=$this->input->post('edit_bill_no')) && ($data['paid_amount']=$this->input->post('edit_paid_amount')) && ($data['due_amount']=$this->input->post('edit_due_amount')))
-    { 
-        //$data['date']=  date('d/m/Y');
-        if(($this->student_model->updatePayment($id,$data)))
-            echo json_encode(array('status'=>TRUE,'message'=>'Payment Updated'));
-        else
-            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
-    }
- }
  
  function add_course()
  {
@@ -158,7 +146,7 @@ class Student extends CI_Controller {
     { 
         //$data['date']=  date('d/m/Y');
         if(($this->student_model->insertCourse($data)))
-            echo json_encode(array('status'=>TRUE,'message'=>'Course Saved'));
+            echo json_encode(array('status'=>TRUE,'message'=>'Course Saved '));
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
     }
@@ -190,7 +178,7 @@ class Student extends CI_Controller {
      if(($id=$this->input->post('id')))
      {
          $total=$this->student_model->calcTotalByStudent($id);
-         echo $total['amount'];
+         echo $total;
      }
  }
  

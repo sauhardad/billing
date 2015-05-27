@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2015 at 08:21 AM
+-- Generation Time: May 27, 2015 at 09:06 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,10 +44,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('02137a1e1ac9609a994bd61a5208516b', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1431343497, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('106acd8f11b61915a5e51f5c48b63946', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1431344481, 'a:1:{s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('16b25555616722087321a7e168857c63', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1432707671, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('924435683854508a2e8c36bf6c2f3a7e', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1432707534, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('bf885419cc1970a93ccf0f43e733e636', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1432710155, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('e939625a9e923e4c13def705dfc951e7', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1432708063, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -58,6 +56,7 @@ INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activ
 DROP TABLE IF EXISTS `tbl_bill_payment`;
 CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
   `bill_no` varchar(10) NOT NULL,
   `paid_amount` decimal(10,0) NOT NULL,
   `due_amount` decimal(10,0) NOT NULL,
@@ -66,17 +65,18 @@ CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `bill_id` (`bill_no`),
-  KEY `bill_id_2` (`bill_no`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  KEY `bill_id_2` (`bill_no`),
+  KEY `student_id` (`student_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tbl_bill_payment`
 --
 
-INSERT INTO `tbl_bill_payment` (`id`, `bill_no`, `paid_amount`, `due_amount`, `date`, `user_id`, `entry_timestamp`) VALUES
-(1, '1234', '600', '12', '11/05/2015', 1, '2015-05-11 16:58:53'),
-(2, '234', '1200', '600', '11/05/2015', 1, '2015-05-11 16:56:46'),
-(3, '1234', '4800', '200', '11/05/2015', 1, '2015-05-11 17:30:26');
+INSERT INTO `tbl_bill_payment` (`id`, `student_id`, `bill_no`, `paid_amount`, `due_amount`, `date`, `user_id`, `entry_timestamp`) VALUES
+(5, 83, '1234', '1200', '2100', '27/05/2015', 1, '2015-05-27 12:42:35'),
+(6, 83, '1234', '1000', '1100', '27/05/2015', 1, '2015-05-27 12:49:37'),
+(7, 83, '2344', '100', '1000', '27/05/2015', 1, '2015-05-27 12:49:57');
 
 -- --------------------------------------------------------
 
@@ -359,6 +359,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `tbl_bill_payment`
+--
+ALTER TABLE `tbl_bill_payment`
+  ADD CONSTRAINT `tbl_bill_payment_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_students` (`id`);
 
 --
 -- Constraints for table `tbl_group`

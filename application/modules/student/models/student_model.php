@@ -134,12 +134,23 @@ Class Student_model extends CI_Model
      */
     function calcTotalByStudent($student_id)
     {
-        $this->db->select('SUM(amount) as amount');
+        $total=0;
+        $this->db->select('SUM(amount) as total_amount');
         $this->db->where('student_id',$student_id);
         $query = $this->db->get('tbl_student_course');
         $result=$query->result_array();
         if($result)
-            return $result[0];
+             $total=$result[0]['total_amount'];
+        
+        $total_paid=0;
+        $this->db->select('SUM(paid_amount) as paid_amount');
+        $this->db->where('student_id',$student_id);
+        $query = $this->db->get('tbl_bill_payment');
+        $result=$query->result_array();
+        if($result)
+             $total_paid=$result[0]['paid_amount'];
+        
+        return ($total-$total_paid);
     }
 }
 ?>

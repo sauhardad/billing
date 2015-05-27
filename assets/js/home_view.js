@@ -21,28 +21,21 @@ $(function () {
     
     //calculate due amount on add
     $( "#add_paid_amount" ).keyup(function() {
-        $.ajax({
-            type: "POST",
-            url: base_url+'student/ajax_get_total_amount',
-            data: {id : $('#student_id').val()},
-            success:function(data) {
-                $('#add_due_amount').val((parseInt(data,10)- parseInt($('#add_paid_amount').val(),10)));
-            }       
-        }); 
-       
-    });
-    
-    //calculate due amount on edit
-    $( "#edit_paid_amount" ).keyup(function() {
-        $.ajax({
-            type: "POST",
-            url: base_url+'student/ajax_get_total_amount',
-            data: {id : $('#student_id').val()},
-            success:function(data) {
-                $('#edit_due_amount').val((parseInt(data,10)- parseInt($('#edit_paid_amount').val(),10)));
-            }       
-        }); 
-       
+        if($(this).val() && $.isNumeric( $(this).val()))
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'student/ajax_get_total_amount',
+                data: {id : $('#student_id').val()},
+                success:function(data) {
+                    $('#add_due_amount').val((parseInt(data,10)- parseInt($('#add_paid_amount').val(),10)));
+                }       
+            }); 
+        }
+        else
+        {
+            $('#add_due_amount').val("");
+        }
     });
     
     //fill in form values in the edit student form
@@ -64,20 +57,6 @@ $(function () {
         
         //trigger the onchange event of section to retrieve subsections
         $( "#edit_section_dropdown" ).trigger( "change" );
-        
-    });
-    
-    //fill in form values in the edit teacher form
-    $(document).on( "click", '.edit_payment_btn',function(e) {
-        var id= $(this).data('id');
-        var bill_no = $(this).data('bill_no');
-        var paid = $(this).data('paid');
-        var due = $(this).data('due');
-
-        $("input:hidden[name=edit_payment_id]").val(id);
-        $("#edit_bill_no").val(bill_no);
-        $("#edit_paid_amount").val(paid);
-        $("#edit_due_amount").val(due);
         
     });
     
