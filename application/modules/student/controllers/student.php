@@ -107,9 +107,9 @@ class Student extends CI_Controller {
         $data['roles']=$this->config->item('role_value');
         $data['id']=$id;
         $data['students']=$this->student_model->retrieveStudent($id)[0];
-        $data['payments']=$this->student_model->retrievePayment();
+        $data['payments']=$this->student_model->retrievePayment(NULL,$id);
         $data['teachers']=$this->teacher_model->retrieveTeacher();
-        $data['courses']=$this->student_model->retrieveCourse();
+        $data['courses']=$this->student_model->retrieveCourse(NULL,$id);
         $this->template->load('default', 'student/student_specific_view',$data);
      }
  }
@@ -142,7 +142,7 @@ class Student extends CI_Controller {
  function add_course()
  {
     $data=array();
-    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')) && ($data['time']=$this->input->post('add_course_time')))
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher_id']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')) && ($data['time']=$this->input->post('add_course_time')))
     { 
         //$data['date']=  date('d/m/Y');
         if(($this->student_model->insertCourse($data)))
