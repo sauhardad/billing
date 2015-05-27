@@ -185,7 +185,7 @@
                         <h3>Add Course</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('student/add_amount',array('id' => 'add_course_form')); ?>
+                        <?php echo form_open('student/add_course',array('id' => 'add_course_form')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>

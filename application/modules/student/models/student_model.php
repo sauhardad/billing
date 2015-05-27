@@ -29,7 +29,7 @@ Class Student_model extends CI_Model
      * 
      * @param type $data
      */
-    function insertAmount($data)
+    function insertCourse($data)
     {
         $data['user_id']= $this->session->userdata('logged_in')['id'];
         return $this->db->insert('tbl_student_course', $data);
