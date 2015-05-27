@@ -13,7 +13,7 @@ class Student extends CI_Controller {
    $this->load->model('subsection/subsection_model');
    $this->load->model('section/section_model');
    $this->load->model('group/group_model');
-      $this->load->model('teacher/teacher_model');
+   $this->load->model('teacher/teacher_model');
    $this->load->helper(array('form'));
  }
 
@@ -30,6 +30,7 @@ class Student extends CI_Controller {
     $data['sections']=$this->section_model->retrieveSection();
     $data['subsections']=$this->subsection_model->retrieveSubsection();
     $data['groups']=$this->group_model->retrieveGroup();
+    $data['teachers']=$this->teacher_model->retrieveTeacher();
     $this->template->load('default', 'student/student_main_view',$data);
  }
  
@@ -105,8 +106,9 @@ class Student extends CI_Controller {
             $data['users']=$this->user_model->get_users_except($session_data['id']);
         $data['roles']=$this->config->item('role_value');
         $data['id']=$id;
-        $data['student']=$this->student_model->retrieveStudent($id)[0];
+        $data['students']=$this->student_model->retrieveStudent($id)[0];
         $data['payments']=$this->student_model->retrievePayment();
+        $data['teachers']=$this->teacher_model->retrieveTeacher();
         $this->template->load('default', 'student/student_specific_view',$data);
      }
  }
@@ -143,6 +145,19 @@ class Student extends CI_Controller {
         //$data['date']=  date('d/m/Y');
         if(($this->student_model->updatePayment($id,$data)))
             echo json_encode(array('status'=>TRUE,'message'=>'Payment Updated'));
+        else
+            echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+    }
+ }
+ 
+ function add_amount()
+ {
+    $data=array();
+    if(($data['subject']=$this->input->post('add_am_subject')) && ($data['teacher']=$this->input->post('add_teacher_dropdown')) && ($data['amount']=$this->input->post('add_am_amount')) && ($data['time']=$this->input->post('add_am_time')))
+    { 
+        //$data['date']=  date('d/m/Y');
+        if(($this->student_model->insertAmount($data)))
+            echo json_encode(array('status'=>TRUE,'message'=>'Amount Saved'));
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
     }

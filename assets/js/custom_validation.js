@@ -639,6 +639,40 @@ $(function () {
         }
     });
     
+     //validate and submit add course form
+    $("#add_amount_form").validate({
+        rules: {
+                add_am_subject: "required",
+                add_teacher_dropdown: "required",
+                add_am_amount: "required",
+                add_am_time: {
+                        required: true,
+                }
+        },
+        messages: {
+                add_am_subject: "Please enter the subject",
+                add_teacher_dropdown: "Please select teacher",
+                add_am_amount: "Please enter course amount",
+                add_am_time: {
+                        required: "Please enter the time"
+                }
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    
     
     //validate and verify password    
     // validate signup form on keyup and submit

@@ -25,6 +25,17 @@ Class Student_model extends CI_Model
         
     }
     
+    /** function that inserts new payment into the database
+     * 
+     * @param type $data
+     */
+    function insertAmount($data)
+    {
+        $data['user_id']= $this->session->userdata('logged_in')['id'];
+        return $this->db->insert('tbl_student_amount', $data);
+        
+    }
+    
     /** function that retrieves specific students if the student_id is provided
      * from the student table else all the students
      * 
