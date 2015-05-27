@@ -142,7 +142,7 @@ class Student extends CI_Controller {
  function add_course()
  {
     $data=array();
-    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')) && ($data['time']=$this->input->post('add_course_time')))
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher_id']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')) && ($data['time']=$this->input->post('add_course_time')))
     { 
         //$data['date']=  date('d/m/Y');
         if(($this->student_model->insertCourse($data)))
