@@ -640,20 +640,20 @@ $(function () {
     });
     
      //validate and submit add course form
-    $("#add_amount_form").validate({
+    $("#add_course_form").validate({
         rules: {
-                add_am_subject: "required",
-                add_teacher_dropdown: "required",
-                add_am_amount: "required",
-                add_am_time: {
+                add_course_subject: "required",
+                add_course_teacher: "required",
+                add_course_amount: "required",
+                add_course_time: {
                         required: true,
                 }
         },
         messages: {
-                add_am_subject: "Please enter the subject",
-                add_teacher_dropdown: "Please select teacher",
-                add_am_amount: "Please enter course amount",
-                add_am_time: {
+                add_course_subject: "Please enter the subject",
+                add_course_teacher: "Please select teacher",
+                add_course_amount: "Please enter course amount",
+                add_course_time: {
                         required: "Please enter the time"
                 }
         },
@@ -662,6 +662,7 @@ $(function () {
             $(form).ajaxSubmit({
                 clearForm:true,
                 dataType:'json',
+                data:{student_id: $('#student_id').val()},
                 success: function(data) {
                     alert(data.message);
                     if(data.status==true)

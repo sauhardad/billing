@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 11, 2015 at 12:28 PM
+-- Generation Time: May 27, 2015 at 08:21 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,8 +44,10 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('5b665bea19c05854a6eb5b1a2e44421a', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1431339582, 'a:1:{s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('7388afe3771fb7e0bd1587f15c5eeef5', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1431339818, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('02137a1e1ac9609a994bd61a5208516b', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1431343497, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('106acd8f11b61915a5e51f5c48b63946', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1431344481, 'a:1:{s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('16b25555616722087321a7e168857c63', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1432707671, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('924435683854508a2e8c36bf6c2f3a7e', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1432707534, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,16 @@ CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   PRIMARY KEY (`id`),
   KEY `bill_id` (`bill_no`),
   KEY `bill_id_2` (`bill_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tbl_bill_payment`
+--
+
+INSERT INTO `tbl_bill_payment` (`id`, `bill_no`, `paid_amount`, `due_amount`, `date`, `user_id`, `entry_timestamp`) VALUES
+(1, '1234', '600', '12', '11/05/2015', 1, '2015-05-11 16:58:53'),
+(2, '234', '1200', '600', '11/05/2015', 1, '2015-05-11 16:56:46'),
+(3, '1234', '4800', '200', '11/05/2015', 1, '2015-05-11 17:30:26');
 
 -- --------------------------------------------------------
 
@@ -238,23 +249,32 @@ INSERT INTO `tbl_students` (`id`, `section_id`, `subsection_id`, `group_id`, `st
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_student_amount`
+-- Table structure for table `tbl_student_course`
 --
 
-DROP TABLE IF EXISTS `tbl_student_amount`;
-CREATE TABLE IF NOT EXISTS `tbl_student_amount` (
+DROP TABLE IF EXISTS `tbl_student_course`;
+CREATE TABLE IF NOT EXISTS `tbl_student_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `student_id` int(11) NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `teacher` varchar(255) NOT NULL,
+  `teacher_id` int(255) NOT NULL,
   `amount` decimal(10,0) NOT NULL,
   `time` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `student_id` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `student_id` (`student_id`),
+  KEY `teacher_id` (`teacher_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `tbl_student_course`
+--
+
+INSERT INTO `tbl_student_course` (`id`, `student_id`, `subject`, `teacher_id`, `amount`, `time`, `user_id`, `active`, `entry_timestamp`) VALUES
+(7, 83, 'Chemistry', 7, '1200', 'Morning', 1, 0, '2015-05-27 11:53:04'),
+(8, 83, 'Chemistry', 7, '2100', 'sadas', 1, 0, '2015-05-27 11:57:24');
 
 -- --------------------------------------------------------
 
@@ -332,7 +352,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-05-11 12:53:47', '2015-05-11 12:53:47'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-05-27 11:44:44', '2015-05-27 11:44:44'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
@@ -360,10 +380,11 @@ ALTER TABLE `tbl_level`
   ADD CONSTRAINT `tbl_level_ibfk_1` FOREIGN KEY (`subsection_id`) REFERENCES `tbl_subsection` (`id`);
 
 --
--- Constraints for table `tbl_student_amount`
+-- Constraints for table `tbl_student_course`
 --
-ALTER TABLE `tbl_student_amount`
-  ADD CONSTRAINT `tbl_student_amount_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tbl_student_course`
+  ADD CONSTRAINT `tbl_student_course_ibfk_2` FOREIGN KEY (`teacher_id`) REFERENCES `tbl_teacher` (`id`),
+  ADD CONSTRAINT `tbl_student_course_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `tbl_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tbl_subsection`

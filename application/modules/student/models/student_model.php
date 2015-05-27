@@ -32,7 +32,7 @@ Class Student_model extends CI_Model
     function insertAmount($data)
     {
         $data['user_id']= $this->session->userdata('logged_in')['id'];
-        return $this->db->insert('tbl_student_amount', $data);
+        return $this->db->insert('tbl_student_course', $data);
         
     }
     
@@ -63,6 +63,21 @@ Class Student_model extends CI_Model
         if(!is_null($payment_id))
             $this->db->where('id', $payment_id);
         $query = $this->db->get('tbl_bill_payment');
+        $result=$query->result_array();
+        return $result;
+    }
+    
+    /** function that retrieves specific course if the course_id is provided
+     * from the student_course table else all the courses
+     * 
+     * @param type $course_id
+     * @return type
+     */
+    function retrieveCourse($course_id=NULL)
+    {
+        if(!is_null($course_id))
+            $this->db->where('id', $course_id);
+        $query = $this->db->get('tbl_student_course');
         $result=$query->result_array();
         return $result;
     }
@@ -121,7 +136,7 @@ Class Student_model extends CI_Model
     {
         $this->db->select('SUM(amount) as amount');
         $this->db->where('student_id',$student_id);
-        $query = $this->db->get('tbl_student_amount');
+        $query = $this->db->get('tbl_student_course');
         $result=$query->result_array();
         if($result)
             return $result[0];

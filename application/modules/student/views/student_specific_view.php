@@ -65,6 +65,7 @@
                         <?php if(isset($courses)){ ?>
                         <?php $sn=1; ?>
                         <?php $teacher_map=convert_to_keyvalue($teachers); ?>
+                        <?php //debug_array($courses);die; ?>
                         <?php foreach($courses as $course){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
@@ -184,38 +185,38 @@
                         <h3>Add Course</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('student/add_amount',array('id' => 'add_amount_form')); ?>
+                        <?php echo form_open('student/add_amount',array('id' => 'add_course_form')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>
-                                    <label for="add_am_subject">Subject</label>
+                                    <label for="add_course_subject">Subject</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_am_subject" class="form-control input-sm">
+                                    <input type="text" name="add_course_subject" class="form-control input-sm">
                                 </td>
                             </tr>
                            <tr>
                                 <td>
-                                    <label for="add_teacher_dropdown">Teachers</label>
+                                    <label for="add_course_teacher">Teachers</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_teacher_dropdown"') ?>
+                                    <?php echo form_dropdown('add_course_teacher',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_course_teacher"') ?>
                                 </td>
                            </tr>
                             <tr>
                                 <td>
-                                    <label for="add_am_amount">Amount</label>
+                                    <label for="add_course_amount">Amount</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_am_amount" id="add_am_amount" class="form-control input-sm">
+                                    <input type="text" name="add_course_amount" id="add_course_amount" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_am_time">Time</label>
+                                    <label for="add_course_time">Time</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_am_time" id="add_am_time" class="form-control input-sm">
+                                    <input type="text" name="add_course_time" id="add_course_time" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    

@@ -109,6 +109,7 @@ class Student extends CI_Controller {
         $data['students']=$this->student_model->retrieveStudent($id)[0];
         $data['payments']=$this->student_model->retrievePayment();
         $data['teachers']=$this->teacher_model->retrieveTeacher();
+        $data['courses']=$this->student_model->retrieveCourse();
         $this->template->load('default', 'student/student_specific_view',$data);
      }
  }
@@ -153,7 +154,7 @@ class Student extends CI_Controller {
  function add_amount()
  {
     $data=array();
-    if(($data['subject']=$this->input->post('add_am_subject')) && ($data['teacher']=$this->input->post('add_teacher_dropdown')) && ($data['amount']=$this->input->post('add_am_amount')) && ($data['time']=$this->input->post('add_am_time')))
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')) && ($data['time']=$this->input->post('add_course_time')))
     { 
         //$data['date']=  date('d/m/Y');
         if(($this->student_model->insertAmount($data)))
