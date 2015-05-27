@@ -29,7 +29,7 @@ class Group extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['subsection_id']=$this->input->post('subsection_id')) && ($data['name']=$this->input->post('add_group_name')) && ($data['code']=$this->input->post('add_group_code')) && ($data['time_slot']=$this->input->post('add_group_time_slot')))
+     if(($data['subsection_id']=$this->input->post('subsection_id')) && ($data['name']=$this->input->post('add_group_name')) && ($data['teacher_id']=$this->input->post('add_group_teacher')) && ($data['code']=$this->input->post('add_group_code')) && ($data['time_slot']=$this->input->post('add_group_time_slot')))
      {
          $data['is_running']=$this->input->post('add_group_is_running');
          if($this->group_model->insertGroup($data))
@@ -42,7 +42,7 @@ class Group extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_group_id')) && ($data['name']=$this->input->post('edit_group_name')) && ($data['time_slot']=$this->input->post('edit_group_time_slot')))
+     if(($id=$this->input->post('edit_group_id')) && ($data['name']=$this->input->post('edit_group_name')) && ($data['teacher_id']=$this->input->post('edit_group_teacher')) && ($data['time_slot']=$this->input->post('edit_group_time_slot')))
      {
         $data['is_running']=$this->input->post('edit_group_is_running'); 
         if($this->group_model->updateGroup($id,$data))

@@ -15,11 +15,13 @@
                         <th>Code</th>
                         <th>Name</th>
                         <th>Time Slot</th>
+                        <th>Teacher</th>
                         <th>Running</th>
                         <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($groups)){ ?>
+                        <?php $teacher_map=convert_to_keyvalue($teachers); ?>
                         <?php $sn=1; ?>
                         <?php foreach($groups as $group){ ?>
                             <tr>
@@ -27,9 +29,10 @@
                                 <td><?php echo $group['code']; ?></td>
                                 <td><?php echo $group['name']; ?></td>
                                 <td><?php echo $group['time_slot']; ?></td>
+                                <td><?php echo $teacher_map[$group['teacher_id']]; ?></td>
                                 <td><?php echo $group['is_running']? "Yes":"No"  ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_group_btn" data-id="<?php echo $group['id']; ?>" data-code="<?php echo $group['code']; ?>" data-name="<?php echo $group['name']; ?>" data-slot="<?php echo $group['time_slot']; ?>" data-running="<?php echo $group['is_running']; ?>" data-toggle="modal" data-target="#edit_group_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_group_btn" data-id="<?php echo $group['id']; ?>" data-code="<?php echo $group['code']; ?>" data-name="<?php echo $group['name']; ?>" data-teacher_id="<?php echo $group['teacher_id']; ?>" data-slot="<?php echo $group['time_slot']; ?>" data-running="<?php echo $group['is_running']; ?>" data-toggle="modal" data-target="#edit_group_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $group['id']; ?>','group/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
@@ -66,6 +69,14 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="add_group_name" id="add_group_name" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_group_teacher">Teacher</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_group_teacher',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_group_teacher"') ?>
                                 </td>
                             </tr>
                             <tr>
@@ -119,6 +130,14 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="edit_group_name" id="edit_group_name" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_group_teacher">Teacher</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('edit_group_teacher',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="edit_group_teacher"') ?>
                                 </td>
                             </tr>
                             <tr>

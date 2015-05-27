@@ -12,6 +12,7 @@ class Subsection extends CI_Controller {
    $this->load->model('subsection_model');
    $this->load->model('section/section_model');
    $this->load->model('group/group_model');
+   $this->load->model('teacher/teacher_model');
    $this->load->helper(array('form'));
  }
 
@@ -78,6 +79,7 @@ class Subsection extends CI_Controller {
         
         $data['this_subsection']=$this->subsection_model->retrieveSubsection($id,NULL)[0];
         $data['groups']=$this->group_model->retrieveGroup(NULL,$id);
+        $data['teachers']=$this->teacher_model->retrieveTeacher();
        
         $this->template->load('default', 'subsection/specific_subsection_view',$data);
      }

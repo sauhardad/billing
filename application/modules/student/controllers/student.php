@@ -63,8 +63,8 @@ class Student extends CI_Controller {
         $data['contact_no']=$this->input->post('add_contact_no'); 
         $data['address']=$this->input->post('add_address'); 
         $data['dob']=$this->input->post('add_student_dob');
-        if(($this->student_model->insertStudent($data)) OR $error==FALSE)
-            echo json_encode(array('status'=>TRUE,'message'=>'Student Saved'));
+        if(($student_id=$this->student_model->insertStudent($data)) OR $error==FALSE)
+            echo json_encode(array('status'=>TRUE,'message'=>'Student Saved','student_id'=>$student_id));
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
     }
@@ -142,7 +142,7 @@ class Student extends CI_Controller {
  function add_course()
  {
     $data=array();
-    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher_id']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')) && ($data['time']=$this->input->post('add_course_time')))
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher_id']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')))
     { 
         //$data['date']=  date('d/m/Y');
         if(($this->student_model->insertCourse($data)))

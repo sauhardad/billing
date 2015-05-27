@@ -240,7 +240,7 @@ $(function () {
                 success: function(data) {
                     alert(data.message);
                     if(data.status==true)
-                        window.location=window.location.href;
+                        window.location=base_url+'student/view/'+data.student_id;
                 }
             });
             return false;
@@ -300,10 +300,12 @@ $(function () {
                       }  
                 },
                 add_group_name: "required",
+                add_group_teacher:{ valueNotEquals: "0" },
                 add_group_time_slot:"required"
         },
         messages: {
                 add_group_name: "Please enter name of the Group",
+                add_group_teacher:"Please select a Teacher",
                 add_group_time_slot: "Please enter a time slot",
                 add_group_code: {
                         required: "Please provide the code",
@@ -335,10 +337,12 @@ $(function () {
                         rangelength: [2,2]
                 },
                 edit_group_name: "required",
+                edit_group_teacher:{ valueNotEquals: "0" },
                 edit_group_time_slot:"required"
         },
         messages: {
                 edit_group_name: "Please enter name of the Group",
+                edit_group_teacher:"Please select a Teacher",
                 edit_group_time_slot: "Please enter a time slot",
                 edit_group_code: {
                         required: "Please provide the code",
@@ -623,18 +627,12 @@ $(function () {
         rules: {
                 add_course_subject: "required",
                 add_course_teacher: "required",
-                add_course_amount: "required",
-                add_course_time: {
-                        required: true,
-                }
+                add_course_amount: "required"
         },
         messages: {
                 add_course_subject: "Please enter the subject",
                 add_course_teacher: "Please select teacher",
-                add_course_amount: "Please enter course amount",
-                add_course_time: {
-                        required: "Please enter the time"
-                }
+                add_course_amount: "Please enter course amount"
         },
         errorClass: "invalid",
         submitHandler: function(form) {

@@ -50,13 +50,15 @@
                         <?php } ?>
                         <?php } ?>
                     </tbody>
-                    <tfoot>
-                        <th></th>
-                        <th></th>
-                        <th>Total</th>
-                        <th><?php echo $total_sum;?></th>
-                        <th></th>
-                    </tfoot>
+                    <?php if ($total_sum!=0) { ?>
+                        <tfoot>
+                            <th></th>
+                            <th></th>
+                            <th>Total</th>
+                            <th><?php echo $total_sum;?></th>
+                            <th></th>
+                        </tfoot>
+                    <?php } ?>
                </table>
             </div>
                 
@@ -88,13 +90,15 @@
                         <?php } ?>
                         <?php } ?>
                     </tbody>
-                    <tfoot>
-                        <th></th>
-                        <th></th>
-                        <th>Total</th>
-                        <th><?php echo $total_paid_sum;?></th>
-                        <th></th>
-                    </tfoot>
+                    <?php if ($total_sum!=0) { ?>
+                        <tfoot>
+                            <th></th>
+                            <th></th>
+                            <th>Total</th>
+                            <th><?php echo $total_paid_sum;?></th>
+                            <th></th>
+                        </tfoot>
+                    <?php } ?>
                 </table>
             </div>    
         </div>
@@ -177,14 +181,6 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="add_course_amount" id="add_course_amount" class="form-control input-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="add_course_time">Time</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="add_course_time" id="add_course_time" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    

@@ -10,7 +10,8 @@ Class Student_model extends CI_Model
     {
         $data['user_id']= $this->session->userdata('logged_in')['id'];
         $data['active']= TRUE;
-        return $this->db->insert('tbl_students', $data);
+        if($this->db->insert('tbl_students', $data))
+                return $this->db->insert_id();
         
     }
     
