@@ -31,13 +31,13 @@
                         <th>Teacher</th>
                         <th>Amount</th>
                         <th>Time</th>
-                        <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($courses)){ ?>
                         <?php $sn=1; ?>
+                        <?php $total_sum=0; ?>
                         <?php $teacher_map=convert_to_keyvalue($teachers); ?>
-                        <?php foreach($courses as $course){ ?>
+                            <?php foreach($courses as $course){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
                                 <td><?php echo $course['subject']; ?></td>
@@ -45,11 +45,19 @@
                                 <td><?php echo $course['amount']; ?></td>
                                 <td><?php echo $course['time']; ?></td>
                             </tr> 
+                            <?php $total_sum+=$course['amount']; ?>
                             <?php $sn++; ?>
                         <?php } ?>
                         <?php } ?>
                     </tbody>
-                </table>
+                    <tfoot>
+                        <th></th>
+                        <th></th>
+                        <th>Total</th>
+                        <th><?php echo $total_sum;?></th>
+                        <th></th>
+                    </tfoot>
+               </table>
             </div>
                 
             <div class="col-md-8">
@@ -62,11 +70,11 @@
                         <th>Date</th>
                         <th>Paid</th>
                         <th>Due</th>
-                        <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($payments)){ ?>
                         <?php $sn=1; ?>
+                        <?php $total_paid_sum=0; ?>
                         <?php foreach($payments as $payment){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
@@ -75,10 +83,18 @@
                                 <td><?php echo $payment['paid_amount']; ?></td>
                                 <td><?php echo $payment['due_amount']; ?></td>
                             </tr> 
+                            <?php $total_paid_sum+=$payment['paid_amount']; ?>
                             <?php $sn++; ?>
                         <?php } ?>
                         <?php } ?>
                     </tbody>
+                    <tfoot>
+                        <th></th>
+                        <th></th>
+                        <th>Total</th>
+                        <th><?php echo $total_paid_sum;?></th>
+                        <th></th>
+                    </tfoot>
                 </table>
             </div>    
         </div>

@@ -132,7 +132,7 @@ Class Student_model extends CI_Model
         return $this->db->update('tbl_bill_payment', $data); 
     }
  
-    /** function that calculates total amount that needs to be paod by a student
+    /** function that calculates total amount that needs to be paid by a student
      * 
      * @param type $student_id
      */

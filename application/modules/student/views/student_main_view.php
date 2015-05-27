@@ -34,7 +34,7 @@
                         <?php foreach($students as $student){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $student['student_name']; ?></td>
+                                <td> <a href="<?php echo base_url('student/view/'.$student['id']); ?>"> <?php echo $student['student_name']; ?></a></td>
                                 <td><?php echo $student['address']; ?></td>
                                 <td><?php echo $student['contact_no']; ?></td>
                                 <td><?php echo $section_map[$student['section_id']]; ?></td>
