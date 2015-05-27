@@ -64,6 +64,22 @@ class Group extends CI_Controller {
      }
  }
  
+ function view()
+ {
+     if(($id=$this->uri->segment(3)))
+     {
+        $data=array();
+        $session_data = $this->session->userdata('logged_in');
+        $data['session_data']=$session_data;
+        //check if the user has permission to add/edit users
+        if ($session_data['role']=$this->config->item('role_admin'))
+            $data['users']=$this->user_model->get_users_except($session_data['id']);
+        $data['roles']=$this->config->item('role_value');
+        $data['this_group']=$this->group_model->retrieveGroup($id,NULL)[0];
+        $this->template->load('default', 'group/group_main_view',$data);
+     }
+ }
+ 
  function check_code()
  {
     if(($code=$this->input->post('code')) && ($subsection_id=$this->input->post('subsection_id')))

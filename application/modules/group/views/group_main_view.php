@@ -4,6 +4,7 @@
                 <div> 
                   <h2 style="display:inline-block;">Groups</h2>
                   <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_group_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+                  <input type="hidden" name="group_id" id="group_id" value="<?php echo $this_group['id']; ?>"/>
                 </div>
               </div>
             </div>
