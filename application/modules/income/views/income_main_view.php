@@ -39,7 +39,7 @@
                                 <td><?php echo $income['date']; ?></td>
                                 <td>
                                     <button class="btn btn-primary edit_income_btn" data-id="<?php echo $income['id']; ?>" data-teacher_id="<?php echo $income['teacher_id']; ?>" data-group_id="<?php echo $income['group_id']; ?>" data-date="<?php echo $income['date']; ?>" data-edit_due="<?php echo $income['dues']; ?>" data-remark="<?php echo $income['remarks']; ?> "data-share_percent="<?php echo $income['share_percent']; ?>  "data-total="<?php echo $income['total']; ?> "data-payment="<?php echo $income['payment']; ?>" data-toggle="modal" data-target="#edit_income_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $income['id']; ?>','income/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
+                                    <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $income['id']; ?>','income/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
                             <?php $sn++; ?>
@@ -114,7 +114,7 @@
                                     <label for="add_date">Date</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_date" class="form-control input-sm nepali_datepicker">
+                                    <input type="text" name="add_date" class="form-control input-sm datepicker">
                                 </td>
                             </tr>
                             
@@ -195,7 +195,7 @@
                                     <label for="edit_date">Date</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_date" class="form-control input-sm nepali_datepicker" id="edit_date">
+                                    <input type="text" name="edit_date" class="form-control input-sm datepicker" id="edit_date">
                                 </td>
                             </tr>
                             

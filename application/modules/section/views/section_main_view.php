@@ -26,7 +26,7 @@
                                 <td>
                                     <a class="btn btn-success" href="<?php echo base_url('section/view/'.$section['id']); ?>"><span class="glyphicon glyphicon-list glyphicon-margin-right-5"></span>View</a>
                                     <button class="btn btn-primary edit_section_btn" data-id="<?php echo $section['id']; ?>" data-code="<?php echo $section['code']; ?>" data-name="<?php echo $section['name']; ?>" data-toggle="modal" data-target="#edit_section_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $section['id']; ?>','section/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
+                                    <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $section['id']; ?>','section/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
                             <?php $sn++; ?>

@@ -43,7 +43,7 @@
                                 <td><?php echo $student['dob']; ?></td>
                                 <td>
                                     <button class="btn btn-primary edit_student_btn" data-id="<?php echo $student['id']; ?>" data-dob="<?php echo $student['dob']; ?>" data-section="<?php echo $student['section_id']; ?>" data-subsection="<?php echo $student['subsection_id']; ?>" data-group="<?php echo $student['group_id']; ?>" data-name="<?php echo $student['student_name']; ?>" data-address="<?php echo $student['address']; ?>" data-contact="<?php echo $student['contact_no']; ?>" data-toggle="modal" data-target="#edit_student_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $student['id']; ?>','student/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
+                                    <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $student['id']; ?>','student/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
                             <?php $sn++; ?>

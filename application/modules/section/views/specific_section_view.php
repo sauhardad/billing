@@ -27,7 +27,7 @@
                                 <td>
                                     <a class="btn btn-success" href="<?php echo base_url('subsection/view/'.$subsection['id']); ?>"><span class="glyphicon glyphicon-list glyphicon-margin-right-5"></span>View</a>
                                     <button class="btn btn-primary edit_subsection_btn" data-id="<?php echo $subsection['id']; ?>" data-code="<?php echo $subsection['code']; ?>" data-name="<?php echo $subsection['name']; ?>" data-toggle="modal" data-target="#edit_subsection_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $subsection['id']; ?>','subsection/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
+                                    <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $subsection['id']; ?>','subsection/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
                             <?php $sn++; ?>

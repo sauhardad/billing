@@ -27,7 +27,7 @@
                                 <td><?php echo $expense['date']; ?></td>
                                 <td>
                                     <button class="btn btn-primary edit_expense_btn" data-id="<?php echo $expense['id']; ?>" data-particulars="<?php echo $expense['particulars']; ?>" data-amount="<?php echo $expense['amount']; ?>" data-date="<?php echo $expense['date']; ?>" data-toggle="modal" data-target="#edit_expense_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <button class="btn btn-danger" onclick="return deleteData('<?php echo $expense['id']; ?>','expense/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>
+                                    <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $expense['id']; ?>','expense/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
                             <?php $sn++; ?>
