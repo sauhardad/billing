@@ -32,6 +32,7 @@
                                 <td><?php echo $teacher_map[$group['teacher_id']]; ?></td>
                                 <td><?php echo $group['is_running']? "Yes":"No"  ?></td>
                                 <td>
+									<a class="btn btn-success" href="<?php echo base_url('group/view/'.$group['id']); ?>"><span class="glyphicon glyphicon-list glyphicon-margin-right-5"></span>View</a>
                                     <button class="btn btn-primary edit_group_btn" data-id="<?php echo $group['id']; ?>" data-code="<?php echo $group['code']; ?>" data-name="<?php echo $group['name']; ?>" data-teacher_id="<?php echo $group['teacher_id']; ?>" data-slot="<?php echo $group['time_slot']; ?>" data-running="<?php echo $group['is_running']; ?>" data-toggle="modal" data-target="#edit_group_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $group['id']; ?>','group/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>

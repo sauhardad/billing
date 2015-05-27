@@ -76,7 +76,6 @@ class Subsection extends CI_Controller {
         if ($session_data['role']=$this->config->item('role_admin'))
             $data['users']=$this->user_model->get_users_except($session_data['id']);
         $data['roles']=$this->config->item('role_value');
-        
         $data['this_subsection']=$this->subsection_model->retrieveSubsection($id,NULL)[0];
         $data['groups']=$this->group_model->retrieveGroup(NULL,$id);
         $data['teachers']=$this->teacher_model->retrieveTeacher();
