@@ -107,9 +107,9 @@ class Student extends CI_Controller {
         $data['roles']=$this->config->item('role_value');
         $data['id']=$id;
         $data['students']=$this->student_model->retrieveStudent($id)[0];
-        $data['payments']=$this->student_model->retrievePayment();
+        $data['payments']=$this->student_model->retrievePayment(NULL,$id);
         $data['teachers']=$this->teacher_model->retrieveTeacher();
-        $data['courses']=$this->student_model->retrieveCourse();
+        $data['courses']=$this->student_model->retrieveCourse(NULL,$id);
         $this->template->load('default', 'student/student_specific_view',$data);
      }
  }

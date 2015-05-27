@@ -3,7 +3,11 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="student-img-container">
-                        <img src="http://localhost/billing/assets/img/user_uploads/<?php echo $students['photo']; ?>">
+                        <img src="
+                            <?php if($students['photo']) { echo 'http://localhost/billing/assets/img/user_uploads/'.$students['photo'];}
+                                  else{ echo 'http://localhost/billing/assets/img/empty.jpg'; }
+                            ?>
+                        ">
                     </div>    
                     <br />
                     <br />

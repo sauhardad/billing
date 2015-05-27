@@ -53,30 +53,34 @@ Class Student_model extends CI_Model
     }
     
       /** function that retrieves specific payments if the payment_id is provided
-     * from the bill_payment table else all the payments
+     * from the bill_payment table 
+     * and payments made by individual student if student_id is provided
+     * else all the payments
      * 
      * @param type $payment_id
      * @return type
      */
-    function retrievePayment($payment_id=NULL)
+    function retrievePayment($payment_id=NULL,$student_id=NULL)
     {
-        if(!is_null($payment_id))
-            $this->db->where('id', $payment_id);
+        if(!is_null($payment_id))   $this->db->where('id', $payment_id);
+        if(!is_null($student_id)) $this->db->where('student_id', $student_id);
         $query = $this->db->get('tbl_bill_payment');
         $result=$query->result_array();
         return $result;
     }
     
     /** function that retrieves specific course if the course_id is provided
-     * from the student_course table else all the courses
+     * from the student_course table
+     * and courses taken up by student if student_id is provided
+     *else all the courses
      * 
      * @param type $course_id
      * @return type
      */
-    function retrieveCourse($course_id=NULL)
+    function retrieveCourse($course_id=NULL,$student_id=NULL)
     {
-        if(!is_null($course_id))
-            $this->db->where('id', $course_id);
+        if(!is_null($course_id)) $this->db->where('id', $course_id);
+        if(!is_null($student_id)) $this->db->where('student_id', $student_id);
         $query = $this->db->get('tbl_student_course');
         $result=$query->result_array();
         return $result;
@@ -141,7 +145,7 @@ Class Student_model extends CI_Model
         $result=$query->result_array();
         if($result)
              $total=$result[0]['total_amount'];
-        
+       
         $total_paid=0;
         $this->db->select('SUM(paid_amount) as paid_amount');
         $this->db->where('student_id',$student_id);
