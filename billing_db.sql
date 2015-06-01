@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2015 at 12:51 PM
+-- Generation Time: Jun 01, 2015 at 10:19 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('9a9df38b03f58d0fd0390f867b17c689', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1432723517, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('c8c9ed7fb7c35fb001ed2a23c407a6cd', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1432723610, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('0222eda07019384d9ac0829058c6141b', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36', 1433146401, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('ff04324df7dc9635f3940ff1522a20a7', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1433146474, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   `student_id` int(11) NOT NULL,
   `bill_no` varchar(10) NOT NULL,
   `paid_amount` decimal(10,0) NOT NULL,
-  `due_amount` decimal(10,0) NOT NULL,
   `date` varchar(10) NOT NULL,
   `user_id` int(11) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -67,7 +66,17 @@ CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   KEY `bill_id` (`bill_no`),
   KEY `bill_id_2` (`bill_no`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tbl_bill_payment`
+--
+
+INSERT INTO `tbl_bill_payment` (`id`, `student_id`, `bill_no`, `paid_amount`, `date`, `user_id`, `entry_timestamp`) VALUES
+(3, 1, '123', '4000', '29/05/2015', 1, '2015-05-29 13:52:17'),
+(4, 1, '12345', '1000', '29/05/2015', 1, '2015-05-29 13:52:36'),
+(5, 2, '111', '3000', '29/05/2015', 1, '2015-05-29 13:54:16'),
+(6, 3, '1234', '3000', '01/06/2015', 1, '2015-06-01 13:02:21');
 
 -- --------------------------------------------------------
 
@@ -117,14 +126,15 @@ CREATE TABLE IF NOT EXISTS `tbl_group` (
   PRIMARY KEY (`id`),
   KEY `subsection_id` (`subsection_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `tbl_group`
 --
 
 INSERT INTO `tbl_group` (`id`, `subsection_id`, `code`, `name`, `teacher_id`, `time_slot`, `is_running`, `user_id`, `active`, `entry_timestamp`) VALUES
-(13, 5, '12', 'ABD', 7, '6-7', 1, 1, 1, '2015-05-27 16:33:59');
+(13, 5, '12', 'ABD', 7, '6-7', 1, 1, 1, '2015-05-27 16:33:59'),
+(14, 5, '13', 'Java', 7, '6-7', 1, 1, 1, '2015-06-01 13:01:20');
 
 -- --------------------------------------------------------
 
@@ -138,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `tbl_income` (
   `teacher_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL,
   `total` decimal(10,0) NOT NULL,
-  `share_percent` int(3) NOT NULL,
+  `share` decimal(10,0) NOT NULL,
   `date` varchar(10) NOT NULL,
   `payment` decimal(10,0) NOT NULL,
   `dues` decimal(10,0) NOT NULL,
@@ -153,7 +163,15 @@ CREATE TABLE IF NOT EXISTS `tbl_income` (
   KEY `user_id_2` (`user_id`),
   KEY `teacher_id_2` (`teacher_id`),
   KEY `group_id_2` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tbl_income`
+--
+
+INSERT INTO `tbl_income` (`id`, `teacher_id`, `group_id`, `total`, `share`, `date`, `payment`, `dues`, `remarks`, `user_id`, `active`, `entry_timestamp`) VALUES
+(2, 7, 13, '11100', '1110', '06/03/2015', '8000', '3100', 'Paid', 1, 1, '2015-06-01 13:42:21'),
+(3, 7, 14, '4000', '400', '06/03/2015', '3000', '1000', 'Remaining', 1, 1, '2015-06-01 13:42:40');
 
 -- --------------------------------------------------------
 
@@ -223,7 +241,16 @@ CREATE TABLE IF NOT EXISTS `tbl_students` (
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tbl_students`
+--
+
+INSERT INTO `tbl_students` (`id`, `section_id`, `subsection_id`, `group_id`, `student_name`, `address`, `contact_no`, `dob`, `photo`, `user_id`, `active`, `entry_timestamp`) VALUES
+(1, 1, 5, 13, 'Nirdosh Bista', 'Kalanki', '', '05/13/2015', '', 1, 1, '2015-05-29 12:48:21'),
+(2, 1, 5, 13, 'Sauharda Dawadi', 'Syuchatar', '9841009755', '05/20/2015', '', 1, 1, '2015-05-29 13:53:16'),
+(3, 1, 5, 14, 'Ramhari Sedhain', 'Balaju', '987766587', '', '', 1, 1, '2015-06-01 13:02:01');
 
 -- --------------------------------------------------------
 
@@ -244,7 +271,20 @@ CREATE TABLE IF NOT EXISTS `tbl_student_course` (
   PRIMARY KEY (`id`),
   KEY `student_id` (`student_id`),
   KEY `teacher_id` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Dumping data for table `tbl_student_course`
+--
+
+INSERT INTO `tbl_student_course` (`id`, `student_id`, `subject`, `teacher_id`, `amount`, `user_id`, `active`, `entry_timestamp`) VALUES
+(9, 1, 'Social', 7, '1000', 1, 0, '2015-05-29 13:49:09'),
+(10, 1, 'Mathematics', 7, '2000', 1, 0, '2015-05-29 13:50:30'),
+(11, 1, 'Physics', 7, '2000', 1, 0, '2015-05-29 13:52:02'),
+(12, 2, 'Mathematics', 7, '2000', 1, 0, '2015-05-29 13:53:38'),
+(13, 2, 'Physics', 7, '2000', 1, 0, '2015-05-29 13:53:53'),
+(14, 1, 'Social', 7, '2100', 1, 0, '2015-06-01 11:08:25'),
+(15, 3, 'Mathematics', 7, '4000', 1, 0, '2015-06-01 13:02:13');
 
 -- --------------------------------------------------------
 
@@ -287,19 +327,21 @@ CREATE TABLE IF NOT EXISTS `tbl_teacher` (
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `contact_no` varchar(255) NOT NULL,
+  `share_percent` int(3) NOT NULL,
   `user_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `tbl_teacher`
 --
 
-INSERT INTO `tbl_teacher` (`id`, `name`, `address`, `contact_no`, `user_id`, `active`, `entry_timestamp`) VALUES
-(7, 'Ram Prasad Sharma', 'kalanki', '9841009755', 1, 1, '2015-04-24 14:53:39'),
-(9, 'Mahesh Joshi', 'lokanthalli 16', '9841168519', 1, 1, '2015-04-24 14:53:56');
+INSERT INTO `tbl_teacher` (`id`, `name`, `address`, `contact_no`, `share_percent`, `user_id`, `active`, `entry_timestamp`) VALUES
+(7, 'Ram Prasad Sharma', 'kalanki', '9841009755', 10, 1, 1, '2015-06-01 13:41:35'),
+(9, 'Mahesh Joshi', 'lokanthalli 16', '9841168519', 30, 1, 1, '2015-06-01 13:21:53'),
+(10, 'Priya Karki', 'Bhaktapur', '98765467', 20, 1, 1, '2015-06-01 13:18:43');
 
 -- --------------------------------------------------------
 
@@ -323,7 +365,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-05-27 15:58:05', '2015-05-27 15:58:05'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-06-01 14:03:38', '2015-06-01 14:03:38'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 

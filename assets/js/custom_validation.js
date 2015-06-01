@@ -10,7 +10,8 @@ $(function () {
                 },
                 add_address: {
                         required: true,
-                }
+                },
+                add_share_percent:"required"
         },
         messages: {
                 add_name: "Please enter name of the Teacher",
@@ -20,7 +21,8 @@ $(function () {
                 },
                 add_address: {
                         required: "Please provide an address"
-                }
+                },
+                add_share_percent:"Please provide a teacher share percentage"
         },
         errorClass: "invalid",
         submitHandler: function(form) {
@@ -48,7 +50,8 @@ $(function () {
                 },
                 edit_address: {
                         required: true,
-                }
+                },
+                edit_share_percent:"required"
         },
         messages: {
                 edit_name: "Please enter name of the Teacher",
@@ -58,7 +61,8 @@ $(function () {
                 },
                 edit_address: {
                         required: "Please provide an address"
-                }
+                },
+                edit_share_percent:"Please provide a teacher share percentage"
         },
         errorClass: "invalid",
         submitHandler: function(form) {
@@ -144,7 +148,7 @@ $(function () {
                 add_payment: "required",
                 add_due: "required",
                 add_total: "required",
-                add_share_percent: "required",
+                add_share: "required",
                 add_remark: "required",
                 add_date: "required",
                 
@@ -155,7 +159,7 @@ $(function () {
                 add_payment: "Please enter Payment amount",
                 add_due: "Please enter due amount",
                 add_total: "Please enter total",
-                add_share_percent: "Please enter share percentage",
+                add_share: "Please enter share percentage",
                 add_remark: "Please add remark",
                 add_date: "Please enter date",
         },
@@ -181,7 +185,7 @@ $(function () {
                 edit_payment: "required",
                 edit_due: "required",
                 edit_total: "required",
-                edit_share_percent: "required",
+                edit_share: "required",
                 edit_remark: "required",
                 edit_date: "required",
                 
@@ -192,7 +196,7 @@ $(function () {
                 edit_payment: "Please enter Payment amount",
                 edit_due: "Please enter due amount",
                 edit_total: "Please enter total",
-                edit_share_percent: "Please enter share percentage",
+                edit_share: "Please enter share percentage",
                 edit_remark: "Please add remark",
                 edit_date: "Please enter date",
         },
@@ -626,12 +630,10 @@ $(function () {
     $("#add_course_form").validate({
         rules: {
                 add_course_subject: "required",
-                add_course_teacher: "required",
                 add_course_amount: "required"
         },
         messages: {
                 add_course_subject: "Please enter the subject",
-                add_course_teacher: "Please select teacher",
                 add_course_amount: "Please enter course amount"
         },
         errorClass: "invalid",
@@ -643,7 +645,17 @@ $(function () {
                 success: function(data) {
                     alert(data.message);
                     if(data.status==true)
-                        window.location=window.location.href;
+                    {
+                        
+                        var sn=parseInt($('.courses_sn').last().text())+1;
+                        $('#student_courses').append('<tr><td>'+sn+'</td><td>'+data.course.subject+'</td><td>'+data.course.teacher+'</td><td>'+data.course.amount+'</td></tr>');
+                        $('#course_total_amt').html(parseInt($('#course_total_amt').text())+parseInt(data.course.amount));
+                        $('#payment_due_amt').html(parseInt($('#payment_due_amt').text())+parseInt(data.course.amount));
+                        
+                        $('#add_course_modal').modal('hide');
+                        $('#add_payment_modal').modal('show');
+                    }
+                        //window.location=window.location.href;
                 }
             });
             return false;

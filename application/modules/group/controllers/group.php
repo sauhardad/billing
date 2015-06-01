@@ -90,7 +90,32 @@ class Group extends CI_Controller {
         echo "true";
     }
  }
-
+ 
+ function get_teacher_groups()
+ {
+     if(($teacher_id=$this->input->post('id')))
+     {
+         $temp=$this->group_model->retrieveGroupsByTeacher($teacher_id);
+         $groups=array();
+         if(!empty($temp))
+         {
+             $groups['0']="Select Group";
+             foreach($temp as $value)
+                 $groups[$value['id']]=$value['name'];
+         }
+         echo json_encode($groups);
+     }
+ }
+ 
+ function ajax_load_teacher_income_by_group()
+ {
+     if(($group_id=$this->input->post('id')))
+     {
+         $temp=$this->group_model->retrieveTeacherIncomeByGroup($group_id);
+         echo json_encode($temp);
+     }
+ }
+ 
 }
 
 ?>

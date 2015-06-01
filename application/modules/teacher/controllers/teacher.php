@@ -29,7 +29,7 @@ class Teacher extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['name']=$this->input->post('add_teacher_name')) && ($data['contact_no']=$this->input->post('add_contact_no')) && ($data['address']=$this->input->post('add_address')))
+     if(($data['name']=$this->input->post('add_teacher_name')) && ($data['contact_no']=$this->input->post('add_contact_no')) && ($data['address']=$this->input->post('add_address')) && ($data['share_percent']=$this->input->post('add_share_percent')))
      {
          if($this->teacher_model->insertTeacher($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Teacher Saved'));
@@ -41,7 +41,7 @@ class Teacher extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_teacher_id')) && ($data['name']=$this->input->post('edit_teacher_name')) && ($data['contact_no']=$this->input->post('edit_contact_no')) && ($data['address']=$this->input->post('edit_address')))
+     if(($id=$this->input->post('edit_teacher_id')) && ($data['name']=$this->input->post('edit_teacher_name')) && ($data['contact_no']=$this->input->post('edit_contact_no')) && ($data['address']=$this->input->post('edit_address')) && ($data['share_percent']=$this->input->post('edit_share_percent')))
      {
         if($this->teacher_model->updateTeacher($id,$data))
             echo json_encode(array('status'=>TRUE,'message'=>'Teacher Updated'));

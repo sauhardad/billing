@@ -20,6 +20,23 @@ Class Common_model extends CI_Model
         if($this->db->count_all_results()) return TRUE;
         return FALSE;
     }
- 
+    
+    /** function that returns teacher_id of teacher currently teaching student 
+     * when student_id is passed
+     * 
+     * @param $student_id int
+     * @return $teacher_id int
+     * 
+     */
+    function getStudentTeacher($student_id)
+    {
+        $this->db->select('teacher_id');
+        $this->db->from('tbl_students');
+        $this->db->where('tbl_students.id',$student_id);
+        $this->db->join('tbl_group','tbl_group.id=tbl_students.group_id','inner');
+        $query = $this->db->get();
+        $result=$query->result_array();
+        return $result[0]['teacher_id'];
+    }
 }
 ?>

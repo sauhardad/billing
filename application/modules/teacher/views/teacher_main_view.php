@@ -14,6 +14,7 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Contact Number</th>
+                        <th>Share Percentage</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -25,8 +26,9 @@
                                 <td><?php echo $teacher['name']; ?></td>
                                 <td><?php echo $teacher['address']; ?></td>
                                 <td><?php echo $teacher['contact_no']; ?></td>
+                                <td><?php echo $teacher['share_percent']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_teacher_btn" data-id="<?php echo $teacher['id']; ?>" data-name="<?php echo $teacher['name']; ?>" data-address="<?php echo $teacher['address']; ?>" data-contact="<?php echo $teacher['contact_no']; ?>" data-toggle="modal" data-target="#edit_teacher_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_teacher_btn" data-id="<?php echo $teacher['id']; ?>" data-name="<?php echo $teacher['name']; ?>" data-address="<?php echo $teacher['address']; ?>" data-contact="<?php echo $teacher['contact_no']; ?>" data-share_percent="<?php echo $teacher['share_percent']; ?>" data-toggle="modal" data-target="#edit_teacher_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $teacher['id']; ?>','teacher/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
@@ -73,6 +75,14 @@
                                     <input type="text" name="add_address" class="form-control input-sm">
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_share_percent">Share Percentage</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_share_percent" class="form-control input-sm">
+                                </td>
+                            </tr>
                         </table>    
                         
                         <input class="btn btn-primary" type="submit" value="Save" id="submit">
@@ -116,6 +126,14 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="edit_address" id="edit_address" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_share_percent">Share Percentage</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="edit_share_percent" id="edit_share_percent" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    

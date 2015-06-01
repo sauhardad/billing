@@ -34,11 +34,11 @@
                                 <td><?php echo $income['payment']; ?></td>
                                 <td><?php echo $income['dues']; ?></td>
                                 <td><?php echo $income['total']; ?></td>
-                                <td><?php echo $income['share_percent']; ?></td>
+                                <td><?php echo $income['share']; ?></td>
                                 <td><?php echo $income['remarks']; ?></td>
                                 <td><?php echo $income['date']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_income_btn" data-id="<?php echo $income['id']; ?>" data-teacher_id="<?php echo $income['teacher_id']; ?>" data-group_id="<?php echo $income['group_id']; ?>" data-date="<?php echo $income['date']; ?>" data-edit_due="<?php echo $income['dues']; ?>" data-remark="<?php echo $income['remarks']; ?> "data-share_percent="<?php echo $income['share_percent']; ?>  "data-total="<?php echo $income['total']; ?> "data-payment="<?php echo $income['payment']; ?>" data-toggle="modal" data-target="#edit_income_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_income_btn" data-id="<?php echo $income['id']; ?>" data-teacher_id="<?php echo $income['teacher_id']; ?>" data-group_id="<?php echo $income['group_id']; ?>" data-date="<?php echo $income['date']; ?>" data-edit_due="<?php echo $income['dues']; ?>" data-remark="<?php echo $income['remarks']; ?> "data-share="<?php echo $income['share']; ?>  "data-total="<?php echo $income['total']; ?> "data-payment="<?php echo $income['payment']; ?>" data-toggle="modal" data-target="#edit_income_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $income['id']; ?>','income/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
@@ -66,13 +66,13 @@
                                     <label for="add_teacher_dropdown">Teachers</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_teacher_dropdown"') ?>
+                                    <?php echo form_dropdown('add_teacher_dropdown',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_teacher_dropdown" onchange="loadTeacherGroups(this);"') ?>
                                 </td>
                                 <td>
                                     <label for="add_group_dropdown">Groups</label>
                                 </td>
                                 <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_group_dropdown',array("0"=>"Select Group") + convert_to_keyvalue($groups),"0",'class="form-control" id="add_group_dropdown"') ?>
+                                    <?php echo form_dropdown('add_group_dropdown',array("0"=>"Select Group") + convert_to_keyvalue($groups),"0",'class="form-control" id="add_group_dropdown" onchange="loadTeacherIncomeByGroup(this.value);"') ?>
                                 </td>
                             </tr>
                             <tr>
@@ -80,13 +80,13 @@
                                     <label for="add_payment">Payment</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_payment" class="form-control input-sm">
+                                    <input type="text" name="add_payment" class="form-control input-sm" id="add_payment" readonly>
                                 </td>
                                 <td>
                                     <label for="add_due">Due</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_due" class="form-control input-sm">
+                                    <input type="text" name="add_due" class="form-control input-sm" id="add_due" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -94,13 +94,13 @@
                                     <label for="add_total">Total</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_total" class="form-control input-sm">
+                                    <input type="text" name="add_total" class="form-control input-sm" id="add_total" readonly>
                                 </td>
                                 <td>
-                                    <label for="add_share_percent">Share-Percent</label>
+                                    <label for="add_share">Teacher Share</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_share_percent" class="form-control input-sm">
+                                    <input type="text" name="add_share" class="form-control input-sm" id="add_share" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -161,13 +161,13 @@
                                     <label for="edit_payment">Payment</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_payment" class="form-control input-sm" id="edit_payment">
+                                    <input type="text" name="edit_payment" class="form-control input-sm" id="edit_payment" readonly>
                                 </td>
                                 <td>
                                     <label for="edit_due">Due</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_due" class="form-control input-sm" id="edit_due">
+                                    <input type="text" name="edit_due" class="form-control input-sm" id="edit_due" readonly>
                                 </td>
                             </tr>
                             <tr>
@@ -175,13 +175,13 @@
                                     <label for="edit_total">Total</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_total" class="form-control input-sm" id="edit_total">
+                                    <input type="text" name="edit_total" class="form-control input-sm" id="edit_total" readonly>
                                 </td>
                                 <td>
-                                    <label for="edit_share_percent">Share-Percent</label>
+                                    <label for="edit_share">Share-Percent</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_share_percent" class="form-control input-sm" id="edit_share_percent">
+                                    <input type="text" name="edit_share" class="form-control input-sm" id="edit_share" readonly>
                                 </td>
                             </tr>
                             <tr>

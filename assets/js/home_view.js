@@ -67,11 +67,13 @@ $(function () {
         var id = $(this).data('id');
         var address = $(this).data('address');
         var contact = $(this).data('contact');
+        var share_percent=$(this).data('share_percent');
 
         $("input:hidden[name=edit_teacher_id]").val(id);
         $("#edit_teacher_name").val(name);
         $("#edit_address").val(address);
         $("#edit_contact_no").val(contact);
+        $("#edit_share_percent").val(share_percent);
         
     });
     
@@ -126,7 +128,7 @@ $(function () {
         var teacher_id = $(this).data('teacher_id');
         var group_id = $(this).data('group_id');
         var total = $(this).data('total');
-        var share_percent = $(this).data('share_percent');
+        var share = $(this).data('share');
         var date = $(this).data('date');
         var payment = $(this).data('payment');
         var remark = $(this).data('remark');
@@ -139,7 +141,7 @@ $(function () {
         $("#edit_teacher_dropdown").val(teacher_id);
         $("#edit_group_dropdown").val(group_id);
         $("#edit_total").val(total);
-        $("#edit_share_percent").val(share_percent);
+        $("#edit_share").val(share);
         $("#edit_date").val(date);
         $("#edit_payment").val(payment);
         $("#edit_remark").val(remark);
@@ -231,4 +233,50 @@ function loadDropdown(element)
                 
         }       
       });
+}
+
+/** function that loads the list of groups that a teacher teaches 
+ * 
+ */
+function loadTeacherGroups(element)
+{
+    if(element.value)
+    {
+        $.ajax({
+        type: "POST",
+        url: base_url+'group/get_teacher_groups',
+        data: {id : element.value},
+        dataType: 'json',
+        success:function(data) {
+             $('#add_group_dropdown').empty();
+             $.each(data, function(i, value) {
+                $('#add_group_dropdown').append($('<option>').text(value).attr('value', i));
+            });
+        }       
+      });
+    } 
+}
+
+/** function that loads income details of teacher when a group is selected 
+ * 
+ * @param int group_id
+ * @returns {undefined}
+ */
+function loadTeacherIncomeByGroup(group_id)
+{
+    if(parseInt(group_id)!==0)
+    {
+        $.ajax({
+        type: "POST",
+        url: base_url+'group/ajax_load_teacher_income_by_group',
+        data: {id : parseInt(group_id)},
+        dataType: 'json',
+        success:function(data) { 
+            $('#add_payment').val(data.paid);
+            $('#add_total').val(data.total);
+            $('#add_due').val(data.due);
+            $('#add_share').val(data.share);
+        }       
+      });
+    }
 }

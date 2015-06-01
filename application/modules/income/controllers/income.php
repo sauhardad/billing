@@ -34,7 +34,7 @@ class Income extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['teacher_id']=$this->input->post('add_teacher_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')) && ($data['total']=$this->input->post('add_total')) && ($data['share_percent']=$this->input->post('add_share_percent')) && ($data['date']=$this->input->post('add_date')) && ($data['payment']=$this->input->post('add_payment')) && ($data['dues']=$this->input->post('add_due')) && ($data['remarks']=$this->input->post('add_remark')) )
+     if(($data['teacher_id']=$this->input->post('add_teacher_dropdown')) && ($data['group_id']=$this->input->post('add_group_dropdown')) && ($data['total']=$this->input->post('add_total')) && ($data['share']=$this->input->post('add_share')) && ($data['date']=$this->input->post('add_date')) && ($data['payment']=$this->input->post('add_payment')) && ($data['dues']=$this->input->post('add_due')) && ($data['remarks']=$this->input->post('add_remark')) )
      {
         
          if($this->income_model->insertIncome($data))
@@ -47,7 +47,7 @@ class Income extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_income_id')) && ($data['teacher_id']=$this->input->post('edit_teacher_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')) && ($data['total']=$this->input->post('edit_total')) && ($data['share_percent']=$this->input->post('edit_share_percent')) && ($data['date']=$this->input->post('edit_date')) && ($data['payment']=$this->input->post('edit_payment')) && ($data['dues']=$this->input->post('edit_due')) && ($data['remarks']=$this->input->post('edit_remark')))
+     if(($id=$this->input->post('edit_income_id')) && ($data['teacher_id']=$this->input->post('edit_teacher_dropdown')) && ($data['group_id']=$this->input->post('edit_group_dropdown')) && ($data['total']=$this->input->post('edit_total')) && ($data['share']=$this->input->post('edit_share')) && ($data['date']=$this->input->post('edit_date')) && ($data['payment']=$this->input->post('edit_payment')) && ($data['dues']=$this->input->post('edit_due')) && ($data['remarks']=$this->input->post('edit_remark')))
      {
         
          if($this->income_model->updateIncome($id,$data))
@@ -67,7 +67,6 @@ class Income extends CI_Controller {
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
  }
- 
 }
 
 ?>

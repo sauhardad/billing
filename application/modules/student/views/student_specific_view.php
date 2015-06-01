@@ -24,13 +24,12 @@
                 <div class="col-md-8">
                    <h2 style="display:inline-block;">Courses</h2>
                    <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_course_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="student_courses">
                     <thead>
                         <th>S.N.</th>
                         <th>Course</th>
                         <th>Teacher</th>
                         <th>Amount</th>
-                        <th>Time</th>
                     </thead>
                     <tbody>
                         <?php if(isset($courses)){ ?>
@@ -39,11 +38,10 @@
                         <?php $teacher_map=convert_to_keyvalue($teachers); ?>
                             <?php foreach($courses as $course){ ?>
                             <tr>
-                                <td><?php echo $sn; ?></td>
+                                <td><span class="courses_sn"><?php echo $sn; ?></span></td>
                                 <td><?php echo $course['subject']; ?></td>
                                 <td><?php echo $teacher_map[$course['teacher_id']]; ?></td>
                                 <td><?php echo $course['amount']; ?></td>
-                                <td><?php echo $course['time']; ?></td>
                             </tr> 
                             <?php $total_sum+=$course['amount']; ?>
                             <?php $sn++; ?>
@@ -55,8 +53,7 @@
                             <th></th>
                             <th></th>
                             <th>Total</th>
-                            <th><?php echo $total_sum;?></th>
-                            <th></th>
+                            <th><span id="course_total_amt"><?php echo $total_sum;?></span></th>
                         </tfoot>
                     <?php } ?>
                </table>
@@ -83,7 +80,7 @@
                                 <td><?php echo $payment['bill_no']; ?></td>
                                 <td><?php echo $payment['date'];  ?></td>
                                 <td><?php echo $payment['paid_amount']; ?></td>
-                                <td><?php echo $payment['due_amount']; ?></td>
+                                <td><?php //echo $payment['due_amount']; ?></td>
                             </tr> 
                             <?php $total_paid_sum+=$payment['paid_amount']; ?>
                             <?php $sn++; ?>
@@ -96,7 +93,7 @@
                             <th></th>
                             <th>Total</th>
                             <th><?php echo $total_paid_sum;?></th>
-                            <th></th>
+                            <th><span id="payment_due_amt"><?php echo ($total_sum-$total_paid_sum); ?></span></th>
                         </tfoot>
                     <?php } ?>
                 </table>
@@ -167,14 +164,6 @@
                                     <input type="text" name="add_course_subject" class="form-control input-sm">
                                 </td>
                             </tr>
-                           <tr>
-                                <td>
-                                    <label for="add_course_teacher">Teachers</label>
-                                </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_course_teacher',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_course_teacher"') ?>
-                                </td>
-                           </tr>
                             <tr>
                                 <td>
                                     <label for="add_course_amount">Amount</label>
