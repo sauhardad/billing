@@ -26,6 +26,23 @@ class Teacher extends CI_Controller {
     $this->template->load('default', 'teacher/teacher_main_view',$data);
  }
  
+ function view()
+ {
+     $data=array();
+     if(($id=$this->uri->segment(3)))
+     {
+        $session_data = $this->session->userdata('logged_in');
+        $data['session_data']=$session_data;
+        //check if the user has permission to add/edit users
+        if ($session_data['role']=$this->config->item('role_admin'))
+            $data['users']=$this->user_model->get_users_except($session_data['id']);
+        $data['roles']=$this->config->item('role_value');
+        $data['id']=$id;
+        $data['teacher']=$this->teacher_model->retrieveTeacher($id);
+        $this->template->load('default', 'teacher/teacher_specific_view',$data);
+     }
+ }
+ 
  function add()
  {
      $data=array();

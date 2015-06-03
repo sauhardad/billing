@@ -23,7 +23,7 @@
                         <?php foreach($teachers as $teacher){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $teacher['name']; ?></td>
+                                <td><a href="<?php echo base_url('teacher/view/'.$teacher['id']); ?>"><?php echo $teacher['name']; ?></a></td>
                                 <td><?php echo $teacher['address']; ?></td>
                                 <td><?php echo $teacher['contact_no']; ?></td>
                                 <td><?php echo $teacher['share_percent']; ?></td>
