@@ -166,6 +166,14 @@
                             </tr>
                             <tr>
                                 <td>
+                                    <label for="add_course_teacher">Teacher</label>
+                                </td>
+                                <td colspan="3"  aria-invalid="true">
+                                    <?php echo form_dropdown('add_course_teacher',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_course_teacher"') ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <label for="add_course_amount">Amount</label>
                                 </td>
                                 <td colspan="3">

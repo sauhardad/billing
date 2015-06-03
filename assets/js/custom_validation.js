@@ -304,12 +304,10 @@ $(function () {
                       }  
                 },
                 add_group_name: "required",
-                add_group_teacher:{ valueNotEquals: "0" },
                 add_group_time_slot:"required"
         },
         messages: {
                 add_group_name: "Please enter name of the Group",
-                add_group_teacher:"Please select a Teacher",
                 add_group_time_slot: "Please enter a time slot",
                 add_group_code: {
                         required: "Please provide the code",
@@ -341,12 +339,10 @@ $(function () {
                         rangelength: [2,2]
                 },
                 edit_group_name: "required",
-                edit_group_teacher:{ valueNotEquals: "0" },
                 edit_group_time_slot:"required"
         },
         messages: {
                 edit_group_name: "Please enter name of the Group",
-                edit_group_teacher:"Please select a Teacher",
                 edit_group_time_slot: "Please enter a time slot",
                 edit_group_code: {
                         required: "Please provide the code",
@@ -630,10 +626,12 @@ $(function () {
     $("#add_course_form").validate({
         rules: {
                 add_course_subject: "required",
+                add_course_teacher: { valueNotEquals: "0" },
                 add_course_amount: "required"
         },
         messages: {
                 add_course_subject: "Please enter the subject",
+                add_course_teacher:"Please Select a Teacher",
                 add_course_amount: "Please enter course amount"
         },
         errorClass: "invalid",

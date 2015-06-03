@@ -96,14 +96,12 @@ $(function () {
         var id = $(this).data('id');
         var code = $(this).data('code');
         var name = $(this).data('name');
-        var teacher_id=$(this).data('teacher_id');
         var slot = $(this).data('slot');
         var running = $(this).data('running');
 
         $("input:hidden[name=edit_group_id]").val(id);
         $("#edit_group_code").val(code);
         $("#edit_group_name").val(name);
-        $("#edit_group_teacher").val(teacher_id);
         $("#edit_group_time_slot").val(slot);
         $("#edit_group_is_running").val(running);
         

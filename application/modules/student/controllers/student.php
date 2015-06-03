@@ -143,10 +143,9 @@ class Student extends CI_Controller {
  function add_course()
  {
     $data=array();
-    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['amount']=$this->input->post('add_course_amount')))
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['subject']=$this->input->post('add_course_subject')) && ($data['teacher_id']=$this->input->post('add_course_teacher')) && ($data['amount']=$this->input->post('add_course_amount')))
     { 
         //$data['date']=  date('d/m/Y');
-        $data['teacher_id']=$this->common_model->getStudentTeacher($data['student_id']); 
         if(($this->student_model->insertCourse($data)))
             echo json_encode(array('status'=>TRUE,'message'=>'Course Saved ','course'=>array('subject'=>$data['subject'],'teacher'=>$this->teacher_model->retrieveTeacher($data['teacher_id'])[0]['name'],'amount'=>$data['amount'])));
         else
