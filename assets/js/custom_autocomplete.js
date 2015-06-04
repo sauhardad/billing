@@ -1,5 +1,7 @@
 $(function () { 
     var cache = {};    
+    
+    //autocomplete for searching for student
     $( "#search_student" ).autocomplete({
             minLength: 2,
             source: function( request, response ) {

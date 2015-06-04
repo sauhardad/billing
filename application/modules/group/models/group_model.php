@@ -119,6 +119,20 @@ Class Group_model extends CI_Model
         return $temp;
         
     }
+    
+     /** function that returns groups if the group name consists of the string 
+     * provided
+     * @param string $string
+     * @return array list of group
+     */
+    function searchGroups($string)
+    {
+        $this->db->select('id,name');
+        $this->db->like('name',$string);
+        $query = $this->db->get('tbl_group');
+        $result=$query->result_array();
+        return $result;
+    }
  
 }
 ?>

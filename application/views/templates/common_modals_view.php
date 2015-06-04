@@ -1,3 +1,50 @@
+<!-- modal for generating reports -->
+<div class="modal fade" tabindex="-1" role="dialog" id="report_modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Generate Report</h3>
+            </div>
+            <div class="modal-body">
+                <?php $report_types=array("0"=>"Select Report Type",
+                                          "1"=>"Group Report");
+                ?>
+                <table class="table-padding-10">
+                    <tr class="show">
+                        <td>
+                            <label for="generate_report_type">Report Type</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('generate_report_type', array("0"=>"Select Report Type")+$this->config->item('report_types'), "0",'class="form-control" id="generate_report_type" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
+                    <tr class="hide" id="select_group_tr">
+                        <td>
+                            <label for="select_group">Select Group</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_group', array("all"=>"All","specific"=>"Specific"), "0",'class="form-control" id="select_group" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
+                    <tr class="hide" id="search_group_tr">
+                        <td>
+                            <label for="search_group">Group Name</label>
+                        </td>
+                        <td colspan="3">
+                            <input type="text" id="search_group" class="form-control"/>
+                        </td>
+                    </tr>
+                </table>    
+
+                <input class="btn btn-primary" type="button" id="generate_report" value="Generate" onclick="return reportModalAction(this);">
+            </div>
+        </div>
+    </div>    
+</div>
+<!--end of modal for generating reports -->
+
+
 <div class="modal fade" id="password_modal" tabindex="-1" role="dialog" >
     <div class="modal-dialog">
         <div class="modal-content" style="height:300px;">

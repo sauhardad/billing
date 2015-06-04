@@ -353,10 +353,15 @@ thead {
     display:inline;
 }
 
-/* for displaying calender-popup at the foremost */
+/* for displaying calender-popup and ui-autocomplete at the foremost */
 .calendars-popup{
     z-index:9999;
 }
+.ui-autocomplete{
+    z-index:9999;
+}
+
+
 /* for the autocomplete search */
 .autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
 .autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
@@ -404,6 +409,4 @@ img.search-picture{
 .student-img-container img{
     width:70%;
 }
- 
-
  

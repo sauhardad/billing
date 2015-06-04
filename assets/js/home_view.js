@@ -19,6 +19,9 @@ $(function () {
         maxWidth:200
     });
     
+    //initialise token input
+    $("#search_group").tokenInput(base_url+'group/search',{tokenLimit: 1,theme: "facebook"});
+    
     //calculate due amount on add
     $( "#add_paid_amount" ).keyup(function() {
         if($(this).val() && $.isNumeric( $(this).val()))
@@ -277,4 +280,76 @@ function loadTeacherIncomeByGroup(group_id)
         }       
       });
     }
+}
+
+/** function that is invoked when certain action is performed on the report modal
+ * source is the element that triggered the action
+ * @param object source 
+ */
+function reportModalAction(source)
+{
+    if($(source).attr('id')==="generate_report_type")
+    {
+        if($(source).val()==="group")
+        {
+            $('#select_group_tr').removeClass('hide').addClass('show');
+        }
+        else{
+            $('#select_group_tr').removeClass('show').addClass('hide');
+        }
+    }
+    else if($(source).attr('id')==="select_group")
+    {
+        if($(source).val()==="specific")
+        {
+            $('#search_group_tr').removeClass('hide').addClass('show');
+        }
+        else{
+            $('#search_group_tr').removeClass('show').addClass('hide');
+        }
+    }
+    else if($(source).attr('id')==="generate_report")
+    {
+        //validation before generating report
+        if($('#generate_report_type').val()==='group')
+        {
+            var type='group';
+            var all_flag;
+            var tokenInput;
+            var id;
+            if($('#select_group').val()==='all')
+            {
+                all_flag=true;
+                id=0;
+                generateReport(type,all_flag,id);
+            }
+            else if($('#select_group').val()==='specific')
+            {
+                all_flag=false;
+                if($('#search_group').tokenInput("get").length)
+                {
+                    tokenInput=$('#search_group').tokenInput("get")[0];
+                    id=tokenInput.id;
+                    generateReport(type,all_flag,id);
+                }
+                else
+                {
+                    alert("Please select a "+$('#generate_report_type').val()+" to generate report");
+                }
+            }
+        }
+        else 
+        {
+            alert("Please Choose a report type");
+        }
+    }
+}
+
+
+/** function that generates a given type of report 
+ * 
+ */
+function generateReport(type,all_flag,id)
+{
+    window.location.replace(base_url+"report?type="+type);
 }

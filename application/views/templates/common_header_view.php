@@ -13,6 +13,8 @@
    <link href="<?=base_url()?>assets/css/jquery.calendars.picker.css" rel="stylesheet" type="text/css">
    <link href="<?=base_url()?>assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css"> 
    <link href="<?=base_url()?>assets/css/picedit.min.css" rel="stylesheet" type="text/css"> 
+   <link href="<?=base_url()?>assets/css/token-input.css" rel="stylesheet" type="text/css"> 
+   <link href="<?=base_url()?>assets/css/token-input-facebook.css" rel="stylesheet" type="text/css"> 
    <link href="<?=base_url()?>assets/css/home_view.css" rel="stylesheet" type="text/css"> 
        
    <script src="<?=base_url()?>assets/js/jquery.min.js"></script>    
@@ -27,6 +29,9 @@
    
    <!-- fo the picture edit tool -->
    <script src="<?=base_url()?>assets/js/picedit.min.js"></script>
+   
+   <!-- for the tokenizer autocomplete plugin -->
+   <script src="<?=base_url()?>assets/js/jquery.tokeninput.js"></script>
    
    <!-- for the jquery plugin calender -->
    <script src="<?=base_url()?>assets/js/jquery.plugin.min.js"></script>
@@ -67,6 +72,12 @@
 				</a>
 			</li>
                         <li>
+				<a href="#report_modal" data-toggle="modal" class="animate">
+					<span class="desc animate">Report </span>
+					<span class="glyphicon glyphicon-list-alt"></span>
+				</a>
+			</li>
+                        <li>
 				<a href="<?php echo base_url('teacher');?>" class="animate">
 					<span class="desc animate"> Teachers </span>
 					<span class="glyphicon glyphicon-pencil"></span>
@@ -78,12 +89,12 @@
 					<span class="glyphicon glyphicon-th-large"></span>
 				</a>
 			</li>
-                        <li>
+                        <!--<li>
 				<a href="<?php echo base_url('income');?>" class="animate">
 					<span class="desc animate">Income </span>
 					<span class="glyphicon glyphicon-euro"></span>
 				</a>
-			</li>
+			</li>-->
                         <li>
 				<a href="<?php echo base_url('expense');?>" class="animate">
 					<span class="desc animate">Expenses </span>

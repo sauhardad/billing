@@ -116,6 +116,15 @@ class Group extends CI_Controller {
      }
  }
  
+ function search()
+ {
+     if(($term=$this->input->get('q')))
+     {
+         $data = $this->group_model->searchGroups($term);
+         echo json_encode($data);
+     }
+ }
+ 
 }
 
 ?>
