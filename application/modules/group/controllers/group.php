@@ -118,9 +118,9 @@ class Group extends CI_Controller {
  
  function search()
  {
-     if(($term=$this->input->get('q')))
+     if(($term=$this->input->get('q')) && ($subsection_id=$this->input->get('subsection_id')))
      {
-         $data = $this->group_model->searchGroups($term);
+         $data = $this->group_model->searchGroups($term,$subsection_id);
          echo json_encode($data);
      }
  }

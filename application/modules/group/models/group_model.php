@@ -121,14 +121,16 @@ Class Group_model extends CI_Model
     }
     
      /** function that returns groups if the group name consists of the string 
-     * provided
+     * provided which belongs to a given subsection
      * @param string $string
+     * @param int $subsection_id
      * @return array list of group
      */
-    function searchGroups($string)
+    function searchGroups($string,$subsection_id)
     {
         $this->db->select('id,name');
         $this->db->like('name',$string);
+        $this->db->where('subsection_id',$subsection_id);
         $query = $this->db->get('tbl_group');
         $result=$query->result_array();
         return $result;

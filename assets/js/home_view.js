@@ -19,9 +19,6 @@ $(function () {
         maxWidth:200
     });
     
-    //initialise token input
-    $("#search_group").tokenInput(base_url+'group/search',{tokenLimit: 1,theme: "facebook"});
-    
     //calculate due amount on add
     $( "#add_paid_amount" ).keyup(function() {
         if($(this).val() && $.isNumeric( $(this).val()))
@@ -290,22 +287,79 @@ function reportModalAction(source)
 {
     if($(source).attr('id')==="generate_report_type")
     {
+        $('#select_section_tr').removeClass('show').addClass('hide');
+        $('#select_subsection_tr').removeClass('show').addClass('hide');
+        $('#select_group_tr').removeClass('show').addClass('hide');
+        $('#select_group').val("all");
+        $('#search_group_tr').removeClass('show').addClass('hide');
+        $(".token-input-list-facebook").remove();
         if($(source).val()==="group")
         {
-            $('#select_group_tr').removeClass('hide').addClass('show');
+            $.ajax({
+                type: "POST",
+                url: base_url+'report/getSections',
+                dataType: 'json',
+                success:function(data) { 
+                    $('#select_section').empty().append($("<option></option>").attr("value","0").text("Select Section")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_section')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name)); 
+                   });
+                   $('#select_section_tr').removeClass('hide').addClass('show');
+                }       
+              });
+            
         }
-        else{
-            $('#select_group_tr').removeClass('show').addClass('hide');
+    }
+    else if($(source).attr('id')==="select_section")
+    {
+        $('#select_subsection_tr').removeClass('show').addClass('hide');
+        $('#select_group_tr').removeClass('show').addClass('hide');
+        $('#select_group').val("all");
+        $('#search_group_tr').removeClass('show').addClass('hide');
+        $(".token-input-list-facebook").remove();
+        if($(source).val()!=='0')
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'report/getSubsections',
+                dataType: 'json',
+                data: {id : parseInt($(source).val())},
+                success:function(data) { 
+                    $('#select_subsection').empty().append($("<option></option>").attr("value","0").text("Select Subsection")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_subsection')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name)); 
+                   });
+                   $('#select_subsection_tr').removeClass('hide').addClass('show');
+                }       
+              });
+        }
+    }
+    else if($(source).attr('id')==="select_subsection")
+    {
+        $('#select_group_tr').removeClass('show').addClass('hide');
+        $('#select_group').val("all");
+        $('#search_group_tr').removeClass('show').addClass('hide');
+        $(".token-input-list-facebook").remove();
+        if($(source).val()!=='0')
+        {
+            $('#select_group_tr').removeClass('hide').addClass('show');
         }
     }
     else if($(source).attr('id')==="select_group")
     {
+        $(".token-input-list-facebook").remove();
+        $('#search_group_tr').removeClass('show').addClass('hide');
         if($(source).val()==="specific")
         {
+            //initialise token input
+            $("#search_group").tokenInput(base_url+'group/search?subsection_id='+$('#select_subsection').val(),{tokenLimit: 1,theme: "facebook"});
             $('#search_group_tr').removeClass('hide').addClass('show');
-        }
-        else{
-            $('#search_group_tr').removeClass('show').addClass('hide');
         }
     }
     else if($(source).attr('id')==="generate_report")
@@ -317,6 +371,18 @@ function reportModalAction(source)
             var all_flag;
             var tokenInput;
             var id;
+            if($('#select_section').val()==='0')
+            {
+                alert("Please choose a Section");
+                return false;
+            }
+            if($('#select_subsection').val()==='0')
+            {
+                alert("Please choose a Subection");
+                return false;
+            }
+                
+                
             if($('#select_group').val()==='all')
             {
                 all_flag=true;
@@ -337,6 +403,7 @@ function reportModalAction(source)
                     alert("Please select a "+$('#generate_report_type').val()+" to generate report");
                 }
             }
+            
         }
         else 
         {
@@ -351,5 +418,5 @@ function reportModalAction(source)
  */
 function generateReport(type,all_flag,id)
 {
-    window.location.replace(base_url+"report?type="+type);
+    window.location.replace(base_url+"report?type="+type+"&all_flag="+all_flag+"&id="+id);
 }

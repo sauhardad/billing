@@ -19,6 +19,22 @@
                             <?php echo form_dropdown('generate_report_type', array("0"=>"Select Report Type")+$this->config->item('report_types'), "0",'class="form-control" id="generate_report_type" onchange="return reportModalAction(this);"'); ?>
                         </td>
                     </tr>
+                    <tr class="hide" id="select_section_tr">
+                        <td>
+                            <label for="select_section">Select Section</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_section', array("0"=>"Select Section"), "0",'class="form-control" id="select_section" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
+                    <tr class="hide" id="select_subsection_tr">
+                        <td>
+                            <label for="select_subsection">Select Subsection</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_subsection', array("0"=>"Select Subection"), "0",'class="form-control" id="select_subsection" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
                     <tr class="hide" id="select_group_tr">
                         <td>
                             <label for="select_group">Select Group</label>
