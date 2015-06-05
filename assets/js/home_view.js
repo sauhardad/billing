@@ -386,7 +386,7 @@ function reportModalAction(source)
             if($('#select_group').val()==='all')
             {
                 all_flag=true;
-                id=0;
+                id=$('#select_subsection').val();
                 generateReport(type,all_flag,id);
             }
             else if($('#select_group').val()==='specific')

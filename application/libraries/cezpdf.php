@@ -25,7 +25,7 @@ var $ezPageCount=0;
 
 // ------------------------------------------------------------------------------
 
-function Cezpdf($paper='a4',$orientation='portrait'){
+function Cezpdf($options=array('a4','portrait')){
 	// Assuming that people don't want to specify the paper size using the absolute coordinates
 	// allow a couple of options:
 	// orientation can be 'portrait' or 'landscape'
@@ -38,8 +38,9 @@ function Cezpdf($paper='a4',$orientation='portrait'){
 	// paper cordinates are calculated in this way: (inches * 72) where 1 inch = 2.54 cm
 	// 
 	// Now you may also pass a 2 values array containing the page width and height in centimeters
-	// -------------------------
-
+	// -------------------------   
+        $paper=$options[0];
+        $orientation=$options[1];
 	if (!is_array($paper)){
 		switch (strtoupper($paper)){
 			case '4A0': {$size = array(0,0,4767.87,6740.79); break;}

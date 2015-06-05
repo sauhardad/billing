@@ -12,6 +12,7 @@ class Report extends CI_Controller {
    
    $this->load->model('section/section_model');
    $this->load->model('subsection/subsection_model');
+   $this->load->model('report_model');
    $this->load->helper(array('form'));
  }
  
@@ -19,27 +20,24 @@ class Report extends CI_Controller {
  {
      if(($type=$this->input->get('type')))
      {
-         $all_flag=$this->input->get('all_flag');
-         $id=$this->input->get('id');
+        $all_flag=$this->input->get('all_flag');
+        $id=$this->input->get('id');
          
-       
-        $this->load->library('cezpdf'); 
-       
-        //for report
-        $db_data[] = array('name' => 'Jon Doe', 'phone' => '111-222-3333', 'email' => 'jdoe@someplace.com','contact'=>'kalanki');
-        $db_data[] = array('name' => 'Jane Doe', 'phone' => '222-333-4444', 'email' => 'jane.doe@something.com','contact'=>'bhaktapur');
-        $db_data[] = array('name' => 'Jon Smith', 'phone' => '333-444-5555', 'email' => 'jsmith@someplacepsecial.com','contact'=>'Lalitpur');
+        //in case of all group report
+        if(($type==='group') && ($all_flag==='true'))
+        {
+            $this->load->library('cezpdf',array('a4','landscape')); 
+            $db_data=$this->report_model->retrieveAllGroupReport($id);
+            $col_names = array(
+                'name' => 'Group Name',
+                'amount' => 'Amount',
+                'paid' => 'Paid Amount',
+                'due'=>'Due Amount'
+            );
 
-        $col_names = array(
-            'name' => 'Name',
-            'phone' => 'Phone Number',
-            'email' => 'E-mail Address',
-            'contact'=>'Contact Address'
-        );
-
-        $this->cezpdf->ezTable($db_data, $col_names, 'Contact List', array('width'=>550));
-        $this->cezpdf->ezStream();
-         
+            $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>550));
+            $this->cezpdf->ezStream();
+        }
      }
  }
  
