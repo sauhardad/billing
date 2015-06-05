@@ -22,7 +22,9 @@ class Report extends CI_Controller {
          $all_flag=$this->input->get('all_flag');
          $id=$this->input->get('id');
          
-         
+       
+        $this->load->library('cezpdf'); 
+       
         //for report
         $db_data[] = array('name' => 'Jon Doe', 'phone' => '111-222-3333', 'email' => 'jdoe@someplace.com','contact'=>'kalanki');
         $db_data[] = array('name' => 'Jane Doe', 'phone' => '222-333-4444', 'email' => 'jane.doe@something.com','contact'=>'bhaktapur');
