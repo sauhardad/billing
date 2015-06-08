@@ -29,6 +29,7 @@ class Report extends CI_Controller {
             $this->load->library('cezpdf',array('a4','landscape')); 
             $db_data=$this->report_model->retrieveAllGroupReport($id);
             $col_names = array(
+                'sn'=>'S.N.',
                 'name' => 'Group Name',
                 'amount' => 'Amount(Rs)',
                 'paid' => 'Paid Amount(Rs)',
