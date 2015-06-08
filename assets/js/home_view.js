@@ -405,6 +405,10 @@ function reportModalAction(source)
             }
             
         }
+        else if($('#generate_report_type').val()==="income")
+        {
+            generateReport('income','true',0);
+        }
         else 
         {
             alert("Please Choose a report type");

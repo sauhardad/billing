@@ -12,7 +12,7 @@ Class Report_model extends CI_Model
         $temp=array();
         
         //get total amount
-        $this->db->select('tbl_group.id,tbl_group.name,SUM(tbl_student_course.amount) as amount,t.paid as paid,v.teacher_share');
+        $this->db->select('tbl_group.id,tbl_group.name,SUM(tbl_student_course.amount) as amount,t.paid as paid,(SUM(tbl_student_course.amount)-t.paid) as due,v.teacher_share,(SUM(tbl_student_course.amount)-v.teacher_share) as office_share');
         $this->db->from('tbl_group');
         $this->db->where('tbl_group.subsection_id',$subsection_id);
         $this->db->join('tbl_students','tbl_students.group_id=tbl_group.id','left');
@@ -43,19 +43,62 @@ Class Report_model extends CI_Model
            else $t_paid+=$temp[$key]['paid'];
            
            
-           if(!($temp[$key]['due']=($temp[$key]['amount']-$temp[$key]['paid'])))   $temp[$key]['due']=0; 
+           if(!$temp[$key]['due']) $temp[$key]['due']=0; 
            else $t_due+=$temp[$key]['due'];
            
            if(!$temp[$key]['teacher_share']) $temp[$key]['teacher_share']=0; 
            else $t_teacher_share+=$temp[$key]['teacher_share'];
            
-           if(!($temp[$key]['office_share']=($temp[$key]['amount']-$temp[$key]['teacher_share'])))    $temp[$key]['office_share']=0;
+           if(!$temp[$key]['office_share']) $temp[$key]['office_share']=0;
            else $t_office_share+=$temp[$key]['office_share'];
            
            
            $sn++;
         }
         $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due,'teacher_share'=>$t_teacher_share,'office_share'=>$t_office_share);
+        return $temp;
+    }
+    
+    /** function that retrieves report summary of all the sections 
+     * 
+     * @return array() $temp
+     */
+    function retrieveAllSectionReport()
+    {
+        $this->db->select('tbl_section.name,SUM(tbl_student_course.amount) as amount,t.paid,(SUM(tbl_student_course.amount)-t.paid) as due');
+        $this->db->from('tbl_section');
+        $this->db->join('tbl_students','tbl_students.section_id=tbl_section.id','left');
+        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
+        $this->db->join('(SELECT `tbl_section`.`id` as section_id, SUM(tbl_bill_payment.paid_amount) as paid FROM (`tbl_section`) LEFT JOIN `tbl_students` ON `tbl_students`.`section_id`=`tbl_section`.`id` LEFT JOIN `tbl_bill_payment` ON `tbl_bill_payment`.`student_id`=`tbl_students`.`id` GROUP BY `tbl_section`.`id` ORDER BY `tbl_section`.`id`) as t','t.section_id=tbl_section.id','left');
+        $this->db->group_by('tbl_section.id');
+        $this->db->order_by('tbl_section.id');
+        $query=$this->db->get();
+        $temp=$query->result_array();     
+        
+        $t_amount=0;
+        $t_paid=0;
+        $t_due=0;
+        $sn=1;
+        foreach($temp as $key=>$value)
+        {
+           //initialize sn
+            $temp[$key]['sn']=$sn;
+            
+           if(!$temp[$key]['amount']) $temp[$key]['amount']=0; 
+           else $t_amount+=$temp[$key]['amount'];
+           
+           if(!$temp[$key]['paid']) $temp[$key]['paid']=0; 
+           else $t_paid+=$temp[$key]['paid'];
+           
+           
+           if(!$temp[$key]['due']) $temp[$key]['due']=0; 
+           else $t_due+=$temp[$key]['due'];
+           
+           
+           
+           $sn++;
+        }
+        $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         return $temp;
     }
 }

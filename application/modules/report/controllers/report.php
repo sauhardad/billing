@@ -38,13 +38,29 @@ class Report extends CI_Controller {
                 'office_share'=>'Office Share(Rs)'
             );
 
-            $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>550));
+            $this->cezpdf->ezTable($db_data, $col_names, 'Group Summary', array('width'=>550));
             $this->cezpdf->ezStream();
         }
         //in case of individual group report
         else if(($type==='group') && ($all_flag==='false') && ($id))
         {
             
+        }
+        //income summary for all sections
+        else if(($type==='income') && ($all_flag==='true') && (!$id))
+        {
+            $this->load->library('cezpdf',array('a4','portrait')); 
+            $db_data=$this->report_model->retrieveAllSectionReport();
+            $col_names = array(
+                'sn'=>'S.N.',
+                'name' => 'Section',
+                'amount' => 'Total Amount(Rs)',
+                'paid' => 'Paid Amount(Rs)',
+                'due'=>'Due Amount(Rs)'
+            );
+
+            $this->cezpdf->ezTable($db_data, $col_names, 'Sections Summary', array('width'=>550));
+            $this->cezpdf->ezStream();
         }
      }
  }
