@@ -101,5 +101,37 @@ Class Report_model extends CI_Model
         $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         return $temp;
     }
+    function retrieveSpStudentReport($group_id)
+    {
+        $temp=array();
+        
+        $this->db->select('tbl_students.id,tbl_students.student_name,tbl_students.contact_no,COUNT(tbl_student_course.subject) as subject_count');                
+        $this->db->from('tbl_students');
+        $this->db->where('tbl_students.group_id',$group_id);
+        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','inner');
+        $this->db->group_by('tbl_students.id');
+        $query=$this->db->get();
+        $temp=$query->result_array();  
+        
+        foreach($temp as $key=>$value)
+        {
+            $id=$value['id'];
+            $this->db->select('subject');
+            $this->db->from('tbl_student_course');
+            $this->db->where('student_id',$id);
+            $query=$this->db->get();
+            $result=$query->result_array();  
+            
+            $count=1;
+            foreach($result as $key2=>$value2)
+            {
+                $temp[$key]['subject_'.$count]=$value2['subject'];
+                $count++;
+            }
+        }
+        
+        return $temp;
+        
+    }
 }
 ?>
