@@ -58,5 +58,20 @@ Class Report_model extends CI_Model
         $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due,'teacher_share'=>$t_teacher_share,'office_share'=>$t_office_share);
         return $temp;
     }
+    
+    function retrieveSpStudentReport($group_id)
+    {
+        $temp=array();
+        
+        $this->db->select('tbl_students.id,tbl_students.student_name,tbl_students.contact_no,tbl_student_course.subject');
+        $this->db->from('tbl_students');
+        $this->db->where('tbl_students.group_id',$group_id);
+        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
+        $query=$this->db->get();
+        $temp=$query->result_array();  
+        //debug_array($temp);die;
+        return $temp;
+        
+    }
 }
 ?>

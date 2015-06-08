@@ -44,8 +44,17 @@ class Report extends CI_Controller {
         //in case of individual group report
         else if(($type==='group') && ($all_flag==='false') && ($id))
         {
+            $this->load->library('cezpdf',array('a4','landscape'));
+            $db_data=$this->report_model->retrieveSpStudentReport($id);
+            $col_names = array(
+                'student_name' => 'Name',
+                'contact_no' => 'Contact',
+                'subject'=> 'Sub1'
+            );
             
-        }
+            $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>550));
+            $this->cezpdf->ezStream();
+        };
      }
  }
  
@@ -59,6 +68,8 @@ class Report extends CI_Controller {
      if(($section_id=$this->input->post('id')))
         echo json_encode($this->subsection_model->retrieveSubsection(NULL,$section_id));
  }
+ 
+ 
 }
 
 ?>
