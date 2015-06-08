@@ -30,13 +30,20 @@ class Report extends CI_Controller {
             $db_data=$this->report_model->retrieveAllGroupReport($id);
             $col_names = array(
                 'name' => 'Group Name',
-                'amount' => 'Amount',
-                'paid' => 'Paid Amount',
-                'due'=>'Due Amount'
+                'amount' => 'Amount(Rs)',
+                'paid' => 'Paid Amount(Rs)',
+                'due'=>'Due Amount(Rs)',
+                'teacher_share'=>'Teacher Share(Rs)',
+                'office_share'=>'Office Share(Rs)'
             );
 
             $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>550));
             $this->cezpdf->ezStream();
+        }
+        //in case of individual group report
+        else if(($type==='group') && ($all_flag==='false') && ($id))
+        {
+            
         }
      }
  }
