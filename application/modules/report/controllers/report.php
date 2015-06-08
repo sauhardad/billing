@@ -47,12 +47,17 @@ class Report extends CI_Controller {
             $this->load->library('cezpdf',array('a4','landscape'));
             $db_data=$this->report_model->retrieveSpStudentReport($id);
             $col_names = array(
+                'sn'=>'S.N.',
                 'student_name' => 'Name',
                 'contact_no' => 'Contact',
                 'subject_1'=> 'Subject 1',
                 'subject_2'=> 'Subject 2',
                 'subject_3'=> 'Subject 3',
                 'subject_4'=> 'Subject 4',
+                'amount'=>'Amount(Rs)',
+                'paid'=>'Paid(Rs)',
+                'due'=>'Due(Rs)'
+               
                 
             );
             

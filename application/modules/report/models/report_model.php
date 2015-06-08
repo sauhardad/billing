@@ -105,14 +105,19 @@ Class Report_model extends CI_Model
     {
         $temp=array();
         
-        $this->db->select('tbl_students.id,tbl_students.student_name,tbl_students.contact_no,COUNT(tbl_student_course.subject) as subject_count');                
+        $this->db->select('tbl_students.id,tbl_students.student_name,tbl_students.contact_no,COUNT(tbl_student_course.subject) as subject_count,SUM(tbl_student_course.amount) as amount,t.paid,(SUM(tbl_student_course.amount)-t.paid) as due');                
         $this->db->from('tbl_students');
         $this->db->where('tbl_students.group_id',$group_id);
-        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','inner');
+        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
+        $this->db->join('(SELECT `tbl_students`.`id`, SUM(tbl_bill_payment.paid_amount) as paid FROM (`tbl_students`) LEFT JOIN `tbl_bill_payment` ON `tbl_bill_payment`.`student_id`=`tbl_students`.`id` WHERE `tbl_students`.`group_id` = '.$group_id.' GROUP BY `tbl_students`.`id`) as t','t.id=tbl_students.id','left');
         $this->db->group_by('tbl_students.id');
         $query=$this->db->get();
         $temp=$query->result_array();  
         
+        $t_amount=0;
+        $t_paid=0;
+        $t_due=0;
+        $sn=1;
         foreach($temp as $key=>$value)
         {
             $id=$value['id'];
@@ -125,10 +130,26 @@ Class Report_model extends CI_Model
             $count=1;
             foreach($result as $key2=>$value2)
             {
-                $temp[$key]['subject_'.$count]=$value2['subject'];
+                $temp[$key]['subject_'.$count]=$value2['subject'];    
                 $count++;
+                
             }
+            
+            $temp[$key]['sn']=$sn;
+            
+            if(!$temp[$key]['amount']) $temp[$key]['amount']=0; 
+            else $t_amount+=$temp[$key]['amount'];
+           
+            if(!$temp[$key]['paid']) $temp[$key]['paid']=0; 
+            else $t_paid+=$temp[$key]['paid'];
+
+
+            if(!$temp[$key]['due']) $temp[$key]['due']=0; 
+            else $t_due+=$temp[$key]['due'];
+            
+            $sn++;
         }
+        $temp[]=array('student_name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         
         return $temp;
         
