@@ -4,6 +4,9 @@
 $config['role_value'] = array('1'=>'Admin','2'=>'Accountant');
 $config['role_admin'] = 1;
 $config['role_accountant']=2;
-$config['report_types']=array('group'=>'Group',
+$config['report_types']=array('group-summary'=>'Group(Summary)',
+                              'group-checking'=>'Group(Checking)',
+                              'group-contact'=>'Group(Contact)',
+                              'transaction'=>'Transaction',  
                               'income'=>'Income'
                              );

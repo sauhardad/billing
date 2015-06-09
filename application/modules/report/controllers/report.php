@@ -24,7 +24,7 @@ class Report extends CI_Controller {
         $id=$this->input->get('id');
          
         //in case of all group report
-        if(($type==='group') && ($all_flag==='true'))
+        if(($type==='group-summary') && ($all_flag==='true'))
         {
             $this->load->library('cezpdf',array('a4','landscape')); 
             $db_data=$this->report_model->retrieveAllGroupReport($id);
@@ -42,7 +42,7 @@ class Report extends CI_Controller {
             $this->cezpdf->ezStream();
         }
         //in case of individual group report
-        else if(($type==='group') && ($all_flag==='false') && ($id))
+        else if(($type==='group-summary') && ($all_flag==='false') && ($id))
         {
             $this->load->library('cezpdf',array('a4','landscape'));
             $db_data=$this->report_model->retrieveSpStudentReport($id);

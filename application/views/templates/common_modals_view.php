@@ -7,9 +7,6 @@
                 <h3>Generate Report</h3>
             </div>
             <div class="modal-body">
-                <?php $report_types=array("0"=>"Select Report Type",
-                                          "1"=>"Group Report");
-                ?>
                 <table class="table-padding-10">
                     <tr class="show">
                         <td>

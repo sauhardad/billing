@@ -293,7 +293,7 @@ function reportModalAction(source)
         $('#select_group').val("all");
         $('#search_group_tr').removeClass('show').addClass('hide');
         $(".token-input-list-facebook").remove();
-        if($(source).val()==="group")
+        if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact")
         {
             $.ajax({
                 type: "POST",
@@ -350,6 +350,19 @@ function reportModalAction(source)
         {
             $('#select_group_tr').removeClass('hide').addClass('show');
         }
+        
+        //check if select group report type needs to be displayed
+        if($('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==='group-checking')
+        {
+            $('#select_group_tr').removeClass('show').addClass('hide');
+            //initialise token input
+            $("#search_group").tokenInput(base_url+'group/search?subsection_id='+$('#select_subsection').val(),{tokenLimit: 1,theme: "facebook"});
+            $('#search_group_tr').removeClass('hide').addClass('show');
+        }
+        else if(('#generate_report_type').val()==='group-summary')
+        {
+            $('#select_group_tr').removeClass('hide').addClass('show');
+        }
     }
     else if($(source).attr('id')==="select_group")
     {
@@ -365,9 +378,9 @@ function reportModalAction(source)
     else if($(source).attr('id')==="generate_report")
     {
         //validation before generating report
-        if($('#generate_report_type').val()==='group')
+        if($('#generate_report_type').val()==='group-summary' || $('#generate_report_type').val()==='group-checking' || $('#generate_report_type').val()==='group-contact')
         {
-            var type='group';
+            var type=$('#generate_report_type').val();
             var all_flag;
             var tokenInput;
             var id;
@@ -382,28 +395,42 @@ function reportModalAction(source)
                 return false;
             }
                 
-                
-            if($('#select_group').val()==='all')
+            if($('#generate_report_type').val()==='group-summary')
             {
-                all_flag=true;
-                id=$('#select_subsection').val();
-                generateReport(type,all_flag,id);
+                if($('#select_group').val()==='all')
+                {
+                    all_flag=true;
+                    id=$('#select_subsection').val();
+                    generateReport(type,all_flag,id);
+                }
+                else if($('#select_group').val()==='specific')
+                {
+                    all_flag=false;
+                    if($('#search_group').tokenInput("get").length)
+                    {
+                        tokenInput=$('#search_group').tokenInput("get")[0];
+                        id=tokenInput.id;
+                        generateReport(type,all_flag,id);
+                    }
+                    else
+                    {
+                        alert("Please select a group to generate report");
+                    }
+                }
             }
-            else if($('#select_group').val()==='specific')
+            else if($('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==='group-checking')
             {
-                all_flag=false;
                 if($('#search_group').tokenInput("get").length)
                 {
                     tokenInput=$('#search_group').tokenInput("get")[0];
                     id=tokenInput.id;
-                    generateReport(type,all_flag,id);
+                    generateReport($('#generate_report_type').val(),false,id);
                 }
                 else
                 {
-                    alert("Please select a "+$('#generate_report_type').val()+" to generate report");
+                    alert("Please select a group to generate report");
                 }
             }
-            
         }
         else if($('#generate_report_type').val()==="income")
         {

@@ -55,7 +55,8 @@ Class Report_model extends CI_Model
            
            $sn++;
         }
-        $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due,'teacher_share'=>$t_teacher_share,'office_share'=>$t_office_share);
+        if(!empty($temp))
+            $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due,'teacher_share'=>$t_teacher_share,'office_share'=>$t_office_share);
         return $temp;
     }
     
@@ -98,7 +99,8 @@ Class Report_model extends CI_Model
            
            $sn++;
         }
-        $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
+        if(!empty($temp))
+            $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         return $temp;
     }
     function retrieveSpStudentReport($group_id)
@@ -149,7 +151,8 @@ Class Report_model extends CI_Model
             
             $sn++;
         }
-        $temp[]=array('student_name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
+        if(!empty($temp))
+            $temp[]=array('student_name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         
         return $temp;
         
