@@ -157,5 +157,40 @@ Class Report_model extends CI_Model
         return $temp;
         
     }
+    
+    /** function that returns data for rendering transaction report depening on 
+     * user selected and duration to cover
+     * @param int $user_id
+     * @param int $duration i.e. 1=>Today,2=>Week,3=>Month
+     */
+    function retrieveTransactionReport($user_id,$duration)
+    {
+        $this->db->select('users.username,tbl_bill_payment.bill_no,t.name as section_name,tbl_bill_payment.paid_amount as received');
+        $this->db->from('tbl_bill_payment');
+        $this->db->join('users','users.id=tbl_bill_payment.user_id','inner');
+        $this->db->join('(SELECT `tbl_students`.`id`, `tbl_section`.`name` FROM (`tbl_students`) LEFT JOIN `tbl_section` ON `tbl_section`.`id`=`tbl_students`.`section_id`) as t','t.id=tbl_bill_payment.student_id','left');
+        $this->db->where('users.id',$user_id);
+        $this->db->order_by('users.id');
+        $query=$this->db->get();
+        $temp=$query->result_array();     
+                
+        
+        $t_received=0;
+        $sn=1;
+        foreach($temp as $key=>$value)
+        {
+           //initialize sn
+            $temp[$key]['sn']=$sn;
+            
+           if(!$temp[$key]['received']) $temp[$key]['received']=0; 
+           else $t_received+=$temp[$key]['received'];
+           
+           
+           $sn++;
+        }
+        if(!empty($temp))
+            $temp[]=array('section_name'=>'Total','received'=>$t_received);
+        return $temp;
+    }
 }
 ?>

@@ -63,5 +63,18 @@ Class User_model extends CI_Model
      $result=$query->result();
      return $result;
  }
+ 
+ /** function that retrieves all users in the system
+  * 
+  * @return array() $result
+  */
+ function retrieveAccountants()
+ {
+     $this->db->select('id,username');
+     $this->db->where('role',2);
+     $query = $this -> db -> get('users');
+     $result=$query->result();
+     return $result;
+ }
 }
 ?>

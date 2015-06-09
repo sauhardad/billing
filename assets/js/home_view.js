@@ -290,9 +290,12 @@ function reportModalAction(source)
         $('#select_section_tr').removeClass('show').addClass('hide');
         $('#select_subsection_tr').removeClass('show').addClass('hide');
         $('#select_group_tr').removeClass('show').addClass('hide');
+        $('#select_user_tr').removeClass('show').addClass('hide');
         $('#select_group').val("all");
         $('#search_group_tr').removeClass('show').addClass('hide');
         $(".token-input-list-facebook").remove();
+        $('#select_user_tr').removeClass('show').addClass('hide');
+        $('#select_duration_tr').removeClass('show').addClass('hide');
         if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact")
         {
             $.ajax({
@@ -311,6 +314,25 @@ function reportModalAction(source)
                 }       
               });
             
+        }
+        else if($(source).val()==="transaction")
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'report/getUsers',
+                dataType: 'json',
+                success:function(data) { 
+                    $('#select_user').empty().append($("<option></option>").attr("value","0").text("All")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_user')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.username));     
+                   });
+                   $('#select_user_tr').removeClass('hide').addClass('show');
+                   $('#select_duration_tr').removeClass('hide').addClass('show');
+                }       
+              });
         }
     }
     else if($(source).attr('id')==="select_section")
@@ -359,7 +381,7 @@ function reportModalAction(source)
             $("#search_group").tokenInput(base_url+'group/search?subsection_id='+$('#select_subsection').val(),{tokenLimit: 1,theme: "facebook"});
             $('#search_group_tr').removeClass('hide').addClass('show');
         }
-        else if(('#generate_report_type').val()==='group-summary')
+        else if($('#generate_report_type').val()==='group-summary')
         {
             $('#select_group_tr').removeClass('hide').addClass('show');
         }
@@ -381,9 +403,9 @@ function reportModalAction(source)
         if($('#generate_report_type').val()==='group-summary' || $('#generate_report_type').val()==='group-checking' || $('#generate_report_type').val()==='group-contact')
         {
             var type=$('#generate_report_type').val();
-            var all_flag;
+            var filter1;
             var tokenInput;
-            var id;
+            var filter2;
             if($('#select_section').val()==='0')
             {
                 alert("Please choose a Section");
@@ -399,18 +421,18 @@ function reportModalAction(source)
             {
                 if($('#select_group').val()==='all')
                 {
-                    all_flag=true;
-                    id=$('#select_subsection').val();
-                    generateReport(type,all_flag,id);
+                    filter1=true;
+                    filter2=$('#select_subsection').val();
+                    generateReport(type,filter1,filter2);
                 }
                 else if($('#select_group').val()==='specific')
                 {
-                    all_flag=false;
+                    filter1=false;
                     if($('#search_group').tokenInput("get").length)
                     {
                         tokenInput=$('#search_group').tokenInput("get")[0];
-                        id=tokenInput.id;
-                        generateReport(type,all_flag,id);
+                        filter2=tokenInput.id;
+                        generateReport(type,filter1,filter2);
                     }
                     else
                     {
@@ -423,8 +445,8 @@ function reportModalAction(source)
                 if($('#search_group').tokenInput("get").length)
                 {
                     tokenInput=$('#search_group').tokenInput("get")[0];
-                    id=tokenInput.id;
-                    generateReport($('#generate_report_type').val(),false,id);
+                    filter2=tokenInput.id;
+                    generateReport($('#generate_report_type').val(),false,filter2);
                 }
                 else
                 {
@@ -435,6 +457,10 @@ function reportModalAction(source)
         else if($('#generate_report_type').val()==="income")
         {
             generateReport('income','true',0);
+        }
+        else if($('#generate_report_type').val()==="transaction")
+        {
+            generateReport('transaction',$('#select_duration').val(),$('#select_user').val())
         }
         else 
         {
@@ -447,7 +473,7 @@ function reportModalAction(source)
 /** function that generates a given type of report 
  * 
  */
-function generateReport(type,all_flag,id)
+function generateReport(type,filter1,filter2)
 {
-    window.location.replace(base_url+"report?type="+type+"&all_flag="+all_flag+"&id="+id);
+    window.location.replace(base_url+"report?type="+type+"&filter1="+filter1+"&filter2="+filter2);
 }

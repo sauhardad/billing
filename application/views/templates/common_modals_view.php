@@ -48,6 +48,22 @@
                             <input type="text" id="search_group" class="form-control"/>
                         </td>
                     </tr>
+                    <tr class="hide" id="select_user_tr">
+                        <td>
+                            <label for="select_user">Select User</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_user',array("0"=>"ALL"), "0",'class="form-control" id="select_user"'); ?>
+                        </td>
+                    </tr>
+                    <tr class="hide" id="select_duration_tr">
+                        <td>
+                            <label for="select_duration">Select Duration</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_duration',array("1"=>"Today","2"=>"Week","3"=>"Month"), "1",'class="form-control" id="select_duration"'); ?>
+                        </td>
+                    </tr>
                 </table>    
 
                 <input class="btn btn-primary" type="button" id="generate_report" value="Generate" onclick="return reportModalAction(this);">
