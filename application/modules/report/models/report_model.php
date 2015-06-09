@@ -169,7 +169,8 @@ Class Report_model extends CI_Model
         $this->db->from('tbl_bill_payment');
         $this->db->join('users','users.id=tbl_bill_payment.user_id','inner');
         $this->db->join('(SELECT `tbl_students`.`id`, `tbl_section`.`name` FROM (`tbl_students`) LEFT JOIN `tbl_section` ON `tbl_section`.`id`=`tbl_students`.`section_id`) as t','t.id=tbl_bill_payment.student_id','left');
-        $this->db->where('users.id',$user_id);
+        if($user_id)
+            $this->db->where('users.id',$user_id);
         $this->db->order_by('users.id');
         $query=$this->db->get();
         $temp=$query->result_array();     

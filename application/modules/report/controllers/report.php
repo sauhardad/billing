@@ -82,7 +82,7 @@ class Report extends CI_Controller {
             $this->cezpdf->ezStream();
         }
         //transaction report
-        if(($type='transaction') && ($filter2))
+        if(($type='transaction') && ($filter1))
         {
             $this->load->library('cezpdf',array('a4','portrait')); 
             $db_data=$this->report_model->retrieveTransactionReport($filter2,$filter1);
