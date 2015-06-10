@@ -157,5 +157,21 @@ Class Student_model extends CI_Model
         
         return ($total-$total_paid);
     }
+    
+    /** function that retrieves the bill_no that is to be used with the next payment
+     * @return int bill_no
+     */
+    function  getBillNo()
+    {
+        $this->db->select('(AUTO_INCREMENT) as bill_no');
+        $this->db->where('TABLE_SCHEMA',$this->db->database);
+        $this->db->where('TABLE_NAME','tbl_bill_payment');
+        $query = $this->db->get('INFORMATION_SCHEMA.TABLES');
+        $result=$query->result_array();
+        if(!empty($result))
+            return $result[0]['bill_no'];
+        
+        
+    }
 }
 ?>

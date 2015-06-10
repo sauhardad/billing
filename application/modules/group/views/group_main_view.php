@@ -70,14 +70,6 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_group_teacher">Teacher</label>
-                                </td>
-                                <td colspan="3"  aria-invalid="true">
-                                    <?php echo form_dropdown('add_group_teacher',array("0"=>"Select Teacher") + convert_to_keyvalue($teachers),"0",'class="form-control" id="add_group_teacher"') ?>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <label for="add_group_time_slot">Time Slot</label>
                                 </td>
                                 <td colspan="3">

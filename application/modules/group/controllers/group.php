@@ -21,7 +21,7 @@ class Group extends CI_Controller {
     if ($session_data['role']=$this->config->item('role_admin'))
         $data['users']=$this->user_model->get_users_except($session_data['id']);
     $data['roles']=$this->config->item('role_value');
-    
+   
     $data['groups']=$this->group_model->retrieveGroup();
     $this->template->load('default', 'group/group_main_view',$data);
  }

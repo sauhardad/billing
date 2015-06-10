@@ -80,7 +80,6 @@
                                 <td><?php echo $payment['bill_no']; ?></td>
                                 <td><?php echo $payment['date'];  ?></td>
                                 <td><?php echo $payment['paid_amount']; ?></td>
-                                <td><?php //echo $payment['due_amount']; ?></td>
                             </tr> 
                             <?php $total_paid_sum+=$payment['paid_amount']; ?>
                             <?php $sn++; ?>
@@ -116,7 +115,7 @@
                                     <label for="add_bill_no">Bill Number</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_bill_no" class="form-control input-sm" readonly>
+                                    <input type="text" name="add_bill_no" class="form-control input-sm" value="<?php if(isset($bill_no)){ echo $bill_no;}?>" readonly>
                                 </td>
                             </tr>
                             <tr>

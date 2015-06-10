@@ -24,17 +24,6 @@ $(function () {
         $('#generate_report_type').focus();
     });
     
-    //get the next bill number when payment modal is opened
-    $('#add_payment_modal').on('shown.bs.modal', function () {
-        $.ajax({
-                type: "POST",
-                url: base_url+'student/getBillNo',
-                success:function(data) {
-                   
-                }       
-            }); 
-    });
-    
     //calculate due amount on add
     $( "#add_paid_amount" ).keyup(function() {
         if($(this).val() && $.isNumeric( $(this).val()))
