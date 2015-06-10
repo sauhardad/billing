@@ -59,7 +59,6 @@ class Report extends CI_Controller {
                 'paid'=>'Paid (Rs)',
                 'due'=>'Due (Rs)'
                
-                
             );
             
             $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>550));
@@ -79,6 +78,44 @@ class Report extends CI_Controller {
             );
 
             $this->cezpdf->ezTable($db_data, $col_names, 'Sections Summary', array('width'=>550));
+            $this->cezpdf->ezStream();
+        }
+        //checking ledger summary
+        
+        else if(($type==='group-checking') && ($filter2))
+        {
+            $this->load->library('cezpdf',array('a4','landscape'));
+            $db_data=$this->report_model->retrieveAllCheckLedgerReport($filter2);
+            $col_names = array(
+                'student_name' => 'Name',
+                'contact_no' => 'Contact',
+                'subject_1'=> 'Subject 1',
+                'subject_2'=> 'Subject 2',
+                'subject_3'=> 'Subject 3',
+                'subject_4'=> 'Subject 4'
+                
+            );
+            
+            $this->cezpdf->ezTable($db_data, $col_names, 'Checking Ledger Report', array('width'=>550));
+            $this->cezpdf->ezStream();
+        }
+        
+        //contact ledger summary
+         else if(($type==='group-contact') && ($filter2))
+        {
+            $this->load->library('cezpdf',array('a4','landscape'));
+            $db_data=$this->report_model->retrieveAllContactLedgerReport($filter2);
+            $col_names = array(
+                'student_name' => 'Name',
+                'contact_no' => 'Contact',
+                'subject_1'=> 'Subject 1',
+                'subject_2'=> 'Subject 2',
+                'subject_3'=> 'Subject 3',
+                'subject_4'=> 'Subject 4'
+                
+            );
+            
+            $this->cezpdf->ezTable($db_data, $col_names, 'Checking Contact Report', array('width'=>550));
             $this->cezpdf->ezStream();
         }
         //transaction report
@@ -137,7 +174,6 @@ class Report extends CI_Controller {
  {
      echo json_encode($this->user_model->retrieveAccountants());
  }
- 
  
 }
 
