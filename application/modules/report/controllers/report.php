@@ -153,9 +153,10 @@ class Report extends CI_Controller {
             
             
             //determine what the heading for the report should be
-            $header="Transaction Report - ".date("F j, Y");
+            $header="Transaction Report";
             if($filter2)
-                $header.=" of ".$this->user_model->getUserName($filter2);
+                $header.=" ( ".$this->user_model->getUserName($filter2). " ) ";
+            $header.=" - ".date("F j, Y");
             
 
             $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));

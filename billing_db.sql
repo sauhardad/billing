@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 09, 2015 at 10:38 AM
+-- Generation Time: Jun 10, 2015 at 09:40 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,8 +44,9 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('00d0f1034dfa922c6a9f8a7d7b183074', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1433853494, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('190a9242f8b7867cde05d13482c7ade9', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1433855314, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('02e72ebe07d3dc8954b819668c4a75f4', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1433916214, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('27d67bf4ae7aca4f867df020a5d6a46b', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1433918998, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('d8aa3a32e3b710977c5771964407390c', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1433921504, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -76,9 +77,9 @@ INSERT INTO `tbl_bill_payment` (`id`, `student_id`, `bill_no`, `paid_amount`, `d
 (3, 1, '123', '4000', '29/05/2015', 1, '2015-05-29 13:52:17'),
 (4, 1, '12345', '1000', '29/05/2015', 1, '2015-05-29 13:52:36'),
 (5, 2, '111', '3000', '29/05/2015', 1, '2015-05-29 13:54:16'),
-(6, 3, '1234', '3000', '01/06/2015', 3, '2015-06-09 18:31:29'),
+(6, 3, '1234', '4000', '01/06/2015', 3, '2015-06-10 12:35:58'),
 (7, 4, '1234', '11000', '09/06/2015', 3, '2015-06-09 18:31:44'),
-(8, 5, '345', '5000', '09/06/2015', 3, '2015-06-09 18:31:44');
+(8, 5, '345', '5000', '09/06/2015', 3, '2015-06-01 18:31:44');
 
 -- --------------------------------------------------------
 
@@ -372,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-06-09 18:23:16', '2015-06-09 18:23:16'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-06-10 11:52:32', '2015-06-10 11:52:32'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
