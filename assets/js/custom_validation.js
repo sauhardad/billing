@@ -590,7 +590,6 @@ $(function () {
     //validate and submit payment form in student profile
     $("#add_payment_form").validate({
         rules: {
-                add_bill_no: "required",
                 add_paid_amount: {
                         required: true,
                         number: true
@@ -599,7 +598,6 @@ $(function () {
                 
         },
         messages: {
-                add_bill_no: "Please enter Bill Number",
                 add_paid_amount:{
                         required: "Please enter paid amount",
                         number: "Please enter a valid amount"

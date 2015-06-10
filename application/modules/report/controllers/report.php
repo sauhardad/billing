@@ -86,16 +86,37 @@ class Report extends CI_Controller {
         {
             $this->load->library('cezpdf',array('a4','portrait')); 
             $db_data=$this->report_model->retrieveTransactionReport($filter2,$filter1);
-            $col_names = array(
-                'sn'=>'S.N.',
-                'bill_no' => 'Bill No',
-                'username'=>'Received By',
-                'section_name' => 'Section',
-                'received' => 'Received Amount (Rs)',
-                'remarks'=>'Remarks'
-            );
+            //noneed to display name for individual user report
+            if($filter2)
+            {
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'bill_no' => 'Bill No',
+                    'section_name' => 'Section',
+                    'received' => 'Received Amount (Rs)',
+                    'remarks'=>'Remarks'
+                );  
+            }
+            else
+            {
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'bill_no' => 'Bill No',
+                    'username'=>'Received By',
+                    'section_name' => 'Section',
+                    'received' => 'Received Amount (Rs)',
+                    'remarks'=>'Remarks'
+                );  
+            }
+            
+            
+            //determine what the heading for the report should be
+            $header="Transaction Report";
+            if($filter2)
+                $header.=" of ".$this->user_model->getUserName($filter2);
+            
 
-            $this->cezpdf->ezTable($db_data, $col_names, 'Transaction Report', array('width'=>550));
+            $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
             $this->cezpdf->ezStream();
         }
      }

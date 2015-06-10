@@ -171,10 +171,16 @@ Class Report_model extends CI_Model
         $this->db->join('(SELECT `tbl_students`.`id`, `tbl_section`.`name` FROM (`tbl_students`) LEFT JOIN `tbl_section` ON `tbl_section`.`id`=`tbl_students`.`section_id`) as t','t.id=tbl_bill_payment.student_id','left');
         if($user_id)
             $this->db->where('users.id',$user_id);
+        //apply the data filter
+        if($duration==1) //get payments received today
+           $this->db->where('DATE(tbl_bill_payment.entry_timestamp)','CURDATE()',FALSE);
+        elseif($duration==2) //get payments received this week
+            $this->db->where('WEEK(DATE(tbl_bill_payment.entry_timestamp))','WEEK(CURDATE())',FALSE);
+        elseif($duration==3)
+            $this->db->where('MONTH(DATE(tbl_bill_payment.entry_timestamp))','MONTH(CURDATE())',FALSE);
         $this->db->order_by('users.id');
         $query=$this->db->get();
-        $temp=$query->result_array();     
-                
+        $temp=$query->result_array();      
         
         $t_received=0;
         $sn=1;

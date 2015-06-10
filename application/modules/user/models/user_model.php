@@ -76,5 +76,17 @@ Class User_model extends CI_Model
      $result=$query->result();
      return $result;
  }
+ 
+ /** function that retrieves username when userid is passed
+  * @param int $user_id
+  * @return string $user_name
+  */
+ function getUserName($user_id)
+ {
+     $this->db->where('id',$user_id);
+     $query=$this->db->get('users');
+     $result=$query->result_array();
+     return $result[0]['username'];
+ }
 }
 ?>

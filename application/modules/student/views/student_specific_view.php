@@ -116,7 +116,7 @@
                                     <label for="add_bill_no">Bill Number</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_bill_no" class="form-control input-sm">
+                                    <input type="text" name="add_bill_no" class="form-control input-sm" readonly>
                                 </td>
                             </tr>
                             <tr>
