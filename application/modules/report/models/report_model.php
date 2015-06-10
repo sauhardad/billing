@@ -103,7 +103,7 @@ Class Report_model extends CI_Model
             $temp[]=array('name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         return $temp;
     }
-    function retrieveSpStudentReport($group_id)
+    function retrieveSpGroupReport($group_id)
     {
         $temp=array();
         
@@ -128,13 +128,12 @@ Class Report_model extends CI_Model
             $this->db->where('student_id',$id);
             $query=$this->db->get();
             $result=$query->result_array();  
-            
-            $count=1;
-            foreach($result as $key2=>$value2)
+            for($i=0;$i<4;$i++)
             {
-                $temp[$key]['subject_'.$count]=$value2['subject'];    
-                $count++;
-                
+                if(array_key_exists($i, $result))
+                    $temp[$key]['subject_'.($i+1)]=$result[$i]['subject'];
+                else
+                    $temp[$key]['subject_'.($i+1)]=" ";
             }
             
             $temp[$key]['sn']=$sn;
@@ -152,25 +151,26 @@ Class Report_model extends CI_Model
             $sn++;
         }
         if(!empty($temp))
-            $temp[]=array('student_name'=>'Total','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
+            $temp[]=array('student_name'=>'Total','contact_no'=>' ','subject_1'=>' ','subject_2'=>' ','subject_3'=>' ','subject_4'=>' ','amount'=>$t_amount,'paid'=>$t_paid,'due'=>$t_due);
         
         return $temp;
         
     }
     
-    function retrieveAllCheckLedgerReport($group_id)
+    function retrieveCheckingLedger($group_id)
     {
         $temp=array();
                 
-        $this->db->select('tbl_students.id,tbl_students.contact_no,tbl_students.student_name,tbl_student_course.subject,COUNT(tbl_student_course.subject) as subject_count');
+        $this->db->select('tbl_students.id,tbl_students.contact_no,tbl_students.student_name,tbl_student_course.subject,COUNT(tbl_student_course.subject) as subject_count,t.paid,if((SUM(tbl_student_course.amount)-t.paid),"Due","Full") as remark',FALSE);
         $this->db->from('tbl_students');
         $this->db->where('tbl_students.group_id',$group_id);
         $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
-       $this->db->group_by('tbl_students.id');
+        $this->db->join('(SELECT `tbl_students`.`id`, SUM(tbl_bill_payment.paid_amount) as paid FROM (`tbl_students`) LEFT JOIN `tbl_bill_payment` ON `tbl_bill_payment`.`student_id`=`tbl_students`.`id` WHERE `tbl_students`.`group_id` = '.$group_id.' GROUP BY `tbl_students`.`id`) as t','t.id=tbl_students.id','left');
+        $this->db->group_by('tbl_students.id');
         $query=$this->db->get();
-        $temp=$query->result_array();
+        $temp=$query->result_array();  
         
-         $sn=1;
+        $sn=1;
         foreach($temp as $key=>$value)
         {
             $id=$value['id'];
@@ -180,16 +180,16 @@ Class Report_model extends CI_Model
             $query=$this->db->get();
             $result=$query->result_array();  
             
-            $count=1;
-            foreach($result as $key2=>$value2)
+            for($i=0;$i<4;$i++)
             {
-                $temp[$key]['subject_'.$count]=$value2['subject'];    
-                $count++;
-                
+                if(array_key_exists($i, $result))
+                    $temp[$key]['subject_'.($i+1)]=$result[$i]['subject'];
+                else
+                    $temp[$key]['subject_'.($i+1)]=" ";
             }
             
             $temp[$key]['sn']=$sn;
-             $sn++;
+            $sn++;
         }
         return $temp;
     }
@@ -198,7 +198,7 @@ Class Report_model extends CI_Model
     {
         $temp=array();
                 
-        $this->db->select('tbl_students.id,tbl_students.contact_no,tbl_students.student_name,tbl_student_course.subject,COUNT(tbl_student_course.subject) as subject_count');
+        $this->db->select('tbl_students.id,tbl_students.contact_no,tbl_students.student_name,COUNT(tbl_student_course.subject) as subject_count');
         $this->db->from('tbl_students');
         $this->db->where('tbl_students.group_id',$group_id);
         $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
@@ -215,17 +215,19 @@ Class Report_model extends CI_Model
             $this->db->where('student_id',$id);
             $query=$this->db->get();
             $result=$query->result_array();  
-            
-            $count=1;
-            foreach($result as $key2=>$value2)
+           
+            for($i=0;$i<4;$i++)
             {
-                $temp[$key]['subject_'.$count]=$value2['subject'];    
-                $count++;
-                
+                if(array_key_exists($i, $result))
+                    $temp[$key]['subject_'.($i+1)]=$result[$i]['subject'];
+                else
+                    $temp[$key]['subject_'.($i+1)]=" ";
             }
             
+           
+            
             $temp[$key]['sn']=$sn;
-             $sn++;
+            $sn++;
         }
         return $temp;
     }
@@ -269,7 +271,7 @@ Class Report_model extends CI_Model
            $sn++;
         }
         if(!empty($temp))
-            $temp[]=array('section_name'=>'Total','received'=>$t_received);
+            $temp[]=array('section_name'=>'Total','bill_no'=>' ','received'=>$t_received);
         return $temp;
     }
 }

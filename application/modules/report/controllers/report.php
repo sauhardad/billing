@@ -46,7 +46,7 @@ class Report extends CI_Controller {
         else if(($type==='group-summary') && ($filter1==='false') && ($filter2))
         {
             $this->load->library('cezpdf',array('a4','landscape'));
-            $db_data=$this->report_model->retrieveSpStudentReport($filter2);
+            $db_data=$this->report_model->retrieveSpGroupReport($filter2);
             $col_names = array(
                 'sn'=>'S.N.',
                 'student_name' => 'Name',
@@ -61,7 +61,7 @@ class Report extends CI_Controller {
                
             );
             
-            $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>550));
+            $this->cezpdf->ezTable($db_data, $col_names, 'Group Report', array('width'=>750));
             $this->cezpdf->ezStream();
         }
         //income summary for all sections
@@ -85,18 +85,20 @@ class Report extends CI_Controller {
         else if(($type==='group-checking') && ($filter2))
         {
             $this->load->library('cezpdf',array('a4','landscape'));
-            $db_data=$this->report_model->retrieveAllCheckLedgerReport($filter2);
+            $db_data=$this->report_model->retrieveCheckingLedger($filter2);
             $col_names = array(
+                'sn'=>'S.N.',
                 'student_name' => 'Name',
                 'contact_no' => 'Contact',
                 'subject_1'=> 'Subject 1',
                 'subject_2'=> 'Subject 2',
                 'subject_3'=> 'Subject 3',
-                'subject_4'=> 'Subject 4'
+                'subject_4'=> 'Subject 4',
+                'remark'=>'Remark'
                 
             );
             
-            $this->cezpdf->ezTable($db_data, $col_names, 'Checking Ledger Report', array('width'=>550));
+            $this->cezpdf->ezTable($db_data, $col_names, 'Checking Ledger', array('width'=>550));
             $this->cezpdf->ezStream();
         }
         
@@ -106,20 +108,21 @@ class Report extends CI_Controller {
             $this->load->library('cezpdf',array('a4','landscape'));
             $db_data=$this->report_model->retrieveAllContactLedgerReport($filter2);
             $col_names = array(
+                'sn'=>'S.N.',
                 'student_name' => 'Name',
-                'contact_no' => 'Contact',
+                'contact_no' => 'Contact No',
                 'subject_1'=> 'Subject 1',
                 'subject_2'=> 'Subject 2',
                 'subject_3'=> 'Subject 3',
-                'subject_4'=> 'Subject 4'
-                
+                'subject_4'=> 'Subject 4',
+                'remarks'=>'Remarks'
             );
             
-            $this->cezpdf->ezTable($db_data, $col_names, 'Checking Contact Report', array('width'=>550));
+            $this->cezpdf->ezTable($db_data, $col_names, 'Contact Ledger', array('width'=>550));
             $this->cezpdf->ezStream();
         }
         //transaction report
-        if(($type='transaction') && ($filter1))
+        else if(($type==='transaction') && ($filter1))
         {
             $this->load->library('cezpdf',array('a4','portrait')); 
             $db_data=$this->report_model->retrieveTransactionReport($filter2,$filter1);
