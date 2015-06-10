@@ -158,6 +158,79 @@ Class Report_model extends CI_Model
         
     }
     
+    function retrieveAllCheckLedgerReport($group_id)
+    {
+        $temp=array();
+                
+        $this->db->select('tbl_students.id,tbl_students.contact_no,tbl_students.student_name,tbl_student_course.subject,COUNT(tbl_student_course.subject) as subject_count');
+        $this->db->from('tbl_students');
+        $this->db->where('tbl_students.group_id',$group_id);
+        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
+       $this->db->group_by('tbl_students.id');
+        $query=$this->db->get();
+        $temp=$query->result_array();
+        
+         $sn=1;
+        foreach($temp as $key=>$value)
+        {
+            $id=$value['id'];
+            $this->db->select('subject');
+            $this->db->from('tbl_student_course');
+            $this->db->where('student_id',$id);
+            $query=$this->db->get();
+            $result=$query->result_array();  
+            
+            $count=1;
+            foreach($result as $key2=>$value2)
+            {
+                $temp[$key]['subject_'.$count]=$value2['subject'];    
+                $count++;
+                
+            }
+            
+            $temp[$key]['sn']=$sn;
+             $sn++;
+        }
+        return $temp;
+    }
+    
+    function retrieveAllContactLedgerReport($group_id)
+    {
+        $temp=array();
+                
+        $this->db->select('tbl_students.id,tbl_students.contact_no,tbl_students.student_name,tbl_student_course.subject,COUNT(tbl_student_course.subject) as subject_count');
+        $this->db->from('tbl_students');
+        $this->db->where('tbl_students.group_id',$group_id);
+        $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
+        $this->db->group_by('tbl_students.id');
+        $query=$this->db->get();
+        $temp=$query->result_array();
+        
+         $sn=1;
+        foreach($temp as $key=>$value)
+        {
+            $id=$value['id'];
+            $this->db->select('subject');
+            $this->db->from('tbl_student_course');
+            $this->db->where('student_id',$id);
+            $query=$this->db->get();
+            $result=$query->result_array();  
+            
+            $count=1;
+            foreach($result as $key2=>$value2)
+            {
+                $temp[$key]['subject_'.$count]=$value2['subject'];    
+                $count++;
+                
+            }
+            
+            $temp[$key]['sn']=$sn;
+             $sn++;
+        }
+        return $temp;
+    }
+    
+    
     /** function that returns data for rendering transaction report depening on 
      * user selected and duration to cover
      * @param int $user_id
