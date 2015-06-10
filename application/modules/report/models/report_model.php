@@ -194,7 +194,7 @@ Class Report_model extends CI_Model
         return $temp;
     }
     
-    function retrieveAllContactLedgerReport($group_id)
+    function retrieveContactLedger($group_id)
     {
         $temp=array();
                 
@@ -240,19 +240,31 @@ Class Report_model extends CI_Model
      */
     function retrieveTransactionReport($user_id,$duration)
     {
-        $this->db->select('users.username,tbl_bill_payment.bill_no,t.name as section_name,tbl_bill_payment.paid_amount as received');
+        //variable to display the type of total
+        $total_type=" ";
+        
+        $this->db->select('users.username,tbl_bill_payment.bill_no,t.name as section_name,DATE(tbl_bill_payment.entry_timestamp) as received_on,tbl_bill_payment.paid_amount as received');
         $this->db->from('tbl_bill_payment');
         $this->db->join('users','users.id=tbl_bill_payment.user_id','inner');
         $this->db->join('(SELECT `tbl_students`.`id`, `tbl_section`.`name` FROM (`tbl_students`) LEFT JOIN `tbl_section` ON `tbl_section`.`id`=`tbl_students`.`section_id`) as t','t.id=tbl_bill_payment.student_id','left');
         if($user_id)
             $this->db->where('users.id',$user_id);
-        //apply the data filter
+        //apply the date filter
         if($duration==1) //get payments received today
+        {
            $this->db->where('DATE(tbl_bill_payment.entry_timestamp)','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
         elseif($duration==2) //get payments received this week
+        {
             $this->db->where('WEEK(DATE(tbl_bill_payment.entry_timestamp))','WEEK(CURDATE())',FALSE);
+            $total_type="Total(This Week)";
+        }
         elseif($duration==3)
+        {
             $this->db->where('MONTH(DATE(tbl_bill_payment.entry_timestamp))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }    
         $this->db->order_by('users.id');
         $query=$this->db->get();
         $temp=$query->result_array();      
@@ -271,7 +283,7 @@ Class Report_model extends CI_Model
            $sn++;
         }
         if(!empty($temp))
-            $temp[]=array('section_name'=>'Total','bill_no'=>' ','received'=>$t_received);
+            $temp[]=array('section_name'=>' ','username'=>' ','bill_no'=>' ','received_on'=>$total_type,'received'=>$t_received,'remarks'=>' ');
         return $temp;
     }
 }

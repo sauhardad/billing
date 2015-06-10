@@ -106,7 +106,7 @@ class Report extends CI_Controller {
          else if(($type==='group-contact') && ($filter2))
         {
             $this->load->library('cezpdf',array('a4','landscape'));
-            $db_data=$this->report_model->retrieveAllContactLedgerReport($filter2);
+            $db_data=$this->report_model->retrieveContactLedger($filter2);
             $col_names = array(
                 'sn'=>'S.N.',
                 'student_name' => 'Name',
@@ -133,6 +133,7 @@ class Report extends CI_Controller {
                     'sn'=>'S.N.',
                     'bill_no' => 'Bill No',
                     'section_name' => 'Section',
+                    'received_on'=>"Received On",
                     'received' => 'Received Amount (Rs)',
                     'remarks'=>'Remarks'
                 );  
@@ -144,6 +145,7 @@ class Report extends CI_Controller {
                     'bill_no' => 'Bill No',
                     'username'=>'Received By',
                     'section_name' => 'Section',
+                    'received_on'=>"Received On",
                     'received' => 'Received Amount (Rs)',
                     'remarks'=>'Remarks'
                 );  
@@ -151,7 +153,7 @@ class Report extends CI_Controller {
             
             
             //determine what the heading for the report should be
-            $header="Transaction Report";
+            $header="Transaction Report - ".date("F j, Y");
             if($filter2)
                 $header.=" of ".$this->user_model->getUserName($filter2);
             
