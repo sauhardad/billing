@@ -26,11 +26,26 @@ class Student extends CI_Controller {
         $data['users']=$this->user_model->get_users_except($session_data['id']);
     $data['roles']=$this->config->item('role_value');
     
-    $data['students']=$this->student_model->retrieveStudent();
     $data['sections']=$this->section_model->retrieveSection();
     $data['subsections']=$this->subsection_model->retrieveSubsection();
     $data['groups']=$this->group_model->retrieveGroup();
     $data['teachers']=$this->teacher_model->retrieveTeacher();
+    
+    
+    //now the pagnation configuration
+    $config = array();
+    $config["base_url"] = base_url() . "student/page";
+    $config["total_rows"] =  $data['students']=$this->student_model->retrieveStudentNumber();
+    $config["per_page"] = 100;
+    $config["uri_segment"] = 3;
+    $this->pagination->initialize($config);
+    $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0 ;
+    $data['students']=$this->student_model->retrieveStudent(NULL,$config["per_page"],$page);
+    $data['links'] = $this->pagination->create_links();
+    $data['sn']=1;
+    
+    
+    
     $this->template->load('default', 'student/student_main_view',$data);
  }
  
@@ -107,7 +122,7 @@ class Student extends CI_Controller {
             $data['users']=$this->user_model->get_users_except($session_data['id']);
         $data['roles']=$this->config->item('role_value');
         $data['id']=$id;
-        $data['students']=$this->student_model->retrieveStudent($id)[0];
+        $data['students']=$this->student_model->retrieveStudent($id);
         $data['payments']=$this->student_model->retrievePayment(NULL,$id);
         $data['bill_no']=$this->student_model->getBillNo();
         $data['teachers']=$this->teacher_model->retrieveTeacher();
@@ -183,6 +198,12 @@ class Student extends CI_Controller {
          echo $total;
      }
  }
+ 
+function _remap($method, $params=array())
+ {
+    $methodToCall = method_exists($this, $method) ? $method : 'index';
+    return call_user_func_array(array($this, $methodToCall), $params);
 }
+ }
 
 ?>

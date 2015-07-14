@@ -25,7 +25,6 @@
                     </thead>
                     <tbody>
                         <?php if(isset($students)){ ?>
-                        <?php $sn=1; ?>
                         <?php $section_map=convert_to_keyvalue($sections); ?>
                         <?php $subsection_map=convert_to_keyvalue($subsections); ?>
                         <?php $group_map=convert_to_keyvalue($groups); ?>
@@ -51,8 +50,10 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                <p><?php echo $links; ?></p>
             </div>
         </div>
+        
         
         <!-- modal for adding Student -->
         <div class="modal fade" tabindex="-1" role="dialog" id="add_student_modal">

@@ -43,14 +43,32 @@ Class Student_model extends CI_Model
      * @param type $student_id
      * @return type
      */
-    function retrieveStudent($student_id=NULL)
+    function retrieveStudent($student_id=NULL,$limit=NULL,$start=NULL)
     {
         if(!is_null($student_id))
             $this->db->where('id', $student_id);
+        else
+            $this->db->limit($limit, $start);
         $this->db->where('active', 1);
+        
         $query = $this->db->get('tbl_students');
         $result=$query->result_array();
+        if(!is_null($student_id))
+            return $result[0];
         return $result;
+    }
+    
+    /** function that retrieves specific students if the student_id is provided
+     * from the student table else all the students
+     * 
+     * @param type $student_id
+     * @return int no of students
+     */
+    function retrieveStudentNumber()
+    {
+        $this->db->where('active', 1);
+        $query = $this->db->get('tbl_students');
+        return  $query->num_rows();
     }
     
       /** function that retrieves specific payments if the payment_id is provided
