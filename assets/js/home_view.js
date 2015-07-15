@@ -487,13 +487,12 @@ function printReceipt(data)
     mywindow.document.write('</body></html>');
 
     mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10
 
     mywindow.print();
     
-    
     var afterPrint = function() {
         mywindow.close();
+        mywindow.focus(); // necessary for IE >= 10
     };
 
     if (window.matchMedia) {

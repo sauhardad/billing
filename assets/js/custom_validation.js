@@ -617,7 +617,7 @@ $(function () {
                         dataType : 'html',
                         data: {
                             student_id : data.student_id,
-                            bill_no:data.bill_no
+                            payment_id: data.payment_id
                         },
                         success : function(receiptHtml){
                             printReceipt(receiptHtml);

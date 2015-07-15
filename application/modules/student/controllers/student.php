@@ -13,6 +13,7 @@ class Student extends CI_Controller {
    $this->load->model('subsection/subsection_model');
    $this->load->model('section/section_model');
    $this->load->model('group/group_model');
+   $this->load->model('user/user_model');
    $this->load->model('teacher/teacher_model');
    $this->load->helper(array('form'));
  }
@@ -144,9 +145,16 @@ class Student extends CI_Controller {
  
  function get_receipt()
  {
-    if(($data['student_id']=$this->input->post('student_id')) && ($data['bill_no']=$this->input->post('bill_no')))
+    if(($student_id=$this->input->post('student_id')) && ($payment_id=$this->input->post('payment_id')))
     {
-        echo $this->load->view('receipt');
+        $session_data = $this->session->userdata('logged_in');
+        $data['student']=$this->student_model->retrieveStudent($student_id);
+        $data['payments']=$this->student_model->retrievePayment(NULL,$student_id);
+        $data['current_pay']=$this->student_model->retrievePayment($payment_id)[0];
+        $data['courses']=$this->student_model->retrieveCourse(NULL,$student_id);
+        $data['username']=$this->user_model->getUserName($session_data['id']);
+        //debug_array($data);
+        echo $this->load->view('receipt',$data);
     } 
  }
  
@@ -156,8 +164,8 @@ class Student extends CI_Controller {
     if(($data['student_id']=$this->input->post('student_id')) && ($data['bill_no']=$this->input->post('add_bill_no')) && ($data['paid_amount']=$this->input->post('add_paid_amount')))
     { 
         $data['date']=  date('d/m/Y');
-        if(($this->student_model->insertPayment($data)))
-            echo json_encode(array('status'=>TRUE,'message'=>'Payment Saved','student_id'=>$data['student_id'],'bill_no'=>$data['bill_no']));
+        if(($id=$this->student_model->insertPayment($data)))
+            echo json_encode(array('status'=>TRUE,'message'=>'Payment Saved','student_id'=>$data['student_id'],'payment_id'=>$id));
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
     }

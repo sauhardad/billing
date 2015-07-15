@@ -22,7 +22,8 @@ Class Student_model extends CI_Model
     function insertPayment($data)
     {
         $data['user_id']= $this->session->userdata('logged_in')['id'];
-        return $this->db->insert('tbl_bill_payment', $data);
+        $this->db->insert('tbl_bill_payment', $data);
+        return $this->db->insert_id();
         
     }
     
