@@ -142,6 +142,14 @@ class Student extends CI_Controller {
      }
  }
  
+ function get_receipt()
+ {
+    if(($data['student_id']=$this->input->post('student_id')) && ($data['bill_no']=$this->input->post('bill_no')))
+    {
+        echo $this->load->view('receipt');
+    } 
+ }
+ 
  function add_payment()
  {
     $data=array();
@@ -149,7 +157,7 @@ class Student extends CI_Controller {
     { 
         $data['date']=  date('d/m/Y');
         if(($this->student_model->insertPayment($data)))
-            echo json_encode(array('status'=>TRUE,'message'=>'Payment Saved'));
+            echo json_encode(array('status'=>TRUE,'message'=>'Payment Saved','student_id'=>$data['student_id'],'bill_no'=>$data['bill_no']));
         else
             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
     }

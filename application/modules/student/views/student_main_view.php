@@ -200,3 +200,8 @@
         </div>
 
 </div>
+
+<div id="printarea">
+    ----------------------
+    Valley Institute
+</div>

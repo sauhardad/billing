@@ -474,6 +474,41 @@ function reportModalAction(source)
     }
 }
 
+/** function that prints a receipt
+ * 
+ */
+function printReceipt(data)
+{
+    var mywindow = window.open('', 'printarea', 'height=400,width=600');
+    mywindow.document.write('<html><head><title>Valley Institute</title>');
+    mywindow.document.write('<link rel="stylesheet" href="'+base_url+'/assets/css/print.css" type="text/css" />');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write(data);
+    mywindow.document.write('</body></html>');
+
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10
+
+    mywindow.print();
+    
+    
+    var afterPrint = function() {
+        mywindow.close();
+    };
+
+    if (window.matchMedia) {
+        var mediaQueryList = window.matchMedia('print');
+        mediaQueryList.addListener(function(mql) {
+            if (mql.matches) {
+                beforePrint();
+            } else {
+                afterPrint();
+            }
+        });
+    }
+
+    return true;
+}
 
 /** function that generates a given type of report 
  * 

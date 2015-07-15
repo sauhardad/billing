@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 10, 2015 at 09:40 AM
+-- Generation Time: Jul 14, 2015 at 09:51 AM
 -- Server version: 5.6.14
 -- PHP Version: 5.5.6
 
@@ -44,9 +44,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('02e72ebe07d3dc8954b819668c4a75f4', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1433916214, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('27d67bf4ae7aca4f867df020a5d6a46b', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1433918998, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('d8aa3a32e3b710977c5771964407390c', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1433921504, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('beaa0f4129ef7ee5a4f219d8c4a7e397', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1436860186, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -67,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `tbl_bill_payment` (
   KEY `bill_id` (`bill_no`),
   KEY `bill_id_2` (`bill_no`),
   KEY `student_id` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `tbl_bill_payment`
@@ -79,7 +77,10 @@ INSERT INTO `tbl_bill_payment` (`id`, `student_id`, `bill_no`, `paid_amount`, `d
 (5, 2, '111', '3000', '29/05/2015', 1, '2015-05-29 13:54:16'),
 (6, 3, '1234', '4000', '01/06/2015', 3, '2015-06-10 12:35:58'),
 (7, 4, '1234', '11000', '09/06/2015', 3, '2015-06-09 18:31:44'),
-(8, 5, '345', '5000', '09/06/2015', 3, '2015-06-01 18:31:44');
+(8, 5, '345', '5000', '09/06/2015', 3, '2015-06-01 18:31:44'),
+(9, 4, '9', '20', '10/06/2015', 1, '2015-06-10 13:40:13'),
+(10, 4, '10', '20', '10/06/2015', 1, '2015-06-10 13:40:27'),
+(11, 1, '11', '100', '14/07/2015', 1, '2015-07-14 11:49:47');
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `tbl_group` (
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `subsection_id` (`subsection_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `tbl_group`
@@ -135,10 +136,11 @@ CREATE TABLE IF NOT EXISTS `tbl_group` (
 
 INSERT INTO `tbl_group` (`id`, `subsection_id`, `code`, `name`, `time_slot`, `is_running`, `user_id`, `active`, `entry_timestamp`) VALUES
 (13, 1, '12', 'ABD', '6-7', 1, 1, 1, '2015-06-05 11:34:58'),
-(14, 5, '13', 'Java', '6-7', 1, 1, 1, '2015-06-01 13:01:20'),
+(14, 5, '13', 'Java', '6-7', 0, 1, 1, '2015-06-10 14:01:09'),
 (15, 1, '14', 'CCNA', '3-5', 1, 1, 1, '2015-06-05 11:35:07'),
 (16, 5, '15', 'Java 2', '3-5', 1, 1, 1, '2015-06-03 15:34:56'),
-(17, 1, '23', 'JNCIA', '3-4', 1, 1, 1, '2015-06-05 16:02:52');
+(17, 1, '23', 'JNCIA', '3-4', 1, 1, 1, '2015-06-05 16:02:52'),
+(18, 5, '45', 'GIngerbread 12', '3-6', 1, 1, 1, '2015-06-10 13:53:32');
 
 -- --------------------------------------------------------
 
@@ -373,7 +375,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-06-10 11:52:32', '2015-06-10 11:52:32'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-14 11:48:56', '2015-07-14 11:48:56'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 

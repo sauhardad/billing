@@ -611,9 +611,24 @@ $(function () {
                 dataType:'json',
                 data:{student_id: $('#student_id').val()},
                 success: function(data) {
-                    alert(data.message);
-                    if(data.status==true)
-                        window.location=window.location.href;
+                    $.ajax({
+                        type : 'POST',
+                        url : base_url+'student/get_receipt',
+                        dataType : 'html',
+                        data: {
+                            student_id : data.student_id,
+                            bill_no:data.bill_no
+                        },
+                        success : function(receiptHtml){
+                            printReceipt(receiptHtml);
+                            if(data.status==true)
+                            {
+                                alert("Payment Successfully Saved");
+                                window.location=window.location.href;
+                            }
+                        }
+                    });
+                    
                 }
             });
             return false;
