@@ -13,21 +13,18 @@
         <span><i>Near Kirtipur Gate</i></span><br/>
         <span><i>Phone: 014332509</i></span><br/>
     </div>
-    
+    <br/>
     <span style="margin-top:3%;"><b>Cash Receipt</b></span><br/>
-    <span align="left">Bill No: <?php echo $current_pay['bill_no']; ?></span>
-    <span align="right">Date: <?php echo $current_pay['entry_timestamp']; ?></span>
-    
+    <div style="margin-top:2%;">
+        <span align="left">Bill No: <?php echo $current_pay['bill_no']; ?></span><br/>
+        <span align="right">Date: <?php echo $current_pay['entry_timestamp']; ?></span>
+    </div>
     
     <div style="margin-top:3%;">
         <table border= "1">
             <tr>
                 <td>Name: </td>
                 <td><?php echo $student['student_name']; ?></td>
-            </tr>
-            <tr>
-                <td>Address:</td>
-                <td><?php echo $student['address']; ?></td>
             </tr>
             <tr>
                 <td>Contact Number:</td>
@@ -40,7 +37,7 @@
         <span>Group: <?php echo $group['name']; ?></span>
         
         <div style="margin-top:3%;margin-bottom:3%;">
-            <span>Courses</span>
+            <span><b>Courses</b></span>
             <table border="1">
                 <tr>
                     <td>S.N.</td>
@@ -79,5 +76,5 @@
         <br/>
         <span>Received: <?php echo convert_number_to_words($current_pay['paid_amount'])." Rupees"; ?></span>
         <br/><br/>
-        <span>Received By: <?php echo $username; ?></span>
+        <span><b>Received By: <?php echo $username; ?></b></span>
 </div>
