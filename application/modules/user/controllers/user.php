@@ -18,7 +18,7 @@ class User extends CI_Controller {
  function login()
  {
    if($this->session->userdata('logged_in'))
-       redirect('home', 'refresh');
+       redirect('student', 'refresh');
    else
        $this->load->view('login_view');
  }
@@ -36,7 +36,7 @@ class User extends CI_Controller {
    else
    {
      //redirect to the home page
-     redirect('home', 'refresh');
+     redirect('student', 'refresh');
    }
 
  }

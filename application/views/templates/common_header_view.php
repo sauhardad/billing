@@ -57,20 +57,22 @@
 			<span class="menu-icon"></span>
 		</div>
 		<ul class="navbar-menu animate">
-                        <?php if(!($this->router->fetch_class() === 'home' && $this->router->fetch_method() === 'index')){ ?>
+                        <!--<?php if(!($this->router->fetch_class() === 'home' && $this->router->fetch_method() === 'index')){ ?>
                         <li>
 				<a href="<?php echo base_url('home');?>" class="animate">
 					<span class="desc animate"> Home </span>
 					<span class="glyphicon glyphicon-home"></span>
 				</a>
 			</li>
-                        <?php } ?>
+                        <?php } ?>-->
+                        <?php if(!($this->router->fetch_class() === 'student' && $this->router->fetch_method() === 'index')){ ?>
                         <li>
 				<a href="<?php echo base_url('student');?>" class="animate">
 					<span class="desc animate">Students </span>
-					<span class="glyphicon glyphicon-plus"></span>
+					<span class="glyphicon glyphicon-home"></span>
 				</a>
 			</li>
+                        <?php } ?>
                         <li>
 				<a href="#report_modal" data-toggle="modal" class="animate">
 					<span class="desc animate">Report </span>
