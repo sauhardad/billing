@@ -24,6 +24,7 @@ class Section extends CI_Controller {
     $data['roles']=$this->config->item('role_value');
     
     $data['sections']=$this->section_model->retrieveSection();
+    $data['new_section_code']=$this->common_model->getCode('tbl_section');
     $this->template->load('default', 'section/section_main_view',$data);
  }
  
@@ -77,6 +78,7 @@ class Section extends CI_Controller {
         $data['roles']=$this->config->item('role_value');
         
         $data['this_section']=$this->section_model->retrieveSection($id)[0];
+        $data['new_subsection_code']=$this->common_model->getCode('tbl_subsection');
         $data['subsections']=$this->subsection_model->retrieveSubsection(NULL,$id);
          
         $this->template->load('default', 'section/specific_section_view',$data);

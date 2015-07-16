@@ -54,7 +54,7 @@
                                     <label for="add_subsection_code">Subsection Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_subsection_code" id="add_subsection_code" class="form-control input-sm">
+                                    <input type="text" name="add_subsection_code" id="add_subsection_code" class="form-control input-sm" value="<?php echo $new_subsection_code; ?>" readonly>
                                 </td>
                             </tr>
                             <tr>

@@ -53,7 +53,7 @@
                                     <label for="add_section_code">Section Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_section_code" class="form-control input-sm">
+                                    <input type="text" name="add_section_code" class="form-control input-sm" value="<?php echo $new_section_code; ?>" readonly>
                                 </td>
                             </tr>
                             <tr>

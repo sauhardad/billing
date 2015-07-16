@@ -32,7 +32,6 @@ class Student extends CI_Controller {
     $data['groups']=$this->group_model->retrieveGroup();
     $data['teachers']=$this->teacher_model->retrieveTeacher();
     
-    
     //now the pagnation configuration
     $config = array();
     $config["base_url"] = base_url() . "student/page";

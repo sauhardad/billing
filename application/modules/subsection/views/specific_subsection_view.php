@@ -57,7 +57,7 @@
                                     <label for="add_group_code">Group Code</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_group_code" id="add_group_code" class="form-control input-sm">
+                                    <input type="text" name="add_group_code" id="add_group_code" class="form-control input-sm" value="<?php echo $new_group_code; ?>" readonly>
                                 </td>
                             </tr>
                             <tr>

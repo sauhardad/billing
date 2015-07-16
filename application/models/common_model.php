@@ -38,5 +38,26 @@ Class Common_model extends CI_Model
         $result=$query->result_array();
         return $result[0]['teacher_id'];
     }
+    
+    /** function that generates the next code depending on the table
+     * @param string $table
+     * @return string $code
+     */
+    function getCode($table)
+    {
+        $this->db->select('MAX(code) as code');
+        $this->db->from($table);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0)
+        {
+            $code=sprintf("%02d", 1);
+        }
+        else{
+            $code=sprintf("%02d", $query->row('code')+1);
+        }
+        
+        return $code;
+    }
+    
 }
 ?>
