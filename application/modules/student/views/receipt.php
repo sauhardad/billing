@@ -5,7 +5,7 @@
         $total_paid_sum+=$pay['paid_amount'];
 ?>
 
-<div id="printable_div" align="center">
+<div id="printable_div" align="center" style="font-size:6px;">
     <span align="left">Regd No: 520030003</span>
     <span align="right">PAN: 560010010</span><br/>
     <div align="center" style="margin-top:2%;">
