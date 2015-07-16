@@ -152,8 +152,9 @@ class Student extends CI_Controller {
         $data['payments']=$this->student_model->retrievePayment(NULL,$student_id);
         $data['current_pay']=$this->student_model->retrievePayment($payment_id)[0];
         $data['courses']=$this->student_model->retrieveCourse(NULL,$student_id);
+        $data['subsection']=$this->subsection_model->retrieveSubsection($data['student']['subsection_id'])[0];
+        $data['group']=$this->group_model->retrieveGroup($data['student']['group_id'])[0];
         $data['username']=$this->user_model->getUserName($session_data['id']);
-        //debug_array($data);
         echo $this->load->view('receipt',$data);
     } 
  }

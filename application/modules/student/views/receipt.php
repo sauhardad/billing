@@ -8,18 +8,18 @@
 <div id="printable_div" align="center">
     <span align="left">Regd No: 520030003</span>
     <span align="right">PAN: 560010010</span><br/>
-    <div align="center">
+    <div align="center" style="margin-top:2%;">
         <span><b>Kirtipur Valley Institute</b></span><br/>
         <span><i>Near Kirtipur Gate</i></span><br/>
         <span><i>Phone: 014332509</i></span><br/>
     </div>
     
-    <span style="margin-top:2%;"><b>Cash Receipt</b></span><br/>
+    <span style="margin-top:3%;"><b>Cash Receipt</b></span><br/>
     <span align="left">Bill No: <?php echo $current_pay['bill_no']; ?></span>
-    <span align="right">Date: <?php echo date("F j, Y, g:i a"); ?></span>
+    <span align="right">Date: <?php echo $current_pay['entry_timestamp']; ?></span>
     
     
-    <div style="margin-top:1%;">
+    <div style="margin-top:3%;">
         <table border= "1">
             <tr>
                 <td>Name: </td>
@@ -35,6 +35,10 @@
             </tr>
         </table>
         <br/>
+        
+        <span>Sub-section: <?php echo $subsection['name']; ?></span><br/>
+        <span>Group: <?php echo $group['name']; ?></span>
+        
         <div style="margin-top:3%;margin-bottom:3%;">
             <span>Courses</span>
             <table border="1">
@@ -72,5 +76,8 @@
 
             </table>
         </div>
-    <span>Received By: <?php echo $username; ?></span>
+        <br/>
+        <span>Received: <?php echo convert_number_to_words($current_pay['paid_amount'])." Rupees"; ?></span>
+        <br/><br/>
+        <span>Received By: <?php echo $username; ?></span>
 </div>
