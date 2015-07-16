@@ -5,9 +5,9 @@
         $total_paid_sum+=$pay['paid_amount'];
 ?>
 
-<div id="printable_div">
+<div id="printable_div" align="center">
     <span style="">Valley Institute</span><br/>
-    <div style="margin-top:3%;">
+    <div style="margin-top:1%;">
         <table border= "1">
             <tr>
                 <td>Name: </td>

@@ -1,7 +1,3 @@
-#printable_div{
-    margin-left:15%;
-}
-
 @media print{
   body{ background-color:#FFFFFF; background-image:none; color:#000000 }
   #ad{ display:none;}
