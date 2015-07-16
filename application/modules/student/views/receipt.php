@@ -6,7 +6,7 @@
 ?>
 
 <div id="printable_div" align="center">
-    <span align="left">Regd No: 114505</span>
+    <span align="left">Regd No: 114505</span></br>
     <span align="right">PAN: 302580943</span><br/>
 
     <div align="center" style="margin-top:2%;">
@@ -17,7 +17,7 @@
     <br/>
     <span style="margin-top:3%;"><b>Cash Receipt</b></span><br/>
     <div style="margin-top:2%;">
-        <span align="left">Bill No: <?php echo $current_pay['bill_no']; ?></span><br/>
+        <span align="left"><b>Bill No:</b> <?php echo $current_pay['bill_no']; ?></span><br/>
         <span align="right">Date: <?php echo $current_pay['entry_timestamp']; ?></span>
     </div>
     
@@ -28,7 +28,7 @@
                 <td><?php echo $student['student_name']; ?></td>
             </tr>
             <tr>
-                <td>Contact Number:</td>
+                <td>Contact:</td>
                 <td><?php echo $student['contact_no']; ?></td>
             </tr>
         </table>
@@ -58,7 +58,7 @@
                 <?php } ?>
                     <tr>
                         <td></td>
-                        <td>Total Amount</td>
+                        <td>Total</td>
                         <td><?php echo $total; ?></td>
                     </tr>
                     <tr>
