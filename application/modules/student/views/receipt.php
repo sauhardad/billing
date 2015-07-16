@@ -6,7 +6,19 @@
 ?>
 
 <div id="printable_div" align="center">
-    <span style="">Valley Institute</span><br/>
+    <span align="left">Regd No: 520030003</span>
+    <span align="right">PAN: 560010010</span><br/>
+    <div align="center">
+        <span><b>Kirtipur Valley Institute</b></span><br/>
+        <span><i>Near Kirtipur Gate</i></span><br/>
+        <span><i>Phone: 014332509</i></span><br/>
+    </div>
+    
+    <span style="margin-top:2%;"><b>Cash Receipt</b></span><br/>
+    <span align="left">Bill No: <?php echo $current_pay['bill_no']; ?></span>
+    <span align="right">Date: <?php echo date("F j, Y, g:i a"); ?></span>
+    
+    
     <div style="margin-top:1%;">
         <table border= "1">
             <tr>
