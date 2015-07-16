@@ -4,10 +4,9 @@
     foreach($payments as $pay)
         $total_paid_sum+=$pay['paid_amount'];
 ?>
-
 <div id="printable_div" align="center">
-    <span align="left">Regd No: 520030003</span>
-    <span align="right">PAN: 560010010</span><br/>
+    <span align="left">Regd No: 114505</span>
+    <span align="right">PAN: 302580943</span><br/>
     <div align="center" style="margin-top:2%;">
         <span><b>Kirtipur Valley Institute</b></span><br/>
         <span><i>Near Kirtipur Gate</i></span><br/>
@@ -74,7 +73,7 @@
             </table>
         </div>
         <br/>
-        <span>Received: <?php echo convert_number_to_words($current_pay['paid_amount'])." Rupees"; ?></span>
+        <span>Received: <?php echo convert_number_to_words($current_pay['paid_amount'])." Rupees Only"; ?></span>
         <br/><br/>
         <span><b>Received By: <?php echo $username; ?></b></span>
 </div>
