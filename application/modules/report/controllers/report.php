@@ -134,8 +134,7 @@ class Report extends CI_Controller {
                     'bill_no' => 'Bill No',
                     'section_name' => 'Section',
                     'received_on'=>"Received On",
-                    'received' => 'Received Amount (Rs)',
-                    'remarks'=>'Remarks'
+                    'received' => 'Received Amount (Rs)'
                 );  
             }
             else
@@ -146,8 +145,7 @@ class Report extends CI_Controller {
                     'username'=>'Received By',
                     'section_name' => 'Section',
                     'received_on'=>"Received On",
-                    'received' => 'Received Amount (Rs)',
-                    'remarks'=>'Remarks'
+                    'received' => 'Received Amount (Rs)'
                 );  
             }
             
