@@ -5,77 +5,72 @@
         $total_paid_sum+=$pay['paid_amount'];
 ?>
 
-<div id="printable_div" align="center">
-    <span align="left">Regd No: 114505</span></br>
-    <span align="right">PAN: 302580943</span><br/>
+<div id="printable_div" align="center" style="margin-top:-2% ">
+    <span align="left"><font size="1">Regd No: 114505</font></span>
+    <span align="right"><font size="1">PAN: 302580943</font></span><br/>
 
     <div align="center" style="margin-top:2%;">
-        <span><b>Kirtipur Valley Institute</b></span><br/>
-        <span><i>Near Kirtipur Gate</i></span><br/>
-        <span><i>Phone: 014332509</i></span><br/>
+        <span><b><font size="2">Kirtipur Valley Institute</font></b></span><br/>
+        <span><i><font size="2">Near Kirtipur Gate</font></i></span><br/>
+        <span><i><font size="2">Phone: 014332509</font></i></span><br/>
     </div>
-    <br/>
-    <span style="margin-top:3%;"><b>Cash Receipt</b></span><br/>
-    <div style="margin-top:2%;">
-        <span align="left"><b>Bill No:</b> <?php echo $current_pay['bill_no']; ?></span><br/>
-        <span align="right">Date: <?php echo $current_pay['entry_timestamp']; ?></span>
+    <span><b><font size="2">Cash Receipt</font></b></span><br/>
+    <div>
+        <span align="left"><b><font size="2">Bill No:</b> <?php echo $current_pay['bill_no']; ?></font></span><br/>
+        <span align="right"><font size="2">Date: <?php echo $current_pay['entry_timestamp']; ?></font></span>
     </div>
     
-    <div style="margin-top:3%;">
+    <div>
         <table border= "1">
             <tr>
-                <td>Name: </td>
-                <td><?php echo $student['student_name']; ?></td>
+                <td><font size="2">Name: </font></td>
+                <td><font size="2"><?php echo $student['student_name']; ?></font></td>
             </tr>
             <tr>
-                <td>Contact:</td>
-                <td><?php echo $student['contact_no']; ?></td>
+                <td><font size="2">Contact:</font></td>
+                <td><font size="2"><?php echo $student['contact_no']; ?></font></td>
             </tr>
         </table>
-        <br/>
+        <span><font size="2">Sec: <?php echo $subsection['name']; ?></font></span>
+        <span><font size="2">Group: <?php echo $group['name']; ?></font></span>
         
-        <span>Sub-section: <?php echo $subsection['name']; ?></span><br/>
-        <span>Group: <?php echo $group['name']; ?></span>
-        
-        <div style="margin-top:3%;margin-bottom:3%;">
-            <span><b>Courses</b></span>
+        <div style="margin-top:2%;margin-bottom:2%;">
             <table border="1">
                 <tr>
-                    <td>S.N.</td>
-                    <td>Course</td>
-                    <td>Amount</td>
+                    <td><font size="2">S.N.</font></td>
+                    <td><font size="2">Course</font></td>
+                    <td><font size="2">Amount</font></td>
                 </tr>
                 <?php $sn=1; ?>
                 <?php $total=0; ?>
                 <?php foreach ($courses as $course) { ?>
-                    <tr>
-                        <td><?php echo $sn; ?></td>
-                        <td><?php echo $course['subject']; ?></td>
-                        <td><?php echo $course['amount']; ?></td>
+                    <tr><font size="2">
+                    <td><font size="2"><?php echo $sn; ?></font></td>
+                        <td><font size="2"><?php echo $course['subject']; ?></font></td>
+                        <td><font size="2"><?php echo $course['amount']; ?></font></td>
                     </tr>
                     <?php $sn++; ?>
                     <?php $total+=$course['amount']; ?>
                 <?php } ?>
                     <tr>
                         <td></td>
-                        <td>Total</td>
-                        <td><?php echo $total; ?></td>
+                        <td><font size="2">Total</font></td>
+                        <td><font size="2"><?php echo $total; ?></font></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Payment</td>
-                        <td><?php echo $current_pay['paid_amount']; ?></td>
+                        <td><font size="2">Payment</font></td>
+                        <td><font size="2"><?php echo $current_pay['paid_amount']; ?></font></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>Total Due</td>
-                        <td><?php echo ($total-$total_paid_sum); ?></td>
+                        <td><font size="2">Total Due</font></td>
+                        <td><font size="2"><?php echo ($total-$total_paid_sum); ?></font></td>
                     </tr>
 
             </table>
         </div>
-        <br/>
-        <span>Received: <?php echo convert_number_to_words($current_pay['paid_amount'])." Rupees Only"; ?></span>
-        <br/><br/>
-        <span><b>Received By: <?php echo $username; ?></b></span>
+        <span><font size="2">In Words: <?php echo convert_number_to_words($current_pay['paid_amount'])." Rupees Only"; ?></font></span></br>
+        <span><b><font size="2">Received By: <?php echo $username; ?></font></b></span></br>
+        <span><font size="2">Thank You !</font></span>
 </div>
