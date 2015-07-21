@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jul 21, 2015 at 08:47 AM
--- Server version: 5.6.14
--- PHP Version: 5.5.6
+-- Host: 127.0.0.1
+-- Generation Time: Jul 21, 2015 at 12:17 PM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,8 +44,10 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('d44d244115353faf48b832dcffe6496d', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1437389484, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('d7c1dc2420445ba48769063867ad4704', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1437389676, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('1da7335fa282e2534bccb9c01ac4f16a', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437464989, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('68480114d14965b8c38611af87155d75', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437464107, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('d387d93380705ca58efcb26fe49c2146', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437473764, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('f580ae13151f15a3173f095ac0c62a38', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437465348, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -122,15 +124,6 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
-
---
--- Dumping data for table `tbl_expense`
---
-
-INSERT INTO `tbl_expense` (`id`, `date`, `type`, `particulars`, `emp_id`, `document_id`, `month`, `amount`, `remark`, `user_id`, `active`, `entry_timestamp`) VALUES
-(13, '04/20/2015', 0, 'Stationary', 0, 0, 0, '5432', '', 1, 1, '2015-04-24 16:31:52'),
-(14, '04/25/2015', 0, 'Photocopy', 0, 0, 0, '1200', '', 1, 1, '2015-04-24 14:48:31'),
-(15, '04/06/2015', 0, 'Books', 0, 0, 0, '3000', '', 1, 1, '2015-04-24 14:48:42');
 
 -- --------------------------------------------------------
 
@@ -224,6 +217,25 @@ CREATE TABLE IF NOT EXISTS `tbl_level` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_savings`
+--
+
+DROP TABLE IF EXISTS `tbl_savings`;
+CREATE TABLE IF NOT EXISTS `tbl_savings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `institution` varchar(255) NOT NULL,
+  `amount` decimal(10,0) NOT NULL,
+  `remark` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_section`
 --
 
@@ -256,7 +268,7 @@ INSERT INTO `tbl_section` (`id`, `code`, `name`, `user_id`, `active`, `entry_tim
 
 DROP TABLE IF EXISTS `tbl_staff`;
 CREATE TABLE IF NOT EXISTS `tbl_staff` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
   `contact` int(11) NOT NULL,
@@ -266,7 +278,15 @@ CREATE TABLE IF NOT EXISTS `tbl_staff` (
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tbl_staff`
+--
+
+INSERT INTO `tbl_staff` (`id`, `name`, `address`, `contact`, `post`, `salary`, `user_id`, `active`, `entry_timestamp`) VALUES
+(1, 'nirdosh', 'lokanthali', 987612345, 'md', '150000', 1, 1, '2015-07-21 13:44:22'),
+(2, 'sauharda', 'lokanthali bhaktapur', 452452452, 'md', '233456', 1, 1, '2015-07-21 13:44:58');
 
 -- --------------------------------------------------------
 
@@ -417,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-20 15:48:55', '2015-07-20 15:48:55'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-21 13:34:52', '2015-07-21 13:34:52'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
