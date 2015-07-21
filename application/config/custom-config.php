@@ -7,6 +7,8 @@ $config['role_accountant']=2;
 $config['report_types']=array('group-summary'=>'Group(Summary)',
                               'group-checking'=>'Group(Checking)',
                               'group-contact'=>'Group(Contact)',
+                              'group-account'=>'Group(Account Ledger)',
                               'transaction'=>'Transaction',  
-                              'income'=>'Income'
+                              'income'=>'Income',
+                              'expense'=>'Expense'  
                              );

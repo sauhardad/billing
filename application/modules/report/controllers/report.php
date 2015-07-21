@@ -121,6 +121,37 @@ class Report extends CI_Controller {
             $this->cezpdf->ezTable($db_data, $col_names, 'Contact Ledger', array('width'=>550));
             $this->cezpdf->ezStream();
         }
+        
+        //contact ledger summary
+         else if(($type==='group-account') && ($filter2))
+        {
+            $this->load->library('cezpdf',array('a4','landscape'));
+            $db_header=$this->report_model->retrieveAccountLedgerHeader($filter2);
+            $db_data=$this->report_model->retrieveContactLedger($filter2);
+            $col_names = array(
+                'sn'=>'S.N.',
+                'student_name' => 'Name',
+                'contact_no' => 'Contact No',
+                'subject_1'=> 'Subject 1',
+                'subject_2'=> 'Subject 2',
+                'subject_3'=> 'Subject 3',
+                'subject_4'=> 'Subject 4',
+                'remarks'=>'Remarks'
+            );
+            
+            $this->cezpdf->ezText("Account Ledger",12,array('justification'=>'center'));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezText("Subsection : ".$db_header['subsection_name']."                       ".
+                                  "Group : ".$db_header['group_name']."                    "."Time : ".
+                                    $db_header['time_slot'],12,array('justification'=>'left','left'=>'110'));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezText("Teachers :",12,array('justification'=>'left','left'=>'110'));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezTable($db_data, $col_names, '', array('width'=>550));
+            $this->cezpdf->ezStream();
+        }
+        
+        
         //transaction report
         else if(($type==='transaction') && ($filter1))
         {
