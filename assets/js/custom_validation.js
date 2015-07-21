@@ -1,6 +1,6 @@
 $(function () { 
     
-    // validate signup form on keyup and submit
+     //validate and submit add teacher form
     $("#add_teacher_form").validate({
         rules: {
                 add_name: "required",
@@ -40,7 +40,6 @@ $(function () {
     });
     
     //validate and submit edit teacher form
-    // validate signup form on keyup and submit
     $("#edit_teacher_form").validate({
         rules: {
                 edit_name: "required",
@@ -63,6 +62,88 @@ $(function () {
                         required: "Please provide an address"
                 },
                 edit_share_percent:"Please provide a teacher share percentage"
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit add Staff form
+    $("#add_staff_form").validate({
+        rules: {
+                add_staff_name: "required",
+                add_staff_contact_no: {
+                        required: true,
+                        minlength: 6
+                },
+                add_staff_address: {
+                        required: true,
+                },
+                add_staff_post:"required",
+                add_staff_salary:"required"
+        },
+        messages: {
+                add_name: "Please enter name of the Teacher",
+                add_contact_no: {
+                        required: "Please enter contact number",
+                        minlength: "Invalid contact Number"
+                },
+                add_address: {
+                        required: "Please provide an address",
+                },
+                add_staff_post:"Please provide the post of the staff",
+                add_staff_salary:"Please provide the Salary of the staff"
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit edit teacher form
+    $("#edit_staff_form").validate({
+        rules: {
+                edit_staff_name: "required",
+                edit_staff_contact_no: {
+                        required: true,
+                        minlength: 6
+                },
+                edit_staff_address: {
+                        required: true,
+                },
+                edit_staff_post:"required",
+                edit_staff_salary:"required"
+        },
+        messages: {
+                edit_staff_name: "Please enter name of the Teacher",
+                edit_staff_contact_no: {
+                        required: "Please enter contact number",
+                        minlength: "Invalid contact Number"
+                },
+                edit_staff_address: {
+                        required: "Please provide an address"
+                },
+                edit_staff_post:"Please provide the post of the staff",
+                edit_staff_salary:"Please provide the salary of the staff"
         },
         errorClass: "invalid",
         submitHandler: function(form) {

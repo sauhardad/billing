@@ -20,36 +20,36 @@ Class Staff_model extends CI_Model
      * @param type $staff_id
      * @return type
      */
-    function retrieveTeacher($teacher_id=NULL)
+    function retrieveStaff($staff_id=NULL)
     {
-        if(!is_null($teacher_id))
-            $this->db->where('id', $teacher_id);
+        if(!is_null($staff_id))
+            $this->db->where('id', $staff_id);
         $this->db->where('active', 1);
-        $query = $this->db->get('tbl_teacher');
+        $query = $this->db->get('tbl_staff');
         $result=$query->result_array();
         return $result;
     }
     
-    /** function that deletes teacher when teacher_id is passed
+    /** function that deletes staff when staff_id is passed
      * 
-     * @param type $teacher_id
+     * @param type $staff_id
      * @return type
      */
-    function deleteTeacher($teacher_id)
+    function deleteStaff($staff_id)
     {
-        $this->db->where('id', $teacher_id);
-        return $this->db->delete('tbl_teacher');  
+        $this->db->where('id', $staff_id);
+        return $this->db->delete('tbl_staff');  
     }
     
-    /** function that updates teacher row depending on id passed
+    /** function that updates staff row depending on id passed
      * 
      * @param type $id
      * @param type $data
      */
-    function updateTeacher($id,$data)
+    function updateStaff($id,$data)
     {
         $this->db->where('id', $id);
-        return $this->db->update('tbl_teacher', $data); 
+        return $this->db->update('tbl_staff', $data); 
     }
  
 }

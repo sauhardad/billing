@@ -91,12 +91,12 @@
 					<span class="glyphicon glyphicon-th-large"></span>
 				</a>
 			</li>
-                        <!--<li>
-				<a href="<?php echo base_url('income');?>" class="animate">
-					<span class="desc animate">Income </span>
-					<span class="glyphicon glyphicon-euro"></span>
+                        <li>
+				<a href="<?php echo base_url('staff');?>" class="animate">
+					<span class="desc animate">Staff </span>
+					<span class="glyphicon glyphicon-tower"></span>
 				</a>
-			</li>-->
+			</li>
                         <li>
 				<a href="<?php echo base_url('expense');?>" class="animate">
 					<span class="desc animate">Expenses </span>

@@ -2,8 +2,8 @@
             <div style="min-height: 70px;">
               <div class="page-header" id="fix-page-header">
                 <div> 
-                  <h2 style="display:inline-block;">Teachers</h2>
-                  <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_teacher_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+                  <h2 style="display:inline-block;">Staff</h2>
+                  <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_staff_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
                 </div>
               </div>
             </div>
@@ -14,21 +14,23 @@
                         <th>Name</th>
                         <th>Address</th>
                         <th>Contact Number</th>
-                        <th>Share Percentage</th>
+                        <th>Post</th>
+                        <th>Salary</th>
                         <th></th>
                     </thead>
                     <tbody>
-                        <?php if(isset($teachers)){ ?>
+                        <?php if(isset($staffs)){ ?>
                         <?php $sn=1; ?>
-                        <?php foreach($teachers as $teacher){ ?>
+                        <?php foreach($staffs as $staff){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $teacher['name']; ?></td>
-                                <td><?php echo $teacher['address']; ?></td>
-                                <td><?php echo $teacher['contact_no']; ?></td>
-                                <td><?php echo $teacher['share_percent']; ?></td>
+                                <td><?php echo $staff['name']; ?></td>
+                                <td><?php echo $staff['address']; ?></td>
+                                <td><?php echo $staff['contact']; ?></td>
+                                <td><?php echo $staff['post']; ?></td>
+                                <td><?php echo $staff['salary']; ?></td>
                                 <td>
-                                    <button class="btn btn-primary edit_teacher_btn" data-id="<?php echo $teacher['id']; ?>" data-name="<?php echo $teacher['name']; ?>" data-address="<?php echo $teacher['address']; ?>" data-contact="<?php echo $teacher['contact_no']; ?>" data-share_percent="<?php echo $teacher['share_percent']; ?>" data-toggle="modal" data-target="#edit_teacher_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
+                                    <button class="btn btn-primary edit_staff_btn" data-id="<?php echo $staff['id']; ?>" data-name="<?php echo $staff['name']; ?>" data-address="<?php echo $staff['address']; ?>" data-contact="<?php echo $staff['contact']; ?>" data-post="<?php echo $staff['post']; ?>" data-salary="<?php echo $staff['salary']; ?>" data-toggle="modal" data-target="#edit_staff_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $teacher['id']; ?>','teacher/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
                                 </td>
                             </tr> 
@@ -40,47 +42,55 @@
             </div>
         </div>
         
-        <!-- modal for adding teachers -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="add_teacher_modal">
+        <!-- modal for adding staffs -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="add_staff_modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <a class="close" data-dismiss="modal">×</a>
-                        <h3>Add Teacher</h3>
+                        <h3>Add Staff</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('teacher/add',array('id' => 'add_teacher_form')); ?>
+                        <?php echo form_open('staff/add',array('id' => 'add_staff_form')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>
-                                    <label for="add_teacher_name">Teacher Name</label>
+                                    <label for="add_staff_name">Staff Name</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_teacher_name" class="form-control input-sm">
+                                    <input type="text" name="add_staff_name" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_contact_no">Contact Number</label>
+                                    <label for="add_staff_contact_no">Contact Number</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="add_contact_no" class="form-control input-sm nepali-date">
+                                    <input type="text" name="add_staff_contact_no" class="form-control input-sm nepali-date">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_address">Address</label>
+                                    <label for="add_staff_address">Address</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_address" class="form-control input-sm">
+                                    <input type="text" name="add_staff_address" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="add_share_percent">Share Percentage</label>
+                                    <label for="add_staff_post">Post</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_share_percent" class="form-control input-sm">
+                                    <input type="text" name="add_staff_post" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="add_staff_salary">Salary</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_staff_salary" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    
@@ -93,47 +103,55 @@
             </div>    
         </div>
         
-        <!-- modal for editing teachers -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="edit_teacher_modal">
+        <!-- modal for editing staffs -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="edit_staff_modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <a class="close" data-dismiss="modal">×</a>
-                        <h3>Edit Teacher</h3>
+                        <h3>Edit Staff</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('teacher/edit',array('id' => 'edit_teacher_form'),array('edit_teacher_id' => '')); ?>
+                        <?php echo form_open('staff/edit',array('id' => 'edit_staff_form'),array('edit_staff_id' => '')); ?>
                         <table class="table-padding-10">
                             <tr>
                                 <td>
-                                    <label for="edit_teacher_name">Teacher Name</label>
+                                    <label for="edit_staff_name">Staff Name</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_teacher_name" id="edit_teacher_name" class="form-control input-sm">
+                                    <input type="text" name="edit_staff_name" id="edit_staff_name" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="edit_contact_no">Contact Number</label>
+                                    <label for="edit_staff_contact_no">Contact Number</label>
                                 </td>
                                 <td>
-                                    <input type="text" name="edit_contact_no" id="edit_contact_no" class="form-control input-sm nepali-date">
+                                    <input type="text" name="edit_staff_contact_no" id="edit_staff_contact_no" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="edit_address">Address</label>
+                                    <label for="edit_staff_address">Address</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_address" id="edit_address" class="form-control input-sm">
+                                    <input type="text" name="edit_staff_address" id="edit_staff_address" class="form-control input-sm">
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="edit_share_percent">Share Percentage</label>
+                                    <label for="edit_staff_post">Post</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="edit_share_percent" id="edit_share_percent" class="form-control input-sm">
+                                    <input type="text" name="edit_staff_post" id="edit_staff_post" class="form-control input-sm">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="edit_staff_salary">Salary</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="edit_staff_salary" id="edit_staff_salary" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    
