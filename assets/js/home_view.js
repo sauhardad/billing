@@ -301,7 +301,7 @@ function reportModalAction(source)
         $(".token-input-list-facebook").remove();
         $('#select_user_tr').removeClass('show').addClass('hide');
         $('#select_duration_tr').removeClass('show').addClass('hide');
-        if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact")
+        if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact" || $(source).val()==="group-account")
         {
             $.ajax({
                 type: "POST",
@@ -379,7 +379,7 @@ function reportModalAction(source)
         }
         
         //check if select group report type needs to be displayed
-        if($('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==='group-checking')
+        if($('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==='group-checking' || $('#generate_report_type').val()==="group-account")
         {
             $('#select_group_tr').removeClass('show').addClass('hide');
             //initialise token input
@@ -405,7 +405,7 @@ function reportModalAction(source)
     else if($(source).attr('id')==="generate_report")
     {
         //validation before generating report
-        if($('#generate_report_type').val()==='group-summary' || $('#generate_report_type').val()==='group-checking' || $('#generate_report_type').val()==='group-contact')
+        if($('#generate_report_type').val()==='group-summary' || $('#generate_report_type').val()==='group-checking' || $('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==="group-account")
         {
             var type=$('#generate_report_type').val();
             var filter1;
@@ -445,7 +445,7 @@ function reportModalAction(source)
                     }
                 }
             }
-            else if($('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==='group-checking')
+            else if($('#generate_report_type').val()==='group-contact' || $('#generate_report_type').val()==='group-checking' || $('#generate_report_type').val()==="group-account")
             {
                 if($('#search_group').tokenInput("get").length)
                 {
@@ -469,7 +469,7 @@ function reportModalAction(source)
         }
         else 
         {
-            alert("Please Choose a report type");
+            alert("Please Choose A Report Type");
         }
     }
 }

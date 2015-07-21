@@ -232,6 +232,26 @@ Class Report_model extends CI_Model
         return $temp;
     }
     
+    /** function that retrieves header for account ledger report when group_id is 
+     * passed
+     * @param int $group_id
+     * @return array $header
+     */
+    function retrieveAccountLedgerHeader($group_id)
+    {
+        $temp=array();
+                
+        $this->db->select('tbl_subsection.name as subsection_name,tbl_group.name as group_name,tbl_group.time_slot as time_slot',FALSE);
+        $this->db->from('tbl_group');
+        $this->db->where('tbl_group.id',$group_id);
+        $this->db->join('tbl_subsection','tbl_subsection.id=tbl_group.subsection_id','left');
+      
+        $query=$this->db->get();
+        $temp=$query->row_array();
+        //debug_array($temp);die;
+        return $temp;
+    }
+    
     
     /** function that returns data for rendering transaction report depening on 
      * user selected and duration to cover

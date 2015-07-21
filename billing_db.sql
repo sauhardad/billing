@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jul 16, 2015 at 09:48 AM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: localhost
+-- Generation Time: Jul 21, 2015 at 08:47 AM
+-- Server version: 5.6.14
+-- PHP Version: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,20 +44,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('10479671178d5cc740662a9f922c6700', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0', 1437025525, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('3d4fbca647f2550460056c77f0283844', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9806 Safari/537.36', 1437031084, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('4156f898c097a97e1954e41ef8eb400c', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437028512, ''),
-('68b6fe9874ff94569aa92d9ffb8c4f6f', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437028512, ''),
-('6a01c763467f04e00cbe2705c6ba109d', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437028511, ''),
-('6b1889190dfe37d920ba78e5e915b929', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437029671, ''),
-('6c429576d4305af8f1767e04094fd15f', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437028511, ''),
-('8dbd5be31e4b151821ebfdc6fddae268', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437028512, ''),
-('9a4ddc70b6c984adc66a194862bad241', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437028511, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('d6df9daf948642b4f84623752ac63697', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437032603, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('db1be25a2e35908734f9397a49992d55', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437029671, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('f3871b0dd8f2c53c93cd4088275e346b', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.134 Safari/537.36', 1437025753, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('fd32e8a42f9b766f1609504f35ab9eef', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9806 Safari/537.36', 1437027626, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('fdce25da5cfc703f8e2072669fdee9a6', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9806 Safari/537.36', 1437024418, '');
+('d44d244115353faf48b832dcffe6496d', '127.0.0.1', 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36', 1437389484, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('d7c1dc2420445ba48769063867ad4704', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:36.0) Gecko/20100101 Firefox/36.0', 1437389676, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -122,8 +110,13 @@ DROP TABLE IF EXISTS `tbl_expense`;
 CREATE TABLE IF NOT EXISTS `tbl_expense` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` varchar(10) NOT NULL,
+  `type` int(11) NOT NULL,
   `particulars` varchar(255) NOT NULL,
+  `emp_id` int(11) NOT NULL,
+  `document_id` int(11) NOT NULL,
+  `month` int(2) NOT NULL,
   `amount` decimal(10,0) NOT NULL,
+  `remark` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -134,10 +127,10 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
 -- Dumping data for table `tbl_expense`
 --
 
-INSERT INTO `tbl_expense` (`id`, `date`, `particulars`, `amount`, `user_id`, `active`, `entry_timestamp`) VALUES
-(13, '04/20/2015', 'Stationary', '5432', 1, 1, '2015-04-24 16:31:52'),
-(14, '04/25/2015', 'Photocopy', '1200', 1, 1, '2015-04-24 14:48:31'),
-(15, '04/06/2015', 'Books', '3000', 1, 1, '2015-04-24 14:48:42');
+INSERT INTO `tbl_expense` (`id`, `date`, `type`, `particulars`, `emp_id`, `document_id`, `month`, `amount`, `remark`, `user_id`, `active`, `entry_timestamp`) VALUES
+(13, '04/20/2015', 0, 'Stationary', 0, 0, 0, '5432', '', 1, 1, '2015-04-24 16:31:52'),
+(14, '04/25/2015', 0, 'Photocopy', 0, 0, 0, '1200', '', 1, 1, '2015-04-24 14:48:31'),
+(15, '04/06/2015', 0, 'Books', 0, 0, 0, '3000', '', 1, 1, '2015-04-24 14:48:42');
 
 -- --------------------------------------------------------
 
@@ -254,6 +247,26 @@ INSERT INTO `tbl_section` (`id`, `code`, `name`, `user_id`, `active`, `entry_tim
 (2, '12', 'Tuition', 1, 1, '2015-04-15 13:41:54'),
 (3, '13', 'Consultancy', 1, 1, '2015-04-15 13:42:09'),
 (4, '14', 'Language', 1, 1, '2015-05-27 13:52:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_staff`
+--
+
+DROP TABLE IF EXISTS `tbl_staff`;
+CREATE TABLE IF NOT EXISTS `tbl_staff` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `contact` int(11) NOT NULL,
+  `post` varchar(255) NOT NULL,
+  `salary` decimal(10,0) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -404,7 +417,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-16 12:39:38', '2015-07-16 12:39:38'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-20 15:48:55', '2015-07-20 15:48:55'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
