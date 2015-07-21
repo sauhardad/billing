@@ -81,7 +81,26 @@ $(function () {
         $("#edit_share_percent").val(share_percent);
         
     });
-    
+  
+        //fill in form values in the edit staff form
+    $(document).on( "click", '.edit_staff_btn',function(e) {
+
+        var name = $(this).data('name');
+        var id = $(this).data('id');
+        var address = $(this).data('address');
+        var contact = $(this).data('contact');
+        var post=$(this).data('post');
+        var salary=$(this).data('salary');
+
+        $("input:hidden[name=edit_staff_id]").val(id);
+        $("#edit_staff_name").val(name);
+        $("#edit_staff_address").val(address);
+        $("#edit_staff_contact_no").val(contact);
+        $("#edit_staff_post").val(post);
+        $("#edit_staff_salary").val(salary);
+
+    });
+
     
     //fill in form values in the edit level form
     $(document).on( "click", '.edit_subsection_btn',function(e) {
