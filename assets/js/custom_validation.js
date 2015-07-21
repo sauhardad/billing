@@ -78,67 +78,7 @@ $(function () {
             return false;
         }
     });
-    //validate and submit add expense form
-    $("#add_expense_form").validate({
-        rules: {
-                add_expense_particular: "required",
-                add_expense_amount: "required",
-                add_expense_date: {
-                        required: true,
-                }
-        },
-        messages: {
-                add_expense_particular: "Please enter the particular",
-                add_expense_amount: "Please enter the amount",
-                add_expense_date: {
-                        required: "Please enter the date"
-                }
-        },
-        errorClass: "invalid",
-        submitHandler: function(form) {
-            $(form).ajaxSubmit({
-                clearForm:true,
-                dataType:'json',
-                success: function(data) {
-                    alert(data.message);
-                    if(data.status==true)
-                        window.location=window.location.href;
-                }
-            });
-            return false;
-        }
-    });
     
-    //validate and submit edit expense form
-    $("#edit_expense_form").validate({
-        rules: {
-                edit_expense_particular: "required",
-                edit_expense_amount: "required",
-                edit_expense_date: {
-                        required: true,
-                }
-        },
-        messages: {
-                edit_expense_particular: "Please enter the particular",
-                edit_expense_amount: "Please enter the amount",
-                edit_expense_date:{
-                    required:true,
-                } 
-        },
-        errorClass: "invalid",
-        submitHandler: function(form) {
-            $(form).ajaxSubmit({
-                clearForm:true,
-                dataType:'json',
-                success: function(data) {
-                    alert(data.message);
-                    if(data.status==true)
-                        window.location=window.location.href;
-                }
-            });
-            return false;
-        }
-    });
     
     //validate and submit add income form
     $("#add_income_form").validate({

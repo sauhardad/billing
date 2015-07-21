@@ -10,6 +10,7 @@ class Expense extends CI_Controller {
    if(!$this->session->userdata('logged_in'))
        redirect('user/login', 'refresh');
    $this->load->model('expense_model');
+   $this->load->model('teacher/teacher_model');
    $this->load->helper(array('form'));
  }
 
@@ -22,16 +23,23 @@ class Expense extends CI_Controller {
         $data['users']=$this->user_model->get_users_except($session_data['id']);
     $data['roles']=$this->config->item('role_value');
     
+    $data['staff']=array();
+    $data['teachers']=$this->teacher_model->retrieveTeacher();
     $data['expenses']=$this->expense_model->retrieveExpense();
     $this->template->load('default', 'expense/expense_main_view',$data);
  }
  
  function add()
  {
+     $expense_map=$this->config->item('expense_type_key');
      $data=array();
-     if(($data['particulars']=$this->input->post('add_expense_particular')) && ($data['amount']=$this->input->post('add_expense_amount')) && ($data['date']=$this->input->post('add_expense_date')) )
+     if(($data['type']=$expense_map[$this->input->post('type')]) && ($data['amount']=$this->input->post('amount')) && ($data['date']=$this->input->post('date')) )
      {
-        
+         $data['particulars']=$this->input->post('particular');
+         $data['emp_id']=$this->input->post('emp_id');
+         $data['document_id']=$this->input->post('doc_no');
+         $data['month']=$this->input->post('month');
+         $data['remark']=$this->input->post('particular');
          if($this->expense_model->insertExpense($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Expense Saved'));
          else
@@ -61,6 +69,11 @@ class Expense extends CI_Controller {
          else
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
+ }
+ 
+ function getTeachers()
+ {
+     echo json_encode($this->teacher_model->retrieveTeacher());
  }
  
 }

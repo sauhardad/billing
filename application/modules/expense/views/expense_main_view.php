@@ -12,23 +12,29 @@
                     <thead>
                         <th>S.N.</th>
                         <th>Particular</th>
+                        <th>Teacher/Staff</th>
                         <th>Amount</th>
                         <th>Date</th>
-                        <th></th>
                     </thead>
                     <tbody>
                         <?php if(isset($expenses)){ ?>
                         <?php $sn=1; ?>
+                        <?php $teacher_map=convert_to_keyvalue($teachers); ?>
+                        <?php $staff_map=convert_to_keyvalue($staff); ?>
                         <?php foreach($expenses as $expense){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
                                 <td><?php echo $expense['particulars']; ?></td>
+                                <td>
+                                    <?php 
+                                        if($expense['type']==1)
+                                            echo $teacher_map[$expense['emp_id']]; 
+                                        elseif($expense['type']==2)
+                                            echo $staff_map[$expense['emp_id']]; 
+                                    ?>
+                                </td>
                                 <td><?php echo $expense['amount']; ?></td>
                                 <td><?php echo $expense['date']; ?></td>
-                                <td>
-                                    <button class="btn btn-primary edit_expense_btn" data-id="<?php echo $expense['id']; ?>" data-particulars="<?php echo $expense['particulars']; ?>" data-amount="<?php echo $expense['amount']; ?>" data-date="<?php echo $expense['date']; ?>" data-toggle="modal" data-target="#edit_expense_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
-                                    <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $expense['id']; ?>','expense/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
-                                </td>
                             </tr> 
                             <?php $sn++; ?>
                         <?php } ?>
@@ -47,89 +53,73 @@
                         <h3>Add Expense</h3>
                     </div>
                     <div class="modal-body">
-                        <?php echo form_open('expense/add',array('id' => 'add_expense_form')); ?>
                         <table class="table-padding-10">
-                            <tr>
-                                <td>
-                                    <label for="add_expense_particular">Particular</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="add_expense_particular" class="form-control input-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="add_expense_amount">Amount</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="add_expense_amount" class="form-control input-sm">
-                                </td>
-                            </tr>
-                            <tr>
+                            <tr class="show">
                                 <td>
                                     <label for="add_expense_date">Date</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_expense_date" class="form-control input-sm datepicker">
+                                    <input type="text" name="add_expense_date" class="form-control input-sm datepicker" id="add_expense_date">
                                 </td>
                             </tr>
-                            
-                            
-                           
+                            <tr class="show">
+                                <td>
+                                    <label for="add_expense_type">Expense Type</label>
+                                </td>
+                                <td colspan="3">
+                                    <?php echo form_dropdown('add_expense_type', array("0"=>"Select Expense Type")+$this->config->item('expense_types'), "0",'class="form-control" id="add_expense_type" onchange="return reportExpenseModalAction(this);"'); ?>
+                                </td>
+                            </tr>
+                            <tr id="select_teacher_tr" class="hide">
+                                <td>
+                                    <label for="select_teacher">Select Teacher</label>
+                                </td>
+                                <td colspan="3">
+                                    <?php echo form_dropdown('select_teacher', array("0"=>"Select Teacher"), "0",'class="form-control" id="select_teacher" onchange="return reportExpenseModalAction(this);"'); ?>
+                                </td>
+                            </tr>
+                            <tr id="input_particular" class="hide">
+                                <td>
+                                    <label for="add_expense_particular">Particular</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_expense_particular" class="form-control input-sm" id="add_expense_particular">
+                                </td>
+                            </tr>
+                            <tr class="show">
+                                <td>
+                                    <label for="add_expense_amount">Amount</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_expense_amount" class="form-control input-sm" id="add_expense_amount">
+                                </td>
+                            </tr>
+                            <tr class="show">
+                                <td>
+                                    <label for="add_expense_voucher_bill">Voucher/Bill No</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_expense_voucher_bill" class="form-control input-sm" id="add_expense_voucher_bill">
+                                </td>
+                            </tr>
+                             <tr class="hide">
+                                <td>
+                                    <label for="add_expense_month">Month</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_expense_month" class="form-control input-sm" id="add_expense_month">
+                                </td>
+                            </tr>
+                            <tr class="show">
+                                <td>
+                                    <label for="add_expense_remarks">Remarks</label>
+                                </td>
+                                <td colspan="3">
+                                    <input type="text" name="add_expense_remarks" class="form-control input-sm">
+                                </td>
+                            </tr>
                         </table>    
-                        
-                        <input class="btn btn-primary" type="submit" value="Save">
-                        <?php echo form_close(); ?>
-                        
-                    </div>
-                </div>
-            </div>    
-        </div>
-        
-        
-        <!-- modal for editing expense -->
-        <div class="modal fade" tabindex="-1" role="dialog" id="edit_expense_modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <a class="close" data-dismiss="modal">×</a>
-                        <h3>Edit Expense</h3>
-                    </div>
-                    <div class="modal-body">
-                        <?php echo form_open('expense/edit',array('id' => 'edit_expense_form'),array('edit_expense_id' => '')); ?>
-                        <table class="table-padding-10">
-                            <tr>
-                                <td>
-                                    <label for="edit_expense_particular">Particular</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="edit_expense_particular" id="edit_expense_particular" class="form-control input-sm" >
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="edit_expense_amount">Amount</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="edit_expense_amount" id="edit_expense_amount" class="form-control input-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="edit_expense_date">Date</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="edit_expense_date" id="edit_expense_date" class="form-control input-sm datepicker"  >
-                                </td>
-                            </tr>
-                            
-                            
-                           
-                        </table>    
-                        
-                        <input class="btn btn-primary" type="submit" value="Save">
-                        <?php echo form_close(); ?>
-                        
+                        <input class="btn btn-primary" id="save_expense" type="button" value="Save" onclick="return reportExpenseModalAction(this);"> 
                     </div>
                 </div>
             </div>    

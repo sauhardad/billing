@@ -514,5 +514,85 @@ function printReceipt(data)
  */
 function generateReport(type,filter1,filter2)
 {
-    window.location.replace(base_url+"report?type="+type+"&filter1="+filter1+"&filter2="+filter2);
+    window.open(base_url+"report?type="+type+"&filter1="+filter1+"&filter2="+filter2,'_blank');
+    location.reload();
+}
+
+/** function that is invoked when certain action is performed on the add expense modal
+ * source is the element that triggered the action
+ * @param object source 
+ */
+function reportExpenseModalAction(source)
+{
+    if($(source).attr('id')==="add_expense_type")
+    {
+        $('#select_teacher_tr').removeClass('show').addClass('hide');
+        $('#input_particular_tr').removeClass('show').addClass('hide');
+        
+        if($(source).val()==="teacher")
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'expense/getTeachers',
+                dataType: 'json',
+                success:function(data) { 
+                    $('#select_teacher').empty().append($("<option></option>").attr("value","0").text("Select Teacher")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_teacher')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name)); 
+                   });
+                   $('#select_teacher_tr').removeClass('hide').addClass('show');
+                   $('#input_particular_tr').removeClass('show').addClass('hide');
+                }       
+              });
+        }
+    }
+    //validate ans save the expense
+    else if($(source).attr('id')==="save_expense")
+    {
+        if($('#add_expense_type').val()==='teacher')
+        {
+            if($('#add_expense_date').val()=='')
+            {
+                alert("Please Choose a Date");
+                return false;
+            }
+            if($('#select_teacher').val()==='0')
+            {
+                alert("Please Choose a Teacher");
+                return false;
+            }
+            if($('#add_expense_amount').val()=='')
+            {
+                alert("Please Enter Amount");
+                return false;
+            }
+            if($('#add_expense_voucher_bill').val()=='')
+            {
+                alert("Please Enter Voucher No");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_teacher').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val())
+        }
+    }   
+}
+
+/** function that ajaxifies the adding of an expense
+ * 
+ */
+function addExpense(date,type,particular,emp_id,doc_no,month,amount,remark)
+{
+    $.ajax({
+        type: "POST",
+        url: base_url+'expense/add',
+        data:{date: date, type: type, particular: particular,emp_id: emp_id,doc_no: doc_no,month: month,amount: amount,remark: remark},
+        dataType: 'json',
+        success:function(data) { 
+            alert(data.message);
+            if(data.status==true)
+                window.location=window.location.href;
+        }       
+      });
 }

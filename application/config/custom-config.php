@@ -12,3 +12,17 @@ $config['report_types']=array('group-summary'=>'Group(Summary)',
                               'income'=>'Income',
                               'expense'=>'Expense'  
                              );
+$config['expense_types']=array('teacher'=>'Teacher',
+                               'staff'=>'Staff',
+                               'stationary'=>'Stationary',
+                               'payable'=>'Payables',
+                               'loan'=>'Loan',
+                               'saving'=>'Saving'
+                             );
+$config['expense_type_key']=array('teacher'=>1,
+                               'staff'=>2,
+                               'stationary'=>3,
+                               'payable'=>4,
+                               'loan'=>5,
+                               'saving'=>6
+                            );
