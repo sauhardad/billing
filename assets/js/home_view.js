@@ -547,6 +547,11 @@ function reportExpenseModalAction(source)
     {
         $('#select_teacher_tr').removeClass('show').addClass('hide');
         $('#input_particular_tr').removeClass('show').addClass('hide');
+        $('#add_expense_amount_tr').removeClass('show').addClass('hide');
+        $('#expense_voucher_tr').removeClass('show').addClass('hide');
+        $('#expense_remarks_tr').removeClass('show').addClass('hide');
+        $('#expense_month_tr').removeClass('show').addClass('hide');
+        $('#select_staff_tr').removeClass('show').addClass('hide');
         
         if($(source).val()==="teacher")
         {
@@ -561,9 +566,31 @@ function reportExpenseModalAction(source)
                             .append($("<option></option>")
                             .attr("value",value.id)
                             .text(value.name)); 
+                    $('#select_teacher_tr').removeClass('hide').addClass('show');
+                    $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+                    $('#expense_voucher_tr').removeClass('hide').addClass('show');
+                    $('#expense_remarks_tr').removeClass('hide').addClass('show');
                    });
-                   $('#select_teacher_tr').removeClass('hide').addClass('show');
-                   $('#input_particular_tr').removeClass('show').addClass('hide');
+                }       
+              });
+        }
+        else if($(source).val()==="staff")
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'expense/getStaff',
+                dataType: 'json',
+                success:function(data) { 
+                    $('#select_staff').empty().append($("<option></option>").attr("value","0").text("Select Staff")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_staff')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name)); 
+                        $('#add_expense_amount_tr').removeClass('hide').addClass('show');    
+                        $('#expense_month_tr').removeClass('hide').addClass('show');
+                        $('#select_staff_tr').removeClass('hide').addClass('show');
+                    });
                 }       
               });
         }
@@ -571,21 +598,23 @@ function reportExpenseModalAction(source)
     //validate ans save the expense
     else if($(source).attr('id')==="save_expense")
     {
+        if($('#add_expense_date').val()=='')
+        {
+            alert("Please Choose a Date");
+            return false;
+        }
+        if($('#add_expense_amount').val()=='')
+        {
+            alert("Please Enter Amount");
+            return false;
+        }
+        
+        //validate for teacher
         if($('#add_expense_type').val()==='teacher')
         {
-            if($('#add_expense_date').val()=='')
-            {
-                alert("Please Choose a Date");
-                return false;
-            }
             if($('#select_teacher').val()==='0')
             {
                 alert("Please Choose a Teacher");
-                return false;
-            }
-            if($('#add_expense_amount').val()=='')
-            {
-                alert("Please Enter Amount");
                 return false;
             }
             if($('#add_expense_voucher_bill').val()=='')
@@ -593,7 +622,21 @@ function reportExpenseModalAction(source)
                 alert("Please Enter Voucher No");
                 return false;
             }
-            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_teacher').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val())
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_teacher').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());
+        }
+        else if($('#add_expense_type').val()==='staff')
+        {
+            if($('#select_staff').val()==='0')
+            {
+                alert("Please Choose a Staff");
+                return false;
+            }
+            if($('#add_expense_month').val()==='0')
+            {
+                alert("Please Choose a Month");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());
         }
     }   
 }

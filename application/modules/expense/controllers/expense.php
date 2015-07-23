@@ -11,6 +11,7 @@ class Expense extends CI_Controller {
        redirect('user/login', 'refresh');
    $this->load->model('expense_model');
    $this->load->model('teacher/teacher_model');
+   $this->load->model('staff/staff_model');
    $this->load->helper(array('form'));
  }
 
@@ -23,7 +24,7 @@ class Expense extends CI_Controller {
         $data['users']=$this->user_model->get_users_except($session_data['id']);
     $data['roles']=$this->config->item('role_value');
     
-    $data['staff']=array();
+    $data['staff']=$this->staff_model->retrieveStaff();
     $data['teachers']=$this->teacher_model->retrieveTeacher();
     $data['expenses']=$this->expense_model->retrieveExpense();
     $this->template->load('default', 'expense/expense_main_view',$data);
@@ -39,7 +40,7 @@ class Expense extends CI_Controller {
          $data['emp_id']=$this->input->post('emp_id');
          $data['document_id']=$this->input->post('doc_no');
          $data['month']=$this->input->post('month');
-         $data['remark']=$this->input->post('particular');
+         $data['remark']=$this->input->post('remark');
          if($this->expense_model->insertExpense($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Expense Saved'));
          else
@@ -76,6 +77,10 @@ class Expense extends CI_Controller {
      echo json_encode($this->teacher_model->retrieveTeacher());
  }
  
+ function getStaff()
+ {
+     echo json_encode($this->staff_model->retrieveStaff());
+ }
 }
 
 ?>

@@ -78,6 +78,14 @@
                                     <?php echo form_dropdown('select_teacher', array("0"=>"Select Teacher"), "0",'class="form-control" id="select_teacher" onchange="return reportExpenseModalAction(this);"'); ?>
                                 </td>
                             </tr>
+                            <tr id="select_staff_tr" class="hide">
+                                <td>
+                                    <label for="select_staff">Select Staff</label>
+                                </td>
+                                <td colspan="3">
+                                    <?php echo form_dropdown('select_staff', array("0"=>"Select Staff"), "0",'class="form-control" id="select_staff" onchange="return reportExpenseModalAction(this);"'); ?>
+                                </td>
+                            </tr>
                             <tr id="input_particular" class="hide">
                                 <td>
                                     <label for="add_expense_particular">Particular</label>
@@ -86,15 +94,15 @@
                                     <input type="text" name="add_expense_particular" class="form-control input-sm" id="add_expense_particular">
                                 </td>
                             </tr>
-                            <tr class="show">
+                            <tr class="hide" id="expense_month_tr">
                                 <td>
-                                    <label for="add_expense_amount">Amount</label>
+                                    <label for="add_expense_month">Month</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_expense_amount" class="form-control input-sm" id="add_expense_amount">
+                                    <?php echo form_dropdown('add_expense_month', array_merge(array("0"=>"Select Month"),$this->config->item('monthlist')), "0",'class="form-control" id="add_expense_month" onchange="return reportExpenseModalAction(this);"'); ?>
                                 </td>
                             </tr>
-                            <tr class="show">
+                            <tr class="hide" id="expense_voucher_tr">
                                 <td>
                                     <label for="add_expense_voucher_bill">Voucher/Bill No</label>
                                 </td>
@@ -102,20 +110,20 @@
                                     <input type="text" name="add_expense_voucher_bill" class="form-control input-sm" id="add_expense_voucher_bill">
                                 </td>
                             </tr>
-                             <tr class="hide">
+                            <tr class="hide" id="add_expense_amount_tr">
                                 <td>
-                                    <label for="add_expense_month">Month</label>
+                                    <label for="add_expense_amount">Amount</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_expense_month" class="form-control input-sm" id="add_expense_month">
+                                    <input type="text" name="add_expense_amount" class="form-control input-sm" id="add_expense_amount">
                                 </td>
                             </tr>
-                            <tr class="show">
+                            <tr class="hide" id="expense_remarks_tr">
                                 <td>
                                     <label for="add_expense_remarks">Remarks</label>
                                 </td>
                                 <td colspan="3">
-                                    <input type="text" name="add_expense_remarks" class="form-control input-sm">
+                                    <input type="text" name="add_expense_remarks" id="add_expense_remarks" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    
