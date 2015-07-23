@@ -594,8 +594,23 @@ function reportExpenseModalAction(source)
                 }       
               });
         }
+        
+        else if($(source).val()==="stationary")
+        {
+            $('#input_particular_tr').removeClass('hide').addClass('show');    
+            $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+            $('#expense_voucher_tr').removeClass('hide').addClass('show');
+        }
+        
+        else if($(source).val()==="payable")
+        {
+            $('#expense_payables_tr').removeClass('hide').addClass('show');    
+            $('#expense_month_tr').removeClass('hide').addClass('show');
+            $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+        }
+
     }
-    //validate ans save the expense
+    //validate and save the expense
     else if($(source).attr('id')==="save_expense")
     {
         if($('#add_expense_date').val()=='')
@@ -624,6 +639,7 @@ function reportExpenseModalAction(source)
             }
             addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_teacher').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());
         }
+        //validate for staffs
         else if($('#add_expense_type').val()==='staff')
         {
             if($('#select_staff').val()==='0')
@@ -638,18 +654,48 @@ function reportExpenseModalAction(source)
             }
             addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());
         }
+        //validate for stationary
+        else if($('#add_expense_type').val()==='stationary')
+        {
+            if($('#add_expense_particular').val()=='')
+            {
+                alert("Please Enter a Particular");
+                return false;
+            }
+            if($('#add_expense_voucher_bill').val()=='')
+            {
+                alert("Please Enter Voucher No");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());
+        }
+        //validate for payables
+        else if($('#add_expense_type').val()==='payable')
+        {
+            if($('#add_expense_payables').val()==='0')
+            {
+                alert("Please Choose A Payable");
+                return false;
+            }
+            if($('#add_expense_month').val()==='0')
+            {
+                alert("Please Choose a Month");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val(),$('#add_expense_payables').val());
+        }
     }   
 }
 
 /** function that ajaxifies the adding of an expense
  * 
  */
-function addExpense(date,type,particular,emp_id,doc_no,month,amount,remark)
+function addExpense(date,type,particular,emp_id,doc_no,month,amount,remark,payable_id)
 {
     $.ajax({
         type: "POST",
         url: base_url+'expense/add',
-        data:{date: date, type: type, particular: particular,emp_id: emp_id,doc_no: doc_no,month: month,amount: amount,remark: remark},
+        data:{date: date, type: type, particular: particular,emp_id: emp_id,doc_no: doc_no,month: month,amount: amount,remark: remark, payable_id: payable_id},
         dataType: 'json',
         success:function(data) { 
             alert(data.message);

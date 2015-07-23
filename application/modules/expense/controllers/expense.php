@@ -40,6 +40,7 @@ class Expense extends CI_Controller {
          $data['emp_id']=$this->input->post('emp_id');
          $data['document_id']=$this->input->post('doc_no');
          $data['month']=$this->input->post('month');
+         $data['payable_id']=$this->input->post('payable_id');
          $data['remark']=$this->input->post('remark');
          if($this->expense_model->insertExpense($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Expense Saved'));

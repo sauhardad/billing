@@ -40,3 +40,8 @@ $config['monthlist']=array('1'=>'Baisakh',
                            '11'=>'Falgun',
                            '12'=>'Chaitra'
                         );
+
+$config['payables']=array('1'=>'House Rent',
+                          '2'=>'Telphone',
+                          '3'=>'Electricity'
+                        );
