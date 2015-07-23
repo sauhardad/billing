@@ -127,27 +127,35 @@ class Report extends CI_Controller {
         {
             $this->load->library('cezpdf',array('a4','landscape'));
             $db_header=$this->report_model->retrieveAccountLedgerHeader($filter2);
-            $db_data=$this->report_model->retrieveContactLedger($filter2);
+            $db_data=$this->report_model->retrieveAccountLedger($filter2);
             $col_names = array(
                 'sn'=>'S.N.',
                 'student_name' => 'Name',
-                'contact_no' => 'Contact No',
                 'subject_1'=> 'Subject 1',
                 'subject_2'=> 'Subject 2',
                 'subject_3'=> 'Subject 3',
                 'subject_4'=> 'Subject 4',
-                'remarks'=>'Remarks'
+                'bill_date1'=> '1st Bill Date',
+                'bill_no1'=> '1st Bill No',
+                'bill_amount1'=> '1st Bill Amount',
+                'bill_date2'=> '2nd Bill Date',
+                'bill_no2'=> '2nd Bill No',
+                'bill_amount2'=> '2nd Bill Amount',
+                'bill_date3'=> '3rd Bill Date',
+                'bill_no3'=> '3rd Bill No',
+                'bill_amount3'=> '3rd Bill Amount',
+                'remark'=>'Remarks'
             );
             
             $this->cezpdf->ezText("Account Ledger",12,array('justification'=>'center'));
             $this->cezpdf->ezText("");
-            $this->cezpdf->ezText("Subsection : ".$db_header['subsection_name']."                       ".
+            $this->cezpdf->ezText("Subsection : ".$db_header['subsection_name']."                           ".
                                   "Group : ".$db_header['group_name']."                    "."Time : ".
                                     $db_header['time_slot'],12,array('justification'=>'left','left'=>'110'));
             $this->cezpdf->ezText("");
             $this->cezpdf->ezText("Teachers :",12,array('justification'=>'left','left'=>'110'));
             $this->cezpdf->ezText("");
-            $this->cezpdf->ezTable($db_data, $col_names, '', array('width'=>550));
+            $this->cezpdf->ezTable($db_data, $col_names, '', array('width'=>850));
             $this->cezpdf->ezStream();
         }
         

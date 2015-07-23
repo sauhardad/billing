@@ -24,6 +24,14 @@
                             <?php echo form_dropdown('select_section', array("0"=>"Select Section"), "0",'class="form-control" id="select_section" onchange="return reportModalAction(this);"'); ?>
                         </td>
                     </tr>
+                    <tr class="hide" id="select_expense_type_tr">
+                        <td>
+                            <label for="select_expense_type">Select Expense Type</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_expense_type', array("0"=>"Select Expense Type")+$this->config->item('expense_types'), "0",'class="form-control" id="select_expense_type" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
                     <tr class="hide" id="select_subsection_tr">
                         <td>
                             <label for="select_subsection">Select Subsection</label>
