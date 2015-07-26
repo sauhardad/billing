@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2015 at 10:00 AM
+-- Generation Time: Jul 26, 2015 at 09:46 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -44,17 +44,19 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('29e198fb46c0a7e73326ae1f57fb514d', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437633541, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('5ee561231c2842031acdc3f9ed473f5f', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437634546, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('7685f8905eeb21684a2d8931b7542773', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437636404, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('7c99c0b6914bd042bea29535d43b6477', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437634221, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('9160789f05394134ec4bf827a700767e', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437638061, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('a13695509a1760a4b6a082ebb1b334f5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437637630, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('d1be5907b4e812d2c7599b6aafb40cc9', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437635324, ''),
-('d53289ae8ce02d9a63a981f3ab57b0e5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437636768, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('da0ff8b87d59888ff384d91a065f1886', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437635324, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('e32c38689e57fb60eb81f25c48c5310b', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437635635, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('f170c70cde8662fd78482436288f1b94', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437638061, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('13822f2eb8af9b89273b662206e4d318', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437890915, ''),
+('37fed2e087c835fffbe756a41e9a9a95', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889138, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('5d605145089127a84f7ea06e50732894', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437890915, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('664cc4cbf9eeed34b540767cf126d5b5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437895437, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('85fe33c5375da45f55b2b5cc5a1adb41', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437892393, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('8743a206e3c9511fd55efe3cee0fbac7', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889982, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('a2d6b12114cc7264c79fbc236a4e58ad', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437892393, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('abc3fa621ed825f1d2cc6cfbfc55c0fd', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889982, ''),
+('b03c0fda12f78649f79248bb0ff99b49', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437891424, ''),
+('d1e406418cb3b5d7590487c477cabbf5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889681, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('e3e5ef2bab6768ae48835d43ec7a2218', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437893589, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('eec1240436344605ae19dfe45a3845eb', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889982, ''),
+('f9386465ea0f9973075cc4cf8ad937d5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437891424, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -122,6 +124,7 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
   `type` int(11) NOT NULL,
   `particulars` varchar(255) NOT NULL,
   `payable_id` int(11) NOT NULL,
+  `saving_id` int(11) NOT NULL,
   `emp_id` int(11) NOT NULL,
   `document_id` int(11) NOT NULL,
   `month` int(2) NOT NULL,
@@ -131,27 +134,24 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `tbl_expense`
 --
 
-INSERT INTO `tbl_expense` (`id`, `date`, `type`, `particulars`, `payable_id`, `emp_id`, `document_id`, `month`, `amount`, `remark`, `user_id`, `active`, `entry_timestamp`) VALUES
-(1, '07/01/2015', 3, '', 0, 0, 0, 0, '1254', '', 1, 1, '2015-07-23 12:41:16'),
-(2, '07/07/2015', 3, '', 0, 0, 0, 0, '15', '', 1, 1, '2015-07-23 12:43:12'),
-(3, '07/08/2015', 3, 'jpt', 0, 0, 0, 0, '15487', '', 1, 1, '2015-07-23 12:44:42'),
-(4, '07/07/2015', 4, '', 0, 0, 0, 0, '15487', '', 1, 1, '2015-07-23 12:59:17'),
-(5, '07/15/2015', 4, '', 0, 0, 0, 0, '154', '', 1, 1, '2015-07-23 12:59:56'),
-(6, '07/02/2015', 4, '', 0, 0, 0, 0, '1547', '', 1, 1, '2015-07-23 13:01:24'),
-(7, '07/15/2015', 2, '', 0, 1, 0, 4, '1547', '', 1, 1, '2015-07-23 13:04:58'),
-(8, '07/07/2015', 4, '', 0, 0, 0, 1, '125866', '', 1, 1, '2015-07-23 13:12:55'),
-(9, '07/21/2015', 4, '', 0, 0, 0, 2, '1254', '', 1, 1, '2015-07-23 13:15:02'),
-(10, '07/08/2015', 4, '', 0, 0, 0, 3, '14578', '', 1, 1, '2015-07-23 13:22:35'),
-(11, '07/15/2015', 4, '', 0, 0, 0, 2, '123456', '', 1, 1, '2015-07-23 13:26:58'),
-(12, '07/08/2015', 4, '', 0, 0, 0, 2, '123', '', 1, 1, '2015-07-23 13:29:41'),
-(13, '07/08/2015', 4, '', 0, 0, 0, 1, '125487', '', 1, 1, '2015-07-23 13:36:07'),
-(14, '07/17/2015', 4, '', 2, 0, 0, 3, '12345', '', 1, 1, '2015-07-23 13:39:58');
+INSERT INTO `tbl_expense` (`id`, `date`, `type`, `particulars`, `payable_id`, `saving_id`, `emp_id`, `document_id`, `month`, `amount`, `remark`, `user_id`, `active`, `entry_timestamp`) VALUES
+(26, '07/01/2015', 2, '', 0, 0, 1, 0, 1, '10000', '', 1, 1, '2015-07-26 12:34:17'),
+(27, '07/02/2015', 3, 'copy', 0, 0, 0, 10, 0, '100', '', 1, 1, '2015-07-26 12:34:41'),
+(28, '07/03/2015', 5, 'paid to', 1, 1, 0, 11, 0, '1500', 'jpt', 1, 1, '2015-07-26 12:36:05'),
+(29, '07/08/2015', 6, '', 0, 1, 0, 0, 0, '15000', '', 1, 1, '2015-07-26 12:39:04'),
+(30, '07/09/2015', 4, '', 1, 0, 0, 111, 1, '300000', '', 1, 1, '2015-07-26 12:40:47'),
+(31, '07/08/2015', 4, '', 1, 0, 0, 0, 1, '1500', '', 1, 1, '2015-07-26 12:48:43'),
+(32, '07/01/2015', 4, '', 1, 0, 0, 11, 2, '15000', '', 1, 1, '2015-07-26 12:49:35'),
+(33, '07/07/2015', 6, '', 0, 1, 0, 0, 0, '150000', '', 1, 1, '2015-07-26 12:49:58'),
+(34, '07/01/2015', 4, '', 3, 0, 0, 150, 2, '15000', '', 1, 1, '2015-07-26 12:54:42'),
+(35, '07/25/2015', 5, '', 0, 0, 0, 0, 0, '1500', '', 1, 1, '2015-07-26 12:55:05'),
+(36, '07/09/2015', 5, 'jpt', 0, 0, 0, 1, 0, '1500', '', 1, 1, '2015-07-26 12:57:28');
 
 -- --------------------------------------------------------
 
@@ -465,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-23 13:39:26', '2015-07-23 13:39:26'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-26 12:38:13', '2015-07-26 12:38:13'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
