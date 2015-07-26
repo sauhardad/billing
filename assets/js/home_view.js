@@ -320,6 +320,8 @@ function reportModalAction(source)
         $(".token-input-list-facebook").remove();
         $('#select_user_tr').removeClass('show').addClass('hide');
         $('#select_duration_tr').removeClass('show').addClass('hide');
+        $('#select_expense_type_tr').removeClass('show').addClass('hide');
+        
         if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact" || $(source).val()==="group-account")
         {
             $.ajax({
@@ -357,6 +359,10 @@ function reportModalAction(source)
                    $('#select_duration_tr').removeClass('hide').addClass('show');
                 }       
               });
+        }
+        else if($(source).val()==="expense")
+        {
+            $('#select_expense_type_tr').removeClass('hide').addClass('show');
         }
     }
     else if($(source).attr('id')==="select_section")
@@ -419,6 +425,27 @@ function reportModalAction(source)
             //initialise token input
             $("#search_group").tokenInput(base_url+'group/search?subsection_id='+$('#select_subsection').val(),{tokenLimit: 1,theme: "facebook"});
             $('#search_group_tr').removeClass('hide').addClass('show');
+        }
+    }
+    else if($(source).attr('id')==="select_expense_type")
+    {
+        if($(source).val()==="teacher")
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'report/getTeachers',
+                dataType: 'json',
+                success:function(data) { 
+                    $('#select_teacher').empty().append($("<option></option>").attr("value","0").text("Select Teacher")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_teacher')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name)); 
+                   });
+                   $('#select_teacher_tr').removeClass('hide').addClass('show');
+                }       
+              });
         }
     }
     else if($(source).attr('id')==="generate_report")
@@ -485,6 +512,14 @@ function reportModalAction(source)
         else if($('#generate_report_type').val()==="transaction")
         {
             generateReport('transaction',$('#select_duration').val(),$('#select_user').val())
+        }
+        else if($('#generate_report_type').val()==="expense")
+        {
+            if($('#select_teacher').val()==='0')
+                alert("Please choose a Teacher");
+            else
+                generateReport('expense',$('#select_expense_type').val(),$('#select_teacher').val());
+            
         }
         else 
         {

@@ -72,6 +72,14 @@
                             <?php echo form_dropdown('select_duration',array("1"=>"Today","2"=>"Week","3"=>"Month"), "1",'class="form-control" id="select_duration"'); ?>
                         </td>
                     </tr>
+                    <tr class="hide" id="select_teacher_tr">
+                        <td>
+                            <label for="select_teacher">Select Teacher</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_teacher', array("0"=>"Select Teacher"), "0",'class="form-control" id="select_teacher" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
                 </table>    
 
                 <input class="btn btn-primary" type="button" id="generate_report" value="Generate" onclick="return reportModalAction(this);">

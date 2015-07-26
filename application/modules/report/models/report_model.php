@@ -263,7 +263,7 @@ Class Report_model extends CI_Model
             $result1=$query->result_array();  
            
             //for adding the payments
-            $this->db->select('bill_no,paid_amount,date');
+            $this->db->select('bill_no,paid_amount,date',FALSE);
             $this->db->from('tbl_bill_payment');
             $this->db->where('student_id',$id);
             $query=$this->db->get();
@@ -370,6 +370,59 @@ Class Report_model extends CI_Model
         }
         if(!empty($temp))
             $temp[]=array('section_name'=>' ','username'=>' ','bill_no'=>' ','received_on'=>$total_type,'received'=>$t_received,'remarks'=>' ');
+        return $temp;
+    }
+    
+    /** function that generates teacher expense report when teacher_id is passed
+     * @param int $teacher_id
+     */
+    function retrieveTeacherReport($teacher_id)
+    {
+        //get teacher personal info
+        $this->db->select('t1.name,t1.address,t1.contact_no');
+        $this->db->from('tbl_teacher as t1');
+        $this->db->where('t1.id',$teacher_id);
+        $query=$this->db->get();
+        $temp['personal']=$query->row_array();      
+        
+        //get payment info
+        $this->db->select('t2.date,t2.document_id,t2.amount,t2.remark');
+        $this->db->from('tbl_expense as t2');
+        $this->db->where('t2.emp_id',$teacher_id);
+        $query=$this->db->get();
+        $temp['payments']=$query->result_array();    
+       
+        //get subjects
+        $this->db->select('subject');
+        $this->db->from('tbl_student_course');
+        $this->db->where('teacher_id',$teacher_id);
+        $query=$this->db->get();
+        $buffer=$query->result_array();    
+        
+        //format subject list
+        $temp['personal']['subjects']="";
+        foreach($buffer as $key=>$value)
+        {
+            if(!$temp['personal']['subjects']=="")
+                $temp['personal']['subjects'].=" , ";
+            $temp['personal']['subjects'].=$value['subject'];
+        }
+        
+        
+        
+        $sn=1;
+        $total=0;
+        foreach($temp['payments'] as $key=>$value)
+        {
+           //initialize sn
+           $temp['payments'][$key]['sn']=$sn;
+           $total+=$temp['payments'][$key]['amount'];
+           $sn++;
+        }
+        
+        if(!empty($temp['payments']))
+            $temp['payments'][]=array('sn'=>' ','document_id'=>'Total','amount'=>$total,'remark'=>' ');
+        
         return $temp;
     }
 }

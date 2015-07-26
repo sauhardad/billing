@@ -13,6 +13,7 @@ class Report extends CI_Controller {
    $this->load->model('section/section_model');
    $this->load->model('subsection/subsection_model');
    $this->load->model('user/user_model');
+   $this->load->model('teacher/teacher_model');
    $this->load->model('report_model');
    $this->load->helper(array('form'));
  }
@@ -131,20 +132,20 @@ class Report extends CI_Controller {
             $col_names = array(
                 'sn'=>'S.N.',
                 'student_name' => 'Name',
-                'subject_1'=> 'Subject 1',
-                'subject_2'=> 'Subject 2',
-                'subject_3'=> 'Subject 3',
-                'subject_4'=> 'Subject 4',
-                'bill_date1'=> '1st Bill Date',
-                'bill_no1'=> '1st Bill No',
-                'bill_amount1'=> '1st Bill Amount',
-                'bill_date2'=> '2nd Bill Date',
-                'bill_no2'=> '2nd Bill No',
-                'bill_amount2'=> '2nd Bill Amount',
-                'bill_date3'=> '3rd Bill Date',
-                'bill_no3'=> '3rd Bill No',
-                'bill_amount3'=> '3rd Bill Amount',
-                'remark'=>'Remarks'
+                'subject_1'=> 'Sub',
+                'subject_2'=> 'Sub',
+                'subject_3'=> 'Sub',
+                'subject_4'=> 'Sub',
+                'bill_date1'=> 'Date',
+                'bill_no1'=> 'Bill',
+                'bill_amount1'=> 'Amt',
+                'bill_date2'=> 'Date',
+                'bill_no2'=> 'Bill',
+                'bill_amount2'=> 'Amt',
+                'bill_date3'=> 'Date',
+                'bill_no3'=> 'Bill',
+                'bill_amount3'=> 'Amt',
+                'remark'=>'Rmks'
             );
             
             $this->cezpdf->ezText("Account Ledger",12,array('justification'=>'center'));
@@ -155,7 +156,7 @@ class Report extends CI_Controller {
             $this->cezpdf->ezText("");
             $this->cezpdf->ezText("Teachers :",12,array('justification'=>'left','left'=>'110'));
             $this->cezpdf->ezText("");
-            $this->cezpdf->ezTable($db_data, $col_names, '', array('width'=>850));
+            $this->cezpdf->ezTable($db_data, $col_names, '', array('width'=>750));
             $this->cezpdf->ezStream();
         }
         
@@ -199,6 +200,30 @@ class Report extends CI_Controller {
             $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
             $this->cezpdf->ezStream();
         }
+        else if(($type==='expense') && ($filter1) && ($filter2))
+        {
+            if($filter1=='teacher')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                $db_data=$this->report_model->retrieveTeacherReport($filter2);
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'date'=>'Date',
+                    'document_id' => 'Voucher No',
+                    'amount'=>'Amount',
+                    'remark' => 'Remarks'
+                );  
+                $this->cezpdf->ezText("Teacher Profile",12,array('justification'=>'center'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
+                                      "Address : ".$db_data['personal']['address']."               "."Contact : ".
+                                        $db_data['personal']['contact_no'],12,array('justification'=>'left'));
+                $this->cezpdf->ezText("Subjects : ".$db_data['personal']['subjects'],12,array('justification'=>'left'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data['payments'], $col_names, $header, array('width'=>550));
+                $this->cezpdf->ezStream();
+            }
+        }
      }
  }
  
@@ -216,6 +241,11 @@ class Report extends CI_Controller {
  function getUsers()
  {
      echo json_encode($this->user_model->retrieveAccountants());
+ }
+ 
+ function getTeachers()
+ {
+     echo json_encode($this->teacher_model->retrieveTeacher());
  }
  
 }
