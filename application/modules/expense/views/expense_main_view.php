@@ -19,12 +19,32 @@
                     <tbody>
                         <?php if(isset($expenses)){ ?>
                         <?php $sn=1; ?>
+                        <?php $payables=$this->config->item('payables'); ?>
+                        <?php $savings=$this->config->item('saving'); ?>
                         <?php $teacher_map=convert_to_keyvalue($teachers); ?>
                         <?php $staff_map=convert_to_keyvalue($staff); ?>
                         <?php foreach($expenses as $expense){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $expense['particulars']; ?></td>
+                                <td><?php 
+                                        if($expense['type']==1)
+                                            echo "Teacher Payment";
+                                        elseif($expense['type']==2)
+                                            echo "Monthly Salary";
+                                        elseif($expense['type']==3)
+                                            echo $expense['particulars'];
+                                        elseif($expense['type']==4)
+                                            echo $payables[$expense['payable_id']];
+                                        elseif($expense['type']==5)
+                                            echo $expense['particulars'];
+                                        elseif($expense['type']==6)
+                                            echo $expense['particulars'];
+                                        elseif($expense['type']==7)
+                                            echo $savings[$expense['saving_id']];
+                                        
+                                            
+                                     ?>
+                                </td>
                                 <td>
                                     <?php 
                                         if($expense['type']==1)

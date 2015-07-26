@@ -16,6 +16,7 @@ $config['expense_types']=array('teacher'=>'Teacher',
                                'staff'=>'Staff',
                                'stationary'=>'Stationary',
                                'payable'=>'Payables',
+                               'purchase'=>'Purchase',
                                'loan'=>'Loan',
                                'saving'=>'Saving'
                              );
@@ -23,8 +24,9 @@ $config['expense_type_key']=array('teacher'=>1,
                                'staff'=>2,
                                'stationary'=>3,
                                'payable'=>4,
-                               'loan'=>5,
-                               'saving'=>6
+                               'purchase'=>5,
+                               'loan'=>6,
+                               'saving'=>7
                             );
 
 $config['monthlist']=array('1'=>'Baisakh',
@@ -47,6 +49,6 @@ $config['payables']=array('1'=>'House Rent',
                         );
 
 $config['saving']=array('1'=>'HariOm',
-                          '2'=>'ABC',
-                          '3'=>'XYZ'
+                        '2'=>'ABC',
+                        '3'=>'XYZ'
                         );
