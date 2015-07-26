@@ -52,7 +52,7 @@
                         <a class="close" data-dismiss="modal">×</a>
                         <h3>Add Expense</h3>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body">                            
                         <table class="table-padding-10">
                             <tr class="show">
                                 <td>
@@ -94,12 +94,20 @@
                                     <input type="text" name="add_expense_particular" class="form-control input-sm" id="add_expense_particular">
                                 </td>
                             </tr>
-                            \<tr class="hide" id="expense_payables_tr">
+                            <tr class="hide" id="expense_payables_tr">
                                 <td>
                                     <label for="add_expense_payables">Payables</label>
                                 </td>
                                 <td colspan="3">
                                     <?php echo form_dropdown('add_expense_payables', array_merge(array("0"=>"Select a Payable"),$this->config->item('payables')), "0",'class="form-control" id="add_expense_payables" onchange="return reportExpenseModalAction(this);"'); ?>
+                                </td>
+                            </tr>
+                            <tr class="hide" id="expense_saving_tr">
+                                <td>
+                                    <label for="add_expense_saving">Saving</label>
+                                </td>
+                                <td colspan="3">
+                                    <?php echo form_dropdown('add_expense_saving', array_merge(array("0"=>"Select a Saving"),$this->config->item('saving')), "0",'class="form-control" id="add_expense_saving" onchange="return reportExpenseModalAction(this);"'); ?>
                                 </td>
                             </tr>
                             <tr class="hide" id="expense_month_tr">

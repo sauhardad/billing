@@ -45,3 +45,8 @@ $config['payables']=array('1'=>'House Rent',
                           '2'=>'Telphone',
                           '3'=>'Electricity'
                         );
+
+$config['saving']=array('1'=>'HariOm',
+                          '2'=>'ABC',
+                          '3'=>'XYZ'
+                        );

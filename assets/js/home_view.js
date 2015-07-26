@@ -587,6 +587,8 @@ function reportExpenseModalAction(source)
         $('#expense_remarks_tr').removeClass('show').addClass('hide');
         $('#expense_month_tr').removeClass('show').addClass('hide');
         $('#select_staff_tr').removeClass('show').addClass('hide');
+        $('#expense_payables_tr').removeClass('show').addClass('hide');
+        $('#expense_loan_tr').removeClass('show').addClass('hide');
         
         if($(source).val()==="teacher")
         {
@@ -640,8 +642,21 @@ function reportExpenseModalAction(source)
         else if($(source).val()==="payable")
         {
             $('#expense_payables_tr').removeClass('hide').addClass('show');    
-            $('#expense_month_tr').removeClass('hide').addClass('show');
+            $('#expense_voucher_tr').removeClass('hide').addClass('show');
             $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+            $('#expense_month_tr').removeClass('hide').addClass('show');
+        }
+        else if($(source).val()==="saving")
+        {
+            $('#expense_saving_tr').removeClass('hide').addClass('show');    
+            $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+        }
+        else if($(source).val()==="loan")
+        {
+            $('#input_particular_tr').removeClass('hide').addClass('show');    
+            $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+            $('#expense_voucher_tr').removeClass('hide').addClass('show');
+            $('#expense_remarks_tr').removeClass('hide').addClass('show');
         }
 
     }
@@ -717,7 +732,37 @@ function reportExpenseModalAction(source)
                 alert("Please Choose a Month");
                 return false;
             }
+            if($('#add_expense_voucher_bill').val()=='')
+            {
+                alert("Please Enter Voucher No");
+                return false;
+            }
             addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val(),$('#add_expense_payables').val());
+        }
+         //validate for savings
+        else if($('#add_expense_type').val()==='saving')
+        {
+            if($('#add_expense_saving').val()==='0')
+            {
+                alert("Please Choose A Saving");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val(),$('#add_expense_payables').val(),$('#add_expense_saving').val());
+        }
+         //validate for loan
+         else if($('#add_expense_type').val()==='loan')
+        {
+            if($('#add_expense_particular').val()==='')
+            {
+                alert("Please Enter a loan particular");
+                return false;
+            }
+            if($('#add_expense_voucher_bill').val()==='')
+            {
+                alert("Please Enter a voucher bill number");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val(),$('#add_expense_payables').val(),$('#add_expense_payables').val());
         }
     }   
 }
@@ -725,12 +770,12 @@ function reportExpenseModalAction(source)
 /** function that ajaxifies the adding of an expense
  * 
  */
-function addExpense(date,type,particular,emp_id,doc_no,month,amount,remark,payable_id)
+function addExpense(date,type,particular,emp_id,doc_no,month,amount,remark,payable_id,saving_id)
 {
     $.ajax({
         type: "POST",
         url: base_url+'expense/add',
-        data:{date: date, type: type, particular: particular,emp_id: emp_id,doc_no: doc_no,month: month,amount: amount,remark: remark, payable_id: payable_id},
+        data:{date: date, type: type, particular: particular,emp_id: emp_id,doc_no: doc_no,month: month,amount: amount,remark: remark, payable_id: payable_id, saving_id: saving_id},
         dataType: 'json',
         success:function(data) { 
             alert(data.message);
