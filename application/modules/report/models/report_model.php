@@ -402,7 +402,7 @@ Class Report_model extends CI_Model
         $query=$this->db->get();
         $temp['income']=$query->result_array(); */
         
-        $this->db->select('t1.name as "group",SUM(t5.paid_amount) as "amount"');
+        $this->db->select('t4.name,t1.name as "group",SUM(t5.paid_amount) as "amount"');
         $this->db->from('tbl_group as t1');
         $this->db->join('tbl_students as t2','t2.group_id=t1.id','left');
         $this->db->join('tbl_student_course as t3','t3.student_id=t2.id','left');
@@ -413,6 +413,7 @@ Class Report_model extends CI_Model
         $query = $this->db->get();
         $temp['income']=$query->result_array();
        
+        
         //get subjects
         $this->db->select('subject');
         $this->db->from('tbl_student_course');
@@ -601,6 +602,38 @@ Class Report_model extends CI_Model
        if(!empty($temp))
             $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total,'remark'=>'');
         return $temp;
+    }
+    
+    /** function that generates data for the saving reportand returns an array when a
+     * saving id is passed to it
+     * @param int $saving_id
+     * @return array
+     */
+    function retrieveSavingReport($saving_id)
+    {
+        $this->db->select('date,amount,remark');
+        $this->db->from('tbl_expense');
+        $this->db->where('type',7);
+        $this->db->where('saving_id',$saving_id);
+        $query=$this->db->get();
+        $temp=$query->result_array();
+        
+        $sn=1;
+        $total=0;
+        foreach($temp as $key=>$value)
+        {
+           //initialize sn
+            $temp[$key]['sn']=$sn;
+            $total+=$temp[$key]['amount'];
+            $sn++;
+        }
+        
+        if(!empty($temp))
+            $temp[]=array('sn'=>' ','date'=>'Total','amount'=>$total,'remark'=>'');
+        
+        return $temp;
+        
+        
     }
 }
 ?>

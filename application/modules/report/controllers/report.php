@@ -298,6 +298,29 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
                 $this->cezpdf->ezStream();
             }
+            elseif($filter1=='saving')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                
+                //retrieve the saving organizations from the config table
+                $savings=$this->config->item('saving');
+                $this->cezpdf->ezText("Savings Report",12,array('justification'=>'center'));
+                foreach($savings as $saving_id=>$value)
+                {
+                    $db_data=$this->report_model->retrieveSavingReport($saving_id);
+                    $col_names = array(
+                        'sn'=>'S.N.',
+                        'date'=>'Date',
+                        'amount'=>'Amount',
+                        'remark'=>'Remarks'
+                    );
+                    $this->cezpdf->ezText("");
+                    if(!empty($db_data))
+                        $this->cezpdf->ezTable($db_data, $col_names, $value, array('width'=>550));
+                }
+                
+                $this->cezpdf->ezStream();
+            }
         }
      }
  }
