@@ -235,6 +235,40 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, "Payables", array('width'=>550));
                 $this->cezpdf->ezStream();
             }
+            elseif($filter1=='stationary')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                $db_data=$this->report_model->retrieveStationaryReport();
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'particulars'=>'Particular',
+                    'date'=>'Date',
+                    'document_id' => 'Bill No',
+                    'amount'=>'Amount',
+                );
+                
+                $this->cezpdf->ezText("Expense Report(Stationary)",12,array('justification'=>'center'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
+                $this->cezpdf->ezStream();
+            }
+            elseif($filter1=='purchase')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                $db_data=$this->report_model->retrievePurchaseReport();
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'particulars'=>'Particular',
+                    'date'=>'Date',
+                    'document_id' => 'Bill No',
+                    'amount'=>'Amount',
+                );
+                
+                $this->cezpdf->ezText("Expense Report(Purchase)",12,array('justification'=>'center'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
+                $this->cezpdf->ezStream();
+            }
         }
      }
  }
