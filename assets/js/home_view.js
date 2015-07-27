@@ -530,6 +530,8 @@ function reportModalAction(source)
                 generateReport('expense',$('#select_expense_type').val(),false);
             else if($('#select_expense_type').val()=='loan')
                 generateReport('expense',$('#select_expense_type').val(),false);
+            else if($('#select_expense_type').val()=='saving')
+                generateReport('expense',$('#select_expense_type').val(),false);
             
         }
         else 
