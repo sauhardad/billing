@@ -547,13 +547,59 @@ Class Report_model extends CI_Model
         $query=$this->db->get();
         $temp=$query->result_array();
         $sn=1;
+        $total=0;
         foreach($temp as $key=>$value)
         {
            //initialize sn
             $temp[$key]['sn']=$sn;
-           
-           $sn++;
+            $total+=$temp[$key]['amount'];
+            $sn++;
         }
+        if(!empty($temp))
+            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total);
+        return $temp;
+    }
+    
+    // function that retrieves data for stationary report
+    function retrievePurchaseReport()
+    {
+        $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id');
+        $this->db->from('tbl_expense as t1');
+        $this->db->where('type',5);
+        $query=$this->db->get();
+        $temp=$query->result_array();
+        $sn=1;
+        $total=0;
+        foreach($temp as $key=>$value)
+        {
+           //initialize sn
+            $temp[$key]['sn']=$sn;
+            $total+=$temp[$key]['amount'];
+            $sn++;
+        }
+       if(!empty($temp))
+            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total);
+        return $temp;
+    }
+    
+    function retrieveLoanReport()
+    {
+        $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id,t1.remark');
+        $this->db->from('tbl_expense as t1');
+        $this->db->where('type',6);
+        $query=$this->db->get();
+        $temp=$query->result_array();
+        $sn=1;
+        $total=0;
+        foreach($temp as $key=>$value)
+        {
+           //initialize sn
+            $temp[$key]['sn']=$sn;
+            $total+=$temp[$key]['amount'];
+            $sn++;
+        }
+       if(!empty($temp))
+            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total,'remark'=>'');
         return $temp;
     }
 }

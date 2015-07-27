@@ -280,6 +280,24 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
                 $this->cezpdf->ezStream();
             }
+            
+            elseif($filter1=='loan')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                $db_data=$this->report_model->retrieveLoanReport();
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'particulars'=>'Paid To',
+                    'document_id' => 'Voucher No',
+                    'amount'=>'Amount',
+                    'remark'=>'Remarks'
+                );
+                
+                $this->cezpdf->ezText("Expense Report(Loan)",12,array('justification'=>'center'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
+                $this->cezpdf->ezStream();
+            }
         }
      }
  }
