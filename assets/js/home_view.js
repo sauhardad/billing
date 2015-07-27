@@ -515,10 +515,15 @@ function reportModalAction(source)
         }
         else if($('#generate_report_type').val()==="expense")
         {
-            if($('#select_teacher').val()==='0')
-                alert("Please choose a Teacher");
-            else
-                generateReport('expense',$('#select_expense_type').val(),$('#select_teacher').val());
+            if($('#select_expense_type').val()=='teacher')
+            {
+                if($('#select_teacher').val()==='0')
+                    alert("Please choose a Teacher");
+                else
+                    generateReport('expense',$('#select_expense_type').val(),$('#select_teacher').val());
+            }
+            else if($('#select_expense_type').val()=='payable')
+                generateReport('expense',$('#select_expense_type').val(),false);
             
         }
         else 

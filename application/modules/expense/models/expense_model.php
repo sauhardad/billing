@@ -20,14 +20,29 @@ Class Expense_model extends CI_Model
      * @param type $expense_id
      * @return type
      */
-    function retrieveExpense($expense_id=NULL)
+    function retrieveExpense($expense_id=NULL,$limit=NULL,$start=NULL)
     {
         if(!is_null($expense_id))
             $this->db->where('id', $expense_id);
+        else
+            $this->db->limit($limit, $start);
         $this->db->where('active', 1);
         $query = $this->db->get('tbl_expense');
         $result=$query->result_array();
+        if(!is_null($expense_id))
+            return $result[0];
         return $result;
+    }
+    
+    /** function that retrieves total no of expenses
+     * 
+     * @return int no of expenses
+     */
+    function retrieveExpenseNumber()
+    {
+        $this->db->where('active', 1);
+        $query = $this->db->get('tbl_expense');
+        return  $query->num_rows();
     }
     
     /** function that deletes expense when expense is passed

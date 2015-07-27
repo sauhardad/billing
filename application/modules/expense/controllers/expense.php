@@ -26,7 +26,20 @@ class Expense extends CI_Controller {
     
     $data['staff']=$this->staff_model->retrieveStaff();
     $data['teachers']=$this->teacher_model->retrieveTeacher();
-    $data['expenses']=$this->expense_model->retrieveExpense();
+    
+    
+    //now the pagnation configuration
+    $config = array();
+    $config["base_url"] = base_url() . "expense/page";
+    $config["total_rows"] =  $data['students']=$this->expense_model->retrieveExpenseNumber();
+    $config["per_page"] = 100;
+    $config["uri_segment"] = 3;
+    $this->pagination->initialize($config);
+    $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0 ;
+    $data['expenses']=$this->expense_model->retrieveExpense(NULL,$config["per_page"],$page);
+    $data['links'] = $this->pagination->create_links();
+    $data['sn']=1;
+    
     $this->template->load('default', 'expense/expense_main_view',$data);
  }
  
@@ -83,6 +96,12 @@ class Expense extends CI_Controller {
  {
      echo json_encode($this->staff_model->retrieveStaff());
  }
+ 
+ function _remap($method, $params=array())
+ {
+    $methodToCall = method_exists($this, $method) ? $method : 'index';
+    return call_user_func_array(array($this, $methodToCall), $params);
+}
 }
 
 ?>

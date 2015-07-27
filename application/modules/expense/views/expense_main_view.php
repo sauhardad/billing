@@ -61,6 +61,7 @@
                         <?php } ?>
                     </tbody>
                 </table>
+                <p><?php echo $links; ?></p>
             </div>
         </div>
         

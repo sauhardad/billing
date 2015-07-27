@@ -59,10 +59,8 @@ Class Student_model extends CI_Model
         return $result;
     }
     
-    /** function that retrieves specific students if the student_id is provided
-     * from the student table else all the students
+    /** function that retrieves total no of students
      * 
-     * @param type $student_id
      * @return int no of students
      */
     function retrieveStudentNumber()

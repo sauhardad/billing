@@ -425,5 +425,51 @@ Class Report_model extends CI_Model
         
         return $temp;
     }
+    
+    /** function that retrieves data for the Payable report
+     * @param type
+     * 
+     * @return array
+     */
+    function retrievePayableReport($type)
+    {
+        $expense_type=$this->config->item('expense_type');
+        $expense_type_key=$this->config->item('expense_type_key');
+        $monthlist=$this->config->item('monthlist');
+        $payables=$this->config->item('payables');
+        
+        
+        //create the subquery
+        $subquery="";
+        foreach($payables as $key=>$value)
+        {
+            if(!empty($subquery))
+                $subquery.=",";
+            $subquery.="CASE payable_id WHEN ".$key." THEN SUM(amount) END as '".$key."'";
+        }
+        
+        
+        $this->db->select('month,payable_id, '.$subquery,FALSE);
+        $this->db->from('tbl_expense');
+        //4 is the type payable defined in custom-config.php
+        $this->db->where('type',$expense_type_key[$type]);
+        $this->db->group_by('month,payable_id');
+        $query=$this->db->get();
+        $temp=$query->result_array();    
+        
+        echo $this->db->last_query();die;
+        
+        $sn=1;
+        foreach($temp as $key=>$value)
+        {
+            $temp[$key]['sn']=$sn;
+            $temp[$key]['month']=$monthlist[$temp[$key]['month']];
+            $sn++;
+        }
+        
+        return $temp;
+        
+        
+    }
 }
 ?>

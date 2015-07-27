@@ -200,7 +200,7 @@ class Report extends CI_Controller {
             $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
             $this->cezpdf->ezStream();
         }
-        else if(($type==='expense') && ($filter1) && ($filter2))
+        else if(($type==='expense') && ($filter1))
         {
             if($filter1=='teacher')
             {
@@ -221,6 +221,26 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezText("Subjects : ".$db_data['personal']['subjects'],12,array('justification'=>'left'));
                 $this->cezpdf->ezText("");
                 $this->cezpdf->ezTable($db_data['payments'], $col_names, $header, array('width'=>550));
+                $this->cezpdf->ezStream();
+            }
+            elseif($filter1=='payable')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                $db_data=$this->report_model->retrievePayableReport($filter1);
+                $col_names = array(
+                    'sn'=>'S.N.',
+                    'month'=>'Month'
+                )+$this->config->item('payables');
+                
+                //debug_array($col_names);debug_array($db_data);die;
+//                $this->cezpdf->ezText("Teacher Profile",12,array('justification'=>'center'));
+//                $this->cezpdf->ezText("");
+//                $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
+//                                      "Address : ".$db_data['personal']['address']."               "."Contact : ".
+//                                        $db_data['personal']['contact_no'],12,array('justification'=>'left'));
+//                $this->cezpdf->ezText("Subjects : ".$db_data['personal']['subjects'],12,array('justification'=>'left'));
+//                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data, $col_names, "Payables", array('width'=>550));
                 $this->cezpdf->ezStream();
             }
         }
