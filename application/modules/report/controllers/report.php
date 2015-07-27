@@ -206,13 +206,20 @@ class Report extends CI_Controller {
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
                 $db_data=$this->report_model->retrieveTeacherReport($filter2);
-                $col_names = array(
+                $col_names1 = array(
                     'sn'=>'S.N.',
                     'date'=>'Date',
                     'document_id' => 'Voucher No',
                     'amount'=>'Amount',
                     'remark' => 'Remarks'
                 );  
+                $col_names2 = array(
+                    'sn'=>'S.N.',
+                    'group'=>'Group',
+                    'amount' => 'Amount',
+                    'remark' => 'Remarks'
+                );  
+                
                 $this->cezpdf->ezText("Teacher Profile",12,array('justification'=>'center'));
                 $this->cezpdf->ezText("");
                 $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
@@ -220,7 +227,11 @@ class Report extends CI_Controller {
                                         $db_data['personal']['contact_no'],12,array('justification'=>'left'));
                 $this->cezpdf->ezText("Subjects : ".$db_data['personal']['subjects'],12,array('justification'=>'left'));
                 $this->cezpdf->ezText("");
-                $this->cezpdf->ezTable($db_data['payments'], $col_names, $header, array('width'=>550));
+                $this->cezpdf->ezTable($db_data['income'], $col_names2, "Income", array('width'=>550));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data['payments'], $col_names1, "Expenditure", array('width'=>550));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezText("Balance = ".$db_data['total_income']." - ".$db_data['total_payment']." = ".($db_data['total_income']-$db_data['total_payment']),12,array('justification'=>'left'));
                 $this->cezpdf->ezStream();
             }
             elseif($filter1=='payable')

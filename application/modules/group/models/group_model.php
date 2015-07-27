@@ -108,10 +108,7 @@ Class Group_model extends CI_Model
         //now calculate the teacher share
         //need to retieve from teachers table
         $this->db->select('share_percent');
-        $this->db->from('tbl_group');
-        $this->db->where('tbl_group.id',$group_id);
-        $this->db->join('tbl_teacher','tbl_teacher.id=tbl_group.teacher_id','left');
-        $this->db->group_by("tbl_group.id");
+        $this->db->from('tbl_teacher');
         $query = $this->db->get();
         $result=$query->result_array();
         $temp['share']=($result[0]['share_percent']/100)*$temp['total'];

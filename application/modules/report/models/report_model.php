@@ -391,6 +391,27 @@ Class Report_model extends CI_Model
         $this->db->where('t2.emp_id',$teacher_id);
         $query=$this->db->get();
         $temp['payments']=$query->result_array();    
+        
+        //get income information
+       /* $this->db->select('t3.name as "group",SUM(t1.amount) as "amount"');
+        $this->db->from('tbl_student_course as t1');
+        $this->db->join('tbl_students as t2','t2.id=t1.student_id');
+        $this->db->join('tbl_group as t3','t3.id=t2.group_id');
+        $this->db->where('t1.teacher_id',$teacher_id);
+        $this->db->group_by('t1.teacher_id,t2.group_id');
+        $query=$this->db->get();
+        $temp['income']=$query->result_array(); */
+        
+        $this->db->select('t1.name as "group",SUM(t5.paid_amount) as "amount"');
+        $this->db->from('tbl_group as t1');
+        $this->db->join('tbl_students as t2','t2.group_id=t1.id','left');
+        $this->db->join('tbl_student_course as t3','t3.student_id=t2.id','left');
+        $this->db->join('tbl_teacher as t4','t4.id=t3.teacher_id','left');
+        $this->db->join('tbl_bill_payment as t5','t5.student_id=t2.id','left');
+        $this->db->where('t4.id',$teacher_id);
+        $this->db->group_by("t1.id");
+        $query = $this->db->get();
+        $temp['income']=$query->result_array();
        
         //get subjects
         $this->db->select('subject');
@@ -411,17 +432,34 @@ Class Report_model extends CI_Model
         
         
         $sn=1;
-        $total=0;
+        $total_payments=0;
         foreach($temp['payments'] as $key=>$value)
         {
            //initialize sn
            $temp['payments'][$key]['sn']=$sn;
-           $total+=$temp['payments'][$key]['amount'];
+           $total_payments+=$temp['payments'][$key]['amount'];
            $sn++;
         }
+        $temp['total_payment']=$total_payments;
+        
+        
+        $sn=1;
+        $total_income=0;
+        foreach($temp['income'] as $key=>$value)
+        {
+           //initialize sn
+           $temp['income'][$key]['sn']=$sn;
+           $total_income+=$temp['income'][$key]['amount'];
+           $sn++;
+        }
+        $temp['total_income']=$total_income;
         
         if(!empty($temp['payments']))
-            $temp['payments'][]=array('sn'=>' ','document_id'=>'Total','amount'=>$total,'remark'=>' ');
+            $temp['payments'][]=array('sn'=>' ','document_id'=>'Total','amount'=>$total_payments,'remark'=>' ');
+        
+        if(!empty($temp['income']))
+            $temp['income'][]=array('sn'=>' ','group'=>'Total','amount'=>$total_income,'remark'=>' ');
+        
         
         return $temp;
     }
