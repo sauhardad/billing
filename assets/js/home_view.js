@@ -524,6 +524,8 @@ function reportModalAction(source)
             }
             else if($('#select_expense_type').val()=='payable')
                 generateReport('expense',$('#select_expense_type').val(),false);
+            else if($('#select_expense_type').val()=='stationary')
+                generateReport('expense',$('#select_expense_type').val(),false);
             
         }
         else 
@@ -644,6 +646,13 @@ function reportExpenseModalAction(source)
             $('#expense_voucher_tr').removeClass('hide').addClass('show');
         }
         
+        else if($(source).val()==="purchase")
+        {
+            $('#input_particular_tr').removeClass('hide').addClass('show');    
+            $('#add_expense_amount_tr').removeClass('hide').addClass('show');
+            $('#expense_voucher_tr').removeClass('hide').addClass('show');
+        }
+        
         else if($(source).val()==="payable")
         {
             $('#expense_payables_tr').removeClass('hide').addClass('show');    
@@ -711,6 +720,22 @@ function reportExpenseModalAction(source)
         }
         //validate for stationary
         else if($('#add_expense_type').val()==='stationary')
+        {
+            if($('#add_expense_particular').val()=='')
+            {
+                alert("Please Enter a Particular");
+                return false;
+            }
+            if($('#add_expense_voucher_bill').val()=='')
+            {
+                alert("Please Enter Voucher No");
+                return false;
+            }
+            addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());
+        }
+        
+        //validate for purchase
+        else if($('#add_expense_type').val()==='purchase')
         {
             if($('#add_expense_particular').val()=='')
             {

@@ -468,8 +468,25 @@ Class Report_model extends CI_Model
         }
         
         return $temp;
-        
-        
+    }
+    
+    // function that retrieves data for stationary report
+    function retrieveStationaryReport()
+    {
+        $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id');
+        $this->db->from('tbl_expense as t1');
+        $this->db->where('type',3);
+        $query=$this->db->get();
+        $temp=$query->result_array();
+        $sn=1;
+        foreach($temp as $key=>$value)
+        {
+           //initialize sn
+            $temp[$key]['sn']=$sn;
+           
+           $sn++;
+        }
+        return $temp;
     }
 }
 ?>
