@@ -526,6 +526,10 @@ function reportModalAction(source)
                 generateReport('expense',$('#select_expense_type').val(),false);
             else if($('#select_expense_type').val()=='stationary')
                 generateReport('expense',$('#select_expense_type').val(),false);
+            else if($('#select_expense_type').val()=='purchase')
+                generateReport('expense',$('#select_expense_type').val(),false);
+            else if($('#select_expense_type').val()=='loan')
+                generateReport('expense',$('#select_expense_type').val(),false);
             
         }
         else 
