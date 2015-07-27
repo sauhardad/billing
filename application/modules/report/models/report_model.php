@@ -436,37 +436,67 @@ Class Report_model extends CI_Model
         $expense_type=$this->config->item('expense_type');
         $expense_type_key=$this->config->item('expense_type_key');
         $monthlist=$this->config->item('monthlist');
-        $payables=$this->config->item('payables');
+        $payables=$this->config->item('payables');    
         
-        
-        //create the subquery
-        $subquery="";
+        $query="SELECT t1.month";
+        $first_subquery=TRUE;
+        $total=array();
         foreach($payables as $key=>$value)
         {
-            if(!empty($subquery))
-                $subquery.=",";
-            $subquery.="CASE payable_id WHEN ".$key." THEN SUM(amount) END as '".$key."'";
+            $query.=",t".$key.".".$key;
+            $total[$key]=0;
+        }
+        $query.=" FROM ";
+        foreach($payables as $key=>$value)
+        {
+            if(!$first_subquery)
+                $query.='LEFT JOIN ';
+            $query.='(SELECT month,SUM(amount) as "'.$key.'"
+                            FROM (`tbl_expense`) WHERE `type` = 4 and payable_id='.$key.' group by month) as t'.$key.' ';
+            if(!$first_subquery)
+                $query.=' on t'.$key.'.month=t1.month ';
+            $first_subquery=FALSE;
         }
         
-        
-        $this->db->select('month,payable_id, '.$subquery,FALSE);
-        $this->db->from('tbl_expense');
-        //4 is the type payable defined in custom-config.php
-        $this->db->where('type',$expense_type_key[$type]);
-        $this->db->group_by('month,payable_id');
-        $query=$this->db->get();
+        /*$query=$this->db->query('SELECT t1.month,t1.1,t2.2,t3.3 FROM 
+                        (SELECT month,SUM(amount) as "1"
+                        FROM (`tbl_expense`) WHERE `type` = 4 and payable_id=1 group by month) as t1
+                        LEFT JOIN
+                        (SELECT month,SUM(amount) as "2"
+                        FROM (`tbl_expense`) WHERE `type` = 4 and payable_id=2 group by month) as t2 on t2.month=t1.month
+                        LEFT JOIN
+                        (SELECT month,SUM(amount) as "3"
+                        FROM (`tbl_expense`) WHERE `type` = 4 and payable_id=3 group by month) as t3 on t3.month=t1.month');
+         */
+        $query=$this->db->query($query);
         $temp=$query->result_array();    
         
-        echo $this->db->last_query();die;
         
         $sn=1;
-        foreach($temp as $key=>$value)
+        foreach($temp as $key1=>$value1)
         {
-            $temp[$key]['sn']=$sn;
-            $temp[$key]['month']=$monthlist[$temp[$key]['month']];
+            $temp[$key1]['sn']=$sn;
+            $temp[$key1]['month']=$monthlist[$temp[$key1]['month']];
+            
+            //now sum up the total for each type of payable
+            foreach($payables as $key2=>$value2)
+            {
+                $total[$key2]=$total[$key2]+$temp[$key1][$key2];
+            }
+            
             $sn++;
         }
         
+        if(!empty($temp))
+        {
+            $temp[$sn]=array('sn'=>' ','month'=>'Total');
+            foreach($payables as $key=>$value)
+            {
+                $temp[$sn][$key]=$total[$key];
+            }
+        }
+            
+        debug_array($temp);
         return $temp;
         
         

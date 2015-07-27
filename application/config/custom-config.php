@@ -44,7 +44,7 @@ $config['monthlist']=array('1'=>'Baisakh',
                         );
 
 $config['payables']=array('1'=>'House Rent',
-                          '2'=>'Telphone',
+                          '2'=>'Telephone',
                           '3'=>'Electricity'
                         );
 
