@@ -298,6 +298,29 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
                 $this->cezpdf->ezStream();
             }
+            
+            if($filter1=='staff')
+            {
+                $this->load->library('cezpdf',array('a4','portrait')); 
+                $db_data=$this->report_model->retrieveStaffReport($filter2);
+                    $col_names = array(
+                    'sn'=>'S.N.',
+                    'month'=>'Month',
+                    'date'=>'Date',
+                    'document_id'=>'Voucher Number',
+                    'amount'=>'Amount'    
+                );        
+                
+                
+                $this->cezpdf->ezText("Staff Profile",12,array('justification'=>'center'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
+                                      "Address : ".$db_data['personal']['address']."               "."Contact : ".
+                                        $db_data['personal']['contact_no'],12,array('justification'=>'left'));
+                $this->cezpdf->ezText("");
+                $this->cezpdf->ezTable($db_data, $col_names, "Income", array('width'=>550));
+                $this->cezpdf->ezStream();
+            }
         }
      }
  }
@@ -321,6 +344,11 @@ class Report extends CI_Controller {
  function getTeachers()
  {
      echo json_encode($this->teacher_model->retrieveTeacher());
+ }
+ 
+ function getStaffs()
+ {
+     echo json_encode($this->staff_model->retrieveStaff());
  }
  
 }

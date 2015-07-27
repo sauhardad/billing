@@ -582,6 +582,51 @@ Class Report_model extends CI_Model
         return $temp;
     }
     
+    function retrieveStaffReport($staff_id)
+    {
+        //get Staff personal info
+        $this->db->select('t1.name,t1.address,t1.contact,t1.post,t1.salary');
+        $this->db->from('tbl_staff as t1');
+        $this->db->join('tbl_expense as t2','t2.emp_id=t1.id');
+        $this->db->where('t1.id',$staff_id);
+        $query=$this->db->get();
+        $temp['personal']=$query->row_array();
+        debug_array($temp['personal']);die;
+        
+        $sn=1;
+        $total_payments=0;
+        foreach($temp['payments'] as $key=>$value)
+        {
+           //initialize sn
+           $temp['payments'][$key]['sn']=$sn;
+           $total_payments+=$temp['payments'][$key]['amount'];
+           $sn++;
+        }
+        $temp['total_payment']=$total_payments;
+        
+        
+        $sn=1;
+        $total_income=0;
+        foreach($temp['income'] as $key=>$value)
+        {
+           //initialize sn
+           $temp['income'][$key]['sn']=$sn;
+           $total_income+=$temp['income'][$key]['amount'];
+           $sn++;
+        }
+        $temp['total_income']=$total_income;
+        
+        if(!empty($temp['payments']))
+            $temp['payments'][]=array('sn'=>' ','document_id'=>'Total','amount'=>$total_payments,'remark'=>' ');
+        
+        if(!empty($temp['income']))
+            $temp['income'][]=array('sn'=>' ','group'=>'Total','amount'=>$total_income,'remark'=>' ');
+        
+        
+        return $temp;
+    }
+    
+    
     function retrieveLoanReport()
     {
         $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id,t1.remark');
