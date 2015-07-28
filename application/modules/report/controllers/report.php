@@ -24,6 +24,8 @@ class Report extends CI_Controller {
      {
         $filter1=$this->input->get('filter1');
         $filter2=$this->input->get('filter2');
+        $date1=$this->input->get('date1');
+        $date2=$this->input->get('date2');
          
         //in case of all group report
         if(($type==='group-summary') && ($filter1==='true'))
@@ -66,10 +68,10 @@ class Report extends CI_Controller {
             $this->cezpdf->ezStream();
         }
         //income summary for all sections
-        else if(($type==='income') && ($filter1==='true') && (!$filter2))
+        else if(($type==='income') && ($filter1))
         {
             $this->load->library('cezpdf',array('a4','portrait')); 
-            $db_data=$this->report_model->retrieveAllSectionReport();
+            $db_data=$this->report_model->retrieveAllSectionReport($filter1);
             $col_names = array(
                 'sn'=>'S.N.',
                 'name' => 'Section',
@@ -165,8 +167,8 @@ class Report extends CI_Controller {
         else if(($type==='transaction') && ($filter1))
         {
             $this->load->library('cezpdf',array('a4','portrait')); 
-            $db_data=$this->report_model->retrieveTransactionReport($filter2,$filter1);
-            //noneed to display name for individual user report
+            $db_data=$this->report_model->retrieveTransactionReport($filter2,$filter1,$date1,$date2);
+            //no need to display name for individual user report
             if($filter2)
             {
                 $col_names = array(
@@ -192,10 +194,6 @@ class Report extends CI_Controller {
             
             //determine what the heading for the report should be
             $header="Transaction Report";
-            if($filter2)
-                $header.=" ( ".$this->user_model->getUserName($filter2). " ) ";
-            $header.=" - ".date("F j, Y");
-            
 
             $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
             $this->cezpdf->ezStream();
@@ -246,10 +244,10 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, "Payables", array('width'=>550));
                 $this->cezpdf->ezStream();
             }
-            elseif($filter1=='stationary')
+            elseif($filter1=='stationary' && ($filter2))
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
-                $db_data=$this->report_model->retrieveStationaryReport();
+                $db_data=$this->report_model->retrieveStationaryReport($filter2,$date1,$date2);
                 $col_names = array(
                     'sn'=>'S.N.',
                     'particulars'=>'Particular',
@@ -263,10 +261,10 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
                 $this->cezpdf->ezStream();
             }
-            elseif($filter1=='purchase')
+            elseif($filter1=='purchase' && ($filter2))
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
-                $db_data=$this->report_model->retrievePurchaseReport();
+                $db_data=$this->report_model->retrievePurchaseReport($filter2,$date1,$date2);
                 $col_names = array(
                     'sn'=>'S.N.',
                     'particulars'=>'Particular',
@@ -281,12 +279,13 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezStream();
             }
             
-            elseif($filter1=='loan')
+            elseif($filter1=='loan' && ($filter2))
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
-                $db_data=$this->report_model->retrieveLoanReport();
+                $db_data=$this->report_model->retrieveLoanReport($filter2,$date1,$date2);
                 $col_names = array(
                     'sn'=>'S.N.',
+                    'date'=>'Date',
                     'particulars'=>'Paid To',
                     'document_id' => 'Voucher No',
                     'amount'=>'Amount',
@@ -319,7 +318,7 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezText("");
                 $this->cezpdf->ezTable($db_data, $col_names, "Income", array('width'=>550));
             }
-            elseif($filter1=='saving')
+            elseif($filter1=='saving' && ($filter2))
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
                 
@@ -328,7 +327,7 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezText("Savings Report",12,array('justification'=>'center'));
                 foreach($savings as $saving_id=>$value)
                 {
-                    $db_data=$this->report_model->retrieveSavingReport($saving_id);
+                    $db_data=$this->report_model->retrieveSavingReport($saving_id,$filter2,$date1,$date2);
                     $col_names = array(
                         'sn'=>'S.N.',
                         'date'=>'Date',

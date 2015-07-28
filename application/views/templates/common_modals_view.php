@@ -69,7 +69,21 @@
                             <label for="select_duration">Select Duration</label>
                         </td>
                         <td colspan="3">
-                            <?php echo form_dropdown('select_duration',array("1"=>"Today","2"=>"Week","3"=>"Month"), "1",'class="form-control" id="select_duration"'); ?>
+                            <?php echo form_dropdown('select_duration',array("1"=>"Today","2"=>"Month","3"=>"Custom"), "1",'class="form-control" id="select_duration" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
+                    <tr class="hide" id="duration_between_tr">
+                        <td>
+                            <label for="duration_from">From</label>
+                        </td>
+                        <td>
+                            <input type="text" id="duration_from" class="form-control datepicker"/>
+                        </td>
+                        <td>
+                            <label for="duration_to">To</label>
+                        </td>
+                        <td>
+                            <input type="text" id="duration_to" class="form-control datepicker"/>
                         </td>
                     </tr>
                     <tr class="hide" id="select_teacher_tr">

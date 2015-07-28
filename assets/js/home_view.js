@@ -321,6 +321,7 @@ function reportModalAction(source)
         $('#select_user_tr').removeClass('show').addClass('hide');
         $('#select_duration_tr').removeClass('show').addClass('hide');
         $('#select_expense_type_tr').removeClass('show').addClass('hide');
+        $('#duration_between_tr').removeClass('show').addClass('hide');
         
         if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact" || $(source).val()==="group-account")
         {
@@ -359,6 +360,10 @@ function reportModalAction(source)
                    $('#select_duration_tr').removeClass('hide').addClass('show');
                 }       
               });
+        }
+        else if($(source).val()==="income")
+        {
+            $('#select_duration_tr').removeClass('hide').addClass('show');
         }
         else if($(source).val()==="expense")
         {
@@ -427,6 +432,17 @@ function reportModalAction(source)
             $('#search_group_tr').removeClass('hide').addClass('show');
         }
     }
+    else if($(source).attr('id')==='select_duration')
+    {
+        if($('#select_duration').val()==3)
+        {
+            $('#duration_between_tr').removeClass('hide').addClass('show');
+        }
+        else
+        {
+            $('#duration_between_tr').removeClass('show').addClass('hide');
+        }
+    }
     else if($(source).attr('id')==="select_expense_type")
     {
         if($(source).val()==="teacher")
@@ -446,6 +462,22 @@ function reportModalAction(source)
                    $('#select_teacher_tr').removeClass('hide').addClass('show');
                 }       
               });
+        }
+        else if($(source).val()==="stationary")
+        {
+            $('#select_duration_tr').removeClass('hide').addClass('show');
+        }
+        else if($(source).val()==="purchase")
+        {
+            $('#select_duration_tr').removeClass('hide').addClass('show');
+        }
+        else if($(source).val()==="loan")
+        {
+            $('#select_duration_tr').removeClass('hide').addClass('show');
+        }
+        else if($(source).val()==="saving")
+        {
+            $('#select_duration_tr').removeClass('hide').addClass('show');
         }
     }
     else if($(source).attr('id')==="generate_report")
@@ -474,7 +506,7 @@ function reportModalAction(source)
                 {
                     filter1=true;
                     filter2=$('#select_subsection').val();
-                    generateReport(type,filter1,filter2);
+                    generateReport(type,filter1,filter2,false,false);
                 }
                 else if($('#select_group').val()==='specific')
                 {
@@ -483,7 +515,7 @@ function reportModalAction(source)
                     {
                         tokenInput=$('#search_group').tokenInput("get")[0];
                         filter2=tokenInput.id;
-                        generateReport(type,filter1,filter2);
+                        generateReport(type,filter1,filter2,false,false);
                     }
                     else
                     {
@@ -497,7 +529,7 @@ function reportModalAction(source)
                 {
                     tokenInput=$('#search_group').tokenInput("get")[0];
                     filter2=tokenInput.id;
-                    generateReport($('#generate_report_type').val(),false,filter2);
+                    generateReport($('#generate_report_type').val(),false,filter2,false,false);
                 }
                 else
                 {
@@ -507,11 +539,16 @@ function reportModalAction(source)
         }
         else if($('#generate_report_type').val()==="income")
         {
-            generateReport('income','true',0);
+            generateReport('income',$('#select_duration').val(),false,false,false);
         }
         else if($('#generate_report_type').val()==="transaction")
         {
-            generateReport('transaction',$('#select_duration').val(),$('#select_user').val())
+            if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+            {
+                alert('Please enter From/To date!');
+                return;
+            }
+            generateReport('transaction',$('#select_duration').val(),$('#select_user').val(),$('#duration_from').val(),$('#duration_to').val())
         }
         else if($('#generate_report_type').val()==="expense")
         {
@@ -520,18 +557,46 @@ function reportModalAction(source)
                 if($('#select_teacher').val()==='0')
                     alert("Please choose a Teacher");
                 else
-                    generateReport('expense',$('#select_expense_type').val(),$('#select_teacher').val());
+                    generateReport('expense',$('#select_expense_type').val(),$('#select_teacher').val(),false,false);
             }
             else if($('#select_expense_type').val()=='payable')
-                generateReport('expense',$('#select_expense_type').val(),false);
+                generateReport('expense',$('#select_expense_type').val(),false,false,false);
             else if($('#select_expense_type').val()=='stationary')
-                generateReport('expense',$('#select_expense_type').val(),false);
+            {
+                if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+                {
+                    alert('Please enter From/To date!');
+                    return;
+                }
+                generateReport('expense',$('#select_expense_type').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
+            }
             else if($('#select_expense_type').val()=='purchase')
-                generateReport('expense',$('#select_expense_type').val(),false);
+            {
+                if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+                {
+                    alert('Please enter From/To date!');
+                    return;
+                }
+                generateReport('expense',$('#select_expense_type').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
+            }
+                
             else if($('#select_expense_type').val()=='loan')
-                generateReport('expense',$('#select_expense_type').val(),false);
+            {
+                if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+                {
+                    alert('Please enter From/To date!');
+                    return;
+                }
+                generateReport('expense',$('#select_expense_type').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
+            }
             else if($('#select_expense_type').val()=='saving')
-                generateReport('expense',$('#select_expense_type').val(),false);
+                
+                if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+                {
+                    alert('Please enter From/To date!');
+                    return;
+                }
+                generateReport('expense',$('#select_expense_type').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
             
         }
         else 
@@ -579,9 +644,9 @@ function printReceipt(data)
 /** function that generates a given type of report 
  * 
  */
-function generateReport(type,filter1,filter2)
+function generateReport(type,filter1,filter2,date1,date2)
 {
-    window.open(base_url+"report?type="+type+"&filter1="+filter1+"&filter2="+filter2,'_blank');
+    window.open(base_url+"report?type="+type+"&filter1="+filter1+"&filter2="+filter2+"&date1="+date1+"&date2="+date2,'_blank');
     location.reload();
 }
 

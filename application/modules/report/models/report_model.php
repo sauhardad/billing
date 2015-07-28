@@ -60,17 +60,19 @@ Class Report_model extends CI_Model
         return $temp;
     }
     
-    /** function that retrieves report summary of all the sections 
-     * 
+    /** function that retrieves report summary of all the sections when the duration
+     * is passed
+     * @param int $duration
      * @return array() $temp
      */
-    function retrieveAllSectionReport()
+    function retrieveAllSectionReport($duration)
     {
         $this->db->select('tbl_section.name,SUM(tbl_student_course.amount) as amount,t.paid,(SUM(tbl_student_course.amount)-t.paid) as due');
         $this->db->from('tbl_section');
         $this->db->join('tbl_students','tbl_students.section_id=tbl_section.id','left');
         $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
         $this->db->join('(SELECT `tbl_section`.`id` as section_id, SUM(tbl_bill_payment.paid_amount) as paid FROM (`tbl_section`) LEFT JOIN `tbl_students` ON `tbl_students`.`section_id`=`tbl_section`.`id` LEFT JOIN `tbl_bill_payment` ON `tbl_bill_payment`.`student_id`=`tbl_students`.`id` GROUP BY `tbl_section`.`id` ORDER BY `tbl_section`.`id`) as t','t.section_id=tbl_section.id','left');
+        
         $this->db->group_by('tbl_section.id');
         $this->db->order_by('tbl_section.id');
         $query=$this->db->get();
@@ -324,7 +326,7 @@ Class Report_model extends CI_Model
      * @param int $user_id
      * @param int $duration i.e. 1=>Today,2=>Week,3=>Month
      */
-    function retrieveTransactionReport($user_id,$duration)
+    function retrieveTransactionReport($user_id,$duration,$from,$to)
     {
         //variable to display the type of total
         $total_type=" ";
@@ -341,15 +343,15 @@ Class Report_model extends CI_Model
            $this->db->where('DATE(tbl_bill_payment.entry_timestamp)','CURDATE()',FALSE);
            $total_type="Total(Today)";
         }
-        elseif($duration==2) //get payments received this week
-        {
-            $this->db->where('WEEK(DATE(tbl_bill_payment.entry_timestamp))','WEEK(CURDATE())',FALSE);
-            $total_type="Total(This Week)";
-        }
-        elseif($duration==3)
+        elseif($duration==2) //get payments received this month
         {
             $this->db->where('MONTH(DATE(tbl_bill_payment.entry_timestamp))','MONTH(CURDATE())',FALSE);
             $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('DATE(tbl_bill_payment.entry_timestamp) BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
         }    
         $this->db->order_by('users.id');
         $query=$this->db->get();
@@ -539,14 +541,34 @@ Class Report_model extends CI_Model
         return $temp;
     }
     
-    // function that retrieves data for stationary report
-    function retrieveStationaryReport()
+    /* function that retrieves data for stationary report when the duration is provided
+     * @param int $duration
+     * @return array
+     */
+    function retrieveStationaryReport($duration,$from,$to)
     {
         $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id');
         $this->db->from('tbl_expense as t1');
         $this->db->where('type',3);
+        //apply the date filter
+        if($duration==1) //get payments received today
+        {
+           $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\')','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $this->db->where('MONTH(STR_TO_DATE(t1.date,\'%m/%d/%Y\'))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\') BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
+        }    
         $query=$this->db->get();
         $temp=$query->result_array();
+        
         $sn=1;
         $total=0;
         foreach($temp as $key=>$value)
@@ -557,16 +579,32 @@ Class Report_model extends CI_Model
             $sn++;
         }
         if(!empty($temp))
-            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total);
+            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>$total_type,'amount'=>$total);
         return $temp;
     }
     
     // function that retrieves data for stationary report
-    function retrievePurchaseReport()
+    function retrievePurchaseReport($duration,$from,$to)
     {
         $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id');
         $this->db->from('tbl_expense as t1');
         $this->db->where('type',5);
+        //apply the date filter
+        if($duration==1) //get payments received today
+        {
+           $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\')','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $this->db->where('MONTH(STR_TO_DATE(t1.date,\'%m/%d/%Y\'))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\') BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
+        }    
         $query=$this->db->get();
         $temp=$query->result_array();
         $sn=1;
@@ -579,7 +617,7 @@ Class Report_model extends CI_Model
             $sn++;
         }
        if(!empty($temp))
-            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total);
+            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>$total_type,'amount'=>$total);
         return $temp;
     }
     
@@ -628,11 +666,27 @@ Class Report_model extends CI_Model
     }
     
     
-    function retrieveLoanReport()
+    function retrieveLoanReport($duration,$from,$to)
     {
         $this->db->select('t1.particulars,t1.date,t1.amount,t1.document_id,t1.remark');
         $this->db->from('tbl_expense as t1');
         $this->db->where('type',6);
+        //apply the date filter
+        if($duration==1) //get payments received today
+        {
+           $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\')','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $this->db->where('MONTH(STR_TO_DATE(t1.date,\'%m/%d/%Y\'))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\') BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
+        }    
         $query=$this->db->get();
         $temp=$query->result_array();
         $sn=1;
@@ -645,7 +699,7 @@ Class Report_model extends CI_Model
             $sn++;
         }
        if(!empty($temp))
-            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>'Total','amount'=>$total,'remark'=>'');
+            $temp[]=array('sn'=>' ','particulars'=>' ','date'=>'','document_id'=>$total_type,'amount'=>$total,'remark'=>'');
         return $temp;
     }
     
@@ -654,12 +708,28 @@ Class Report_model extends CI_Model
      * @param int $saving_id
      * @return array
      */
-    function retrieveSavingReport($saving_id)
+    function retrieveSavingReport($saving_id,$duration,$from,$to)
     {
         $this->db->select('date,amount,remark');
-        $this->db->from('tbl_expense');
+        $this->db->from('tbl_expense as t1');
         $this->db->where('type',7);
         $this->db->where('saving_id',$saving_id);
+        //apply the date filter
+        if($duration==1) //get payments received today
+        {
+           $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\')','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $this->db->where('MONTH(STR_TO_DATE(t1.date,\'%m/%d/%Y\'))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\') BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
+        }    
         $query=$this->db->get();
         $temp=$query->result_array();
         
@@ -674,7 +744,7 @@ Class Report_model extends CI_Model
         }
         
         if(!empty($temp))
-            $temp[]=array('sn'=>' ','date'=>'Total','amount'=>$total,'remark'=>'');
+            $temp[]=array('sn'=>' ','date'=>$total_type,'amount'=>$total,'remark'=>'');
         
         return $temp;
         
