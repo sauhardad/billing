@@ -26,6 +26,16 @@ Class Staff_model extends CI_Model
             $this->db->where('id', $staff_id);
         $this->db->where('active', 1);
         $query = $this->db->get('tbl_staff');
+        if(!is_null($staff_id))
+            return $query->result_array()[0];
+        return $query->result_array();
+    }
+    
+    function retrieveStaffMetadata($staff_id)
+    {
+        $this->db->where('staff_id', $staff_id);
+        $this->db->where('active', 1);
+        $query = $this->db->get('tbl_staff_entitled');
         $result=$query->result_array();
         return $result;
     }

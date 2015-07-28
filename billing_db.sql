@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2015 at 09:46 AM
+-- Generation Time: Jul 28, 2015 at 11:19 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -44,19 +44,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('13822f2eb8af9b89273b662206e4d318', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437890915, ''),
-('37fed2e087c835fffbe756a41e9a9a95', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889138, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('5d605145089127a84f7ea06e50732894', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437890915, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('664cc4cbf9eeed34b540767cf126d5b5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437895437, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('85fe33c5375da45f55b2b5cc5a1adb41', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437892393, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('8743a206e3c9511fd55efe3cee0fbac7', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889982, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('a2d6b12114cc7264c79fbc236a4e58ad', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437892393, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('abc3fa621ed825f1d2cc6cfbfc55c0fd', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889982, ''),
-('b03c0fda12f78649f79248bb0ff99b49', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437891424, ''),
-('d1e406418cb3b5d7590487c477cabbf5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889681, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('e3e5ef2bab6768ae48835d43ec7a2218', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437893589, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('eec1240436344605ae19dfe45a3845eb', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1437889982, ''),
-('f9386465ea0f9973075cc4cf8ad937d5', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1437891424, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('06a8da4e3a9a4b5c9710725b4243fec6', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438071060, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('c254e5caf2b3ad3981b1b20ca638caca', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438074616, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
 
 -- --------------------------------------------------------
 
@@ -134,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `tbl_expense` (
   `active` tinyint(1) NOT NULL,
   `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
 
 --
 -- Dumping data for table `tbl_expense`
@@ -151,7 +140,11 @@ INSERT INTO `tbl_expense` (`id`, `date`, `type`, `particulars`, `payable_id`, `s
 (33, '07/07/2015', 6, '', 0, 1, 0, 0, 0, '150000', '', 1, 1, '2015-07-26 12:49:58'),
 (34, '07/01/2015', 4, '', 3, 0, 0, 150, 2, '15000', '', 1, 1, '2015-07-26 12:54:42'),
 (35, '07/25/2015', 5, '', 0, 0, 0, 0, 0, '1500', '', 1, 1, '2015-07-26 12:55:05'),
-(36, '07/09/2015', 5, 'jpt', 0, 0, 0, 1, 0, '1500', '', 1, 1, '2015-07-26 12:57:28');
+(36, '07/09/2015', 5, 'jpt', 0, 0, 0, 1, 0, '1500', '', 1, 1, '2015-07-26 12:57:28'),
+(37, '07/21/2015', 5, 'jpt', 0, 0, 0, 110, 0, '15000', '', 1, 1, '2015-07-27 12:11:04'),
+(38, '07/02/2015', 3, 'YO HO TA', 0, 0, 0, 152, 0, '15000', '', 1, 1, '2015-07-27 13:38:35'),
+(39, '07/02/2015', 3, 'nirdosh le lageko', 0, 0, 0, 154, 0, '1587100', '', 1, 1, '2015-07-27 13:54:59'),
+(40, '07/08/2015', 6, 'aaija ta bhai', 0, 0, 0, 777, 0, '1540', 'yo ho', 1, 1, '2015-07-27 15:40:34');
 
 -- --------------------------------------------------------
 
@@ -313,8 +306,35 @@ CREATE TABLE IF NOT EXISTS `tbl_staff` (
 --
 
 INSERT INTO `tbl_staff` (`id`, `name`, `address`, `contact`, `post`, `salary`, `user_id`, `active`, `entry_timestamp`) VALUES
-(1, 'nirdosh', 'lokanthali', 987612345, 'md', '150000', 1, 1, '2015-07-21 13:44:22'),
+(1, 'nirdosh', 'lokanthali', 987612345, 'secretary', '150000', 1, 1, '2015-07-26 16:04:03'),
 (2, 'sauharda', 'lokanthali bhaktapur', 452452452, 'md', '233456', 1, 1, '2015-07-21 13:44:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_staff_entitled`
+--
+
+DROP TABLE IF EXISTS `tbl_staff_entitled`;
+CREATE TABLE IF NOT EXISTS `tbl_staff_entitled` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `staff_id` int(11) NOT NULL,
+  `month` int(11) NOT NULL,
+  `e_salary` decimal(10,0) NOT NULL,
+  `fine` varchar(255) NOT NULL,
+  `net_salary` decimal(10,0) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `entry_timestamp` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `tbl_staff_entitled`
+--
+
+INSERT INTO `tbl_staff_entitled` (`id`, `staff_id`, `month`, `e_salary`, `fine`, `net_salary`, `user_id`, `active`, `entry_timestamp`) VALUES
+(1, 1, 11, '15000', '1000', '14000', 1, 1, '2015-07-16 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -465,7 +485,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-26 12:38:13', '2015-07-26 12:38:13'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-28 13:56:04', '2015-07-28 13:56:04'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 

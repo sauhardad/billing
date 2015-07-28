@@ -21,7 +21,6 @@ class Staff extends CI_Controller {
     if ($session_data['role']=$this->config->item('role_admin'))
         $data['users']=$this->user_model->get_users_except($session_data['id']);
     $data['roles']=$this->config->item('role_value');
-    
     $data['staffs']=$this->staff_model->retrieveStaff();
     $this->template->load('default', 'staff/staff_main_view',$data);
  }
@@ -39,6 +38,7 @@ class Staff extends CI_Controller {
         $data['roles']=$this->config->item('role_value');
         $data['id']=$id;
         $data['staff']=$this->staff_model->retrieveStaff($id);
+        $data['salaries']=$this->staff_model->retrieveStaffMetadata($id);
         $this->template->load('default', 'staff/staff_specific_view',$data);
      }
  }
