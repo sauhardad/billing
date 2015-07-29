@@ -72,7 +72,7 @@ class Report extends CI_Controller {
         else if(($type==='income') && ($filter1))
         {
             $this->load->library('cezpdf',array('a4','portrait')); 
-            $db_data=$this->report_model->retrieveAllSectionReport($filter1);
+            $db_data=$this->report_model->retrieveAllSectionReport($filter1,$date1,$date2);
             $col_names = array(
                 'sn'=>'S.N.',
                 'name' => 'Section',

@@ -90,14 +90,12 @@ $(function () {
         var address = $(this).data('address');
         var contact = $(this).data('contact');
         var post=$(this).data('post');
-        var salary=$(this).data('salary');
 
         $("input:hidden[name=edit_staff_id]").val(id);
         $("#edit_staff_name").val(name);
         $("#edit_staff_address").val(address);
         $("#edit_staff_contact_no").val(contact);
         $("#edit_staff_post").val(post);
-        $("#edit_staff_salary").val(salary);
 
     });
 
@@ -455,6 +453,10 @@ function reportModalAction(source)
     }
     else if($(source).attr('id')==="select_expense_type")
     {
+        $('#select_duration_tr').removeClass('show').addClass('hide');
+        $('#duration_between_tr').removeClass('show').addClass('hide');
+        $('#select_teacher_tr').removeClass('show').addClass('hide');
+        $('#select_staff_tr').removeClass('show').addClass('hide');
         if($(source).val()==="teacher")
         {
             $.ajax({
@@ -567,7 +569,12 @@ function reportModalAction(source)
         }
         else if($('#generate_report_type').val()==="income")
         {
-            generateReport('income',$('#select_duration').val(),false,false,false);
+            if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+            {
+                alert('Please enter From/To date!');
+                return;
+            }
+            generateReport('income',$('#select_duration').val(),false,$('#duration_from').val(),$('#duration_to').val());
         }
         else if($('#generate_report_type').val()==="transaction")
         {
@@ -740,7 +747,7 @@ function reportExpenseModalAction(source)
                             .attr("value",value.id)
                             .text(value.name)); 
                         $('#add_expense_amount_tr').removeClass('hide').addClass('show');    
-                        $('#expense_month_tr').removeClass('hide').addClass('show');
+                        $('#expense_voucher_tr').removeClass('hide').addClass('show');
                         $('#select_staff_tr').removeClass('hide').addClass('show');
                     });
                 }       
@@ -819,9 +826,9 @@ function reportExpenseModalAction(source)
                 alert("Please Choose a Staff");
                 return false;
             }
-            if($('#add_expense_month').val()==='0')
+            if($('#add_expense_voucher_bill').val()=='')
             {
-                alert("Please Choose a Month");
+                alert("Please Enter Voucher No");
                 return false;
             }
             addExpense($('#add_expense_date').val(),$('#add_expense_type').val(),$('#add_expense_particular').val(),$('#select_staff').val(),$('#add_expense_voucher_bill').val(),$('#add_expense_month').val(),$('#add_expense_amount').val(),$('#add_expense_remarks').val());

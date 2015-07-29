@@ -46,7 +46,7 @@ class Staff extends CI_Controller {
  function add()
  {
      $data=array();
-     if(($data['name']=$this->input->post('add_staff_name')) && ($data['contact']=$this->input->post('add_staff_contact_no')) && ($data['address']=$this->input->post('add_staff_address')) && ($data['post']=$this->input->post('add_staff_post')) && ($data['salary']=$this->input->post('add_staff_salary')))
+     if(($data['name']=$this->input->post('add_staff_name')) && ($data['contact']=$this->input->post('add_staff_contact_no')) && ($data['address']=$this->input->post('add_staff_address')) && ($data['post']=$this->input->post('add_staff_post')))
      {
          if($this->staff_model->insertStaff($data))
              echo json_encode(array('status'=>TRUE,'message'=>'Staff Saved'));
@@ -58,7 +58,7 @@ class Staff extends CI_Controller {
  function edit()
  {
      $data=array();
-     if(($id=$this->input->post('edit_staff_id')) && ($data['name']=$this->input->post('edit_staff_name')) && ($data['contact']=$this->input->post('edit_staff_contact_no')) && ($data['address']=$this->input->post('edit_staff_address')) && ($data['post']=$this->input->post('edit_staff_post')) && ($data['salary']=$this->input->post('edit_staff_salary')))
+     if(($id=$this->input->post('edit_staff_id')) && ($data['name']=$this->input->post('edit_staff_name')) && ($data['contact']=$this->input->post('edit_staff_contact_no')) && ($data['address']=$this->input->post('edit_staff_address')) && ($data['post']=$this->input->post('edit_staff_post')))
      {
         if($this->staff_model->updateStaff($id,$data))
             echo json_encode(array('status'=>TRUE,'message'=>'Staff Updated'));

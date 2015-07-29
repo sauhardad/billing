@@ -65,18 +65,36 @@ Class Report_model extends CI_Model
      * @param int $duration
      * @return array() $temp
      */
-    function retrieveAllSectionReport($duration)
+    function retrieveAllSectionReport($duration,$from,$to)
     {
+        //apply the date filter
+        $where="";
+        if($duration==1) //get payments received today
+        {
+           $where.= 'WHERE DATE(tbl_bill_payment.entry_timestamp)=CURDATE()';
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $where.= 'WHERE MONTH(DATE(tbl_bill_payment.entry_timestamp))=MONTH(CURDATE())';
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $where='WHERE DATE(tbl_bill_payment.entry_timestamp) BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')';
+            $total_type="Total(Custom)";
+        }    
+        
         $this->db->select('tbl_section.name,SUM(tbl_student_course.amount) as amount,t.paid,(SUM(tbl_student_course.amount)-t.paid) as due');
         $this->db->from('tbl_section');
         $this->db->join('tbl_students','tbl_students.section_id=tbl_section.id','left');
         $this->db->join('tbl_student_course','tbl_student_course.student_id=tbl_students.id','left');
-        $this->db->join('(SELECT `tbl_section`.`id` as section_id, SUM(tbl_bill_payment.paid_amount) as paid FROM (`tbl_section`) LEFT JOIN `tbl_students` ON `tbl_students`.`section_id`=`tbl_section`.`id` LEFT JOIN `tbl_bill_payment` ON `tbl_bill_payment`.`student_id`=`tbl_students`.`id` GROUP BY `tbl_section`.`id` ORDER BY `tbl_section`.`id`) as t','t.section_id=tbl_section.id','left');
-        
+        $this->db->join('(SELECT `tbl_section`.`id` as section_id, SUM(tbl_bill_payment.paid_amount) as paid FROM (`tbl_section`) LEFT JOIN `tbl_students` ON `tbl_students`.`section_id`=`tbl_section`.`id` LEFT JOIN `tbl_bill_payment` ON `tbl_bill_payment`.`student_id`=`tbl_students`.`id` '.$where.' GROUP BY `tbl_section`.`id` ORDER BY `tbl_section`.`id`) as t','t.section_id=tbl_section.id','left');
         $this->db->group_by('tbl_section.id');
         $this->db->order_by('tbl_section.id');
         $query=$this->db->get();
         $temp=$query->result_array();     
+        
         
         $t_amount=0;
         $t_paid=0;

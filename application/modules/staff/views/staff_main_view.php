@@ -15,7 +15,6 @@
                         <th>Address</th>
                         <th>Contact Number</th>
                         <th>Post</th>
-                        <th>Salary</th>
                         <th></th>
                     </thead>
                     <tbody>
@@ -28,7 +27,6 @@
                                 <td><?php echo $staff['address']; ?></td>
                                 <td><?php echo $staff['contact']; ?></td>
                                 <td><?php echo $staff['post']; ?></td>
-                                <td><?php echo $staff['salary']; ?></td>
                                 <td>
                                     <button class="btn btn-primary edit_staff_btn" data-id="<?php echo $staff['id']; ?>" data-name="<?php echo $staff['name']; ?>" data-address="<?php echo $staff['address']; ?>" data-contact="<?php echo $staff['contact']; ?>" data-post="<?php echo $staff['post']; ?>" data-salary="<?php echo $staff['salary']; ?>" data-toggle="modal" data-target="#edit_staff_modal"><span class="glyphicon glyphicon-edit glyphicon-margin-right-5"></span>Edit</button>
                                     <!--<button class="btn btn-danger" onclick="return deleteData('<?php echo $teacher['id']; ?>','teacher/delete',this)"><span class="glyphicon glyphicon-trash glyphicon-margin-right-5"></span>Delete</button>-->
@@ -85,14 +83,6 @@
                                     <input type="text" name="add_staff_post" class="form-control input-sm">
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label for="add_staff_salary">Salary</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="add_staff_salary" class="form-control input-sm">
-                                </td>
-                            </tr>
                         </table>    
                         
                         <input class="btn btn-primary" type="submit" value="Save" id="submit">
@@ -144,14 +134,6 @@
                                 </td>
                                 <td colspan="3">
                                     <input type="text" name="edit_staff_post" id="edit_staff_post" class="form-control input-sm">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="edit_staff_salary">Salary</label>
-                                </td>
-                                <td colspan="3">
-                                    <input type="text" name="edit_staff_salary" id="edit_staff_salary" class="form-control input-sm">
                                 </td>
                             </tr>
                         </table>    

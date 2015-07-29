@@ -89,8 +89,7 @@ $(function () {
                 add_staff_address: {
                         required: true,
                 },
-                add_staff_post:"required",
-                add_staff_salary:"required"
+                add_staff_post:"required"
         },
         messages: {
                 add_name: "Please enter name of the Teacher",
@@ -101,8 +100,7 @@ $(function () {
                 add_address: {
                         required: "Please provide an address",
                 },
-                add_staff_post:"Please provide the post of the staff",
-                add_staff_salary:"Please provide the Salary of the staff"
+                add_staff_post:"Please provide the post of the staff"
         },
         errorClass: "invalid",
         submitHandler: function(form) {
