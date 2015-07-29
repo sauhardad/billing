@@ -61,6 +61,22 @@ Class Staff_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('tbl_staff', $data); 
     }
+    
+    function insertStaffSalary($data)
+    {
+        $data['user_id']= $this->session->userdata('logged_in')['id'];
+        $data['active']= TRUE;
+        return $this->db->insert('tbl_staff_entitled', $data);
+        
+    }
+    
+        function updateStaffSalary($id,$entitled_id,$data)
+    {
+        $this->db->where('staff_id', $id);
+        $this->db->where('id',$entitled_id);
+        return $this->db->update('tbl_staff_entitled', $data); 
+    }
+
  
 }
 ?>

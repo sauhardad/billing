@@ -24,7 +24,7 @@
                         <?php foreach($staffs as $staff){ ?>
                             <tr>
                                 <td><?php echo $sn; ?></td>
-                                <td><?php echo $staff['name']; ?></td>
+                                 <td> <a href="<?php echo base_url('staff/view/'.$staff['id']); ?>"> <?php echo $staff['name']; ?></a></td>
                                 <td><?php echo $staff['address']; ?></td>
                                 <td><?php echo $staff['contact']; ?></td>
                                 <td><?php echo $staff['post']; ?></td>

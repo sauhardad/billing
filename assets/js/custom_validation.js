@@ -724,6 +724,60 @@ $(function () {
         }
     });
     
+    //validate and submit add staff salary form
+     $("#add_staff_salary_form").validate({
+        rules: {
+                add_month_dropdown: { valueNotEquals: "0" },
+                add_entitled_salary: "required",
+                add_fine_amount: "required",
+        },
+        messages: {
+                add_month_dropdown: "Please Choose a  month",
+                add_entitled_salary: "Please enter the entitled salary",
+                add_fine_amount: "Please enter the fine amount",
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
+    //validate and submit edit staff salary form
+     $("#edit_staff_salary_form").validate({
+        rules: {
+                edit_month_dropdown: { valueNotEquals: "0" },
+                edit_entitled_salary: "required",
+                edit_fine_amount: "required",
+        },
+        messages: {
+                edit_month_dropdown: "Please Choose a  month",
+                edit_entitled_salary: "Please enter the entitled salary",
+                edit_fine_amount: "Please enter the fine amount",
+        },
+        errorClass: "invalid",
+        submitHandler: function(form) {
+            $(form).ajaxSubmit({
+                clearForm:true,
+                dataType:'json',
+                success: function(data) {
+                    alert(data.message);
+                    if(data.status==true)
+                        window.location=window.location.href;
+                }
+            });
+            return false;
+        }
+    });
+    
     
     
     //validate and verify password    

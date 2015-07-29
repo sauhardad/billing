@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2015 at 11:19 AM
+-- Generation Time: Jul 29, 2015 at 11:42 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -44,8 +44,29 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('06a8da4e3a9a4b5c9710725b4243fec6', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438071060, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
-('c254e5caf2b3ad3981b1b20ca638caca', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438074616, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}');
+('062b563c993823ec6e70a43659980dd6', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438152911, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('0c60e28a19b148263100b23aadec56c1', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438155879, ''),
+('1258d05a03a54b868543c039ebc79428', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154072, ''),
+('1bfcd2bafe5c95320e70ef1b6fdf620e', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438155455, ''),
+('2285dfe7a2d603e226efc4a4cc7fb607', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154495, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('295b044e5e365e9fb4e8e4a5cc7a7355', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154072, ''),
+('2d5db17c09cb2ba7f078351d52af1f55', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438156007, ''),
+('3687ffe58194d9293605c5396cd2b6f1', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438155880, ''),
+('4729aca5cbbdd4be08a03f1f53499698', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438156688, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('4adb8b620e721e10992431419c5cc517', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438155879, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('535321a9ad743e26b2bf99e592d67f94', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438158114, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('6fb9c6f4067e433e025131fbff71e545', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438152400, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('6fcca03159c163d7a3214c5554cb19a3', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154495, ''),
+('7065ad3b4fb0c39b67c97139887ee85a', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154971, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('72570e04c685bf99060dd906a3e322fe', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154072, ''),
+('7ed35dafebb90e5886fce9f9764ed5be', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154072, ''),
+('8acb4b3149c3a17be11db07d31e39321', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438157272, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('8b0288dddd0f298abb577c1d8a7b8348', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438152911, ''),
+('8fb70f36a4c25bdfb139864420d33ccb', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438157612, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('94ec3d84d1507ed994cbbe502001312b', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438155455, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('a18810e18db7b07992b5362bbd0d4579', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.0.9895 Safari/537.36', 1438157611, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('b1d95d338aafa6c7a171afe088707cd7', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438154072, 'a:2:{s:9:"user_data";s:0:"";s:9:"logged_in";a:3:{s:2:"id";s:1:"1";s:8:"username";s:9:"sauhardad";s:4:"role";s:1:"1";}}'),
+('d3345b600ccfa57fe6325c8e25b5fd07', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1438155879, '');
 
 -- --------------------------------------------------------
 
@@ -323,18 +344,29 @@ CREATE TABLE IF NOT EXISTS `tbl_staff_entitled` (
   `e_salary` decimal(10,0) NOT NULL,
   `fine` varchar(255) NOT NULL,
   `net_salary` decimal(10,0) NOT NULL,
+  `remark` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL,
-  `entry_timestamp` datetime NOT NULL,
+  `entry_timestamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `tbl_staff_entitled`
 --
 
-INSERT INTO `tbl_staff_entitled` (`id`, `staff_id`, `month`, `e_salary`, `fine`, `net_salary`, `user_id`, `active`, `entry_timestamp`) VALUES
-(1, 1, 11, '15000', '1000', '14000', 1, 1, '2015-07-16 00:00:00');
+INSERT INTO `tbl_staff_entitled` (`id`, `staff_id`, `month`, `e_salary`, `fine`, `net_salary`, `remark`, `user_id`, `active`, `entry_timestamp`) VALUES
+(13, 1, 5, '15000', '5000', '10000', 'jpt', 1, 1, '2015-07-29 14:10:50'),
+(14, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(15, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(16, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(17, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(18, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(19, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(20, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(21, 2, 1, '15000', '5000', '10000', '', 1, 1, '2015-07-29 13:44:19'),
+(22, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29'),
+(23, 1, 5, '15000', '5000', '10000', 'jpt123', 1, 1, '2015-07-29 13:53:29');
 
 -- --------------------------------------------------------
 
@@ -485,7 +517,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `last_login`, `entry_timestamp`) VALUES
-(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-28 13:56:04', '2015-07-28 13:56:04'),
+(1, 'sauhardad', '$2a$08$B8Ppzm7FU/LgyuTPgh.mEu3unxpEGpuO2KNQBzbmfUVygaogOk23.', 1, '2015-07-29 13:58:35', '2015-07-29 13:58:35'),
 (3, 'nirdosh', '$2a$08$V486ZL57xO77ZJxAcA1Ko.eEiDcLUzt6C975DY5JqqVFcHJj73BIu', 2, '2015-04-13 15:52:27', '2015-04-13 15:52:27'),
 (4, 'nirdosh123', '$2a$08$gMfD2LN2Dqb7yeaDeJk1Ruv6LzVRGWmK24IBOFiDj8DZWmY4uiLvi', 2, '2015-04-13 16:09:49', '2015-04-13 16:09:49');
 
