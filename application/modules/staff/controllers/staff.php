@@ -78,6 +78,35 @@ class Staff extends CI_Controller {
              echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
      }
  }
+ 
+  function add_staff_salary()
+ {
+     $data=array();
+     if(($data['staff_id']=$this->input->post('staff_id')) && ($data['month']=$this->input->post('add_month_dropdown')) && ($data['e_salary']=$this->input->post('add_entitled_salary')) && ($data['fine']=$this->input->post('add_fine_amount')))
+     {
+         $data['net_salary']=$data['e_salary']-$data['fine'];
+         $data['remark']=$this->input->post('add_remark');
+         if($this->staff_model->insertStaffSalary($data))
+             echo json_encode(array('status'=>TRUE,'message'=>'Salary Detail Saved'));
+         else
+             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+     }
+ }
+ 
+ function edit_staff_salary()
+ {
+     $data=array();
+     if(($id=$this->input->post('staff_id')) && ($entitled_id=$this->input->post('edit_staff_salary_id')) && ($data['month']=$this->input->post('edit_month_dropdown')) && ($data['e_salary']=$this->input->post('edit_entitled_salary')) && ($data['fine']=$this->input->post('edit_fine_amount')))
+     {
+         $data['net_salary']=$data['e_salary']-$data['fine'];
+         $data['remark']=$this->input->post('edit_remark');
+         
+         if($this->staff_model->updateStaffSalary($id,$entitled_id,$data))
+             echo json_encode(array('status'=>TRUE,'message'=>'Salary Detail Updated'));
+         else
+             echo json_encode(array('status'=>FALSE,'message'=>'Oops,try again later'));
+     }
+ }
 
 }
 

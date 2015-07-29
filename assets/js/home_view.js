@@ -129,6 +129,23 @@ $(function () {
         
     });
     
+     //fill in form values in the edit salary form
+    $(document).on( "click", '.edit_staff_salary_btn',function(e) {
+
+        var entitled_id = $(this).data('entitled_id');
+        var month = $(this).data('month');
+        var e_salary = $(this).data('e_salary');
+        var fine = $(this).data('fine');
+        var remark = $(this).data('remark');
+
+        $("input:hidden[name=edit_staff_salary_id]").val(entitled_id);
+        $("#edit_month_dropdown").val(month);
+        $("#edit_entitled_salary").val(e_salary);
+        $("#edit_fine_amount").val(fine);
+        $("#edit_remark").val(remark);
+        
+    });
+    
     //fill in form values in the edit section form
     $(document).on( "click", '.edit_section_btn',function(e) {
 
