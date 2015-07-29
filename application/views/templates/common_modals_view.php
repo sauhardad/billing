@@ -64,6 +64,22 @@
                             <?php echo form_dropdown('select_user',array("0"=>"ALL"), "0",'class="form-control" id="select_user"'); ?>
                         </td>
                     </tr>
+                    <tr class="hide" id="select_teacher_tr">
+                        <td>
+                            <label for="select_teacher">Select Teacher</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_teacher', array("0"=>"Select Teacher"), "0",'class="form-control" id="select_teacher" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
+                    <tr class="hide" id="select_staff_tr">
+                        <td>
+                            <label for="select_staff">Select Staff</label>
+                        </td>
+                        <td colspan="3">
+                            <?php echo form_dropdown('select_staff', array("0"=>"Select Staff"), "0",'class="form-control" id="select_staff" onchange="return reportModalAction(this);"'); ?>
+                        </td>
+                    </tr>
                     <tr class="hide" id="select_duration_tr">
                         <td>
                             <label for="select_duration">Select Duration</label>
@@ -84,14 +100,6 @@
                         </td>
                         <td>
                             <input type="text" id="duration_to" class="form-control datepicker"/>
-                        </td>
-                    </tr>
-                    <tr class="hide" id="select_teacher_tr">
-                        <td>
-                            <label for="select_teacher">Select Teacher</label>
-                        </td>
-                        <td colspan="3">
-                            <?php echo form_dropdown('select_teacher', array("0"=>"Select Teacher"), "0",'class="form-control" id="select_teacher" onchange="return reportModalAction(this);"'); ?>
                         </td>
                     </tr>
                 </table>    

@@ -14,6 +14,7 @@ class Report extends CI_Controller {
    $this->load->model('subsection/subsection_model');
    $this->load->model('user/user_model');
    $this->load->model('teacher/teacher_model');
+   $this->load->model('staff/staff_model');
    $this->load->model('report_model');
    $this->load->helper(array('form'));
  }
@@ -198,41 +199,75 @@ class Report extends CI_Controller {
             $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
             $this->cezpdf->ezStream();
         }
+        elseif($type==='teacher' && ($filter1))
+        {
+            $this->load->library('cezpdf',array('a4','portrait')); 
+            $db_data=$this->report_model->retrieveTeacherReport($filter1,$filter2,$date1,$date2);
+            $col_names1 = array(
+                'sn'=>'S.N.',
+                'date'=>'Date',
+                'document_id' => 'Voucher No',
+                'amount'=>'Amount',
+                'remark' => 'Remarks'
+            );  
+            $col_names2 = array(
+                'sn'=>'S.N.',
+                'group'=>'Group',
+                'amount' => 'Amount',
+                'remark' => 'Remarks'
+            );  
+
+            $this->cezpdf->ezText("Teacher Profile",12,array('justification'=>'center'));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
+                                  "Address : ".$db_data['personal']['address']."               "."Contact : ".
+                                    $db_data['personal']['contact_no'],12,array('justification'=>'left'));
+            $this->cezpdf->ezText("Subjects : ".$db_data['personal']['subjects'],12,array('justification'=>'left'));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezTable($db_data['income'], $col_names2, "Income", array('width'=>550));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezTable($db_data['payments'], $col_names1, "Expenditure", array('width'=>550));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezText("Balance = ".$db_data['total_income']." - ".$db_data['total_payment']." = ".($db_data['total_income']-$db_data['total_payment']),12,array('justification'=>'left'));
+            $this->cezpdf->ezStream();
+        }
+        elseif($type=='staff' && ($filter1))
+        {
+            $this->load->library('cezpdf',array('a4','portrait')); 
+            $db_data=$this->report_model->retrieveStaffReport($filter1,$filter2,$date1,$date2);
+            $col_names1 = array(
+                'sn'=>'S.N.',
+                'month'=>'Month',
+                'e_salary'=>'Entitled Salary',
+                'fine'=>'Fine',
+                'net_salary'=>'Net Salary'    
+            );        
+            $col_names2 = array(
+                'sn'=>'S.N.',
+                'date'=>'Date',
+                'document_id'=>'Voucher No',
+                'amount'=>'Received',
+                'remark'=>'Remark'    
+            );        
+
+            $this->cezpdf->ezText("Staff Profile",12,array('justification'=>'center'));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                                    ".
+                                  "Address : ".$db_data['personal']['address']."                              ".
+                                  "Contact : ".$db_data['personal']['contact'],12,array('justification'=>'left'));
+            $this->cezpdf->ezText("Post : ".$db_data['personal']['post']);
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezTable($db_data['entitled'], $col_names1, "Expected Renumeration", array('width'=>550));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezTable($db_data['expense'], $col_names2, "Renumeration Received", array('width'=>550));
+            $this->cezpdf->ezText("");
+            $this->cezpdf->ezText("Balance = ".$db_data['total_net_salary']." - ".$db_data['total_expense']." = ".($db_data['total_net_salary']-$db_data['total_expense']),12,array('justification'=>'left'));
+            $this->cezpdf->ezStream();
+        }
         else if(($type==='expense') && ($filter1))
         {
-            if($filter1=='teacher')
-            {
-                $this->load->library('cezpdf',array('a4','portrait')); 
-                $db_data=$this->report_model->retrieveTeacherReport($filter2);
-                $col_names1 = array(
-                    'sn'=>'S.N.',
-                    'date'=>'Date',
-                    'document_id' => 'Voucher No',
-                    'amount'=>'Amount',
-                    'remark' => 'Remarks'
-                );  
-                $col_names2 = array(
-                    'sn'=>'S.N.',
-                    'group'=>'Group',
-                    'amount' => 'Amount',
-                    'remark' => 'Remarks'
-                );  
-                
-                $this->cezpdf->ezText("Teacher Profile",12,array('justification'=>'center'));
-                $this->cezpdf->ezText("");
-                $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
-                                      "Address : ".$db_data['personal']['address']."               "."Contact : ".
-                                        $db_data['personal']['contact_no'],12,array('justification'=>'left'));
-                $this->cezpdf->ezText("Subjects : ".$db_data['personal']['subjects'],12,array('justification'=>'left'));
-                $this->cezpdf->ezText("");
-                $this->cezpdf->ezTable($db_data['income'], $col_names2, "Income", array('width'=>550));
-                $this->cezpdf->ezText("");
-                $this->cezpdf->ezTable($db_data['payments'], $col_names1, "Expenditure", array('width'=>550));
-                $this->cezpdf->ezText("");
-                $this->cezpdf->ezText("Balance = ".$db_data['total_income']." - ".$db_data['total_payment']." = ".($db_data['total_income']-$db_data['total_payment']),12,array('justification'=>'left'));
-                $this->cezpdf->ezStream();
-            }
-            elseif($filter1=='payable')
+            
+            if($filter1=='payable')
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
                 $db_data=$this->report_model->retrievePayableReport($filter1);
@@ -297,27 +332,6 @@ class Report extends CI_Controller {
                 $this->cezpdf->ezTable($db_data, $col_names, $header, array('width'=>550));
                 $this->cezpdf->ezStream();
             }
-            elseif($filter1=='staff')
-            {
-                $this->load->library('cezpdf',array('a4','portrait')); 
-                $db_data=$this->report_model->retrieveStaffReport($filter2);
-                    $col_names = array(
-                    'sn'=>'S.N.',
-                    'month'=>'Month',
-                    'date'=>'Date',
-                    'document_id'=>'Voucher Number',
-                    'amount'=>'Amount'    
-                );        
-                
-                
-                $this->cezpdf->ezText("Staff Profile",12,array('justification'=>'center'));
-                $this->cezpdf->ezText("");
-                $this->cezpdf->ezText("Name : ".$db_data['personal']['name']."                     ".
-                                      "Address : ".$db_data['personal']['address']."               "."Contact : ".
-                                        $db_data['personal']['contact_no'],12,array('justification'=>'left'));
-                $this->cezpdf->ezText("");
-                $this->cezpdf->ezTable($db_data, $col_names, "Income", array('width'=>550));
-            }
             elseif($filter1=='saving' && ($filter2))
             {
                 $this->load->library('cezpdf',array('a4','portrait')); 
@@ -365,7 +379,7 @@ class Report extends CI_Controller {
      echo json_encode($this->teacher_model->retrieveTeacher());
  }
  
- function getStaffs()
+ function getStaff()
  {
      echo json_encode($this->staff_model->retrieveStaff());
  }

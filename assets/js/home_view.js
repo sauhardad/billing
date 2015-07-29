@@ -322,6 +322,8 @@ function reportModalAction(source)
         $('#select_duration_tr').removeClass('show').addClass('hide');
         $('#select_expense_type_tr').removeClass('show').addClass('hide');
         $('#duration_between_tr').removeClass('show').addClass('hide');
+        $('#select_teacher_tr').removeClass('show').addClass('hide');
+        $('#select_staff_tr').removeClass('show').addClass('hide');
         
         if($(source).val()==="group-summary" || $(source).val()==="group-checking" || $(source).val()==="group-contact" || $(source).val()==="group-account")
         {
@@ -443,6 +445,14 @@ function reportModalAction(source)
             $('#duration_between_tr').removeClass('show').addClass('hide');
         }
     }
+    else if($(source).attr('id')==='select_teacher' && !($(source).val()=="0"))
+    {
+         $('#select_duration_tr').removeClass('hide').addClass('show');
+    }
+    else if($(source).attr('id')==='select_staff' && !($(source).val()=="0"))
+    {
+         $('#select_duration_tr').removeClass('hide').addClass('show');
+    }
     else if($(source).attr('id')==="select_expense_type")
     {
         if($(source).val()==="teacher")
@@ -460,6 +470,24 @@ function reportModalAction(source)
                             .text(value.name)); 
                    });
                    $('#select_teacher_tr').removeClass('hide').addClass('show');
+                }       
+              });
+        }
+        else if($(source).val()==="staff")
+        {
+            $.ajax({
+                type: "POST",
+                url: base_url+'report/getStaff',
+                dataType: 'json',
+                success:function(data) { 
+                    $('#select_staff').empty().append($("<option></option>").attr("value","0").text("Select Staff")); 
+                    $.each(data, function(key, value) {   
+                        $('#select_staff')
+                            .append($("<option></option>")
+                            .attr("value",value.id)
+                            .text(value.name)); 
+                   });
+                   $('#select_staff_tr').removeClass('hide').addClass('show');
                 }       
               });
         }
@@ -557,7 +585,7 @@ function reportModalAction(source)
                 if($('#select_teacher').val()==='0')
                     alert("Please choose a Teacher");
                 else
-                    generateReport('expense',$('#select_expense_type').val(),$('#select_teacher').val(),false,false);
+                    generateReport('teacher',$('#select_teacher').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
             }
             else if($('#select_expense_type').val()=='payable')
                 generateReport('expense',$('#select_expense_type').val(),false,false,false);
@@ -589,15 +617,24 @@ function reportModalAction(source)
                 }
                 generateReport('expense',$('#select_expense_type').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
             }
+            else if($('#select_expense_type').val()=='staff')
+            {
+                if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
+                {
+                    alert('Please enter From/To date!');
+                    return;
+                }
+                generateReport('staff',$('#select_staff').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
+            }
             else if($('#select_expense_type').val()=='saving')
-                
+            {    
                 if($('#select_duration').val()==3 && ($('#duration_from').val()=="" || $('#duration_to').val()==""))
                 {
                     alert('Please enter From/To date!');
                     return;
                 }
                 generateReport('expense',$('#select_expense_type').val(),$('#select_duration').val(),$('#duration_from').val(),$('#duration_to').val());
-            
+            }
         }
         else 
         {

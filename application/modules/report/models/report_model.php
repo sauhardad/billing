@@ -378,7 +378,7 @@ Class Report_model extends CI_Model
     /** function that generates teacher expense report when teacher_id is passed
      * @param int $teacher_id
      */
-    function retrieveTeacherReport($teacher_id)
+    function retrieveTeacherReport($teacher_id,$duration,$from,$to)
     {
         //get teacher personal info
         $this->db->select('t1.name,t1.address,t1.contact_no');
@@ -391,6 +391,21 @@ Class Report_model extends CI_Model
         $this->db->select('t2.date,t2.document_id,t2.amount,t2.remark');
         $this->db->from('tbl_expense as t2');
         $this->db->where('t2.emp_id',$teacher_id);
+        if($duration==1) //get payments received today
+        {
+           $this->db->where('STR_TO_DATE(t2.date,\'%m/%d/%Y\')','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $this->db->where('MONTH(STR_TO_DATE(t2.date,\'%m/%d/%Y\'))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('STR_TO_DATE(t2.date,\'%m/%d/%Y\') BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
+        }    
         $query=$this->db->get();
         $temp['payments']=$query->result_array();    
         
@@ -458,7 +473,7 @@ Class Report_model extends CI_Model
         $temp['total_income']=$total_income;
         
         if(!empty($temp['payments']))
-            $temp['payments'][]=array('sn'=>' ','document_id'=>'Total','amount'=>$total_payments,'remark'=>' ');
+            $temp['payments'][]=array('sn'=>' ','document_id'=>$total_type,'amount'=>$total_payments,'remark'=>' ');
         
         if(!empty($temp['income']))
             $temp['income'][]=array('sn'=>' ','group'=>'Total','amount'=>$total_income,'remark'=>' ');
@@ -621,46 +636,77 @@ Class Report_model extends CI_Model
         return $temp;
     }
     
-    function retrieveStaffReport($staff_id)
+    function retrieveStaffReport($staff_id,$duration,$from,$to)
     {
         //get Staff personal info
-        $this->db->select('t1.name,t1.address,t1.contact,t1.post,t1.salary');
+        $this->db->select('t1.name,t1.address,t1.contact,t1.post');
         $this->db->from('tbl_staff as t1');
-        $this->db->join('tbl_expense as t2','t2.emp_id=t1.id');
         $this->db->where('t1.id',$staff_id);
         $query=$this->db->get();
         $temp['personal']=$query->row_array();
-        debug_array($temp['personal']);die;
+        
+        //get staff expected salary
+        $this->db->select('t1.month,t1.e_salary,t1.fine,t1.net_salary');
+        $this->db->from('tbl_staff_entitled as t1');
+        $this->db->where('t1.staff_id',$staff_id);
+        $query=$this->db->get();
+        $temp['entitled']=$query->result_array();
+        
+        //get staff expenses
+        $this->db->select('t1.date,t1.document_id,t1.amount,t1.remark');
+        $this->db->from('tbl_expense as t1');
+        $this->db->where('t1.type',2);
+        $this->db->where('t1.emp_id',$staff_id);
+        //apply the date filter
+        if($duration==1) //get payments received today
+        {
+           $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\')','CURDATE()',FALSE);
+           $total_type="Total(Today)";
+        }
+        elseif($duration==2) //get payments received this month
+        {
+            $this->db->where('MONTH(STR_TO_DATE(t1.date,\'%m/%d/%Y\'))','MONTH(CURDATE())',FALSE);
+            $total_type="Total(This Month)";
+        }
+        elseif($duration==3)
+        {
+            $this->db->where('STR_TO_DATE(t1.date,\'%m/%d/%Y\') BETWEEN STR_TO_DATE(\''.$from.'\',\'%m/%d/%Y\') AND STR_TO_DATE(\''.$to.'\',\'%m/%d/%Y\')');
+            $total_type="Total(Custom)";
+        }
+        $query=$this->db->get();
+        $temp['expense']=$query->result_array();
         
         $sn=1;
-        $total_payments=0;
-        foreach($temp['payments'] as $key=>$value)
+        $total_entitled_exp=0;
+        $total_entitled_fine=0;
+        $total_entitled_net=0;
+        foreach($temp['entitled'] as $key=>$value)
         {
            //initialize sn
-           $temp['payments'][$key]['sn']=$sn;
-           $total_payments+=$temp['payments'][$key]['amount'];
+           $temp['entitled'][$key]['sn']=$sn;
+           $total_entitled_exp+=$temp['entitled'][$key]['e_salary'];
+           $total_entitled_fine+=$temp['entitled'][$key]['fine'];
+           $total_entitled_net+=$temp['entitled'][$key]['net_salary'];
            $sn++;
         }
-        $temp['total_payment']=$total_payments;
+        $temp['total_net_salary']=$total_entitled_net;
         
         
         $sn=1;
-        $total_income=0;
-        foreach($temp['income'] as $key=>$value)
+        $total_expense=0;
+        foreach($temp['expense'] as $key=>$value)
         {
            //initialize sn
-           $temp['income'][$key]['sn']=$sn;
-           $total_income+=$temp['income'][$key]['amount'];
+           $temp['expense'][$key]['sn']=$sn;
+           $total_expense+=$temp['expense'][$key]['amount'];
            $sn++;
         }
-        $temp['total_income']=$total_income;
+        $temp['total_expense']=$total_expense;   
         
-        if(!empty($temp['payments']))
-            $temp['payments'][]=array('sn'=>' ','document_id'=>'Total','amount'=>$total_payments,'remark'=>' ');
-        
-        if(!empty($temp['income']))
-            $temp['income'][]=array('sn'=>' ','group'=>'Total','amount'=>$total_income,'remark'=>' ');
-        
+        if(!empty($temp['entitled']))
+            $temp['entitled'][]=array('sn'=>' ','month'=>'Total','e_salary'=>$total_entitled_exp,'fine'=>$total_entitled_fine,'net_salary'=>$total_entitled_net);
+        if(!empty($temp['expense']))
+            $temp['expense'][]=array('sn'=>' ','date'=>'','document_id'=>$total_type,'amount'=>$total_expense,'remark'=>' ');
         
         return $temp;
     }
