@@ -2,16 +2,22 @@
         <section style="padding-bottom: 50px; padding-top: 50px;">
             <div class="row">
                 <div class="col-md-12">
-                    <label>Name :<?php echo $staff['name']; ?></label><br>
-                    <label>Address :<?php echo $staff['address']; ?></label><br>
-                    <label>Contact No :<?php echo $staff['contact']; ?></label><br>
-                    <label>Post :<?php echo $staff['post']; ?></label><br>
+                    <table>
+                        <tr>
+                            <td style="width:70%;"><font size="3"><label>Name :<?php echo $staff['name']; ?></label></font></td>
+                            <td><font size="3"><label>Address :<?php echo $staff['address']; ?></label></font></td>
+                        </tr>
+                        <tr>
+                            <td><font size="3"><label>Contact No :<?php echo $staff['contact']; ?></label></font></td>
+                            <td><font size="3"><label>Post :<?php echo $staff['post']; ?></label></font></td>
+                        </tr>
+                    </table>
                     <br>
                     
                     <br /><br/>
                 </div>
                 <!-- table for adding and editing salary -->
-                <div class="col-md-8">
+                <div>
                    <h2 style="display:inline-block;">Salary</h2>
                    <button style="margin:1.5%;vertical-align: top;" class="btn" data-toggle="modal" data-target="#add_salary_modal" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
                 <table class="table table-bordered table-striped" id="student_courses">
